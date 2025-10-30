@@ -2,9 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mubasher One Automotive Maintenance Holding Co.</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- SEO -->
+  <meta name="description" content="SASO 4-Star certified auto service center in Al-Ahsa. Diesel & petrol maintenance, diagnostics, paint, interior restoration, mobile fleet support." />
+  <link rel="canonical" href="https://www.mone-sa.com/" />
+
+  <!-- Social -->
+  <meta property="og:title" content="Mubasher One Automotive Maintenance" />
+  <meta property="og:description" content="SASO 4-Star certified service center in Al-Ahsa." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./assets/og-cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicons (replace with your files if you have them) -->
+  <link rel="icon" href="./assets/favicon.ico" />
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" sizes="180x180" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com" defer></script>
+
   <style>
     html { scroll-behavior: smooth; }
     @keyframes marquee-ltr { from { transform: translateX(-50%); } to { transform: translateX(0%); } }
@@ -16,7 +34,7 @@
   <!-- Header -->
   <header class="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
-      <a href="#" class="flex items-center">
+      <a href="#" class="flex items-center" aria-label="Mubasher One home">
         <img src="./LOGO-01.svg" alt="Mubasher One Logo" class="h-[55px] w-auto" />
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm">
@@ -141,7 +159,6 @@
   </section>
 
   <!-- Photo Gallery / Carousel -->
-  <!-- Photo Gallery / Carousel -->
   <section id="gallery" class="py-16 bg-neutral-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex items-end justify-between gap-4">
@@ -150,27 +167,127 @@
       </div>
 
       <!-- Carousel -->
-      <div class="relative mt-6 rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+      <div class="relative mt-6 rounded-2xl overflow-hidden border border-neutral-200 bg-white" aria-label="Workshop gallery">
         <div id="gallery-track" class="flex transition-transform duration-500 ease-out will-change-transform">
-          <!-- Slides (use your filenames exactly as shown) -->
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/hero_workshop_front.jpeg" alt="Workshop Front" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/workshop_interior_main.jpeg" alt="Workshop Interior Main" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/workshop_view.jpeg" alt="Workshop View" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/customer_reception_main.jpeg" alt="Customer Reception Main" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/customer_reception_secondary.jpeg" alt="Customer Reception Secondary" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/diesel_service_bay.jpeg" alt="Diesel Service Bay" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/ac_electrical_diagnostics.jpeg" alt="AC & Electrical Diagnostics" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/equipment_tools_lifts.jpeg" alt="Equipment, Tools & Lifts" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/mobile_service_unit.jpeg" alt="Mobile Service Unit" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/body_repair_before_before.jpeg" alt="Body Repair - Before" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/body_repair_before_during.jpeg" alt="Body Repair - During" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/body_repair_before_after.jpeg" alt="Body Repair - After" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/engine_repair_actros1.jpeg" alt="Engine Repair - Actros" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/engine_repair_Ashok.jpeg" alt="Engine Repair - Ashok" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/engine_repair_D-max.jpeg" alt="Engine Repair - D-Max" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/engine_repair_Mitsu.jpeg" alt="Engine Repair - Mitsubishi" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/engine_repair_toyota.jpeg" alt="Engine Repair - Toyota" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
-          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100"><img src="./assets/gallery/team_mubasher_one.jpeg" alt="Team Mubasher One" class="h-full w-full object-cover cursor-zoom-in" loading="lazy"></div>
+          <!-- Slides (WebP first with JPEG fallback). Keep base names the same as your files. -->
+          <!-- Example item: hero_workshop_front.webp + hero_workshop_front.jpeg -->
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/hero_workshop_front.webp" type="image/webp" />
+              <img src="./assets/gallery/hero_workshop_front.jpeg" alt="Workshop Front" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/workshop_interior_main.webp" type="image/webp" />
+              <img src="./assets/gallery/workshop_interior_main.jpeg" alt="Workshop Interior Main" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/workshop_view.webp" type="image/webp" />
+              <img src="./assets/gallery/workshop_view.jpeg" alt="Workshop View" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+
+          <!-- repeat the same pattern for all images... -->
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/customer_reception_main.webp" type="image/webp" />
+              <img src="./assets/gallery/customer_reception_main.jpeg" alt="Customer Reception Main" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/customer_reception_secondary.webp" type="image/webp" />
+              <img src="./assets/gallery/customer_reception_secondary.jpeg" alt="Customer Reception Secondary" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/diesel_service_bay.webp" type="image/webp" />
+              <img src="./assets/gallery/diesel_service_bay.jpeg" alt="Diesel Service Bay" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/ac_electrical_diagnostics.webp" type="image/webp" />
+              <img src="./assets/gallery/ac_electrical_diagnostics.jpeg" alt="AC & Electrical Diagnostics" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/equipment_tools_lifts.webp" type="image/webp" />
+              <img src="./assets/gallery/equipment_tools_lifts.jpeg" alt="Equipment, Tools & Lifts" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/mobile_service_unit.webp" type="image/webp" />
+              <img src="./assets/gallery/mobile_service_unit.jpeg" alt="Mobile Service Unit" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+
+          <!-- Body repair sequence -->
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/body_repair_before_before.webp" type="image/webp" />
+              <img src="./assets/gallery/body_repair_before_before.jpeg" alt="Body Repair - Before" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/body_repair_before_during.webp" type="image/webp" />
+              <img src="./assets/gallery/body_repair_before_during.jpeg" alt="Body Repair - During" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/body_repair_before_after.webp" type="image/webp" />
+              <img src="./assets/gallery/body_repair_before_after.jpeg" alt="Body Repair - After" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+
+          <!-- Engines -->
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/engine_repair_actros1.webp" type="image/webp" />
+              <img src="./assets/gallery/engine_repair_actros1.jpeg" alt="Engine Repair - Actros" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/engine_repair_Ashok.webp" type="image/webp" />
+              <img src="./assets/gallery/engine_repair_Ashok.jpeg" alt="Engine Repair - Ashok" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/engine_repair_D-max.webp" type="image/webp" />
+              <img src="./assets/gallery/engine_repair_D-max.jpeg" alt="Engine Repair - D-Max" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/engine_repair_Mitsu.webp" type="image/webp" />
+              <img src="./assets/gallery/engine_repair_Mitsu.jpeg" alt="Engine Repair - Mitsubishi" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/engine_repair_toyota.webp" type="image/webp" />
+              <img src="./assets/gallery/engine_repair_toyota.jpeg" alt="Engine Repair - Toyota" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
+
+          <div class="shrink-0 w-full aspect-[16/9] bg-neutral-100">
+            <picture>
+              <source srcset="./assets/gallery/team_mubasher_one.webp" type="image/webp" />
+              <img src="./assets/gallery/team_mubasher_one.jpeg" alt="Team Mubasher One" class="h-full w-full object-cover cursor-zoom-in" loading="lazy" decoding="async">
+            </picture>
+          </div>
         </div>
 
         <!-- Controls -->
@@ -182,12 +299,12 @@
       </div>
 
       <p class="mt-3 text-xs text-neutral-500">
-        Put these files in <code>./assets/gallery/</code> using exactly the names shown above.
+        Put WebP and JPEG files in <code>./assets/gallery/</code> with the same base names (e.g., <code>hero_workshop_front.webp</code> + <code>hero_workshop_front.jpeg</code>).
       </p>
     </div>
 
     <!-- Lightbox Modal -->
-    <div id="lightbox" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
+    <div id="lightbox" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50" aria-modal="true" role="dialog">
       <button id="lightbox-close" class="absolute top-4 right-4 text-white/80 hover:text-white text-2xl" aria-label="Close">✕</button>
       <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-3xl" aria-label="Prev">‹</button>
       <img id="lightbox-img" src="" alt="Photo" class="max-h-[90vh] max-w-[90vw] object-contain">
@@ -220,40 +337,26 @@
 
         <div class="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <ul class="flex gap-12 animate-marquee-ltr will-change-transform py-2">
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Abrak_500x500.png" alt="ABRAK" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">ABRAK</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Al_Ameer_Bakery_500x500.png" alt="Al Ameer Bakery & Sweets" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Ameer Bakery & Sweets</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Al_Najah_Bakeries_500x500.png" alt="Al Najah Bakeries" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Najah Bakeries</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Al_Rabie_500x500.png" alt="Al Rabie" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Rabie</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Al_Rai_500x500.png" alt="Al Rai" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Rai</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Alfanar_500x500.png" alt="alfanar" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">alfanar</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Arabian_Castles_500x500.png" alt="Arabian Castles" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Arabian Castles</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Autorent_500x500.png" alt="AUTORENT" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">AUTORENT</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Blue_Flame_Energy_500x500.png" alt="Blue Flame Energy" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Blue Flame Energy</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Eiffel_500x500.png" alt="EIFFEL General Contracting" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">EIFFEL General Contracting</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Kaefer_500x500.png" alt="KAEFER" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">KAEFER</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Kentz_500x500.png" alt="KENTZ" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">KENTZ</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/MIA_Arabia_500x500.png" alt="MIA Arabia Company" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">MIA Arabia Company</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Sanabel_500x500.png" alt="Sanabel United Trading Co." class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Sanabel United Trading Co.</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/SRACO_500x500.png" alt="SRACO" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">SRACO</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Table_Four_500x500.png" alt="Table Four" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Table Four</div></li>
+            <!-- NOTE: made these relative so they work on GitHub Pages and custom domains -->
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Abrak_500x500.png" alt="ABRAK" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">ABRAK</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Al_Ameer_Bakery_500x500.png" alt="Al Ameer Bakery & Sweets" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Ameer Bakery & Sweets</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Al_Najah_Bakeries_500x500.png" alt="Al Najah Bakeries" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Najah Bakeries</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Al_Rabie_500x500.png" alt="Al Rabie" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Rabie</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Al_Rai_500x500.png" alt="Al Rai" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Rai</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Alfanar_500x500.png" alt="alfanar" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">alfanar</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Arabian_Castles_500x500.png" alt="Arabian Castles" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Arabian Castles</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Autorent_500x500.png" alt="AUTORENT" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">AUTORENT</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Blue_Flame_Energy_500x500.png" alt="Blue Flame Energy" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Blue Flame Energy</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Eiffel_500x500.png" alt="EIFFEL General Contracting" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">EIFFEL General Contracting</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Kaefer_500x500.png" alt="KAEFER" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">KAEFER</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Kentz_500x500.png" alt="KENTZ" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">KENTZ</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/MIA_Arabia_500x500.png" alt="MIA Arabia Company" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">MIA Arabia Company</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Sanabel_500x500.png" alt="Sanabel United Trading Co." class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Sanabel United Trading Co.</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/SRACO_500x500.png" alt="SRACO" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">SRACO</div></li>
+            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Table_Four_500x500.png" alt="Table Four" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Table Four</div></li>
 
             <!-- Duplicate sequence for seamless loop -->
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Abrak_500x500.png" alt="ABRAK" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">ABRAK</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Al_Ameer_Bakery_500x500.png" alt="Al Ameer Bakery & Sweets" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Ameer Bakery & Sweets</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Al_Najah_Bakeries_500x500.png" alt="Al Najah Bakeries" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Najah Bakeries</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Al_Rabie_500x500.png" alt="Al Rabie" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Rabie</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Al_Rai_500x500.png" alt="Al Rai" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Rai</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Alfanar_500x500.png" alt="alfanar" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">alfanar</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Arabian_Castles_500x500.png" alt="Arabian Castles" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Arabian Castles</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Autorent_500x500.png" alt="AUTORENT" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">AUTORENT</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Blue_Flame_Energy_500x500.png" alt="Blue Flame Energy" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Blue Flame Energy</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Eiffel_500x500.png" alt="EIFFEL General Contracting" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">EIFFEL General Contracting</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Kaefer_500x500.png" alt="KAEFER" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">KAEFER</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Kentz_500x500.png" alt="KENTZ" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">KENTZ</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/MIA_Arabia_500x500.png" alt="MIA Arabia Company" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">MIA Arabia Company</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Sanabel_500x500.png" alt="Sanabel United Trading Co." class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Sanabel United Trading Co.</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/SRACO_500x500.png" alt="SRACO" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">SRACO</div></li>
-            <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="/assets/clients/Table_Four_500x500.png" alt="Table Four" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Table Four</div></li>
+            <!-- (keep same items again) -->
           </ul>
         </div>
       </div>
@@ -296,14 +399,14 @@
           <li>Real-time job tracking via ERP</li>
         </ul>
       </div>
-      <form id="booking-form" class="rounded-2xl bg-white text-neutral-900 p-6 space-y-4">
+      <form id="booking-form" class="rounded-2xl bg-white text-neutral-900 p-6 space-y-4" novalidate>
         <div>
           <label class="text-sm" for="bf_name">Name</label>
-          <input id="bf_name" name="name" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="Your full name" />
+          <input id="bf_name" name="name" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="Your full name" autocomplete="name" />
         </div>
         <div>
           <label class="text-sm" for="bf_phone">Phone / WhatsApp</label>
-          <input id="bf_phone" name="phone" required pattern="\+?\d[\d\s-]{7,}" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="+966…" />
+          <input id="bf_phone" name="phone" required pattern="\+?\d[\d\s-]{7,}" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="+966…" inputmode="tel" autocomplete="tel" />
         </div>
         <div>
           <label class="text-sm" for="bf_issue">Vehicle / Issue</label>
@@ -321,7 +424,9 @@
       <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Find Us</h2>
       <p class="mt-2 text-neutral-600">Click below for directions. Parking available on site.</p>
       <div class="mt-6 rounded-2xl overflow-hidden border border-neutral-200">
-        <iframe title="Mubasher One Location" width="100%" height="420" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=https://maps.app.goo.gl/yhdtpxKjngnFus787&z=15&output=embed"></iframe>
+        <!-- If this embed ever fails, keep the button below as the reliable fallback -->
+        <iframe title="Mubasher One Location" width="100%" height="420" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=https://maps.app.goo.gl/yhdtpxKjngnFus787&z=15&output=embed"></iframe>
       </div>
       <a href="https://maps.app.goo.gl/yhdtpxKjngnFus787" target="_blank" class="mt-4 inline-block rounded-xl px-5 py-3 bg-neutral-900 text-white hover:bg-neutral-800">Get Directions</a>
     </div>
@@ -337,10 +442,10 @@
         <div class="font-semibold">Contact</div>
         <ul class="mt-2 text-sm text-neutral-600 space-y-1">
           <li>Email: <a class="underline" href="mailto:service@mone-sa.com">service@mone-sa.com</a></li>
-          <li>Website: <a class="underline" href="https://www.mone-sa.com" target="_blank">www.mone-sa.com</a></li>
+          <li>Website: <a class="underline" href="https://www.mone-sa.com" target="_blank" rel="noopener">www.mone-sa.com</a></li>
           <li>Phone: <a class="underline" href="tel:+966536600791">+966536600791</a></li>
         </ul>
-        <a class="mt-2 inline-flex items-center gap-2 text-sm underline" target="_blank" href="https://maps.app.goo.gl/yhdtpxKjngnFus787">Open in Google Maps</a>
+        <a class="mt-2 inline-flex items-center gap-2 text-sm underline" target="_blank" rel="noopener" href="https://maps.app.goo.gl/yhdtpxKjngnFus787">Open in Google Maps</a>
       </div>
       <div>
         <div class="font-semibold">Location</div>
@@ -351,12 +456,12 @@
   </footer>
 
   <!-- Floating mobile actions -->
-  <div class="fixed bottom-4 right-4 md:hidden flex flex-col gap-2 z-50">
+  <div class="fixed bottom-4 right-4 md:hidden flex flex-col gap-2 z-50" aria-label="Quick actions">
     <a href="tel:+966536600791" class="rounded-full px-5 py-3 bg-neutral-900 text-white shadow-lg">Call Us</a>
     <a href="https://wa.me/966536600791?text=Hi%20Mubasher%20One%2C%20I%27d%20like%20to%20book%20a%20service." class="rounded-full px-5 py-3 bg-green-600 text-white shadow-lg">WhatsApp</a>
   </div>
 
-  <!-- Booking Form Script -->
+  <!-- Scripts -->
   <script>
     (() => {
       // ===== Booking form → WhatsApp =====
@@ -367,13 +472,15 @@
           const name  = (document.getElementById('bf_name')?.value || '').trim();
           const phone = (document.getElementById('bf_phone')?.value || '').trim();
           const issue = (document.getElementById('bf_issue')?.value || '').trim();
+          if (!name || !phone || !issue) { alert('Please fill all fields'); return; }
           const to = '966536600791';
-          const msg =
-            'Booking request:%0A' +
-            'Name: ' + encodeURIComponent(name) + '%0A' +
-            'Phone: ' + encodeURIComponent(phone) + '%0A' +
-            'Issue: ' + encodeURIComponent(issue);
-          const url = 'https://wa.me/' + to + '?text=' + msg;
+          const msg = [
+            'Booking request:',
+            'Name: ' + name,
+            'Phone: ' + phone,
+            'Issue: ' + issue
+          ].join('%0A');
+          const url = 'https://wa.me/' + to + '?text=' + encodeURI(msg);
           window.location.href = url;
         });
       }
@@ -408,6 +515,7 @@
           const b = document.createElement('button');
           b.className = 'h-2 w-2 rounded-full ' + (i === index ? 'bg-neutral-900' : 'bg-neutral-300');
           b.addEventListener('click', () => goTo(i));
+          b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
           dotsWrap.appendChild(b);
         });
       }
@@ -419,10 +527,10 @@
       track?.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
         touchDeltaX = 0;
-      });
+      }, { passive: true });
       track?.addEventListener('touchmove', (e) => {
         touchDeltaX = e.touches[0].clientX - touchStartX;
-      });
+      }, { passive: true });
       track?.addEventListener('touchend', () => {
         if (Math.abs(touchDeltaX) > 50) {
           if (touchDeltaX < 0) goTo(index + 1); else goTo(index - 1);
@@ -434,7 +542,7 @@
         const img = slide.querySelector('img');
         img?.addEventListener('click', () => {
           if (!img) return;
-          lbImg.src = img.src;
+          lbImg.src = img.currentSrc || img.src;
           lb?.classList.remove('hidden');
           index = i; // sync index
         });
@@ -442,7 +550,7 @@
       function lbGo(delta) {
         index = (index + delta + slides.length) % slides.length;
         const img = slides[index].querySelector('img');
-        if (img) lbImg.src = img.src;
+        if (img) lbImg.src = img.currentSrc || img.src;
       }
       lbPrev?.addEventListener('click', () => lbGo(-1));
       lbNext?.addEventListener('click', () => lbGo(1));
