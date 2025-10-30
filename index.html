@@ -514,8 +514,50 @@
   if (slides.length) goTo(0);
 })();
 </script>
+<script>
+/* === Booking form -> WhatsApp === */
+(() => {
+  const WA_NUMBER = "966536600791"; // no +, no spaces
+  const form = document.getElementById("booking-form");
+  if (!form) return;
+
+  const nameEl  = document.getElementById("bf_name");
+  const phoneEl = document.getElementById("bf_phone");
+  const issueEl = document.getElementById("bf_issue");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const name  = (nameEl?.value || "").trim();
+    const phone = (phoneEl?.value || "").trim();
+    const issue = (issueEl?.value || "").trim();
+
+    // Basic front-end validation
+    if (!name || !phone || !issue) {
+      alert("Please fill your Name, Phone/WhatsApp, and Vehicle/Issue.");
+      return;
+    }
+
+    // Build message
+    const message = [
+      "Booking request:",
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Vehicle/Issue: ${issue}`,
+      "From: www.mone-sa.com"
+    ].join("\n");
+
+    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+
+    // Open WhatsApp in new tab
+    window.open(url, "_blank", "noopener,noreferrer");
+  });
+})();
+</script>
+  
 </body>
 </html>
+
 
 
 
