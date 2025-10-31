@@ -28,6 +28,10 @@
     .fade-in.reveal { opacity: 1; transform: translateY(0); }
 
     /* Gallery */
+    /* Keep gallery slider layout LTR even when page dir=rtl */
+#gallery, #gallery * { direction: ltr; }
+#gallery #gallery-track { direction: ltr; }
+
     .gallery-frame { aspect-ratio: 16/9; position: relative; }
     .caption { position:absolute; left:0; right:0; bottom:0; background:rgba(0,0,0,.55); color:#fff; font-size:12px; line-height:1.25; padding:6px 10px; backdrop-filter: blur(3px); }
     .lb-backdrop { background: rgba(0,0,0,.9); }
@@ -658,5 +662,6 @@
 
 </body>
 </html>
+
 
 
