@@ -694,9 +694,87 @@
     });
   })();
   </script>
+<script>
+/* ===== Working hours via Google Places API v1 =====
+   Docs: https://developers.google.com/maps/documentation/places/web-service/details
+   What you need:
+   - API key with Places API enabled (restrict to www.mone-sa.com HTTP referrer)
+   - Place ID of your business
+*/
+(async function loadHours(){
+  const API_KEY  = "YOUR_API_KEY_HERE";       // TODO
+  const PLACE_ID = "ChIJY_nBNRqjNz4RwBgsAxw27ck";      // TODO (e.g., 'ChIJxxxxxxxxxxxxxxxx')
+
+  const badge = document.getElementById("openNow");
+  const list  = document.getElementById("hoursList");
+  const hint  = document.getElementById("hoursHint");
+  if (!badge || !list) return;
+
+  if (!API_KEY || !PLACE_ID) {
+    badge.textContent = "Hours";
+    list.innerHTML = `<li>Sat–Thu: 8:00–18:00</li><li>Fri: Closed</li>`;
+    return;
+  }
+
+  try {
+    const fields = ["current_opening_hours"].join(",");
+    const url = `https://places.googleapis.com/v1/places/${PLACE_ID}?fields=${fields}&key=${API_KEY}`;
+
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    const oh   = data.currentOpeningHours || data.current_opening_hours || {};
+    const days = oh.weekdayDescriptions || oh.weekday_text || [];
+
+    const open = oh.openNow ?? oh.open_now;
+    if (open === true) {
+      badge.textContent = "Open now";
+      badge.className = "text-xs rounded px-2 py-1 bg-green-100 text-green-800";
+    } else if (open === false) {
+      badge.textContent = "Closed now";
+      badge.className = "text-xs rounded px-2 py-1 bg-red-100 text-red-800";
+    } else {
+      badge.textContent = "Hours";
+    }
+
+    list.innerHTML = days.map(line => `<li>${line}</li>`).join("");
+    if (hint) hint.style.display = "none";
+  } catch (e) {
+    console.error("Hours fetch failed:", e);
+    badge.textContent = "Hours unavailable";
+    list.innerHTML = `<li>Couldn’t load from Google.</li>`;
+  }
+})();
+
+/* ===== Reset sliders after language toggle (you already added resetGallery) ===== */
+window.resetReviews = function(){
+  const track = document.getElementById('review-track');
+  if (!track) return;
+  track.style.direction = 'ltr';
+  track.style.transform = 'translateX(0%)';
+};
+window.resetClients = function(){
+  const marquee = document.getElementById('client-marquee');
+  if (!marquee) return;
+  marquee.style.direction = 'ltr';
+  marquee.style.animation = 'none'; marquee.offsetHeight; marquee.style.animation = '';
+};
+
+/* Call these after you switch to Arabic */
+document.getElementById('langToggle')?.addEventListener('click', ()=>{
+  // when switching to Arabic, after your existing translations:
+  requestAnimationFrame(()=>{
+    if (window.resetGallery)  window.resetGallery();
+    if (window.resetReviews)  window.resetReviews();
+    if (window.resetClients)  window.resetClients();
+  });
+});
+</script>
 
 </body>
 </html>
+
 
 
 
