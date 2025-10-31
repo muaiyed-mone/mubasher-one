@@ -378,11 +378,24 @@
     <div class="mt-10 text-xs text-neutral-500 text-center" data-i18n="footer.copy">© 2025 Mubasher One Automotive Maintenance Holding Co. All rights reserved.</div>
   </footer>
 
-  <!-- FLOATING ACTIONS -->
-  <div class="fixed bottom-4 right-4 flex flex-col gap-2 z-50 md:hidden">
-    <a href="https://wa.me/966536600791?text=Hi%20Mubasher%20One%2C%20I%27d%20like%20to%20book%20a%20service." class="rounded-full px-5 py-3 bg-green-600 text-white shadow-lg pulse">WhatsApp</a>
-    <a href="#book" class="rounded-full px-5 py-3 bg-neutral-900 text-white shadow-lg pulse" data-i18n="hero.book">Book Now</a>
-  </div>
+<!-- FLOATING ACTIONS -->
+<div class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 md:flex-row md:items-center">
+  <a
+    href="https://wa.me/966536600791?text=Hi%20Mubasher%20One%2C%20I%27d%20like%20to%20book%20a%20service."
+    class="rounded-full px-5 py-3 bg-green-600 text-white shadow-lg hover:shadow-xl transition pulse"
+    aria-label="WhatsApp Chat"
+  >
+    WhatsApp
+  </a>
+  <a
+    href="#book"
+    class="rounded-full px-5 py-3 bg-neutral-900 text-white shadow-lg hover:shadow-xl transition pulse"
+    aria-label="Book Now"
+  >
+    Book Now
+  </a>
+</div>
+
 
   <!-- SCRIPTS -->
   <script>
@@ -645,4 +658,5 @@
 
 </body>
 </html>
+
 
