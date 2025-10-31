@@ -61,14 +61,12 @@
 
       <nav class="hidden md:flex items-center gap-8 text-sm">
         <a href="#services" class="hover:text-neutral-700" data-i18n="nav.services">Services</a>
-        <a href="#capabilities" class="hover:text-neutral-700" data-i18n="nav.capabilities">Capabilities</a>
         <a href="#qa" class="hover:text-neutral-700" data-i18n="nav.quality">Quality</a>
         <a href="#values" class="hover:text-neutral-700" data-i18n="nav.values">Values</a>
         <a href="#map" class="hover:text-neutral-700" data-i18n="nav.location">Location</a>
         <a href="#book" class="rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800" data-i18n="nav.book">Book</a>
       </nav>
 
-      <!-- Language Toggle -->
       <button id="langToggle" class="rounded-xl px-3 py-1.5 border border-neutral-300 text-sm hover:bg-neutral-100">عربي</button>
     </div>
   </header>
@@ -102,44 +100,27 @@
     </div>
   </section>
 
-  <!-- STATS -->
-  <section class="py-10 bg-neutral-900 text-white">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid sm:grid-cols-3 gap-4">
-      <div class="rounded-2xl bg-white/10 p-5 text-center">
-        <div class="text-2xl font-bold">3,000 m²</div>
-        <div class="text-sm text-neutral-300">Facility Size</div>
-      </div>
-      <div class="rounded-2xl bg-white/10 p-5 text-center">
-        <div class="text-2xl font-bold">30+ Technicians</div>
-        <div class="text-sm text-neutral-300">Certified Team</div>
-      </div>
-      <div class="rounded-2xl bg-white/10 p-5 text-center">
-        <div class="text-2xl font-bold">SASO 4-Star</div>
-        <div class="text-sm text-neutral-300">Accredited Quality</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES (4 blocks) -->
+  <!-- SERVICES -->
   <section id="services" class="py-16 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Core Services</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="services.title">Core Services</h2>
       <div class="mt-10 grid lg:grid-cols-2 gap-8">
+
         <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition">
-          <h3 class="font-semibold text-lg">Diesel Expertise</h3>
+          <h3 class="font-semibold text-lg" data-i18n="services.diesel">Diesel Expertise</h3>
           <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
             <li>Common-rail diagnostics & repair</li>
             <li>EGR ultrasonic decarbonizing</li>
             <li>AdBlue / SCR system diagnostics</li>
             <li>Fuel and hydraulic pump maintenance</li>
-            <li>Engine assemblies and complete overhauling</li>
+            <li>Engine assemblies and overhauling</li>
             <li>Brake jobs & system service</li>
             <li>Wheel alignment & suspension calibration</li>
           </ul>
         </div>
 
         <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition">
-          <h3 class="font-semibold text-lg">Petrol & Hybrid</h3>
+          <h3 class="font-semibold text-lg" data-i18n="services.petrol">Petrol & Hybrid</h3>
           <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
             <li>Direct injection intake cleaning</li>
             <li>Walnut blasting for carbon buildup</li>
@@ -150,7 +131,7 @@
         </div>
 
         <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition">
-          <h3 class="font-semibold text-lg">Paint & Body Restoration</h3>
+          <h3 class="font-semibold text-lg" data-i18n="services.paint">Paint & Body Restoration</h3>
           <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
             <li>Full body repairs and refinishing</li>
             <li>Booth painting with dust-free filtration</li>
@@ -161,7 +142,7 @@
         </div>
 
         <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition">
-          <h3 class="font-semibold text-lg">Electrical & Diagnostics</h3>
+          <h3 class="font-semibold text-lg" data-i18n="services.elec">Electrical & Diagnostics</h3>
           <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
             <li>A/C service and refrigerant leak testing</li>
             <li>Wiring, alternator, and starter repair</li>
@@ -170,27 +151,15 @@
             <li>Lighting and sensor diagnostics</li>
           </ul>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- GALLERY -->
-  <section id="gallery" class="py-16 bg-neutral-50">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-4">Photo Gallery</h2>
-      <div class="relative rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-        <div id="gallery-track" class="flex transition-transform duration-500 ease-out will-change-transform"></div>
-        <button id="gallery-prev" aria-label="Previous" class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2">‹</button>
-        <button id="gallery-next" aria-label="Next" class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 rounded-full p-2">›</button>
-        <div id="gallery-dots" class="absolute bottom-3 left-0 right-0 flex justify-center gap-2"></div>
       </div>
     </div>
   </section>
 
   <!-- QUALITY -->
-  <section id="qa" class="py-16 bg-white border-t border-neutral-200">
+  <section id="qa" class="py-16 bg-neutral-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Quality Assurance</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="qa.title">Quality Assurance</h2>
       <ul class="mt-6 space-y-2 list-disc pl-6 text-neutral-700">
         <li>SASO 4-Star – Cert. No. 1154</li>
         <li>Service warranty on labor</li>
@@ -204,16 +173,16 @@
   </section>
 
   <!-- CORE VALUES -->
-  <section id="values" class="py-16 bg-neutral-50">
+  <section id="values" class="py-16 bg-white border-t border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Core Values</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="values.title">Core Values</h2>
       <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">⚙️</div><h3 class="font-semibold">Quality</h3><p>Precision workmanship meeting SASO & OEM standards.</p></div>
-        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🤝</div><h3 class="font-semibold">Integrity</h3><p>Transparent communication and ethical operations.</p></div>
-        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🧠</div><h3 class="font-semibold">Expertise</h3><p>Skilled technicians with continuous training.</p></div>
-        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🚛</div><h3 class="font-semibold">Reliability</h3><p>Commitment to deadlines and quality results.</p></div>
-        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🌍</div><h3 class="font-semibold">Sustainability</h3><p>Environmentally responsible practices.</p></div>
-        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🚀</div><h3 class="font-semibold">Innovation</h3><p>Adopting the latest automotive technologies.</p></div>
+        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">⚙️</div><h3>Quality</h3><p>Precision workmanship meeting SASO & OEM standards.</p></div>
+        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🤝</div><h3>Integrity</h3><p>Transparent communication and ethical operations.</p></div>
+        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🧠</div><h3>Expertise</h3><p>Skilled technicians with continuous training.</p></div>
+        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🚛</div><h3>Reliability</h3><p>Commitment to deadlines and quality results.</p></div>
+        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🌍</div><h3>Sustainability</h3><p>Environmentally responsible practices.</p></div>
+        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🚀</div><h3>Innovation</h3><p>Adopting the latest automotive technologies.</p></div>
       </div>
     </div>
   </section>
@@ -222,14 +191,14 @@
   <section id="book" class="py-16 bg-neutral-900 text-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 items-center">
       <div>
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Ready to service your vehicle or fleet?</h2>
-        <p class="mt-3 text-neutral-300">Book a slot or request mobile support. We’ll confirm by phone or WhatsApp.</p>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="book.title">Ready to service your vehicle or fleet?</h2>
+        <p class="mt-3 text-neutral-300" data-i18n="book.desc">Book a slot or request mobile support. We’ll confirm by phone or WhatsApp.</p>
       </div>
       <form id="booking-form" class="rounded-2xl bg-white text-neutral-900 p-6 space-y-4" novalidate>
-        <div><label class="text-sm">Name</label><input id="bf_name" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="Your full name" /></div>
-        <div><label class="text-sm">Phone / WhatsApp</label><input id="bf_phone" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="+966…" /></div>
-        <div><label class="text-sm">Vehicle / Issue</label><textarea id="bf_issue" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" rows="3" placeholder="e.g., 2018 Actros • brake service"></textarea></div>
-        <button type="submit" class="w-full rounded-xl px-4 py-3 bg-neutral-900 text-white font-semibold hover:bg-neutral-800">Request Booking via WhatsApp</button>
+        <div><label class="text-sm" data-i18n="book.name">Name</label><input id="bf_name" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" /></div>
+        <div><label class="text-sm" data-i18n="book.phone">Phone / WhatsApp</label><input id="bf_phone" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" /></div>
+        <div><label class="text-sm" data-i18n="book.issue">Vehicle / Issue</label><textarea id="bf_issue" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" rows="3"></textarea></div>
+        <button type="submit" class="w-full rounded-xl px-4 py-3 bg-neutral-900 text-white font-semibold hover:bg-neutral-800" data-i18n="book.submit">Request Booking via WhatsApp</button>
       </form>
     </div>
   </section>
@@ -237,7 +206,7 @@
   <!-- MAP -->
   <section id="map" class="py-16 bg-white border-t border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Find Us</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="map.title">Find Us</h2>
       <div class="mt-6 rounded-2xl overflow-hidden border border-neutral-200">
         <iframe title="Mubasher One Location" width="100%" height="420" style="border:0" loading="lazy" src="https://www.google.com/maps?q=https://maps.app.goo.gl/yhdtpxKjngnFus787&z=15&output=embed"></iframe>
       </div>
@@ -245,10 +214,11 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-12 bg-neutral-900 text-neutral-300 text-center text-sm">
+  <footer class="py-12 bg-neutral-900 text-neutral-300 text-center text-sm" data-i18n="footer.copy">
     © 2025 Mubasher One Automotive Maintenance Holding Co.
   </footer>
 
+  <!-- === Scripts === -->
   <script>
   // WhatsApp Booking
   document.getElementById('booking-form').addEventListener('submit', e => {
@@ -261,31 +231,29 @@
     window.open(`https://wa.me/966536600791?text=${encodeURIComponent(msg)}`,'_blank');
   });
 
-  // Gallery captions loader
+  // Simple gallery loader (you can extend later)
   (() => {
-    const GALLERY_BASES=["ac_electrical_diagnostics","body_repair_before_before","body_repair_before_during","body_repair_before_after","customer_reception_main","diesel_service_bay","engine_repair_Ashok","engine_repair_D-max","engine_repair_toyota","workshop_view"];
-    const ALT_MAP={
-      ac_electrical_diagnostics:"A/C & Electrical Diagnostics",
-      body_repair_before_before:"Body Repair — Before",
-      body_repair_before_during:"Body Repair — In Progress",
-      body_repair_before_after:"Body Repair — After",
-      customer_reception_main:"Reception Area",
-      diesel_service_bay:"Diesel Service Bay",
-      engine_repair_Ashok:"Engine Overhaul — Ashok Leyland",
-      "engine_repair_D-max":"Engine Service — Isuzu D-MAX",
-      engine_repair_toyota:"Engine Service — Toyota",
-      workshop_view:"Workshop Overview"
-    };
+    const imgs=["ac_electrical_diagnostics","body_repair_before_after","engine_repair_Ashok","engine_repair_D-max","diesel_service_bay","workshop_view"];
     const track=document.getElementById('gallery-track');
-    const slideHTML=(b,a)=>`<div class='relative shrink-0 w-full gallery-frame bg-neutral-100 ph'><img src='./assets/gallery/${b}-960.jpeg' alt='${a}' class='h-full w-full object-cover cursor-zoom-in'><div class='caption'>${a}</div></div>`;
-    track.innerHTML=GALLERY_BASES.map(b=>slideHTML(b,ALT_MAP[b]||b)).join('');
+    const make=(b,t)=>`<div class='relative shrink-0 w-full gallery-frame bg-neutral-100'><img src='./assets/gallery/${b}-960.jpeg' alt='${t}' class='h-full w-full object-cover'><div class='caption'>${t}</div></div>`;
+    track.innerHTML=imgs.map(i=>make(i,i.replaceAll('_',' '))).join('');
   })();
 
-  // Language Toggle
+  // Language Toggle (loads ar.json)
   const langBtn=document.getElementById('langToggle');
   let isAr=false;
-  langBtn.onclick=()=>{isAr=!isAr;document.documentElement.lang=isAr?'ar':'en';document.documentElement.dir=isAr?'rtl':'ltr';langBtn.textContent=isAr?'English':'عربي';};
+  async function setLang(ar){
+    const t=document.querySelectorAll('[data-i18n]');
+    if(ar){
+      const res=await fetch('./assets/lang/ar.json');
+      const data=await res.json();
+      t.forEach(el=>{const k=el.dataset.i18n;if(data[k])el.textContent=data[k];});
+      document.documentElement.lang='ar';document.documentElement.dir='rtl';
+      langBtn.textContent='English';
+    } else {location.reload();}
+  }
+  langBtn.addEventListener('click',()=>{isAr=!isAr;setLang(isAr);});
   </script>
 
 </body>
-</html>
+</
