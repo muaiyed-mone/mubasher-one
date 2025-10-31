@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,16 +23,28 @@
   <!-- Tailwind (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <!-- JSON-LD (credibility) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"AutoRepair",
+    "name":"Mubasher One Automotive Maintenance Holding Co.",
+    "url":"https://www.mone-sa.com/",
+    "address":{"@type":"PostalAddress","addressCountry":"SA","addressRegion":"Eastern Province","addressLocality":"Al-Ahsa"},
+    "telephone":"+966536600791",
+    "award":"SASO 4-Star",
+    "hasCredential":{"@type":"EducationalOccupationalCredential","name":"SASO 4-Star Certification","identifier":"1154","url":"https://www.mone-sa.com/assets/certificates/saso-1154.pdf","credentialCategory":"Quality Certification"}
+  }
+  </script>
+
   <style>
     html { scroll-behavior: smooth; }
-    /* Simple content rhythm */
     section { scroll-margin-top: 80px; }
     @keyframes marquee-ltr { from { transform: translateX(-50%); } to { transform: translateX(0%); } }
     .animate-marquee-ltr { animation: marquee-ltr 28s linear infinite; }
     .animate-marquee-ltr:hover { animation-play-state: paused; }
 
     .gallery-frame { aspect-ratio: 16 / 9; }
-    /* Placeholder shimmer (optional) */
     .ph {
       background: linear-gradient(90deg,#eee 25%,#f7f7f7 37%,#eee 63%);
       background-size: 400% 100%;
@@ -47,27 +59,48 @@
       color:#fff;font-size:12px;line-height:1.25;
       padding:6px 10px;backdrop-filter:blur(3px);
     }
+
+    /* Trust badge sizing */
+    .trust-badge { height: 28px; width: auto; }
+    @media (min-width: 768px){ .trust-badge { height: 36px; } }
+
+    /* Language toggle styles */
+    .lang-btn{border:1px solid rgb(212 212 216);padding:6px 10px;border-radius:12px;font-size:12px}
+    .lang-active{background:#111;color:#fff;border-color:#111}
   </style>
 </head>
 <body class="bg-neutral-50 text-neutral-900">
 
   <!-- ================= HEADER ================= -->
   <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-neutral-200">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
       <a href="#" class="flex items-center" aria-label="Mubasher One home">
         <picture>
           <source srcset="./assets/LOGO-01.svg" type="image/svg+xml">
           <img src="./assets/LOGO-01.png" alt="Mubasher One Logo" class="h-[55px] w-auto" width="220" height="55">
         </picture>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm">
-        <a href="#services" class="hover:text-neutral-700">Services</a>
-        <a href="#capabilities" class="hover:text-neutral-700">Capabilities</a>
-        <a href="#gallery" class="hover:text-neutral-700">Gallery</a>
-        <a href="#qa" class="hover:text-neutral-700">Quality</a>
-        <a href="#map" class="hover:text-neutral-700">Location</a>
-        <a href="#book" class="rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800">Book Service</a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#services" class="hover:text-neutral-700" data-i18n="nav.services">Services</a>
+        <a href="#capabilities" class="hover:text-neutral-700" data-i18n="nav.capabilities">Capabilities</a>
+        <a href="#gallery" class="hover:text-neutral-700" data-i18n="nav.gallery">Gallery</a>
+        <a href="#qa" class="hover:text-neutral-700" data-i18n="nav.quality">Quality</a>
+        <a href="#map" class="hover:text-neutral-700" data-i18n="nav.location">Location</a>
+        <a href="#book" class="rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800" data-i18n="nav.book">Book Service</a>
       </nav>
+
+      <!-- Lang + SASO -->
+      <div class="flex items-center gap-2">
+        <button id="btnEN" class="lang-btn lang-active">EN</button>
+        <button id="btnAR" class="lang-btn">العربية</button>
+        <a href="./assets/certificates/saso-1154.pdf" target="_blank" rel="noopener"
+           class="hidden sm:inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white/70 px-3 py-1.5 hover:bg-white"
+           title="View SASO 4-Star Certificate (PDF)">
+          <img src="./assets/trust/saso-4star.png" alt="SASO 4-Star" class="trust-badge">
+          <span class="text-xs font-medium text-neutral-700" data-i18n="saso.badge">SASO 4-Star</span>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -76,17 +109,27 @@
     <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700"></div>
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-white">
       <div class="max-w-3xl">
-        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight" data-i18n="hero.title">
           Servicing All Brands & Models — Driven by Quality
         </h1>
-        <p class="mt-5 text-neutral-200 max-w-2xl">
+        <p class="mt-5 text-neutral-200 max-w-2xl" data-i18n="hero.blurb">
           SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#book" class="rounded-xl px-5 py-3 bg-white text-neutral-900 font-semibold hover:bg-neutral-100">Book Now</a>
-          <a href="#services" class="rounded-xl px-5 py-3 bg-white/10 ring-1 ring-white/20 hover:bg-white/5">Explore Services</a>
+          <a href="#book" class="rounded-xl px-5 py-3 bg-white text-neutral-900 font-semibold hover:bg-neutral-100" data-i18n="hero.cta1">Book Now</a>
+          <a href="#services" class="rounded-xl px-5 py-3 bg-white/10 ring-1 ring-white/20 hover:bg-white/5" data-i18n="hero.cta2">Explore Services</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ===== Trust bar (SASO) ===== -->
+  <section class="bg-white border-b border-neutral-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center gap-3">
+      <a href="./assets/certificates/saso-1154.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2">
+        <img src="./assets/trust/saso-4star.png" alt="SASO 4-Star" class="h-6 md:h-8 w-auto">
+        <span class="text-sm text-neutral-700" data-i18n="saso.line">SASO 4-Star Certified • Cert. No. 1154</span>
+      </a>
     </div>
   </section>
 
@@ -95,15 +138,15 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid sm:grid-cols-3 gap-4">
       <div class="rounded-2xl bg-white/10 ring-1 ring-white/15 p-5">
         <div class="text-2xl font-bold">3,000 m²</div>
-        <div class="text-sm text-neutral-200">Facility Size</div>
+        <div class="text-sm text-neutral-200" data-i18n="stats.facility">Facility Size</div>
       </div>
       <div class="rounded-2xl bg-white/10 ring-1 ring-white/15 p-5">
-        <div class="text-2xl font-bold">30+ Technicians</div>
-        <div class="text-sm text-neutral-200">Certified Team</div>
+        <div class="text-2xl font-bold">30+ </div>
+        <div class="text-sm text-neutral-200" data-i18n="stats.team">Certified Technicians</div>
       </div>
       <div class="rounded-2xl bg-white/10 ring-1 ring-white/15 p-5">
         <div class="text-2xl font-bold">SASO 4-Star</div>
-        <div class="text-sm text-neutral-200">Accredited Quality</div>
+        <div class="text-sm text-neutral-200" data-i18n="stats.quality">Accredited Quality</div>
       </div>
     </div>
   </section>
@@ -111,61 +154,61 @@
   <!-- ================= CAPABILITIES ================= -->
   <section id="capabilities" class="py-16 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Why Mubasher One</h2>
-      <p class="mt-3 text-neutral-600">We blend accredited quality systems with modern diagnostics and rapid field services.</p>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="why.title">Why Mubasher One</h2>
+      <p class="mt-3 text-neutral-600" data-i18n="why.blurb">We blend accredited quality systems with modern diagnostics and rapid field services.</p>
       <div class="mt-8 grid sm:grid-cols-3 gap-4">
         <div class="rounded-2xl border border-neutral-200 p-5">
-          <div class="font-semibold">SASO 4-Star</div>
-          <p class="text-sm text-neutral-600 mt-1">Quality & safety across operations.</p>
+          <div class="font-semibold" data-i18n="why.saso">SASO 4-Star</div>
+          <p class="text-sm text-neutral-600 mt-1" data-i18n="why.saso_desc">Quality & safety across operations.</p>
         </div>
         <div class="rounded-2xl border border-neutral-200 p-5">
-          <div class="font-semibold">ERP Integration</div>
-          <p class="text-sm text-neutral-600 mt-1">Real-time parts, RO, and inventory.</p>
+          <div class="font-semibold" data-i18n="why.erp">ERP Integration</div>
+          <p class="text-sm text-neutral-600 mt-1" data-i18n="why.erp_desc">Real-time parts, RO, and inventory.</p>
         </div>
         <div class="rounded-2xl border border-neutral-200 p-5">
-          <div class="font-semibold">Mobile Units</div>
-          <p class="text-sm text-neutral-600 mt-1">On-site emergency repair & fleet support.</p>
+          <div class="font-semibold" data-i18n="why.mobile">Mobile Units</div>
+          <p class="text-sm text-neutral-600 mt-1" data-i18n="why.mobile_desc">On-site emergency repair & fleet support.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= SERVICES (brief) ================= -->
+  <!-- ================= SERVICES ================= -->
   <section id="services" class="py-16 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Core Services</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="services.title">Core Services</h2>
       <div class="mt-8 grid lg:grid-cols-2 gap-8">
         <div class="rounded-2xl border border-neutral-200 p-6">
-          <h3 class="font-semibold text-lg">Diesel Expertise</h3>
+          <h3 class="font-semibold text-lg" data-i18n="services.diesel">Diesel Expertise</h3>
           <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
-            <li>Common-rail diagnostics & repair</li>
-            <li>EGR ultrasonic decarbonizing</li>
-            <li>AdBlue / SCR diagnostics</li>
-            <li>Fuel & hydraulic pump maintenance</li>
-            <li>Engine assemblies & overhauling</li>
-            <li>Brake jobs and system service</li>
-            <li>Wheel alignment & suspension calibration</li>
+            <li data-i18n="services.d1">Common-rail diagnostics & repair</li>
+            <li data-i18n="services.d2">EGR ultrasonic decarbonizing</li>
+            <li data-i18n="services.d3">AdBlue / SCR diagnostics</li>
+            <li data-i18n="services.d4">Fuel & hydraulic pump maintenance</li>
+            <li data-i18n="services.d5">Engine assemblies & overhauling</li>
+            <li data-i18n="services.d6">Brake jobs and system service</li>
+            <li data-i18n="services.d7">Wheel alignment & suspension calibration</li>
           </ul>
         </div>
         <div class="rounded-2xl border border-neutral-200 p-6">
-          <h3 class="font-semibold text-lg">Petrol & Hybrid</h3>
+          <h3 class="font-semibold text-lg" data-i18n="services.petrol">Petrol & Hybrid</h3>
           <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
-            <li>Direct injection intake cleaning</li>
-            <li>Walnut blasting for carbon buildup</li>
-            <li>Routine maintenance & drivability</li>
-            <li>Advanced diagnostic tools</li>
+            <li data-i18n="services.p1">Direct injection intake cleaning</li>
+            <li data-i18n="services.p2">Walnut blasting for carbon buildup</li>
+            <li data-i18n="services.p3">Routine maintenance & drivability</li>
+            <li data-i18n="services.p4">Advanced diagnostic tools</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= GALLERY (single, clean) ================= -->
+  <!-- ================= GALLERY ================= -->
   <section id="gallery" class="py-16 bg-neutral-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex items-end justify-between gap-4">
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Photo Gallery</h2>
-        <span class="text-sm text-neutral-500">Swipe on mobile • Click to enlarge</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="gallery.title">Photo Gallery</h2>
+        <span class="text-sm text-neutral-500" data-i18n="gallery.hint">Swipe on mobile • Click to enlarge</span>
       </div>
 
       <div class="relative mt-6 rounded-2xl overflow-hidden border border-neutral-200 bg-white">
@@ -176,7 +219,7 @@
       </div>
     </div>
 
-    <!-- Single lightbox only -->
+    <!-- Single lightbox -->
     <div id="lightbox" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50">
       <button id="lightbox-close" class="absolute top-4 right-4 text-white/80 hover:text-white text-2xl">✕</button>
       <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-3xl">‹</button>
@@ -188,13 +231,17 @@
   <!-- ================= QUALITY ================= -->
   <section id="qa" class="py-16 bg-neutral-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Quality Assurance</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="qa.title">Quality Assurance</h2>
       <ul class="mt-6 space-y-2 list-disc pl-6 text-neutral-700">
-        <li>SASO 4-Star – Cert. No. 1154</li>
-        <li>Service warranty on labor</li>
-        <li>Warranty as per OEM standards</li>
-        <li>4Cs quality integration</li>
+        <li data-i18n="qa.q1">SASO 4-Star – Cert. No. 1154</li>
+        <li data-i18n="qa.q2">Service warranty on labor</li>
+        <li data-i18n="qa.q3">Warranty as per OEM standards</li>
+        <li data-i18n="qa.q4">4Cs quality integration</li>
       </ul>
+      <a href="./assets/certificates/saso-1154.pdf" target="_blank" rel="noopener"
+         class="mt-6 inline-flex items-center rounded-xl px-5 py-3 bg-neutral-900 text-white hover:bg-neutral-800" data-i18n="qa.btn">
+        View SASO Certificate (PDF)
+      </a>
     </div>
   </section>
 
@@ -202,29 +249,31 @@
   <section id="book" class="py-16 bg-neutral-900 text-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 items-center">
       <div>
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Ready to service your vehicle or fleet?</h2>
-        <p class="mt-3 text-neutral-300">Book a slot or request on-site mobile support. We’ll confirm by phone or WhatsApp.</p>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="book.title">Ready to service your vehicle or fleet?</h2>
+        <p class="mt-3 text-neutral-300" data-i18n="book.blurb">Book a slot or request on-site mobile support. We’ll confirm by phone or WhatsApp.</p>
         <ul class="mt-4 space-y-2 text-neutral-300 list-disc pl-6">
-          <li>Al-Ahsa coverage • 24/7 dispatch</li>
-          <li>Transparent estimates with parts & labor warranty</li>
-          <li>Real-time job tracking via ERP</li>
+          <li data-i18n="book.b1">Al-Ahsa coverage • 24/7 dispatch</li>
+          <li data-i18n="book.b2">Transparent estimates with parts & labor warranty</li>
+          <li data-i18n="book.b3">Real-time job tracking via ERP</li>
         </ul>
       </div>
       <form id="booking-form" class="rounded-2xl bg-white text-neutral-900 p-6 space-y-4" novalidate>
         <div>
-          <label class="text-sm" for="bf_name">Name</label>
+          <label class="text-sm" for="bf_name" data-i18n="form.name">Name</label>
           <input id="bf_name" name="name" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="Your full name" />
         </div>
         <div>
-          <label class="text-sm" for="bf_phone">Phone / WhatsApp</label>
-          <input id="bf_phone" name="phone" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="+966…" />
+          <label class="text-sm" for="bf_phone" data-i18n="form.phone">Phone / WhatsApp</label>
+          <input id="bf_phone" name="phone" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="+966…" inputmode="tel" />
         </div>
         <div>
-          <label class="text-sm" for="bf_issue">Vehicle / Issue</label>
+          <label class="text-sm" for="bf_issue" data-i18n="form.issue">Vehicle / Issue</label>
           <textarea id="bf_issue" name="issue" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" rows="3" placeholder="e.g., 2018 Actros • brake service"></textarea>
         </div>
-        <button type="submit" class="w-full rounded-xl px-4 py-3 bg-neutral-900 text-white font-semibold hover:bg-neutral-800">Request Booking via WhatsApp</button>
-        <p class="text-xs text-neutral-500">Submitting opens WhatsApp with your details prefilled.</p>
+        <button type="submit" class="w-full rounded-xl px-4 py-3 bg-neutral-900 text-white font-semibold hover:bg-neutral-800" data-i18n="form.submit">
+          Request Booking via WhatsApp
+        </button>
+        <p class="text-xs text-neutral-500" data-i18n="form.note">Submitting opens WhatsApp with your details prefilled.</p>
       </form>
     </div>
   </section>
@@ -232,13 +281,13 @@
   <!-- ================= MAP ================= -->
   <section id="map" class="py-16 bg-white border-t border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Find Us</h2>
-      <p class="mt-2 text-neutral-600">Click below for directions. Parking available on site.</p>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="map.title">Find Us</h2>
+      <p class="mt-2 text-neutral-600" data-i18n="map.blurb">Click below for directions. Parking available on site.</p>
       <div class="mt-6 rounded-2xl overflow-hidden border border-neutral-200">
         <iframe title="Mubasher One Location" width="100%" height="420" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=https://maps.app.goo.gl/yhdtpxKjngnFus787&z=15&output=embed"></iframe>
       </div>
-      <a href="https://maps.app.goo.gl/yhdtpxKjngnFus787" target="_blank" class="mt-4 inline-block rounded-xl px-5 py-3 bg-neutral-900 text-white hover:bg-neutral-800">Get Directions</a>
+      <a href="https://maps.app.goo.gl/yhdtpxKjngnFus787" target="_blank" class="mt-4 inline-block rounded-xl px-5 py-3 bg-neutral-900 text-white hover:bg-neutral-800" data-i18n="map.btn">Get Directions</a>
     </div>
   </section>
 
@@ -253,15 +302,15 @@
         <div class="text-xs text-neutral-500">© 2025 Mubasher One Automotive Maintenance Holding Co.</div>
       </div>
       <div>
-        <div class="font-semibold">Contact</div>
+        <div class="font-semibold" data-i18n="footer.contact">Contact</div>
         <ul class="mt-2 text-sm text-neutral-600 space-y-1">
           <li>Email: <a class="underline" href="mailto:service@mone-sa.com">service@mone-sa.com</a></li>
-          <li>Phone: <a class="underline" href="tel:+966536600791">+966 53 660 0791</a></li>
+          <li data-i18n="footer.phone">Phone: <a class="underline" href="tel:+966536600791">+966 53 660 0791</a></li>
         </ul>
       </div>
       <div>
-        <div class="font-semibold">Location</div>
-        <p class="mt-2 text-sm text-neutral-600">Al-Ahsa, Eastern Province, Saudi Arabia</p>
+        <div class="font-semibold" data-i18n="footer.location">Location</div>
+        <p class="mt-2 text-sm text-neutral-600" data-i18n="footer.addr">Al-Ahsa, Eastern Province, Saudi Arabia</p>
       </div>
     </div>
   </footer>
@@ -387,10 +436,92 @@
       const n=document.getElementById('bf_name').value.trim(),
             p=document.getElementById('bf_phone').value.trim(),
             i=document.getElementById('bf_issue').value.trim();
-      if(!n||!p||!i){alert("Please fill your Name, Phone, and Issue.");return;}
+      if(!n||!p||!i){alert(window.__t('form.alert'));return;}
       const msg=`Booking request:\nName: ${n}\nPhone: ${p}\nVehicle/Issue: ${i}\nFrom: www.mone-sa.com`;
       window.open(`https://wa.me/966536600791?text=${encodeURIComponent(msg)}`,'_blank','noopener,noreferrer');
     });
+  })();
+
+  // ----------- I18N (EN/AR toggle) -----------
+  (() => {
+    const t = {
+      en: {
+        "nav.services":"Services","nav.capabilities":"Capabilities","nav.gallery":"Gallery","nav.quality":"Quality","nav.location":"Location","nav.book":"Book Service",
+        "hero.title":"Servicing All Brands & Models — Driven by Quality",
+        "hero.blurb":"SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.",
+        "hero.cta1":"Book Now","hero.cta2":"Explore Services",
+        "saso.badge":"SASO 4-Star","saso.line":"SASO 4-Star Certified • Cert. No. 1154",
+        "stats.facility":"Facility Size","stats.team":"Certified Technicians","stats.quality":"Accredited Quality",
+        "why.title":"Why Mubasher One","why.blurb":"We blend accredited quality systems with modern diagnostics and rapid field services.",
+        "why.saso":"SASO 4-Star","why.saso_desc":"Quality & safety across operations.",
+        "why.erp":"ERP Integration","why.erp_desc":"Real-time parts, RO, and inventory.",
+        "why.mobile":"Mobile Units","why.mobile_desc":"On-site emergency repair & fleet support.",
+        "services.title":"Core Services","services.diesel":"Diesel Expertise",
+        "services.d1":"Common-rail diagnostics & repair","services.d2":"EGR ultrasonic decarbonizing","services.d3":"AdBlue / SCR diagnostics","services.d4":"Fuel & hydraulic pump maintenance","services.d5":"Engine assemblies & overhauling","services.d6":"Brake jobs and system service","services.d7":"Wheel alignment & suspension calibration",
+        "services.petrol":"Petrol & Hybrid","services.p1":"Direct injection intake cleaning","services.p2":"Walnut blasting for carbon buildup","services.p3":"Routine maintenance & drivability","services.p4":"Advanced diagnostic tools",
+        "gallery.title":"Photo Gallery","gallery.hint":"Swipe on mobile • Click to enlarge",
+        "qa.title":"Quality Assurance","qa.q1":"SASO 4-Star – Cert. No. 1154","qa.q2":"Service warranty on labor","qa.q3":"Warranty as per OEM standards","qa.q4":"4Cs quality integration","qa.btn":"View SASO Certificate (PDF)",
+        "book.title":"Ready to service your vehicle or fleet?","book.blurb":"Book a slot or request on-site mobile support. We’ll confirm by phone or WhatsApp.","book.b1":"Al-Ahsa coverage • 24/7 dispatch","book.b2":"Transparent estimates with parts & labor warranty","book.b3":"Real-time job tracking via ERP",
+        "form.name":"Name","form.phone":"Phone / WhatsApp","form.issue":"Vehicle / Issue","form.submit":"Request Booking via WhatsApp","form.note":"Submitting opens WhatsApp with your details prefilled.","form.alert":"Please fill your Name, Phone, and Issue.",
+        "map.title":"Find Us","map.blurb":"Click below for directions. Parking available on site.","map.btn":"Get Directions",
+        "footer.contact":"Contact","footer.phone":"Phone: ","footer.location":"Location","footer.addr":"Al-Ahsa, Eastern Province, Saudi Arabia"
+      },
+      ar: {
+        "nav.services":"الخدمات","nav.capabilities":"المميزات","nav.gallery":"المعرض","nav.quality":"الجودة","nav.location":"الموقع","nav.book":"احجز خدمة",
+        "hero.title":"خدمة جميع الماركات والموديلات — مدفوعة بالجودة",
+        "hero.blurb":"مركز خدمة حاصل على تصنيف ساسو 4 نجوم في الأحساء، نقدم صيانة دقيقة لسيارات الديزل والبنزين مع أنظمة مؤسسية ودعم ميداني في الموقع.",
+        "hero.cta1":"احجز الآن","hero.cta2":"استعرض الخدمات",
+        "saso.badge":"ساسو ٤ نجوم","saso.line":"معتمد ساسو ٤ نجوم • رقم الشهادة 1154",
+        "stats.facility":"مساحة المنشأة","stats.team":"فنيون معتمدون","stats.quality":"جودة معتمدة",
+        "why.title":"لماذا مباشرة وان","why.blurb":"نمزج أنظمة الجودة المعتمدة مع أحدث أجهزة التشخيص وخدمة ميدانية سريعة.",
+        "why.saso":"ساسو ٤ نجوم","why.saso_desc":"جودة وسلامة عبر العمليات.",
+        "why.erp":"تكامل بنظام ERP","why.erp_desc":"مخزون وطلبات عمل في الوقت الفعلي.",
+        "why.mobile":"وحدات متنقلة","why.mobile_desc":"إصلاحات طارئة ودعم أساطيل في موقع العميل.",
+        "services.title":"الخدمات الرئيسية","services.diesel":"خبرة الديزل",
+        "services.d1":"تشخيص وإصلاح نظام الكومون ريل","services.d2":"تنظيف EGR بالموجات فوق الصوتية","services.d3":"تشخيص أنظمة AdBlue/SCR","services.d4":"صيانة مضخات الوقود والهيدروليك","services.d5":"تجميع المحركات والعمرة","services.d6":"خراطة وصيانة أنظمة الفرامل","services.d7":"ترصيص وضبط زوايا وتعليق",
+        "services.petrol":"البنزين والهايبرد","services.p1":"تنظيف مجرى السحب لمحركات الحقن المباشر","services.p2":"تنظيف الكربون بقشر الجوز","services.p3":"صيانة دورية ومعالجة الأعطال","services.p4":"أدوات تشخيص متقدمة",
+        "gallery.title":"معرض الصور","gallery.hint":"اسحب على الجوال • اضغط للتكبير",
+        "qa.title":"ضمان الجودة","qa.q1":"ساسو ٤ نجوم — رقم الشهادة 1154","qa.q2":"ضمان على الأجور","qa.q3":"ضمان وفق معايير المصنع","qa.q4":"تكامل الجودة 4Cs","qa.btn":"عرض شهادة ساسو (PDF)",
+        "book.title":"جاهزون لخدمة مركبتك أو أسطولك؟","book.blurb":"احجز موعداً أو اطلب خدمة ميدانية. سيتم التأكيد عبر الهاتف أو واتساب.","book.b1":"تغطية الأحساء • تواجد 24/7","book.b2":"تسعير واضح مع ضمان قطع وعمالة","book.b3":"متابعة العمل لحظياً عبر ERP",
+        "form.name":"الاسم","form.phone":"الجوال / واتساب","form.issue":"المركبة / المشكلة","form.submit":"إرسال الطلب عبر واتساب","form.note":"سيتم فتح واتساب مع تعبئة التفاصيل تلقائياً.","form.alert":"يرجى تعبئة الاسم ورقم الجوال والمشكلة.",
+        "map.title":"موقعنا","map.blurb":"اضغط أدناه للحصول على الاتجاهات. يوجد مواقف داخلية.","map.btn":"افتح الخرائط",
+        "footer.contact":"تواصل","footer.phone":"الهاتف: ","footer.location":"الموقع","footer.addr":"الأحساء، المنطقة الشرقية، المملكة العربية السعودية"
+      }
+    };
+    window.__t = (k)=> (t[window.__lang||'en'][k] || t.en[k] || k);
+
+    function applyLang(lang){
+      window.__lang = lang;
+      const html = document.documentElement;
+      html.lang = lang;
+      html.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        const val = __t(key);
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = val;
+        } else {
+          el.textContent = val;
+        }
+      });
+
+      // placeholders for form fields
+      document.getElementById('bf_name')?.setAttribute('placeholder', lang==='ar' ? 'الاسم الكامل' : 'Your full name');
+      document.getElementById('bf_phone')?.setAttribute('placeholder', lang==='ar' ? '+966…' : '+966…');
+      document.getElementById('bf_issue')?.setAttribute('placeholder', lang==='ar' ? 'مثال: 2018 أكتروس • خدمة فرامل' : 'e.g., 2018 Actros • brake service');
+
+      // Toggle button styles
+      document.getElementById('btnEN').classList.toggle('lang-active', lang==='en');
+      document.getElementById('btnAR').classList.toggle('lang-active', lang==='ar');
+    }
+
+    document.getElementById('btnEN')?.addEventListener('click',()=>applyLang('en'));
+    document.getElementById('btnAR')?.addEventListener('click',()=>applyLang('ar'));
+
+    // Init language: try browser language, default EN
+    const prefersAR = (navigator.language||'en').toLowerCase().startsWith('ar');
+    applyLang(prefersAR ? 'ar' : 'en');
   })();
   </script>
 </body>
