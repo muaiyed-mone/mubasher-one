@@ -46,6 +46,13 @@
 
     /* Buttons */
     .btn { @apply rounded-xl px-5 py-3 font-semibold; }
+    /* Keep sliders LTR even when page dir=rtl */
+#reviews, #reviews * { direction: ltr; }
+#reviews #review-track { direction: ltr; }
+
+#clients, #clients * { direction: ltr; }
+#clients #client-marquee { direction: ltr; }
+
   </style>
 </head>
 <body class="bg-neutral-50 text-neutral-900">
@@ -662,6 +669,7 @@
 
 </body>
 </html>
+
 
 
 
