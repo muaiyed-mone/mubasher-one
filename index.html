@@ -16,7 +16,7 @@
   <meta property="og:image" content="./assets/og-cover.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Favicons (replace with your files if you have them) -->
+  <!-- Favicons -->
   <link rel="icon" href="./assets/favicon.ico" />
   <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" sizes="180x180" />
 
@@ -29,7 +29,6 @@
     .animate-marquee-ltr { animation: marquee-ltr 28s linear infinite; }
     .animate-marquee-ltr:hover { animation-play-state: paused; }
 
-    /* Uniform gallery frame + placeholder shimmer */
     .gallery-frame { aspect-ratio: 16 / 9; }
     .ph {
       background: linear-gradient(90deg,#eee 25%,#f7f7f7 37%,#eee 63%);
@@ -38,26 +37,60 @@
     }
     @keyframes ph { 0%{background-position:100% 0} 100%{background-position:0 0} }
   </style>
+
+  <!-- Schema.org (basic) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"AutoRepair",
+    "name":"Mubasher One Automotive Maintenance Holding Co.",
+    "url":"https://www.mone-sa.com/",
+    "logo":"https://www.mone-sa.com/assets/LOGO-01.svg",
+    "image":"https://www.mone-sa.com/assets/og-cover.jpg",
+    "telephone":"+966536600791",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Al-Ahsa",
+      "addressRegion":"Eastern Province",
+      "addressCountry":"SA"
+    },
+    "description":"SASO 4-Star certified auto service center in Al-Ahsa. Diesel & petrol maintenance, diagnostics, complete overhauls, paint, interior restoration, mobile fleet support.",
+    "openingHours":"Su-Th 08:00-19:00"
+  }
+  </script>
 </head>
 <body class="bg-neutral-50 text-neutral-900">
   <!-- Header -->
   <header class="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
       <a href="#" class="flex items-center" aria-label="Mubasher One home">
-        <!-- Robust logo with fallbacks: SVG -> PNG -> text -->
         <picture>
           <source srcset="./assets/LOGO-01.svg" type="image/svg+xml">
           <img id="brandLogo" src="./assets/LOGO-01.png" alt="Mubasher One Logo" class="h-[55px] w-auto" width="220" height="55"
                onerror="this.replaceWith(Object.assign(document.createElement('span'),{innerText:'Mubasher One',className:'font-semibold text-lg'}));">
         </picture>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm">
-        <a href="#services" class="hover:text-neutral-700">Services</a>
-        <a href="#capabilities" class="hover:text-neutral-700">Capabilities</a>
-        <a href="#qa" class="hover:text-neutral-700">Quality</a>
-        <a href="#clients" class="hover:text-neutral-700">Clients</a>
-        <a href="#map" class="hover:text-neutral-700">Location</a>
-        <a href="#book" class="rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800">Book Service</a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#services" class="hover:text-neutral-700" data-i18n="navServices">Services</a>
+        <a href="#capabilities" class="hover:text-neutral-700" data-i18n="navCapabilities">Capabilities</a>
+        <a href="#qa" class="hover:text-neutral-700" data-i18n="navQuality">Quality</a>
+        <a href="#clients" class="hover:text-neutral-700" data-i18n="navClients">Clients</a>
+        <a href="#map" class="hover:text-neutral-700" data-i18n="navLocation">Location</a>
+
+        <!-- SASO badge -->
+        <a href="./assets/saso-certificate.pdf" target="_blank" rel="noopener" class="hidden lg:inline-flex items-center gap-2 rounded-full border border-neutral-200 px-3 py-1">
+          <img src="./assets/saso-4star-badge.png" alt="SASO 4-Star" class="h-5 w-auto">
+          <span class="text-xs" data-i18n="saso">SASO 4-Star</span>
+        </a>
+
+        <a href="#book" class="rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800" data-i18n="navBook">Book Service</a>
+
+        <!-- Language toggle -->
+        <div class="flex items-center gap-2">
+          <button id="to-en" class="rounded-md px-2 py-1 border border-neutral-300">EN</button>
+          <button id="to-ar" class="rounded-md px-2 py-1 border border-neutral-300">AR</button>
+        </div>
       </nav>
     </div>
   </header>
@@ -67,15 +100,15 @@
     <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700"></div>
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-white">
       <div class="max-w-3xl">
-        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight" data-i18n="heroTitle">
           Servicing All Brands & Models — Driven by Quality
         </h1>
-        <p class="mt-5 text-neutral-200 max-w-2xl">
+        <p class="mt-5 text-neutral-200 max-w-2xl" data-i18n="heroSub">
           SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#book" class="rounded-xl px-5 py-3 bg-white text-neutral-900 font-semibold hover:bg-neutral-100">Book Now</a>
-          <a href="#services" class="rounded-xl px-5 py-3 bg-white/10 ring-1 ring-white/20 hover:bg-white/5">Explore Services</a>
+          <a href="#book" class="rounded-xl px-5 py-3 bg-white text-neutral-900 font-semibold hover:bg-neutral-100" data-i18n="ctaBook">Book Now</a>
+          <a href="#services" class="rounded-xl px-5 py-3 bg-white/10 ring-1 ring-white/20 hover:bg-white/5" data-i18n="ctaExplore">Explore Services</a>
         </div>
       </div>
     </div>
@@ -86,15 +119,15 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid sm:grid-cols-3 gap-4">
       <div class="rounded-2xl bg-white/10 ring-1 ring-white/15 p-5">
         <div class="text-2xl font-bold">3,000 m²</div>
-        <div class="text-sm text-neutral-200">Facility Size</div>
+        <div class="text-sm text-neutral-200" data-i18n="statFacility">Facility Size</div>
       </div>
       <div class="rounded-2xl bg-white/10 ring-1 ring-white/15 p-5">
         <div class="text-2xl font-bold">30+ Technicians</div>
-        <div class="text-sm text-neutral-200">Certified Team</div>
+        <div class="text-sm text-neutral-200" data-i18n="statTeam">Certified Team</div>
       </div>
       <div class="rounded-2xl bg-white/10 ring-1 ring-white/15 p-5">
         <div class="text-2xl font-bold">SASO 4-Star</div>
-        <div class="text-sm text-neutral-200">Accredited Quality</div>
+        <div class="text-sm text-neutral-200" data-i18n="statSaso">Accredited Quality</div>
       </div>
     </div>
   </section>
@@ -102,20 +135,20 @@
   <!-- Why / Capabilities -->
   <section id="capabilities" class="py-16 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Why Mubasher One</h2>
-      <p class="mt-3 text-neutral-600">We blend accredited quality systems with modern diagnostics and rapid field services.</p>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="whyTitle">Why Mubasher One</h2>
+      <p class="mt-3 text-neutral-600" data-i18n="whySub">We blend accredited quality systems with modern diagnostics and rapid field services.</p>
       <div class="mt-8 grid sm:grid-cols-3 gap-4">
         <div class="rounded-2xl border border-neutral-200 p-5">
-          <div class="font-semibold">SASO 4-Star</div>
-          <p class="text-sm text-neutral-600 mt-1">Quality & safety across operations.</p>
+          <div class="font-semibold" data-i18n="whySaso">SASO 4-Star</div>
+          <p class="text-sm text-neutral-600 mt-1" data-i18n="whySasoTxt">Quality & safety across operations.</p>
         </div>
         <div class="rounded-2xl border border-neutral-200 p-5">
-          <div class="font-semibold">ERP Integration</div>
-          <p class="text-sm text-neutral-600 mt-1">Real-time parts, RO, and inventory.</p>
+          <div class="font-semibold" data-i18n="whyErp">ERP Integration</div>
+          <p class="text-sm text-neutral-600 mt-1" data-i18n="whyErpTxt">Real-time parts, RO, and inventory.</p>
         </div>
         <div class="rounded-2xl border border-neutral-200 p-5">
-          <div class="font-semibold">Mobile Units</div>
-          <p class="text-sm text-neutral-600 mt-1">On-site emergency repair & fleet support.</p>
+          <div class="font-semibold" data-i18n="whyMobile">Mobile Units</div>
+          <p class="text-sm text-neutral-600 mt-1" data-i18n="whyMobileTxt">On-site emergency repair & fleet support.</p>
         </div>
       </div>
     </div>
@@ -124,48 +157,48 @@
   <!-- Services -->
   <section id="services" class="py-16 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Core Services</h2>
-      <p class="mt-3 text-neutral-600 max-w-2xl">Comprehensive maintenance programs tailored for fleets and private vehicles.</p>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="servicesTitle">Core Services</h2>
+      <p class="mt-3 text-neutral-600 max-w-2xl" data-i18n="servicesSub">Comprehensive maintenance programs tailored for fleets and private vehicles.</p>
       <div class="mt-8 grid lg:grid-cols-2 gap-8">
         <div class="rounded-2xl border border-neutral-200 p-6">
-          <h3 class="font-semibold text-lg">Diesel Expertise</h3>
+          <h3 class="font-semibold text-lg" data-i18n="svcDiesel">Diesel Expertise</h3>
           <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
-            <li>Common-rail diagnostics & repair</li>
-            <li>EGR ultrasonic decarbonizing</li>
-            <li>AdBlue / SCR system diagnostics</li>
-            <li>Fuel and hydraulic pump rebuilding & maintenance</li>
-            <li>Engine assemblies and complete overhauling</li>
-            <li>Brake jobs & system service</li>
-            <li>Wheel alignment & suspension calibration</li>
+            <li data-i18n="svcD1">Common-rail diagnostics & repair</li>
+            <li data-i18n="svcD2">EGR ultrasonic decarbonizing</li>
+            <li data-i18n="svcD3">AdBlue / SCR system diagnostics</li>
+            <li data-i18n="svcD4">Fuel and hydraulic pump rebuilding & maintenance</li>
+            <li data-i18n="svcD5">Engine assemblies and complete overhauling</li>
+            <li data-i18n="svcD6">Brake jobs & system service</li>
+            <li data-i18n="svcD7">Wheel alignment & suspension calibration</li>
           </ul>
         </div>
         <div class="rounded-2xl border border-neutral-200 p-6">
-          <h3 class="font-semibold text-lg">Petrol & Hybrid</h3>
+          <h3 class="font-semibold text-lg" data-i18n="svcPetrol">Petrol & Hybrid</h3>
           <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
-            <li>Direct injection intake cleaning</li>
-            <li>Walnut blasting for carbon buildup</li>
-            <li>Routine maintenance & drivability</li>
-            <li>Advanced diagnostic tools</li>
+            <li data-i18n="svcP1">Direct injection intake cleaning</li>
+            <li data-i18n="svcP2">Walnut blasting for carbon buildup</li>
+            <li data-i18n="svcP3">Routine maintenance & drivability</li>
+            <li data-i18n="svcP4">Advanced diagnostic tools</li>
           </ul>
         </div>
         <div class="rounded-2xl border border-neutral-200 p-6">
-          <h3 class="font-semibold text-lg">Specialized Equipment</h3>
+          <h3 class="font-semibold text-lg" data-i18n="svcEquip">Specialized Equipment</h3>
           <ul class="mt-3 grid md:grid-cols-2 gap-3 list-disc pl-6 text-neutral-700">
-            <li>Paint & prep rooms for premium finish and fast curing</li>
-            <li>10-ton hydraulic lifts for SUVs and light trucks</li>
-            <li>Brake lathes for disc/drum resurfacing</li>
-            <li>Advanced multi-brand scan & diagnostic tools</li>
-            <li>Paintless dent repair</li>
-            <li>Chassis sandblasting and reconditioning</li>
+            <li data-i18n="svcE1">Paint & prep rooms for premium finish and fast curing</li>
+            <li data-i18n="svcE2">10-ton hydraulic lifts for SUVs and light trucks</li>
+            <li data-i18n="svcE3">Brake lathes for disc/drum resurfacing</li>
+            <li data-i18n="svcE4">Advanced multi-brand scan & diagnostic tools</li>
+            <li data-i18n="svcE5">Paintless dent repair</li>
+            <li data-i18n="svcE6">Chassis sandblasting and reconditioning</li>
           </ul>
         </div>
         <div class="rounded-2xl border border-neutral-200 p-6">
-          <h3 class="font-semibold text-lg">Upholstery & Interior Restoration</h3>
+          <h3 class="font-semibold text-lg" data-i18n="svcInterior">Upholstery & Interior Restoration</h3>
           <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
-            <li>Seat and door panel re-upholstery</li>
-            <li>Roof lining and carpet replacement</li>
-            <li>Custom stitching and leather upgrades</li>
-            <li>Interior detailing and dashboard restoration</li>
+            <li data-i18n="svcI1">Seat and door panel re-upholstery</li>
+            <li data-i18n="svcI2">Roof lining and carpet replacement</li>
+            <li data-i18n="svcI3">Custom stitching and leather upgrades</li>
+            <li data-i18n="svcI4">Interior detailing and dashboard restoration</li>
           </ul>
         </div>
       </div>
@@ -173,39 +206,15 @@
   </section>
 
   <!-- Photo Gallery / Carousel -->
-<section id="gallery" class="py-16 bg-neutral-50">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="flex items-end justify-between gap-4">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Photo Gallery</h2>
-      <span class="text-sm text-neutral-500">Swipe on mobile • Click to enlarge</span>
-    </div>
-
-    <div class="relative mt-6 rounded-2xl overflow-hidden border border-neutral-200 bg-white" aria-label="Workshop gallery">
-      <div id="gallery-track" class="flex transition-transform duration-500 ease-out will-change-transform">
-        <!-- Slides will be injected automatically -->
+  <section id="gallery" class="py-16 bg-neutral-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="galTitle">Photo Gallery</h2>
+        <span class="text-sm text-neutral-500" data-i18n="galHint">Swipe on mobile • Click to enlarge</span>
       </div>
 
-      <!-- Controls -->
-      <button id="gallery-prev" aria-label="Previous" class="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/80 hover:bg-white shadow p-2">‹</button>
-      <button id="gallery-next" aria-label="Next" class="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/80 hover:bg-white shadow p-2">›</button>
-
-      <!-- Dots -->
-      <div id="gallery-dots" class="absolute bottom-3 left-0 right-0 flex justify-center gap-2"></div>
-    </div>
-
-    <p class="mt-3 text-xs text-neutral-500">
-     
-    </p>
-  </div>
-
-  <!-- Lightbox Modal -->
-  <div id="lightbox" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-50" aria-modal="true" role="dialog">
-    <button id="lightbox-close" class="absolute top-4 right-4 text-white/80 hover:text-white text-2xl" aria-label="Close">✕</button>
-    <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-3xl" aria-label="Prev">‹</button>
-    <img id="lightbox-img" src="" alt="Photo" class="max-h-[90vh] max-w-[90vw] object-contain">
-    <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-3xl" aria-label="Next">›</button>
-  </div>
-</section>
+      <div class="relative mt-6 rounded-2xl overflow-hidden border border-neutral-200 bg-white" aria-label="Workshop gallery">
+        <div id="gallery-track" class="flex transition-transform duration-500 ease-out will-change-transform"></div>
 
         <!-- Controls -->
         <button id="gallery-prev" aria-label="Previous" class="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/80 hover:bg-white shadow p-2">‹</button>
@@ -214,10 +223,6 @@
         <!-- Dots -->
         <div id="gallery-dots" class="absolute bottom-3 left-0 right-0 flex justify-center gap-2"></div>
       </div>
-
-      <p class="mt-3 text-xs text-neutral-500">
-       
-      </p>
     </div>
 
     <!-- Lightbox Modal -->
@@ -232,12 +237,12 @@
   <!-- Quality Assurance -->
   <section id="qa" class="py-16 bg-neutral-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Quality Assurance</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="qaTitle">Quality Assurance</h2>
       <ul class="mt-6 space-y-2 list-disc pl-6 text-neutral-700">
-        <li>SASO 4-Star – Cert. No. 1154</li>
-        <li>Service warranty on labor</li>
-        <li>Warranty as per OEM standards</li>
-        <li>4Cs quality integration</li>
+        <li data-i18n="qa1">SASO 4-Star – Cert. No. 1154</li>
+        <li data-i18n="qa2">Service warranty on labor</li>
+        <li data-i18n="qa3">Warranty as per OEM standards</li>
+        <li data-i18n="qa4">4Cs quality integration</li>
       </ul>
     </div>
   </section>
@@ -245,8 +250,8 @@
   <!-- Our Clients (Continuous Marquee) -->
   <section id="clients" class="py-16 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Our Clients</h2>
-      <p class="mt-3 text-neutral-600 max-w-2xl">Trusted by leading fleets, manufacturers, and suppliers in Saudi Arabia.</p>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="clientsTitle">Our Clients</h2>
+      <p class="mt-3 text-neutral-600 max-w-2xl" data-i18n="clientsSub">Trusted by leading fleets, manufacturers, and suppliers in Saudi Arabia.</p>
 
       <div class="relative mt-8 overflow-hidden">
         <div class="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-white to-transparent"></div>
@@ -254,7 +259,7 @@
 
         <div class="[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <ul class="flex gap-12 animate-marquee-ltr will-change-transform py-2">
-            <!-- Use relative paths so this works on GitHub Pages AND your custom domain -->
+            <!-- (unchanged) your client logos list -->
             <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Abrak_500x500.png" alt="ABRAK" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">ABRAK</div></li>
             <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Al_Ameer_Bakery_500x500.png" alt="Al Ameer Bakery & Sweets" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Ameer Bakery & Sweets</div></li>
             <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Al_Najah_Bakeries_500x500.png" alt="Al Najah Bakeries" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Al Najah Bakeries</div></li>
@@ -271,32 +276,35 @@
             <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Sanabel_500x500.png" alt="Sanabel United Trading Co." class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Sanabel United Trading Co.</div></li>
             <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/SRACO_500x500.png" alt="SRACO" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">SRACO</div></li>
             <li class="shrink-0 w-44"><div class="h-16 grid place-content-center rounded-xl border border-neutral-200 bg-white p-3"><img src="./assets/clients/Table_Four_500x500.png" alt="Table Four" class="mx-auto max-h-12 object-contain"/></div><div class="mt-2 text-center text-xs text-neutral-500">Table Four</div></li>
-            <!-- Duplicate set for loop if desired -->
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Testimonials -->
+  <!-- Testimonials + Google Reviews slot -->
   <section id="testimonials" class="py-16 bg-neutral-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex items-end justify-between gap-4">
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">What Clients Say</h2>
-        <span class="text-sm text-neutral-500">Corporate & individual testimonials</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="revTitle">What Clients Say</h2>
+        <span class="text-sm text-neutral-500" data-i18n="revSub">Corporate & individual testimonials</span>
       </div>
+
+      <!-- Paste your Google Reviews widget code below (Elfsight/Trustindex/etc.) -->
+      <!-- <div id="google-reviews-widget"> ...embed code... </div> -->
+
       <div class="mt-8 grid md:grid-cols-3 gap-6">
         <blockquote class="rounded-2xl border border-neutral-200 p-6 bg-white">
-          <h3 class="font-semibold mb-2">Walk-in Customer</h3>
-          <p class="text-neutral-700">“Mubasher One is one of the workshops that amaze you with its reliability, dependability, and mastery of work. The workshop manager has extensive experience in the field of maintenance. They also excel in providing spare parts, even those that are difficult to find, according to the customer's desire.”</p>
+          <h3 class="font-semibold mb-2" data-i18n="rev1h">Walk-in Customer</h3>
+          <p class="text-neutral-700" data-i18n="rev1t">“Mubasher One is one of the workshops that amaze you with its reliability, dependability, and mastery of work. The workshop manager has extensive experience in the field of maintenance. They also excel in providing spare parts, even those that are difficult to find, according to the customer's desire.”</p>
         </blockquote>
         <blockquote class="rounded-2xl border border-neutral-200 p-6 bg-white">
-          <h3 class="font-semibold mb-2">Fleet Coordinator</h3>
-          <p class="text-neutral-700">“The only integrated diesel maintenance workshop in Al-Ahsa and all the cars of our company have maintenance, spare parts, bodywork, painting, installation of protection barriers and upholstery — all our work is with them and the management is very cooperative.”</p>
+          <h3 class="font-semibold mb-2" data-i18n="rev2h">Fleet Coordinator</h3>
+          <p class="text-neutral-700" data-i18n="rev2t">“The only integrated diesel maintenance workshop in Al-Ahsa and all the cars of our company have maintenance, spare parts, bodywork, painting, installation of protection barriers and upholstery — all our work is with them and the management is very cooperative.”</p>
         </blockquote>
         <blockquote class="rounded-2xl border border-neutral-200 p-6 bg-white">
-          <h3 class="font-semibold mb-2">Paint Job Customer</h3>
-          <p class="text-neutral-700">“This workshop has a qualified maintenance team and the vehicle work is done satisfactorily.”</p>
+          <h3 class="font-semibold mb-2" data-i18n="rev3h">Paint Job Customer</h3>
+          <p class="text-neutral-700" data-i18n="rev3t">“This workshop has a qualified maintenance team and the vehicle work is done satisfactorily.”</p>
         </blockquote>
       </div>
     </div>
@@ -306,29 +314,29 @@
   <section id="book" class="py-16 bg-neutral-900 text-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 items-center">
       <div>
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Ready to service your vehicle or fleet?</h2>
-        <p class="mt-3 text-neutral-300">Book a slot or request on-site mobile support. We’ll confirm by phone or WhatsApp.</p>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="bookTitle">Ready to service your vehicle or fleet?</h2>
+        <p class="mt-3 text-neutral-300" data-i18n="bookSub">Book a slot or request on-site mobile support. We’ll confirm by phone or WhatsApp.</p>
         <ul class="mt-4 space-y-2 text-neutral-300 list-disc pl-6">
-          <li>Al-Ahsa coverage • 24/7 dispatch</li>
-          <li>Transparent estimates with parts & labor warranty</li>
-          <li>Real-time job tracking via ERP</li>
+          <li data-i18n="bookL1">Al-Ahsa coverage • 24/7 dispatch</li>
+          <li data-i18n="bookL2">Transparent estimates with parts & labor warranty</li>
+          <li data-i18n="bookL3">Real-time job tracking via ERP</li>
         </ul>
       </div>
       <form id="booking-form" class="rounded-2xl bg-white text-neutral-900 p-6 space-y-4" novalidate>
         <div>
-          <label class="text-sm" for="bf_name">Name</label>
+          <label class="text-sm" for="bf_name" data-i18n="formName">Name</label>
           <input id="bf_name" name="name" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="Your full name" autocomplete="name" />
         </div>
         <div>
-          <label class="text-sm" for="bf_phone">Phone / WhatsApp</label>
+          <label class="text-sm" for="bf_phone" data-i18n="formPhone">Phone / WhatsApp</label>
           <input id="bf_phone" name="phone" required pattern="\+?\d[\d\s-]{7,}" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="+966…" inputmode="tel" autocomplete="tel" />
         </div>
         <div>
-          <label class="text-sm" for="bf_issue">Vehicle / Issue</label>
+          <label class="text-sm" for="bf_issue" data-i18n="formIssue">Vehicle / Issue</label>
           <textarea id="bf_issue" name="issue" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" rows="3" placeholder="e.g., 2018 Actros • brake service"></textarea>
         </div>
-        <button type="submit" class="w-full rounded-xl px-4 py-3 bg-neutral-900 text-white font-semibold hover:bg-neutral-800">Request Booking via WhatsApp</button>
-        <p class="text-xs text-neutral-500">Submitting opens WhatsApp with your details prefilled.</p>
+        <button type="submit" class="w-full rounded-xl px-4 py-3 bg-neutral-900 text-white font-semibold hover:bg-neutral-800" data-i18n="formBtn">Request Booking via WhatsApp</button>
+        <p class="text-xs text-neutral-500" data-i18n="formNote">Submitting opens WhatsApp with your details prefilled.</p>
       </form>
     </div>
   </section>
@@ -336,13 +344,14 @@
   <!-- Map / Find Us -->
   <section id="map" class="py-16 bg-white border-t border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Find Us</h2>
-      <p class="mt-2 text-neutral-600">Click below for directions. Parking available on site.</p>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="mapTitle">Find Us</h2>
+      <p class="mt-2 text-neutral-600" data-i18n="mapSub">Click below for directions. Parking available on site.</p>
       <div class="mt-6 rounded-2xl overflow-hidden border border-neutral-200">
+        <!-- Tip: Replace this iframe with Google Maps "Embed a map" code for your exact pin when ready -->
         <iframe title="Mubasher One Location" width="100%" height="420" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps?q=https://maps.app.goo.gl/yhdtpxKjngnFus787&z=15&output=embed"></iframe>
       </div>
-      <a href="https://maps.app.goo.gl/yhdtpxKjngnFus787" target="_blank" class="mt-4 inline-block rounded-xl px-5 py-3 bg-neutral-900 text-white hover:bg-neutral-800">Get Directions</a>
+      <a href="https://maps.app.goo.gl/yhdtpxKjngnFus787" target="_blank" class="mt-4 inline-block rounded-xl px-5 py-3 bg-neutral-900 text-white hover:bg-neutral-800" data-i18n="mapBtn">Get Directions</a>
     </div>
   </section>
 
@@ -356,17 +365,17 @@
         </picture>
       </div>
       <div>
-        <div class="font-semibold">Contact</div>
+        <div class="font-semibold" data-i18n="footerContact">Contact</div>
         <ul class="mt-2 text-sm text-neutral-600 space-y-1">
           <li>Email: <a class="underline" href="mailto:service@mone-sa.com">service@mone-sa.com</a></li>
           <li>Website: <a class="underline" href="https://www.mone-sa.com" target="_blank" rel="noopener">www.mone-sa.com</a></li>
           <li>Phone: <a class="underline" href="tel:+966536600791">+966536600791</a></li>
         </ul>
-        <a class="mt-2 inline-flex items-center gap-2 text-sm underline" target="_blank" rel="noopener" href="https://maps.app.goo.gl/yhdtpxKjngnFus787">Open in Google Maps</a>
+        <a class="mt-2 inline-flex items-center gap-2 text-sm underline" target="_blank" rel="noopener" href="https://maps.app.goo.gl/yhdtpxKjngnFus787" data-i18n="footerMap">Open in Google Maps</a>
       </div>
       <div>
-        <div class="font-semibold">Location</div>
-        <p class="mt-2 text-sm text-neutral-600">Al-Ahsa, Eastern Province, Saudi Arabia</p>
+        <div class="font-semibold" data-i18n="footerLoc">Location</div>
+        <p class="mt-2 text-sm text-neutral-600" data-i18n="footerLocTxt">Al-Ahsa, Eastern Province, Saudi Arabia</p>
       </div>
     </div>
     <div class="mt-10 text-xs text-neutral-500 text-center">© 2025 Mubasher One Automotive Maintenance Holding Co. All rights reserved.</div>
@@ -374,191 +383,254 @@
 
   <!-- Floating mobile actions -->
   <div class="fixed bottom-4 right-4 md:hidden flex flex-col gap-2 z-50" aria-label="Quick actions">
-    <a href="tel:+966536600791" class="rounded-full px-5 py-3 bg-neutral-900 text-white shadow-lg">Call Us</a>
-    <a href="https://wa.me/966536600791?text=Hi%20Mubasher%20One%2C%20I%27d%20like%20to%20book%20a%20service." class="rounded-full px-5 py-3 bg-green-600 text-white shadow-lg">WhatsApp</a>
+    <a href="tel:+966536600791" class="rounded-full px-5 py-3 bg-neutral-900 text-white shadow-lg" data-i18n="floatCall">Call Us</a>
+    <a href="https://wa.me/966536600791?text=Hi%20Mubasher%20One%2C%20I%27d%20like%20to%20book%20a%20service." class="rounded-full px-5 py-3 bg-green-600 text-white shadow-lg" data-i18n="floatWA">WhatsApp</a>
   </div>
 
-<!-- ========================== SCRIPT ========================== -->
-<script>
-(() => {
-  // ====== 1. Your gallery images ======
-  const GALLERY_BASES = [
-  "ac_electrical_diagnostics",
-  "body_repair_before_before",
-  "body_repair_before_during",
-  "body_repair_before_after",
-  "customer_reception_main",
-  "customer_reception_secondary",
-  "diesel_service_bay",
-  "engine_repair_actros1",
-  "engine_repair_Ashok",
-  "engine_repair_D-max",
-  "engine_repair_Mitsu",
-  "engine_repair_toyota",
-  "equipment_tools_lifts",
-  "mobile_service_unit", 
-  "team_mubasher_one",
-  "paint_booth_main",
-  "chassis_reconditioning",
-  "engine_bay_diagnostics",
-  "workshop_interior_main",
-  "workshop_view",
-  "hero_workshop_front",
+  <!-- ========================== SCRIPTS ========================== -->
+  <script>
+  // ====== 1) GALLERY (uses your existing base names & paths) ======
+  (() => {
+    const GALLERY_BASES = [
+      "ac_electrical_diagnostics",
+      "body_repair_before_before",
+      "body_repair_before_during",
+      "body_repair_before_after",
+      "customer_reception_main",
+      "customer_reception_secondary",
+      "diesel_service_bay",
+      "engine_repair_actros1",
+      "engine_repair_Ashok",
+      "engine_repair_D-max",
+      "engine_repair_Mitsu",
+      "engine_repair_toyota",
+      "equipment_tools_lifts",
+      "mobile_service_unit",
+      "team_mubasher_one",
+      "paint_booth_main",
+      "chassis_reconditioning",
+      "engine_bay_diagnostics",
+      "workshop_interior_main",
+      "workshop_view",
+      "hero_workshop_front"
+    ];
 
+    const ALT_MAP = {
+      ac_electrical_diagnostics: "AC & Electrical Diagnostics",
+      body_repair_before_after: "Body Repair — Before & After",
+      body_repair_before_before: "Body Repair — Before"
+    };
 
-    // 👉 Add more base names here as you upload more images
-  ];
+    const track = document.getElementById('gallery-track');
+    const makeSlideHTML = (base, alt) => `
+      <div class="shrink-0 w-full gallery-frame bg-neutral-100 ph">
+        <picture>
+          <source data-srcset="./assets/gallery/${base}-640.webp 640w,
+                               ./assets/gallery/${base}-960.webp 960w,
+                               ./assets/gallery/${base}-1280.webp 1280w" type="image/webp">
+          <img
+            data-src="./assets/gallery/${base}-960.jpeg"
+            data-srcset="./assets/gallery/${base}-640.jpeg 640w,
+                         ./assets/gallery/${base}-960.jpeg 960w,
+                         ./assets/gallery/${base}-1280.jpeg 1280w"
+            data-fallback="./assets/gallery/${base}.jpeg"
+            sizes="(max-width: 768px) 100vw, 960px"
+            alt="${alt}"
+            class="h-full w-full object-cover cursor-zoom-in"
+            width="1280" height="720"
+            loading="lazy" decoding="async">
+        </picture>
+      </div>`;
+    if (track) track.innerHTML = GALLERY_BASES.map(b => makeSlideHTML(b, ALT_MAP[b] || b)).join('');
 
-  const ALT_MAP = {
-    ac_electrical_diagnostics: "AC & Electrical Diagnostics",
-    body_repair_before_after: "Body Repair — Before & After",
-    body_repair_before_before: "Body Repair — Before"
-  };
+    const slides = track ? Array.from(track.children) : [];
+    const prevBtn = document.getElementById('gallery-prev');
+    const nextBtn = document.getElementById('gallery-next');
+    const dotsWrap = document.getElementById('gallery-dots');
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbPrev = document.getElementById('lightbox-prev');
+    const lbNext = document.getElementById('lightbox-next');
+    const lbClose = document.getElementById('lightbox-close');
 
-  // ====== 2. Build the slides automatically ======
-  const track = document.getElementById('gallery-track');
-  const makeSlideHTML = (base, alt) => `
-    <div class="shrink-0 w-full gallery-frame bg-neutral-100 ph">
-      <picture>
-        <source data-srcset="./assets/gallery/${base}-640.webp 640w,
-                             ./assets/gallery/${base}-960.webp 960w,
-                             ./assets/gallery/${base}-1280.webp 1280w" type="image/webp">
-        <img
-          data-src="./assets/gallery/${base}-960.jpeg"
-          data-srcset="./assets/gallery/${base}-640.jpeg 640w,
-                       ./assets/gallery/${base}-960.jpeg 960w,
-                       ./assets/gallery/${base}-1280.jpeg 1280w"
-          data-fallback="./assets/gallery/${base}.jpeg"
-          sizes="(max-width: 768px) 100vw, 960px"
-          alt="${alt}"
-          class="h-full w-full object-cover cursor-zoom-in"
-          width="1280" height="720"
-          loading="lazy" decoding="async">
-      </picture>
-    </div>`;
-  if (track) track.innerHTML = GALLERY_BASES.map(b => makeSlideHTML(b, ALT_MAP[b] || b)).join('');
-
-  // ====== 3. Slider + Lightbox ======
-  const slides = track ? Array.from(track.children) : [];
-  const prevBtn = document.getElementById('gallery-prev');
-  const nextBtn = document.getElementById('gallery-next');
-  const dotsWrap = document.getElementById('gallery-dots');
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightbox-img');
-  const lbPrev = document.getElementById('lightbox-prev');
-  const lbNext = document.getElementById('lightbox-next');
-  const lbClose = document.getElementById('lightbox-close');
-
-  let index = 0;
-  function goTo(i) {
-    if (!track) return;
-    index = (i + slides.length) % slides.length;
-    track.style.transform = `translateX(-${index * 100}%)`;
-    updateDots();
-  }
-  function updateDots() {
-    if (!dotsWrap) return;
-    dotsWrap.innerHTML = '';
-    slides.forEach((_, i) => {
-      const b = document.createElement('button');
-      b.className = 'h-2 w-2 rounded-full ' + (i === index ? 'bg-neutral-900' : 'bg-neutral-300');
-      b.addEventListener('click', () => goTo(i));
-      dotsWrap.appendChild(b);
-    });
-  }
-  prevBtn?.addEventListener('click', () => goTo(index - 1));
-  nextBtn?.addEventListener('click', () => goTo(index + 1));
-  slides.forEach((slide, i) => {
-    slide.querySelector('img')?.addEventListener('click', e => {
-      lbImg.src = e.target.currentSrc || e.target.src;
-      lb.classList.remove('hidden');
-      index = i;
-    });
-  });
-  function lbGo(d) {
-    index = (index + d + slides.length) % slides.length;
-    const img = slides[index].querySelector('img');
-    if (img) lbImg.src = img.currentSrc || img.src;
-  }
-  lbPrev?.addEventListener('click', () => lbGo(-1));
-  lbNext?.addEventListener('click', () => lbGo(1));
-  lbClose?.addEventListener('click', () => lb.classList.add('hidden'));
-  lb?.addEventListener('click', e => { if (e.target === lb) lb.classList.add('hidden'); });
-  document.addEventListener('keydown', e => {
-    if (lb.classList.contains('hidden')) return;
-    if (e.key === 'Escape') lb.classList.add('hidden');
-    if (e.key === 'ArrowRight') lbGo(1);
-    if (e.key === 'ArrowLeft') lbGo(-1);
-  });
-
-  // ====== 4. Lazy-load ======
-  function hydrate(pic) {
-    pic.querySelectorAll('source').forEach(s => { if (s.dataset.srcset) s.srcset = s.dataset.srcset; });
-    const img = pic.querySelector('img');
-    if (img) {
-      const fb = img.dataset.fallback;
-      img.onerror = () => { if (fb && img.src !== fb) { img.removeAttribute('srcset'); img.src = fb; } };
-      if (img.dataset.srcset) img.srcset = img.dataset.srcset;
-      if (img.dataset.src) img.src = img.dataset.src;
-      img.addEventListener('load', () => pic.closest('.ph')?.classList.remove('ph'), { once: true });
+    let index = 0;
+    function goTo(i) {
+      if (!track) return;
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      updateDots();
     }
-  }
-  const lazyPics = Array.from(document.querySelectorAll('#gallery picture'));
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries, obs) => {
-      entries.forEach(e => { if (e.isIntersecting) { hydrate(e.target); obs.unobserve(e.target); }});
-    }, { rootMargin: '600px 0px' });
-    lazyPics.forEach(p => io.observe(p));
-  } else lazyPics.forEach(hydrate);
-
-  if (slides.length) goTo(0);
-})();
-</script>
-<script>
-/* === Booking form -> WhatsApp === */
-(() => {
-  const WA_NUMBER = "966536600791"; // no +, no spaces
-  const form = document.getElementById("booking-form");
-  if (!form) return;
-
-  const nameEl  = document.getElementById("bf_name");
-  const phoneEl = document.getElementById("bf_phone");
-  const issueEl = document.getElementById("bf_issue");
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const name  = (nameEl?.value || "").trim();
-    const phone = (phoneEl?.value || "").trim();
-    const issue = (issueEl?.value || "").trim();
-
-    // Basic front-end validation
-    if (!name || !phone || !issue) {
-      alert("Please fill your Name, Phone/WhatsApp, and Vehicle/Issue.");
-      return;
+    function updateDots() {
+      if (!dotsWrap) return;
+      dotsWrap.innerHTML = '';
+      slides.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.className = 'h-2 w-2 rounded-full ' + (i === index ? 'bg-neutral-900' : 'bg-neutral-300');
+        b.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(b);
+      });
     }
+    prevBtn?.addEventListener('click', () => goTo(index - 1));
+    nextBtn?.addEventListener('click', () => goTo(index + 1));
+    slides.forEach((slide, i) => {
+      slide.querySelector('img')?.addEventListener('click', e => {
+        lbImg.src = e.target.currentSrc || e.target.src;
+        lb.classList.remove('hidden');
+        index = i;
+      });
+    });
+    function lbGo(d) {
+      index = (index + d + slides.length) % slides.length;
+      const img = slides[index].querySelector('img');
+      if (img) lbImg.src = img.currentSrc || img.src;
+    }
+    lbPrev?.addEventListener('click', () => lbGo(-1));
+    lbNext?.addEventListener('click', () => lbGo(1));
+    lbClose?.addEventListener('click', () => lb.classList.add('hidden'));
+    lb?.addEventListener('click', e => { if (e.target === lb) lb.classList.add('hidden'); });
+    document.addEventListener('keydown', e => {
+      if (lb.classList.contains('hidden')) return;
+      if (e.key === 'Escape') lb.classList.add('hidden');
+      if (e.key === 'ArrowRight') lbGo(1);
+      if (e.key === 'ArrowLeft') lbGo(-1);
+    });
 
-    // Build message
-    const message = [
-      "Booking request:",
-      `Name: ${name}`,
-      `Phone: ${phone}`,
-      `Vehicle/Issue: ${issue}`,
-      "From: www.mone-sa.com"
-    ].join("\n");
+    function hydrate(pic) {
+      pic.querySelectorAll('source').forEach(s => { if (s.dataset.srcset) s.srcset = s.dataset.srcset; });
+      const img = pic.querySelector('img');
+      if (img) {
+        const fb = img.dataset.fallback;
+        img.onerror = () => { if (fb && img.src !== fb) { img.removeAttribute('srcset'); img.src = fb; } };
+        if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+        if (img.dataset.src) img.src = img.dataset.src;
+        img.addEventListener('load', () => pic.closest('.ph')?.classList.remove('ph'), { once: true });
+      }
+    }
+    const lazyPics = Array.from(document.querySelectorAll('#gallery picture'));
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => { if (e.isIntersecting) { hydrate(e.target); obs.unobserve(e.target); }});
+      }, { rootMargin: '600px 0px' });
+      lazyPics.forEach(p => io.observe(p));
+    } else lazyPics.forEach(hydrate);
 
-    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+    if (slides.length) goTo(0);
+  })();
 
-    // Open WhatsApp in new tab
-    window.open(url, "_blank", "noopener,noreferrer");
-  });
-})();
-</script>
-  
+  // ====== 2) Booking form -> WhatsApp (your existing number) ======
+  (() => {
+    const WA_NUMBER = "966536600791"; // no +, no spaces
+    const form = document.getElementById("booking-form");
+    if (!form) return;
+
+    const nameEl  = document.getElementById("bf_name");
+    const phoneEl = document.getElementById("bf_phone");
+    const issueEl = document.getElementById("bf_issue");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name  = (nameEl?.value || "").trim();
+      const phone = (phoneEl?.value || "").trim();
+      const issue = (issueEl?.value || "").trim();
+
+      if (!name || !phone || !issue) {
+        alert(document.documentElement.lang === 'ar'
+          ? "يرجى إدخال الاسم ورقم الجوال ونوع السيارة/العطل."
+          : "Please fill your Name, Phone/WhatsApp, and Vehicle/Issue.");
+        return;
+      }
+
+      const message = [
+        (document.documentElement.lang === 'ar' ? "طلب حجز:" : "Booking request:"),
+        `Name: ${name}`,
+        `Phone: ${phone}`,
+        `Vehicle/Issue: ${issue}`,
+        "From: www.mone-sa.com"
+      ].join("\n");
+
+      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+  })();
+
+  // ====== 3) Simple EN/AR toggle (updates text + RTL) ======
+  (() => {
+    const dict = {
+      en: {
+        navServices:"Services", navCapabilities:"Capabilities", navQuality:"Quality", navClients:"Clients", navLocation:"Location", navBook:"Book Service",
+        saso:"SASO 4-Star",
+        heroTitle:"Servicing All Brands & Models — Driven by Quality",
+        heroSub:"SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.",
+        ctaBook:"Book Now", ctaExplore:"Explore Services",
+        statFacility:"Facility Size", statTeam:"Certified Team", statSaso:"Accredited Quality",
+        whyTitle:"Why Mubasher One", whySub:"We blend accredited quality systems with modern diagnostics and rapid field services.",
+        whySaso:"SASO 4-Star", whySasoTxt:"Quality & safety across operations.",
+        whyErp:"ERP Integration", whyErpTxt:"Real-time parts, RO, and inventory.",
+        whyMobile:"Mobile Units", whyMobileTxt:"On-site emergency repair & fleet support.",
+        servicesTitle:"Core Services", servicesSub:"Comprehensive maintenance programs tailored for fleets and private vehicles.",
+        svcDiesel:"Diesel Expertise", svcPetrol:"Petrol & Hybrid", svcEquip:"Specialized Equipment", svcInterior:"Upholstery & Interior Restoration",
+        svcD1:"Common-rail diagnostics & repair", svcD2:"EGR ultrasonic decarbonizing", svcD3:"AdBlue / SCR system diagnostics", svcD4:"Fuel and hydraulic pump rebuilding & maintenance", svcD5:"Engine assemblies and complete overhauling", svcD6:"Brake jobs & system service", svcD7:"Wheel alignment & suspension calibration",
+        svcP1:"Direct injection intake cleaning", svcP2:"Walnut blasting for carbon buildup", svcP3:"Routine maintenance & drivability", svcP4:"Advanced diagnostic tools",
+        svcE1:"Paint & prep rooms for premium finish and fast curing", svcE2:"10-ton hydraulic lifts for SUVs and light trucks", svcE3:"Brake lathes for disc/drum resurfacing", svcE4:"Advanced multi-brand scan & diagnostic tools", svcE5:"Paintless dent repair", svcE6:"Chassis sandblasting and reconditioning",
+        svcI1:"Seat and door panel re-upholstery", svcI2:"Roof lining and carpet replacement", svcI3:"Custom stitching and leather upgrades", svcI4:"Interior detailing and dashboard restoration",
+        galTitle:"Photo Gallery", galHint:"Swipe on mobile • Click to enlarge",
+        qaTitle:"Quality Assurance", qa1:"SASO 4-Star – Cert. No. 1154", qa2:"Service warranty on labor", qa3:"Warranty as per OEM standards", qa4:"4Cs quality integration",
+        clientsTitle:"Our Clients", clientsSub:"Trusted by leading fleets, manufacturers, and suppliers in Saudi Arabia.",
+        revTitle:"What Clients Say", revSub:"Corporate & individual testimonials", rev1h:"Walk-in Customer", rev1t:"“Mubasher One is one of the workshops that amaze you with its reliability, dependability, and mastery of work. The workshop manager has extensive experience in the field of maintenance. They also excel in providing spare parts, even those that are difficult to find, according to the customer's desire.”", rev2h:"Fleet Coordinator", rev2t:"“The only integrated diesel maintenance workshop in Al-Ahsa and all the cars of our company have maintenance, spare parts, bodywork, painting, installation of protection barriers and upholstery — all our work is with them and the management is very cooperative.”", rev3h:"Paint Job Customer", rev3t:"“This workshop has a qualified maintenance team and the vehicle work is done satisfactorily.”",
+        bookTitle:"Ready to service your vehicle or fleet?", bookSub:"Book a slot or request on-site mobile support. We’ll confirm by phone or WhatsApp.",
+        bookL1:"Al-Ahsa coverage • 24/7 dispatch", bookL2:"Transparent estimates with parts & labor warranty", bookL3:"Real-time job tracking via ERP",
+        formName:"Name", formPhone:"Phone / WhatsApp", formIssue:"Vehicle / Issue", formBtn:"Request Booking via WhatsApp", formNote:"Submitting opens WhatsApp with your details prefilled.",
+        mapTitle:"Find Us", mapSub:"Click below for directions. Parking available on site.", mapBtn:"Get Directions",
+        footerContact:"Contact", footerLoc:"Location", footerLocTxt:"Al-Ahsa, Eastern Province, Saudi Arabia", footerMap:"Open in Google Maps",
+        floatCall:"Call Us", floatWA:"WhatsApp"
+      },
+      ar: {
+        navServices:"الخدمات", navCapabilities:"القدرات", navQuality:"الجودة", navClients:"العملاء", navLocation:"الموقع", navBook:"احجز خدمة",
+        saso:"ساسو 4 نجوم",
+        heroTitle:"نخدم جميع الماركات والموديلات — تقودنا الجودة",
+        heroSub:"مركز معتمد من ساسو في الأحساء، صيانة دقيقة لمركبات الديزل والبنزين مع أنظمة مؤسسية ودعم ميداني.",
+        ctaBook:"احجز الآن", ctaExplore:"استعرض الخدمات",
+        statFacility:"مساحة المنشأة", statTeam:"فريق معتمد", statSaso:"جودة معتمدة",
+        whyTitle:"لماذا مباشر وان", whySub:"نمزج بين أنظمة الجودة المعتمدة والتشخيص الحديث والخدمات الميدانية السريعة.",
+        whySaso:"ساسو 4 نجوم", whySasoTxt:"جودة وسلامة عبر جميع العمليات.",
+        whyErp:"تكامل مع ERP", whyErpTxt:"قطع الغيار وأوامر العمل والمخزون لحظيًا.",
+        whyMobile:"فرق ميدانية", whyMobileTxt:"إصلاحات طارئة في الموقع ودعم للأساطيل.",
+        servicesTitle:"الخدمات الأساسية", servicesSub:"برامج صيانة شاملة مخصصة للأساطيل والعملاء الأفراد.",
+        svcDiesel:"تخصص ديزل", svcPetrol:"بنزين وهجين", svcEquip:"معدات متخصصة", svcInterior:"تنجيد وترميم داخلي",
+        svcD1:"تشخيص وإصلاح منظومة الحقن المشترك", svcD2:"إزالة كربون بالموجات فوق الصوتية لنظام EGR", svcD3:"تشخيص أنظمة AdBlue/SCR", svcD4:"إعادة بناء وصيانة مضخات الوقود والهيدروليك", svcD5:"تجميعات محرك وعمرات كاملة", svcD6:"خدمة أنظمة الفرامل", svcD7:"وزن أذرعة وتعليق ومعايرة",
+        svcP1:"تنظيف مجاري الحقن للمحركات المباشرة", svcP2:"تنظيف قشري (Walnut) لترسبات الكربون", svcP3:"صيانة دورية وتحسين قيادة", svcP4:"أدوات تشخيص متقدمة",
+        svcE1:"غرف دهان وتحضير بإنهاء فاخر وتجفيف سريع", svcE2:"رافعات 10 طن للـSUV والبيك أب", svcE3:"مخارط أقراص/طبول للفرامل", svcE4:"أجهزة فحص متعددة العلامات", svcE5:"سمكرة بدون بوية (PDR)", svcE6:"سفع رملي وإعادة تأهيل للشاسيه",
+        svcI1:"إعادة تنجيد المقاعد والأبواب", svcI2:"تبديل سقف السيارة والفرش الأرضي", svcI3:"خياطة مخصصة وترقيات جلد", svcI4:"تنظيف داخلي وترميم لوحة العدادات",
+        galTitle:"معرض الصور", galHint:"اسحب على الجوال • اضغط للتكبير",
+        qaTitle:"ضمان الجودة", qa1:"ساسو 4 نجوم — رقم الشهادة 1154", qa2:"ضمان على أجور اليد", qa3:"ضمان وفق معايير الشركات المصنعة", qa4:"تكامل الجودة 4Cs",
+        clientsTitle:"عملاؤنا", clientsSub:"موثوق من قبل الأساطيل والمصنعين والموردين في السعودية.",
+        revTitle:"آراء العملاء", revSub:"شهادات من الشركات والأفراد", rev1h:"عميل مراجع", rev1t:"“ورشة تبهر بالموثوقية والإتقان. إدارة بخبرة عالية. توفير قطع حتى النادرة حسب رغبة العميل.”", rev2h:"منسق أسطول", rev2t:"“الورشة الديزل المتكاملة الوحيدة في الأحساء. جميع أعمال شركتنا من صيانة وقطع وسمكرة ودهان وتدريع وتنجيد لديهم والإدارة متعاونة جدًا.”", rev3h:"عميل أعمال دهان", rev3t:"“فريق مؤهل والنتيجة مرضية.”",
+        bookTitle:"جاهزون لخدمة مركبتك أو أسطولك؟", bookSub:"احجز موعدًا أو اطلب دعمًا ميدانيًا. سنؤكد عبر الهاتف أو واتساب.",
+        bookL1:"تغطية الأحساء • جاهزية 24/7", bookL2:"تسعير واضح مع ضمان قطع وأجور", bookL3:"تتبع المهام لحظيًا عبر ERP",
+        formName:"الاسم", formPhone:"الجوال / واتساب", formIssue:"المركبة / المشكلة", formBtn:"طلب حجز عبر واتساب", formNote:"سيتم فتح واتساب برسالة جاهزة للإرسال.",
+        mapTitle:"موقعنا", mapSub:"اضغط أدناه للحصول على الاتجاهات. تتوفر مواقف.", mapBtn:"الاتجاهات",
+        footerContact:"تواصل", footerLoc:"الموقع", footerLocTxt:"الأحساء، المنطقة الشرقية، السعودية", footerMap:"افتح في خرائط قوقل",
+        floatCall:"اتصل بنا", floatWA:"واتساب"
+      }
+    };
+
+    const setLang = (lang) => {
+      const root = document.documentElement;
+      root.lang = lang;
+      root.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.getAttribute('data-i18n');
+        if (dict[lang][k] !== undefined) el.textContent = dict[lang][k];
+      });
+    };
+
+    document.getElementById('to-en')?.addEventListener('click', ()=>setLang('en'));
+    document.getElementById('to-ar')?.addEventListener('click', ()=>setLang('ar'));
+
+    // Default EN
+    setLang('en');
+  })();
+  </script>
 </body>
 </html>
-
-
-
-
-
