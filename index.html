@@ -205,7 +205,8 @@
       diesel_service_bay:"Diesel Service Bay — Heavy-Duty Work Area",
       engine_repair_actros1:"Engine Overhaul — Mercedes-Benz Actros (Heavy Truck)",
       engine_repair_Ashok:"Engine Overhaul — Ashok Leyland",
-      engine_repair_D_max:"Engine Service — Isuzu D-MAX",
+      engine_repair_D_max:"Engine Service — Isuzu D-MAX",     /* underscore key to match fallback too */
+      "engine_repair_D-max":"Engine Service — Isuzu D-MAX",   /* dash key to match your filename */
       engine_repair_Mitsu:"Engine Service — Mitsubishi",
       engine_repair_toyota:"Engine Service — Toyota",
       equipment_tools_lifts:"Shop Equipment — Lifts, Tools & Safety",
@@ -220,52 +221,89 @@
     };
 
     const track = document.getElementById('gallery-track');
+
+    // Build slides with REAL src/srcset so images actually load
     const makeSlideHTML = (base, alt) => `
       <div class="relative shrink-0 w-full gallery-frame bg-neutral-100 ph">
         <picture>
-          <source data-srcset="./assets/gallery/${base}-640.webp 640w,
-                               ./assets/gallery/${base}-960.webp 960w,
-                               ./assets/gallery/${base}-1280.webp 1280w" type="image/webp">
+          <!-- WebP set (if present) -->
+          <source srcset="./assets/gallery/${base}-640.webp 640w,
+                          ./assets/gallery/${base}-960.webp 960w,
+                          ./assets/gallery/${base}-1280.webp 1280w" type="image/webp">
+          <!-- JPEG set with fallback to plain base.jpeg -->
           <img
-            data-src="./assets/gallery/${base}-960.jpeg"
-            data-srcset="./assets/gallery/${base}-640.jpeg 640w,
-                         ./assets/gallery/${base}-960.jpeg 960w,
-                         ./assets/gallery/${base}-1280.jpeg 1280w"
-            data-fallback="./assets/gallery/${base}.jpeg"
-            alt="${alt}" class="h-full w-full object-cover cursor-zoom-in" width="1280" height="720">
+            src="./assets/gallery/${base}-960.jpeg"
+            srcset="./assets/gallery/${base}-640.jpeg 640w,
+                    ./assets/gallery/${base}-960.jpeg 960w,
+                    ./assets/gallery/${base}-1280.jpeg 1280w"
+            sizes="(max-width: 768px) 100vw, 960px"
+            alt="${alt}"
+            class="h-full w-full object-cover cursor-zoom-in"
+            width="1280" height="720"
+            loading="lazy"
+            decoding="async"
+            onerror="this.onerror=null; this.removeAttribute('srcset'); this.src='./assets/gallery/${base}.jpeg';">
         </picture>
         <div class="caption">${alt}</div>
       </div>`;
-    if(track) track.innerHTML = GALLERY_BASES.map(b => makeSlideHTML(b, ALT_MAP[b] || b)).join('');
 
+    if (track) track.innerHTML = GALLERY_BASES
+      .map(b => makeSlideHTML(b, ALT_MAP[b] || b.replace(/[_-]+/g,' ').replace(/\b\w/g,m=>m.toUpperCase())))
+      .join('');
+
+    // Slider + Lightbox
     const slides = Array.from(track.children);
-    const prev = document.getElementById('gallery-prev'), next = document.getElementById('gallery-next');
-    const dots = document.getElementById('gallery-dots'), lb=document.getElementById('lightbox'),
-          lbImg=document.getElementById('lightbox-img'), lbPrev=document.getElementById('lightbox-prev'),
-          lbNext=document.getElementById('lightbox-next'), lbClose=document.getElementById('lightbox-close');
-    let idx=0;
-    const go=i=>{idx=(i+slides.length)%slides.length;track.style.transform=`translateX(-${idx*100}%)`;updateDots()};
-    const updateDots=()=>{dots.innerHTML='';slides.forEach((_,i)=>{const b=document.createElement('button');b.className='h-2 w-2 rounded-full '+(i===idx?'bg-neutral-900':'bg-neutral-300');b.onclick=()=>go(i);dots.appendChild(b);})};
-    prev.onclick=()=>go(idx-1);next.onclick=()=>go(idx+1);
-    slides.forEach((s,i)=>s.querySelector('img').onclick=e=>{lbImg.src=e.target.currentSrc||e.target.src;lb.classList.remove('hidden');idx=i});
-    const lbGo=d=>{idx=(idx+d+slides.length)%slides.length;lbImg.src=slides[idx].querySelector('img').currentSrc||slides[idx].querySelector('img').src};
-    lbPrev.onclick=()=>lbGo(-1);lbNext.onclick=()=>lbGo(1);lbClose.onclick=()=>lb.classList.add('hidden');lb.onclick=e=>{if(e.target===lb)lb.classList.add('hidden')};
-    go(0);
+    const prev = document.getElementById('gallery-prev');
+    const next = document.getElementById('gallery-next');
+    const dots = document.getElementById('gallery-dots');
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbPrev = document.getElementById('lightbox-prev');
+    const lbNext = document.getElementById('lightbox-next');
+    const lbClose = document.getElementById('lightbox-close');
+
+    let idx = 0;
+    const go = i => {
+      idx = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${idx * 100}%)`;
+      updateDots();
+    };
+    const updateDots = () => {
+      dots.innerHTML = '';
+      slides.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.className = 'h-2 w-2 rounded-full ' + (i === idx ? 'bg-neutral-900' : 'bg-neutral-300');
+        b.addEventListener('click', () => go(i));
+        dots.appendChild(b);
+      });
+    };
+    prev?.addEventListener('click', () => go(idx - 1));
+    next?.addEventListener('click', () => go(idx + 1));
+
+    slides.forEach((slide, i) => {
+      slide.querySelector('img')?.addEventListener('click', e => {
+        lbImg.src = e.target.currentSrc || e.target.src;
+        lb.classList.remove('hidden');
+        idx = i;
+      });
+    });
+    const lbGo = d => {
+      idx = (idx + d + slides.length) % slides.length;
+      const img = slides[idx].querySelector('img');
+      if (img) lbImg.src = img.currentSrc || img.src;
+    };
+    lbPrev?.addEventListener('click', () => lbGo(-1));
+    lbNext?.addEventListener('click', () => lbGo(1));
+    lbClose?.addEventListener('click', () => lb.classList.add('hidden'));
+    lb?.addEventListener('click', e => { if (e.target === lb) lb.classList.add('hidden'); });
+    document.addEventListener('keydown', e => {
+      if (lb.classList.contains('hidden')) return;
+      if (e.key === 'Escape') lb.classList.add('hidden');
+      if (e.key === 'ArrowRight') lbGo(1);
+      if (e.key === 'ArrowLeft') lbGo(-1);
+    });
+
+    if (slides.length) go(0);
   })();
 
   // WhatsApp form
-  (() => {
-    const form=document.getElementById('booking-form');
-    form?.addEventListener('submit',e=>{
-      e.preventDefault();
-      const n=document.getElementById('bf_name').value.trim(),
-            p=document.getElementById('bf_phone').value.trim(),
-            i=document.getElementById('bf_issue').value.trim();
-      if(!n||!p||!i){alert("Please fill your Name, Phone, and Issue.");return;}
-      const msg=`Booking request:\nName: ${n}\nPhone: ${p}\nVehicle/Issue: ${i}\nFrom: www.mone-sa.com`;
-      window.open(`https://wa.me/966536600791?text=${encodeURIComponent(msg)}`,'_blank');
-    });
-  })();
-  </script>
-</body>
-</html>
