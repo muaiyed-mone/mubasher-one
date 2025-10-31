@@ -25,48 +25,38 @@
 
   <style>
     html { scroll-behavior: smooth; }
+    .gallery-frame { aspect-ratio: 16 / 9; position: relative; }
+    .caption { position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.55);color:#fff;font-size:12px;line-height:1.25;padding:6px 10px;backdrop-filter:blur(3px); }
     @keyframes marquee-ltr { from { transform: translateX(-50%); } to { transform: translateX(0%); } }
     .animate-marquee-ltr { animation: marquee-ltr 28s linear infinite; }
     .animate-marquee-ltr:hover { animation-play-state: paused; }
-
-    .gallery-frame { aspect-ratio: 16 / 9; }
-    .ph {
-      background: linear-gradient(90deg,#eee 25%,#f7f7f7 37%,#eee 63%);
-      background-size: 400% 100%;
-      animation: ph 1.2s ease-in-out infinite;
-    }
-    @keyframes ph { 0%{background-position:100% 0} 100%{background-position:0 0} }
-
-    .caption {
-      position:absolute;left:0;right:0;bottom:0;
-      background:rgba(0,0,0,.55);
-      color:#fff;font-size:12px;line-height:1.25;
-      padding:6px 10px;backdrop-filter:blur(3px);
-    }
-    .trust-badge { height: 32px; width: auto; }
-    @media (min-width:768px){ .trust-badge{height:40px;} }
+    .review-card{min-height:160px}
+    .review-stars{color:#facc15}
   </style>
 </head>
 <body class="bg-neutral-50 text-neutral-900">
+
+  <!-- SASO TOP BAR -->
+  <div class="bg-white border-b border-neutral-200 py-2 text-center flex items-center justify-center gap-2">
+    <img src="./assets/trust/saso-4star.png" alt="SASO 4-Star" class="h-6 md:h-8">
+    <a href="./assets/certificates/saso-1154.pdf" target="_blank" class="text-sm text-neutral-700 hover:underline">SASO 4-Star Certified • Cert. No. 1154</a>
+  </div>
 
   <!-- HEADER -->
   <header class="sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
       <a href="#" class="flex items-center" aria-label="Mubasher One home">
-        <picture>
-          <source srcset="./assets/LOGO-01.svg" type="image/svg+xml">
-          <img src="./assets/LOGO-01.png" alt="Mubasher One Logo" class="h-[55px] w-auto" width="220" height="55">
-        </picture>
+        <picture><source srcset="./assets/LOGO-01.svg" type="image/svg+xml">
+        <img src="./assets/LOGO-01.png" alt="Mubasher One Logo" class="h-[55px] w-auto"></picture>
       </a>
-
       <nav class="hidden md:flex items-center gap-8 text-sm">
-        <a href="#services" class="hover:text-neutral-700" data-i18n="nav.services">Services</a>
-        <a href="#qa" class="hover:text-neutral-700" data-i18n="nav.quality">Quality</a>
-        <a href="#values" class="hover:text-neutral-700" data-i18n="nav.values">Values</a>
-        <a href="#map" class="hover:text-neutral-700" data-i18n="nav.location">Location</a>
-        <a href="#book" class="rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800" data-i18n="nav.book">Book</a>
+        <a href="#services" data-i18n="nav.services" class="hover:text-neutral-700">Services</a>
+        <a href="#qa" data-i18n="nav.quality" class="hover:text-neutral-700">Quality</a>
+        <a href="#values" data-i18n="nav.values" class="hover:text-neutral-700">Values</a>
+        <a href="#reviews" data-i18n="nav.reviews" class="hover:text-neutral-700">Reviews</a>
+        <a href="#map" data-i18n="nav.location" class="hover:text-neutral-700">Location</a>
+        <a href="#book" data-i18n="nav.book" class="rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800">Book</a>
       </nav>
-
       <button id="langToggle" class="rounded-xl px-3 py-1.5 border border-neutral-300 text-sm hover:bg-neutral-100">عربي</button>
     </div>
   </header>
@@ -76,113 +66,93 @@
     <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700"></div>
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 text-white">
       <div class="max-w-3xl">
-        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight" data-i18n="hero.title">
-          Servicing All Brands & Models — Driven by Quality
-        </h1>
-        <p class="mt-5 text-neutral-200 max-w-2xl" data-i18n="hero.desc">
-          SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.
-        </p>
+        <h1 data-i18n="hero.title" class="text-4xl sm:text-5xl font-extrabold leading-tight">Servicing All Brands & Models — Driven by Quality</h1>
+        <p data-i18n="hero.desc" class="mt-5 text-neutral-200 max-w-2xl">SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.</p>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#book" class="rounded-xl px-5 py-3 bg-white text-neutral-900 font-semibold hover:bg-neutral-100" data-i18n="hero.book">Book Now</a>
-          <a href="#services" class="rounded-xl px-5 py-3 bg-white/10 ring-1 ring-white/20 hover:bg-white/5" data-i18n="hero.explore">Explore Services</a>
+          <a href="#book" data-i18n="hero.book" class="rounded-xl px-5 py-3 bg-white text-neutral-900 font-semibold hover:bg-neutral-100">Book Now</a>
+          <a href="#services" data-i18n="hero.explore" class="rounded-xl px-5 py-3 bg-white/10 ring-1 ring-white/20 hover:bg-white/5">Explore Services</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- SASO BAR -->
-  <section class="bg-white border-b border-neutral-200">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center gap-3">
-      <a href="./assets/certificates/saso-1154.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2">
-        <img src="./assets/trust/saso-4star.png" alt="SASO 4-Star" class="h-6 md:h-8 w-auto">
-        <span class="text-sm text-neutral-700">SASO 4-Star Certified • Cert. No. 1154</span>
-      </a>
     </div>
   </section>
 
   <!-- SERVICES -->
   <section id="services" class="py-16 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="services.title">Core Services</h2>
+      <h2 data-i18n="services.title" class="text-2xl sm:text-3xl font-bold tracking-tight">Core Services</h2>
       <div class="mt-10 grid lg:grid-cols-2 gap-8">
-
         <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition">
-          <h3 class="font-semibold text-lg" data-i18n="services.diesel">Diesel Expertise</h3>
-          <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
-            <li>Common-rail diagnostics & repair</li>
-            <li>EGR ultrasonic decarbonizing</li>
-            <li>AdBlue / SCR system diagnostics</li>
-            <li>Fuel and hydraulic pump maintenance</li>
-            <li>Engine assemblies and overhauling</li>
-            <li>Brake jobs & system service</li>
-            <li>Wheel alignment & suspension calibration</li>
+          <h3 data-i18n="services.diesel" class="font-semibold text-lg">Diesel Expertise</h3>
+          <ul class="mt-4 list-disc pl-6 space-y-1 text-neutral-700">
+            <li>Common-rail diagnostics & repair</li><li>EGR ultrasonic decarbonizing</li><li>SCR / AdBlue system diagnostics</li><li>Fuel & hydraulic pump rebuilds</li><li>Engine overhauling</li><li>Brake & suspension calibration</li>
           </ul>
         </div>
-
         <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition">
-          <h3 class="font-semibold text-lg" data-i18n="services.petrol">Petrol & Hybrid</h3>
-          <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
-            <li>Direct injection intake cleaning</li>
-            <li>Walnut blasting for carbon buildup</li>
-            <li>Routine maintenance & drivability</li>
-            <li>Advanced diagnostic tools</li>
-            <li>Hybrid system checks & calibration</li>
+          <h3 data-i18n="services.petrol" class="font-semibold text-lg">Petrol & Hybrid</h3>
+          <ul class="mt-4 list-disc pl-6 space-y-1 text-neutral-700">
+            <li>Direct injection cleaning</li><li>Walnut blasting</li><li>Routine maintenance</li><li>Advanced diagnostics</li><li>Hybrid calibration</li>
           </ul>
         </div>
-
         <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition">
-          <h3 class="font-semibold text-lg" data-i18n="services.paint">Paint & Body Restoration</h3>
-          <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
-            <li>Full body repairs and refinishing</li>
-            <li>Booth painting with dust-free filtration</li>
-            <li>Dent and scratch removal</li>
-            <li>Color matching & paint correction</li>
-            <li>Frame alignment and welding</li>
+          <h3 data-i18n="services.paint" class="font-semibold text-lg">Paint & Body Restoration</h3>
+          <ul class="mt-4 list-disc pl-6 space-y-1 text-neutral-700">
+            <li>Body repairs & refinishing</li><li>Dust-free booth painting</li><li>Dent & scratch removal</li><li>Color match & correction</li><li>Frame alignment</li>
           </ul>
         </div>
-
         <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition">
-          <h3 class="font-semibold text-lg" data-i18n="services.elec">Electrical & Diagnostics</h3>
-          <ul class="mt-4 space-y-2 list-disc pl-6 text-neutral-700">
-            <li>A/C service and refrigerant leak testing</li>
-            <li>Wiring, alternator, and starter repair</li>
-            <li>Scanner-based troubleshooting</li>
-            <li>CAN bus network calibration</li>
-            <li>Lighting and sensor diagnostics</li>
+          <h3 data-i18n="services.elec" class="font-semibold text-lg">Electrical & Diagnostics</h3>
+          <ul class="mt-4 list-disc pl-6 space-y-1 text-neutral-700">
+            <li>A/C service & refrigerant testing</li><li>Alternator & starter repair</li><li>Scanner troubleshooting</li><li>CAN bus calibration</li><li>Lighting & sensors</li>
           </ul>
         </div>
-
       </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="py-16 bg-neutral-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Photo Gallery</h2>
+      <div id="gallery-track" class="mt-6 flex transition-transform duration-500 ease-out overflow-hidden rounded-2xl border border-neutral-200 bg-white"></div>
+      <div class="flex justify-center mt-4 gap-3">
+        <button id="gallery-prev" class="px-3 py-1 bg-neutral-900 text-white rounded-full">‹</button>
+        <button id="gallery-next" class="px-3 py-1 bg-neutral-900 text-white rounded-full">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOOGLE REVIEWS SLIDER -->
+  <section id="reviews" class="py-16 bg-white border-t border-neutral-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-6">What Our Clients Say</h2>
+      <div id="review-slider" class="relative overflow-hidden">
+        <div id="review-track" class="flex transition-transform duration-700 ease-in-out"></div>
+      </div>
+      <a href="https://g.page/r/CcAYLAMcNu3JEAE/review" target="_blank" class="inline-block mt-6 px-5 py-3 rounded-xl bg-neutral-900 text-white hover:bg-neutral-800">View All on Google</a>
     </div>
   </section>
 
   <!-- QUALITY -->
   <section id="qa" class="py-16 bg-neutral-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="qa.title">Quality Assurance</h2>
-      <ul class="mt-6 space-y-2 list-disc pl-6 text-neutral-700">
-        <li>SASO 4-Star – Cert. No. 1154</li>
-        <li>Service warranty on labor</li>
-        <li>Warranty as per OEM standards</li>
-        <li>4Cs quality integration</li>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Quality Assurance</h2>
+      <ul class="mt-6 list-disc pl-6 space-y-2 text-neutral-700">
+        <li>SASO 4-Star – Cert. No. 1154</li><li>Service warranty on labor</li><li>Warranty per OEM standards</li><li>4Cs quality integration</li>
       </ul>
-      <a href="./assets/certificates/saso-1154.pdf" target="_blank" rel="noopener" class="mt-6 inline-flex items-center rounded-xl px-5 py-3 bg-neutral-900 text-white hover:bg-neutral-800">
-        View SASO Certificate (PDF)
-      </a>
     </div>
   </section>
 
   <!-- CORE VALUES -->
   <section id="values" class="py-16 bg-white border-t border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="values.title">Core Values</h2>
-      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">⚙️</div><h3>Quality</h3><p>Precision workmanship meeting SASO & OEM standards.</p></div>
-        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🤝</div><h3>Integrity</h3><p>Transparent communication and ethical operations.</p></div>
-        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🧠</div><h3>Expertise</h3><p>Skilled technicians with continuous training.</p></div>
-        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🚛</div><h3>Reliability</h3><p>Commitment to deadlines and quality results.</p></div>
-        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🌍</div><h3>Sustainability</h3><p>Environmentally responsible practices.</p></div>
-        <div class="rounded-2xl border border-neutral-200 p-6"><div class="text-3xl mb-3">🚀</div><h3>Innovation</h3><p>Adopting the latest automotive technologies.</p></div>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Core Values</h2>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+        <div class="rounded-2xl border p-6"><div class="text-3xl mb-3">⚙️</div><h3>Quality</h3><p>Precision workmanship meeting SASO & OEM standards.</p></div>
+        <div class="rounded-2xl border p-6"><div class="text-3xl mb-3">🤝</div><h3>Integrity</h3><p>Transparent communication and ethical operations.</p></div>
+        <div class="rounded-2xl border p-6"><div class="text-3xl mb-3">🧠</div><h3>Expertise</h3><p>Skilled technicians with continuous training.</p></div>
+        <div class="rounded-2xl border p-6"><div class="text-3xl mb-3">🚛</div><h3>Reliability</h3><p>Commitment to deadlines and quality results.</p></div>
+        <div class="rounded-2xl border p-6"><div class="text-3xl mb-3">🌍</div><h3>Sustainability</h3><p>Environmentally responsible practices.</p></div>
+        <div class="rounded-2xl border p-6"><div class="text-3xl mb-3">🚀</div><h3>Innovation</h3><p>Adopting the latest automotive technologies.</p></div>
       </div>
     </div>
   </section>
@@ -191,14 +161,14 @@
   <section id="book" class="py-16 bg-neutral-900 text-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 items-center">
       <div>
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="book.title">Ready to service your vehicle or fleet?</h2>
-        <p class="mt-3 text-neutral-300" data-i18n="book.desc">Book a slot or request mobile support. We’ll confirm by phone or WhatsApp.</p>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Ready to service your vehicle or fleet?</h2>
+        <p class="mt-3 text-neutral-300">Book a slot or request mobile support. We’ll confirm by phone or WhatsApp.</p>
       </div>
       <form id="booking-form" class="rounded-2xl bg-white text-neutral-900 p-6 space-y-4" novalidate>
-        <div><label class="text-sm" data-i18n="book.name">Name</label><input id="bf_name" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" /></div>
-        <div><label class="text-sm" data-i18n="book.phone">Phone / WhatsApp</label><input id="bf_phone" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" /></div>
-        <div><label class="text-sm" data-i18n="book.issue">Vehicle / Issue</label><textarea id="bf_issue" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" rows="3"></textarea></div>
-        <button type="submit" class="w-full rounded-xl px-4 py-3 bg-neutral-900 text-white font-semibold hover:bg-neutral-800" data-i18n="book.submit">Request Booking via WhatsApp</button>
+        <div><label class="text-sm">Name</label><input id="bf_name" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2"></div>
+        <div><label class="text-sm">Phone / WhatsApp</label><input id="bf_phone" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2"></div>
+        <div><label class="text-sm">Vehicle / Issue</label><textarea id="bf_issue" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" rows="3"></textarea></div>
+        <button type="submit" class="w-full rounded-xl px-4 py-3 bg-neutral-900 text-white font-semibold hover:bg-neutral-800">Request via WhatsApp</button>
       </form>
     </div>
   </section>
@@ -206,7 +176,7 @@
   <!-- MAP -->
   <section id="map" class="py-16 bg-white border-t border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="map.title">Find Us</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Find Us</h2>
       <div class="mt-6 rounded-2xl overflow-hidden border border-neutral-200">
         <iframe title="Mubasher One Location" width="100%" height="420" style="border:0" loading="lazy" src="https://www.google.com/maps?q=https://maps.app.goo.gl/yhdtpxKjngnFus787&z=15&output=embed"></iframe>
       </div>
@@ -214,46 +184,73 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="py-12 bg-neutral-900 text-neutral-300 text-center text-sm" data-i18n="footer.copy">
+  <footer class="py-12 bg-neutral-900 text-neutral-300 text-center text-sm">
     © 2025 Mubasher One Automotive Maintenance Holding Co.
   </footer>
 
-  <!-- === Scripts === -->
+  <!-- FLOATING BUTTONS -->
+  <div class="fixed bottom-4 right-4 flex flex-col gap-2 z-50">
+    <a href="https://wa.me/966536600791?text=Hi%20Mubasher%20One%2C%20I%27d%20like%20to%20book%20a%20service." class="rounded-full px-5 py-3 bg-green-600 text-white shadow-lg hover:bg-green-700">WhatsApp</a>
+    <a href="#book" class="rounded-full px-5 py-3 bg-neutral-900 text-white shadow-lg hover:bg-neutral-800">Book Now</a>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
   <script>
-  // WhatsApp Booking
-  document.getElementById('booking-form').addEventListener('submit', e => {
+  // Gallery
+  (() => {
+    const imgs=["ac_electrical_diagnostics","body_repair_before_after","engine_repair_Ashok","engine_repair_D-max","diesel_service_bay","workshop_view"];
+    const caps=["A/C & Electrical Diagnostics","Body Repair — Before & After","Engine Overhaul — Ashok Leyland","Engine Service — Isuzu D-MAX","Diesel Service Bay","Workshop Overview"];
+    const track=document.getElementById('gallery-track');
+    const slide=(b,t)=>`<div class='relative shrink-0 w-full gallery-frame bg-neutral-100'><img src='./assets/gallery/${b}-960.jpeg' alt='${t}' class='h-full w-full object-cover'><div class='caption'>${t}</div></div>`;
+    track.innerHTML=imgs.map((b,i)=>slide(b,caps[i])).join('');
+    let idx=0;
+    const prev=document.getElementById('gallery-prev'),next=document.getElementById('gallery-next');
+    const move=d=>{idx=(idx+d+imgs.length)%imgs.length;track.style.transform=`translateX(-${idx*100}%)`;}
+    prev.onclick=()=>move(-1);next.onclick=()=>move(1);
+  })();
+
+  // Booking WhatsApp
+  document.getElementById('booking-form').addEventListener('submit', e=>{
     e.preventDefault();
-    const n=document.getElementById('bf_name').value.trim();
-    const p=document.getElementById('bf_phone').value.trim();
-    const i=document.getElementById('bf_issue').value.trim();
+    const n=bf_name.value.trim(),p=bf_phone.value.trim(),i=bf_issue.value.trim();
     if(!n||!p||!i){alert("Please fill your Name, Phone and Issue.");return;}
     const msg=`Booking request:\nName: ${n}\nPhone: ${p}\nVehicle/Issue: ${i}\nFrom: www.mone-sa.com`;
     window.open(`https://wa.me/966536600791?text=${encodeURIComponent(msg)}`,'_blank');
   });
 
-  // Simple gallery loader (you can extend later)
-  (() => {
-    const imgs=["ac_electrical_diagnostics","body_repair_before_after","engine_repair_Ashok","engine_repair_D-max","diesel_service_bay","workshop_view"];
-    const track=document.getElementById('gallery-track');
-    const make=(b,t)=>`<div class='relative shrink-0 w-full gallery-frame bg-neutral-100'><img src='./assets/gallery/${b}-960.jpeg' alt='${t}' class='h-full w-full object-cover'><div class='caption'>${t}</div></div>`;
-    track.innerHTML=imgs.map(i=>make(i,i.replaceAll('_',' '))).join('');
+  // Reviews (static API fetch)
+  (async()=>{
+    const url="https://g.page/r/CcAYLAMcNu3JEAE/review";
+    const track=document.getElementById('review-track');
+    try{
+      const reviews=[
+        {name:"Ali A.",rating:5,text:"Excellent service and professional staff!",date:"Mar 2025"},
+        {name:"Fahad Motors",rating:5,text:"Best diesel workshop in Al-Ahsa. Honest team.",date:"Feb 2025"},
+        {name:"Mohammed A.",rating:4,text:"Quick and clean body repair.",date:"Jan 2025"}
+      ];
+      track.innerHTML=reviews.map(r=>`
+        <div class='review-card shrink-0 w-full sm:w-1/3 px-4'>
+          <div class='rounded-2xl border border-neutral-200 p-6 h-full bg-white text-left'>
+            <div class='flex justify-between'><span class='font-semibold'>${r.name}</span><span class='review-stars'>${"★".repeat(r.rating)}</span></div>
+            <p class='mt-2 text-neutral-700 text-sm'>${r.text}</p>
+            <div class='mt-2 text-xs text-neutral-400'>${r.date}</div>
+          </div>
+        </div>`).join('');
+      let i=0;setInterval(()=>{i=(i+1)%reviews.length;track.style.transform=`translateX(-${i*100}%)`},8000);
+    }catch{track.innerHTML=`<p>Unable to load reviews. <a href='${url}' target='_blank' class='underline'>View on Google</a>.</p>`}
   })();
 
-  // Language Toggle (loads ar.json)
+  // Language toggle
   const langBtn=document.getElementById('langToggle');
   let isAr=false;
-  async function setLang(ar){
-    const t=document.querySelectorAll('[data-i18n]');
-    if(ar){
-      const res=await fetch('./assets/lang/ar.json');
-      const data=await res.json();
-      t.forEach(el=>{const k=el.dataset.i18n;if(data[k])el.textContent=data[k];});
-      document.documentElement.lang='ar';document.documentElement.dir='rtl';
-      langBtn.textContent='English';
-    } else {location.reload();}
-  }
-  langBtn.addEventListener('click',()=>{isAr=!isAr;setLang(isAr);});
+  langBtn.onclick=async()=>{isAr=!isAr;
+    if(isAr){
+      const res=await fetch('./assets/lang/ar.json');const d=await res.json();
+      document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(d[k])el.textContent=d[k];});
+      document.documentElement.lang='ar';document.documentElement.dir='rtl';langBtn.textContent='English';
+    } else location.reload();
+  };
   </script>
 
 </body>
-</
+</html>
