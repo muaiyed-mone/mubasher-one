@@ -720,41 +720,28 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
   });
 });
 </script>
-  <script>
-/* ===== Working hours via Google Places API v1 (browser-safe) ===== */
+<script>
 (async function loadHours(){
-  const API_KEY  = "AIzaSyBfCTfoHR1NRoDivnukJRPCZw68h5Wj9hk";   // <-- your key
-  const PLACE_ID = "ChIJY_nBNRqjNz4RwBgsAxw27ck";                // <-- your place id
+  // ✅ Put your same key and place id here
+  const API_KEY  = "AIzaSyBfCTfoHR1NRoDivnukJRPCZw68h5Wj9hk";
+  const PLACE_ID = "ChIJY_nBNRqjNz4RwBgsAxw27ck";
 
   const badge = document.getElementById("openNow");
   const list  = document.getElementById("hoursList");
   const hint  = document.getElementById("hoursHint");
   if (!badge || !list) return;
 
-  // Safety fallback if key/ID missing
-  if (!API_KEY || !PLACE_ID) {
+  function setFallback(){
     badge.textContent = "Hours";
     list.innerHTML = `<li>Sat–Thu: 8:00–18:00</li><li>Fri: Closed</li>`;
-    return;
   }
 
-  try {
-    // Places v1: use headers (not ?fields=) for browser fetches
-    const res = await fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}`, {
-      headers: {
-        "X-Goog-Api-Key": API_KEY,
-        "X-Goog-FieldMask": "currentOpeningHours.weekdayDescriptions,currentOpeningHours.openNow"
-      }
-    });
+  // Render helper
+  function renderHours(data){
+    const oh   = data.currentOpeningHours || data.opening_hours || {};
+    const days = oh.weekdayDescriptions || oh.weekday_text || [];
+    const open = (oh.openNow !== undefined) ? oh.openNow : oh.open_now;
 
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-
-    // v1 uses camelCase keys (currentOpeningHours)
-    const oh   = data.currentOpeningHours || {};
-    const days = oh.weekdayDescriptions || [];
-
-    const open = oh.openNow;
     if (open === true) {
       badge.textContent = "Open now";
       badge.className = "text-xs rounded px-2 py-1 bg-green-100 text-green-800";
@@ -765,20 +752,65 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
       badge.textContent = "Hours";
     }
 
-    list.innerHTML = days.length ? days.map(line => `<li>${line}</li>`).join("") 
-                                 : `<li>Hours not published on Google</li>`;
+    list.innerHTML = days.length
+      ? days.map(line => `<li>${line}</li>`).join("")
+      : `<li>Hours not published on Google</li>`;
+
     if (hint) hint.style.display = "none";
-  } catch (e) {
-    console.error("Hours fetch failed:", e);
+  }
+
+  try {
+    // ---- Try Places API v1 (official, with headers + field mask) ----
+    const resV1 = await fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}`, {
+      headers: {
+        "X-Goog-Api-Key": API_KEY,
+        // Ask exactly for what we need (camelCase in v1):
+        "X-Goog-FieldMask": "currentOpeningHours.weekdayDescriptions,currentOpeningHours.openNow"
+      },
+      mode: "cors"
+    });
+
+    if (resV1.ok) {
+      const json = await resV1.json();
+      if (json && json.currentOpeningHours) {
+        renderHours(json);
+        return;
+      }
+      // If no currentOpeningHours returned, we’ll try legacy
+    } else {
+      // If v1 rejected (403/400), fall through to legacy
+      // console.warn("v1 error:", await resV1.text());
+    }
+
+    // ---- Fallback: legacy Place Details (opening_hours) ----
+    const fieldStr = "opening_hours/weekday_text,opening_hours/open_now";
+    const urlLegacy = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(PLACE_ID)}&fields=${encodeURIComponent(fieldStr)}&key=${API_KEY}`;
+    const resLegacy = await fetch(urlLegacy, { mode: "cors" });
+
+    if (!resLegacy.ok) throw new Error(`Legacy HTTP ${resLegacy.status}`);
+    const j2 = await resLegacy.json();
+
+    if (j2.status === "OK" && j2.result && j2.result.opening_hours) {
+      renderHours({ opening_hours: j2.result.opening_hours });
+      return;
+    }
+
+    // If still nothing, show a clear hint on page
     badge.textContent = "Hours unavailable";
-    list.innerHTML = `<li>Couldn’t load from Google.</li>`;
+    list.innerHTML = `<li>Google returned: ${j2.status || "No data"}</li><li>Check API restrictions for Places API.</li>`;
+  } catch (err) {
+    console.error("Hours fetch failed:", err);
+    badge.textContent = "Hours unavailable";
+    list.innerHTML = `<li>Couldn’t load from Google.</li><li>Check API & referrer restrictions.</li>`;
   }
 })();
 </script>
 
 
+
 </body>
 </html>
+
 
 
 
