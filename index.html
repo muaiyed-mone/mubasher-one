@@ -361,12 +361,12 @@
     <div class="mt-6 grid lg:grid-cols-2 gap-6 items-start">
       <!-- Google Maps embed -->
       <div class="rounded-2xl overflow-hidden border border-neutral-200">
-        <iframe
-          title="Mubasher One Location"
-          width="100%" height="420" style="border:0"
-          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=25.4060045,49.4632149&z=15&output=embed">
-        </iframe>
+       <iframe
+  title="Mubasher One — Google Map"
+  width="100%" height="420" style="border:0"
+  loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBfCTfoHR1NRoDivnukJRPCZw68h5Wj9hk&language=ar&region=SA&q=place_id:ChIJY_nBNRqjNz4RwBgsAxw27ck">
+</iframe>
         <a href="https://maps.app.goo.gl/11GzxMCKBD8raQtj7" target="_blank"
            class="block text-center py-3 text-sm bg-neutral-50 hover:bg-neutral-100 border-t border-neutral-200">
           Open in Google Maps
@@ -695,57 +695,6 @@
   })();
   </script>
 <script>
-/* ===== Working hours via Google Places API v1 =====
-   Docs: https://developers.google.com/maps/documentation/places/web-service/details
-   What you need:
-   - API key with Places API enabled (restrict to www.mone-sa.com HTTP referrer)
-   - Place ID of your business
-*/
-(async function loadHours(){
-  const API_KEY  = "AIzaSyBfCTfoHR1NRoDivnukJRPCZw68h5Wj9hk";       // TODO
-  const PLACE_ID = "ChIJY_nBNRqjNz4RwBgsAxw27ck";      // TODO (e.g., 'ChIJxxxxxxxxxxxxxxxx')
-
-  const badge = document.getElementById("openNow");
-  const list  = document.getElementById("hoursList");
-  const hint  = document.getElementById("hoursHint");
-  if (!badge || !list) return;
-
-  if (!API_KEY || !PLACE_ID) {
-    badge.textContent = "Hours";
-    list.innerHTML = `<li>Sat–Thu: 8:00–18:00</li><li>Fri: Closed</li>`;
-    return;
-  }
-
-  try {
-    const fields = ["current_opening_hours"].join(",");
-    const url = `https://places.googleapis.com/v1/places/${PLACE_ID}?fields=${fields}&key=${API_KEY}`;
-
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-
-    const oh   = data.currentOpeningHours || data.current_opening_hours || {};
-    const days = oh.weekdayDescriptions || oh.weekday_text || [];
-
-    const open = oh.openNow ?? oh.open_now;
-    if (open === true) {
-      badge.textContent = "Open now";
-      badge.className = "text-xs rounded px-2 py-1 bg-green-100 text-green-800";
-    } else if (open === false) {
-      badge.textContent = "Closed now";
-      badge.className = "text-xs rounded px-2 py-1 bg-red-100 text-red-800";
-    } else {
-      badge.textContent = "Hours";
-    }
-
-    list.innerHTML = days.map(line => `<li>${line}</li>`).join("");
-    if (hint) hint.style.display = "none";
-  } catch (e) {
-    console.error("Hours fetch failed:", e);
-    badge.textContent = "Hours unavailable";
-    list.innerHTML = `<li>Couldn’t load from Google.</li>`;
-  }
-})();
 
 /* ===== Reset sliders after language toggle (you already added resetGallery) ===== */
 window.resetReviews = function(){
@@ -771,9 +720,66 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
   });
 });
 </script>
+  <script>
+/* ===== Working hours via Google Places API v1 (browser-safe) ===== */
+(async function loadHours(){
+  const API_KEY  = "AIzaSyBfCTfoHR1NRoDivnukJRPCZw68h5Wj9hk";   // <-- your key
+  const PLACE_ID = "ChIJY_nBNRqjNz4RwBgsAxw27ck";                // <-- your place id
+
+  const badge = document.getElementById("openNow");
+  const list  = document.getElementById("hoursList");
+  const hint  = document.getElementById("hoursHint");
+  if (!badge || !list) return;
+
+  // Safety fallback if key/ID missing
+  if (!API_KEY || !PLACE_ID) {
+    badge.textContent = "Hours";
+    list.innerHTML = `<li>Sat–Thu: 8:00–18:00</li><li>Fri: Closed</li>`;
+    return;
+  }
+
+  try {
+    // Places v1: use headers (not ?fields=) for browser fetches
+    const res = await fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}`, {
+      headers: {
+        "X-Goog-Api-Key": API_KEY,
+        "X-Goog-FieldMask": "currentOpeningHours.weekdayDescriptions,currentOpeningHours.openNow"
+      }
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    // v1 uses camelCase keys (currentOpeningHours)
+    const oh   = data.currentOpeningHours || {};
+    const days = oh.weekdayDescriptions || [];
+
+    const open = oh.openNow;
+    if (open === true) {
+      badge.textContent = "Open now";
+      badge.className = "text-xs rounded px-2 py-1 bg-green-100 text-green-800";
+    } else if (open === false) {
+      badge.textContent = "Closed now";
+      badge.className = "text-xs rounded px-2 py-1 bg-red-100 text-red-800";
+    } else {
+      badge.textContent = "Hours";
+    }
+
+    list.innerHTML = days.length ? days.map(line => `<li>${line}</li>`).join("") 
+                                 : `<li>Hours not published on Google</li>`;
+    if (hint) hint.style.display = "none";
+  } catch (e) {
+    console.error("Hours fetch failed:", e);
+    badge.textContent = "Hours unavailable";
+    list.innerHTML = `<li>Couldn’t load from Google.</li>`;
+  }
+})();
+</script>
+
 
 </body>
 </html>
+
 
 
 
