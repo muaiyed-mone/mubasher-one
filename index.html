@@ -114,28 +114,100 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700"></div>
-    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-white">
-      <div class="max-w-3xl fade-in">
-        <!-- add reveal-text -->
-        <h1 class="reveal-text text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight" data-i18n="hero.title">
-          Servicing All Brands &amp; Models — Driven by Quality
-        </h1>
-        <!-- add hero-sub -->
-        <p class="hero-sub mt-5 text-neutral-200 max-w-2xl" data-i18n="hero.desc">
-          SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <!-- Primary CTA -->
-          <a href="#book" class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 shadow-lg hover:shadow-xl hover:bg-neutral-100 transition" data-i18n="hero.book">Book Now</a>
-          <!-- Secondary CTA (glass / outline) -->
-          <a href="#services" class="rounded-xl px-6 py-3 font-semibold bg-white/10 backdrop-blur ring-1 ring-white/30 hover:bg-white/15 hover:ring-white/40 transition" data-i18n="hero.explore">Explore Services</a>
-        </div>
+<!-- ===== HERO ===== -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700"></div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 text-white">
+    <div class="max-w-3xl">
+      <!-- Animated heading -->
+      <h1 class="reveal-text text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
+        Servicing All Brands &amp; Models — Driven by Quality
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="hero-sub mt-5 text-neutral-200 max-w-2xl">
+        SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.
+      </p>
+
+      <!-- Buttons -->
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#book" class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 shadow-lg hover:shadow-xl hover:bg-neutral-100 transition">
+          Book Now
+        </a>
+        <a href="#services" class="rounded-xl px-6 py-3 font-semibold bg-white/10 backdrop-blur ring-1 ring-white/30 hover:bg-white/15 hover:ring-white/40 transition">
+          Explore Services
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- ===== HERO ANIMATION CSS ===== -->
+<style>
+.reveal-text span {
+  display:inline-block;
+  opacity:0;
+  transform:translateY(14px);
+  animation:revealUp .6s cubic-bezier(.22,.61,.36,1) forwards;
+}
+@keyframes revealUp {
+  to {opacity:1; transform:translateY(0);}
+}
+.hero-sub {
+  opacity:0;
+  animation:fadeIn .6s ease forwards;
+  animation-delay:var(--hero-delay,.6s);
+}
+@keyframes fadeIn { to {opacity:1;} }
+</style>
+
+<!-- ===== HERO ANIMATION JS ===== -->
+<script>
+function heroTextReveal(){
+  const heading=document.querySelector('.reveal-text');
+  const sub=document.querySelector('.hero-sub');
+  if(!heading) return;
+
+  const text=heading.textContent.trim();
+  heading.textContent='';
+  const isArabic=/[\u0600-\u06FF]/.test(text);
+  const delay=0.10; // slower, smooth reveal
+  let count=0;
+
+  if(isArabic){
+    // animate by word (Arabic letters stay connected)
+    text.split(/(\s+)/).forEach(part=>{
+      if(/^\s+$/.test(part)){
+        heading.appendChild(document.createTextNode(part));
+      } else {
+        const span=document.createElement('span');
+        span.textContent=part;
+        span.style.animationDelay=`${count*delay}s`;
+        heading.appendChild(span);
+        count++;
+      }
+    });
+  } else {
+    // animate by letter (English)
+    for(const ch of text){
+      if(ch===' '){ heading.appendChild(document.createTextNode(' ')); continue; }
+      const span=document.createElement('span');
+      span.textContent=ch;
+      span.style.animationDelay=`${count*delay}s`;
+      heading.appendChild(span);
+      count++;
+    }
+  }
+
+  if(sub){
+    const totalDelay=(count*delay)+0.5;
+    sub.style.setProperty('--hero-delay',`${totalDelay}s`);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', heroTextReveal);
+</script>
 
   <!-- STATS -->
   <section class="py-10 bg-neutral-900 text-white">
@@ -892,3 +964,4 @@
 
 </body>
 </html>
+
