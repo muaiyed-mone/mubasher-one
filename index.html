@@ -27,31 +27,10 @@
     .fade-in { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
     .fade-in.reveal { opacity: 1; transform: translateY(0); }
 
-    /* ===== HERO TEXT REVEAL ===== */
-    .reveal-text span {
-      display:inline-block;
-      opacity:0;
-      transform: translateY(14px);
-      animation: revealUp 0.6s cubic-bezier(.22,.61,.36,1) forwards;
-      will-change: transform, opacity;
-    }
-    @keyframes revealUp { to { opacity:1; transform:translateY(0); } }
-    /* subtitle appears after heading finishes; JS will set --hero-delay */
-    .hero-sub {
-      opacity: 0;
-      animation: heroSubFade 1s ease forwards;
-      animation-delay: var(--hero-delay, 2.8s);
-    }
-    @keyframes heroSubFade { to { opacity: 1; } }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal-text span { animation: none; opacity: 1; transform:none; }
-      .hero-sub { animation: none; opacity: 1; }
-    }
-
     /* Gallery */
     /* Keep gallery slider layout LTR even when page dir=rtl */
-    #gallery, #gallery * { direction: ltr; }
-    #gallery #gallery-track { direction: ltr; }
+#gallery, #gallery * { direction: ltr; }
+#gallery #gallery-track { direction: ltr; }
 
     .gallery-frame { aspect-ratio: 16/9; position: relative; }
     .caption { position:absolute; left:0; right:0; bottom:0; background:rgba(0,0,0,.55); color:#fff; font-size:12px; line-height:1.25; padding:6px 10px; backdrop-filter: blur(3px); }
@@ -67,16 +46,21 @@
 
     /* Buttons */
     .btn { @apply rounded-xl px-5 py-3 font-semibold; }
-
     /* Keep sliders LTR even when page dir=rtl */
-    #reviews, #reviews * { direction: ltr; }
-    #reviews #review-track { direction: ltr; }
-    #clients, #clients * { direction: ltr; }
-    #clients #client-marquee { direction: ltr; }
+#reviews, #reviews * { direction: ltr; }
+#reviews #review-track { direction: ltr; }
 
-    /* Glow effect for floating icons */
-    .pulse img { transition: filter 0.3s ease, transform 0.3s ease; }
-    .pulse:hover img { filter: drop-shadow(0 0 6px rgba(255,255,255,.7)); transform: scale(1.08); }
+#clients, #clients * { direction: ltr; }
+#clients #client-marquee { direction: ltr; }
+/* Glow effect for floating icons */
+.pulse img {
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.pulse:hover img {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+  transform: scale(1.08);
+}
+
   </style>
 </head>
 <body class="bg-neutral-50 text-neutral-900">
@@ -114,100 +98,39 @@
     </div>
   </header>
 
-<!-- ===== HERO ===== -->
-<section class="relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700"></div>
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700"></div>
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-white">
+      <div class="max-w-3xl fade-in">
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight" data-i18n="hero.title">
+          Servicing All Brands &amp; Models — Driven by Quality
+        </h1>
+        <p class="mt-5 text-neutral-200 max-w-2xl" data-i18n="hero.desc">
+          SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+  <!-- Primary CTA -->
+  <a
+    href="#book"
+    class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 shadow-lg hover:shadow-xl hover:bg-neutral-100 transition"
+    data-i18n="hero.book"
+  >
+    Book Now
+  </a>
 
-  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 text-white">
-    <div class="max-w-3xl">
-      <!-- Animated heading -->
-      <h1 class="reveal-text text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
-        Servicing All Brands &amp; Models — Driven by Quality
-      </h1>
-
-      <!-- Subtitle -->
-      <p class="hero-sub mt-5 text-neutral-200 max-w-2xl">
-        SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.
-      </p>
-
-      <!-- Buttons -->
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="#book" class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 shadow-lg hover:shadow-xl hover:bg-neutral-100 transition">
-          Book Now
-        </a>
-        <a href="#services" class="rounded-xl px-6 py-3 font-semibold bg-white/10 backdrop-blur ring-1 ring-white/30 hover:bg-white/15 hover:ring-white/40 transition">
-          Explore Services
-        </a>
+  <!-- Secondary CTA (glass / outline) -->
+  <a
+    href="#services"
+    class="rounded-xl px-6 py-3 font-semibold bg-white/10 backdrop-blur ring-1 ring-white/30 hover:bg-white/15 hover:ring-white/40 transition"
+    data-i18n="hero.explore"
+  >
+    Explore Services
+  </a>
+</div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ===== HERO ANIMATION CSS ===== -->
-<style>
-.reveal-text span {
-  display:inline-block;
-  opacity:0;
-  transform:translateY(14px);
-  animation:revealUp .6s cubic-bezier(.22,.61,.36,1) forwards;
-}
-@keyframes revealUp {
-  to {opacity:1; transform:translateY(0);}
-}
-.hero-sub {
-  opacity:0;
-  animation:fadeIn .6s ease forwards;
-  animation-delay:var(--hero-delay,.6s);
-}
-@keyframes fadeIn { to {opacity:1;} }
-</style>
-
-<!-- ===== HERO ANIMATION JS ===== -->
-<script>
-function heroTextReveal(){
-  const heading=document.querySelector('.reveal-text');
-  const sub=document.querySelector('.hero-sub');
-  if(!heading) return;
-
-  const text=heading.textContent.trim();
-  heading.textContent='';
-  const isArabic=/[\u0600-\u06FF]/.test(text);
-  const delay=0.10; // slower, smooth reveal
-  let count=0;
-
-  if(isArabic){
-    // animate by word (Arabic letters stay connected)
-    text.split(/(\s+)/).forEach(part=>{
-      if(/^\s+$/.test(part)){
-        heading.appendChild(document.createTextNode(part));
-      } else {
-        const span=document.createElement('span');
-        span.textContent=part;
-        span.style.animationDelay=`${count*delay}s`;
-        heading.appendChild(span);
-        count++;
-      }
-    });
-  } else {
-    // animate by letter (English)
-    for(const ch of text){
-      if(ch===' '){ heading.appendChild(document.createTextNode(' ')); continue; }
-      const span=document.createElement('span');
-      span.textContent=ch;
-      span.style.animationDelay=`${count*delay}s`;
-      heading.appendChild(span);
-      count++;
-    }
-  }
-
-  if(sub){
-    const totalDelay=(count*delay)+0.5;
-    sub.style.setProperty('--hero-delay',`${totalDelay}s`);
-  }
-}
-
-document.addEventListener('DOMContentLoaded', heroTextReveal);
-</script>
+  </section>
 
   <!-- STATS -->
   <section class="py-10 bg-neutral-900 text-white">
@@ -436,134 +359,139 @@ document.addEventListener('DOMContentLoaded', heroTextReveal);
     </div>
   </section>
 
-  <!-- MAP / HOURS -->
-  <section id="map" class="py-16 bg-white border-t border-neutral-200" dir="ltr">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Find Us</h2>
-      <p class="mt-2 text-neutral-600">Click below for directions. Parking available on site.</p>
+  <!-- MAP / FIND US -->
+ <!-- MAP / HOURS -->
+<section id="map" class="py-16 bg-white border-t border-neutral-200" dir="ltr">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Find Us</h2>
+    <p class="mt-2 text-neutral-600">Click below for directions. Parking available on site.</p>
 
-      <div class="mt-6 grid lg:grid-cols-2 gap-6 items-start">
-        <!-- Google Maps embed -->
-        <div class="rounded-2xl overflow-hidden border border-neutral-200">
-          <iframe
-            title="Mubasher One — Google Map"
-            width="100%" height="420" style="border:0"
-            loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBfCTfoHR1NRoDivnukJRPCZw68h5Wj9hk&language=ar&region=SA&q=place_id:ChIJY_nBNRqjNz4RwBgsAxw27ck">
-          </iframe>
-          <a href="https://maps.app.goo.gl/11GzxMCKBD8raQtj7" target="_blank"
-             class="block text-center py-3 text-sm bg-neutral-50 hover:bg-neutral-100 border-t border-neutral-200">
-            Open in Google Maps
-          </a>
+    <div class="mt-6 grid lg:grid-cols-2 gap-6 items-start">
+      <!-- Google Maps embed -->
+      <div class="rounded-2xl overflow-hidden border border-neutral-200">
+       <iframe
+  title="Mubasher One — Google Map"
+  width="100%" height="420" style="border:0"
+  loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBfCTfoHR1NRoDivnukJRPCZw68h5Wj9hk&language=ar&region=SA&q=place_id:ChIJY_nBNRqjNz4RwBgsAxw27ck">
+</iframe>
+        <a href="https://maps.app.goo.gl/11GzxMCKBD8raQtj7" target="_blank"
+           class="block text-center py-3 text-sm bg-neutral-50 hover:bg-neutral-100 border-t border-neutral-200">
+          Open in Google Maps
+        </a>
+      </div>
+
+      <!-- Working hours -->
+      <div class="rounded-2xl border border-neutral-200 bg-white p-5" id="hours" dir="ltr">
+        <div class="flex items-center justify-between">
+          <h3 class="font-semibold">Working Hours</h3>
+          <span id="openNow" class="text-xs rounded px-2 py-1 bg-neutral-100">Loading…</span>
         </div>
+        <ul id="hoursList" class="mt-3 text-sm text-neutral-700 space-y-1"></ul>
 
-        <!-- Working hours -->
-        <div class="rounded-2xl border border-neutral-200 bg-white p-5" id="hours" dir="ltr">
-          <div class="flex items-center justify-between">
-            <h3 class="font-semibold">Working Hours</h3>
-            <span id="openNow" class="text-xs rounded px-2 py-1 bg-neutral-100">Loading…</span>
-          </div>
-          <ul id="hoursList" class="mt-3 text-sm text-neutral-700 space-y-1"></ul>
-
-          <!-- Fallback notice (hidden when API succeeds) -->
-          <p id="hoursHint" class="mt-3 text-xs text-neutral-500">
-            If hours don’t load, add your Google Places API key and Place ID in the script.
-          </p>
-        </div>
+        <!-- Fallback notice (hidden when API succeeds) -->
+        <p id="hoursHint" class="mt-3 text-xs text-neutral-500">
+          If hours don’t load, add your Google Places API key and Place ID in the script.
+        </p>
       </div>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer id="contact" class="py-6 bg-neutral-900 text-neutral-300">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8">
-      <!-- Logo -->
-      <div class="flex flex-col items-start text-sm text-neutral-400">
-        <picture>
-          <source srcset="./assets/LOGO-01.svg" type="image/svg+xml">
-          <img src="./assets/LOGO-01.png" alt="Mubasher One Logo" class="h-[64px] w-auto mb-3">
-        </picture>
-        <p>CR: 2252107229&nbsp;|&nbsp;VAT: 311567104500003&nbsp;|&nbsp;SASO 4-Star Certification No. 1154</p>
-      </div>
-
-      <!-- Contact Info -->
-      <div>
-        <div class="font-semibold" data-i18n="footer.contact">Contact</div>
-        <ul class="mt-2 text-sm space-y-1">
-          <li data-i18n="footer.email">
-            Email: <a class="underline" href="mailto:service@mone-sa.com">service@mone-sa.com</a>
-          </li>
-          <li data-i18n="footer.website">
-            Website: <a class="underline" href="https://www.mone-sa.com" target="_blank" rel="noopener">www.mone-sa.com</a>
-          </li>
-          <li data-i18n="footer.phone">
-            Phone: <a class="underline" href="tel:+966536600791">+966 53 660 0791</a>
-          </li>
-        </ul>
-        <a class="mt-2 inline-flex items-center gap-2 text-sm underline" target="_blank" rel="noopener"
-           href="https://maps.app.goo.gl/yhdtpxKjngnFus787" data-i18n="footer.map">Open in Google Maps</a>
-      </div>
-
-      <!-- Location -->
-      <div>
-        <div class="font-semibold" data-i18n="footer.location">Location</div>
-        <p class="mt-2 text-sm" data-i18n="footer.addr">Al-Ahsa, Eastern Province, Saudi Arabia</p>
-      </div>
-    </div>
-
-    <!-- Divider -->
-    <div class="border-t border-neutral-800 mt-10 mb-6 mx-auto w-1/2"></div>
-
-    <!-- Legal Info -->
-    <div class="text-xs text-neutral-400 text-center space-y-1">
-      <!-- EN -->
-      <p data-lang="en" data-i18n="footer.legal-en">
-        © 2025 Mubasher One Automotive Maintenance Holding Co.<br>
-        Al-Ahsa, Saudi Arabia | All Rights Reserved
-      </p>
-
-      <!-- AR -->
-      <p data-lang="ar" dir="rtl" class="hidden" data-i18n="footer.legal-ar">
-        © ٢٠٢٥ شركة مباشر وان القابضة لصيانة السيارات<br>
-        السجل التجاري: ٢٢٥٢١٠٧٢٢٩ | الرقم الضريبي: ٣١١٥٦٧١٠٤٥٠٠٠٠٣ | شهادة ساسو ٤ نجوم رقم: ١١٥٤<br>
-        الأحساء، المملكة العربية السعودية | جميع الحقوق محفوظة
-      </p>
-    </div>
-  </footer>
-
-  <!-- FLOATING ACTIONS (vertical stack) -->
-  <div class="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
-    <!-- WhatsApp -->
-    <a
-      href="https://wa.me/966536600791?text=Hi%20Mubasher%20One%2C%20I%27d%20like%20to%20book%20a%20service."
-      class="flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-green-600 text-white shadow-lg hover:shadow-xl transition pulse"
-      aria-label="WhatsApp Chat"
-    >
-      <img src="./assets/icons/whatsapp.svg" alt="WhatsApp" class="h-5 w-5">
-      <span>WhatsApp</span>
-    </a>
-
-    <!-- Book Now -->
-    <a
-      href="#book"
-      class="flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-neutral-900 text-white shadow-lg hover:shadow-xl transition pulse"
-      aria-label="Book Now"
-    >
-      <img src="./assets/icons/calendar.svg" alt="Book Now" class="h-5 w-5">
-      <span>Book Now</span>
-    </a>
-
-    <!-- Take Me There -->
-    <a
-      href="https://maps.app.goo.gl/11GzxMCKBD8raQtj7"
-      target="_blank"
-      class="flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-blue-600 text-white shadow-lg hover:shadow-xl transition pulse"
-      aria-label="Get Directions"
-    >
-      <img src="./assets/icons/map.svg" alt="Map" class="h-5 w-5">
-      <span>Take Me There</span>
-    </a>
   </div>
+</section>
+
+
+ <!-- FOOTER -->
+<footer id="contact" class="py-6 bg-neutral-900 text-neutral-300">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8">
+    <!-- Logo -->
+ <div class="flex flex-col items-start text-sm text-neutral-400">
+  <picture>
+    <source srcset="./assets/LOGO-01.svg" type="image/svg+xml">
+    <img src="./assets/LOGO-01.png" alt="Mubasher One Logo" class="h-[64px] w-auto mb-3">
+  </picture>
+  <p>CR: 2252107229&nbsp;|&nbsp;VAT: 311567104500003&nbsp;|&nbsp;SASO 4-Star Certification No. 1154</p>
+</div>
+
+    <!-- Contact Info -->
+    <div>
+      <div class="font-semibold" data-i18n="footer.contact">Contact</div>
+      <ul class="mt-2 text-sm space-y-1">
+        <li data-i18n="footer.email">
+          Email: <a class="underline" href="mailto:service@mone-sa.com">service@mone-sa.com</a>
+        </li>
+        <li data-i18n="footer.website">
+          Website: <a class="underline" href="https://www.mone-sa.com" target="_blank" rel="noopener">www.mone-sa.com</a>
+        </li>
+        <li data-i18n="footer.phone">
+          Phone: <a class="underline" href="tel:+966536600791">+966 53 660 0791</a>
+        </li>
+      </ul>
+      <a class="mt-2 inline-flex items-center gap-2 text-sm underline" target="_blank" rel="noopener"
+         href="https://maps.app.goo.gl/yhdtpxKjngnFus787" data-i18n="footer.map">Open in Google Maps</a>
+    </div>
+
+    <!-- Location -->
+    <div>
+      <div class="font-semibold" data-i18n="footer.location">Location</div>
+      <p class="mt-2 text-sm" data-i18n="footer.addr">Al-Ahsa, Eastern Province, Saudi Arabia</p>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="border-t border-neutral-800 mt-10 mb-6 mx-auto w-1/2"></div>
+
+  <!-- Legal Info -->
+  <div class="text-xs text-neutral-400 text-center space-y-1">
+    <!-- EN -->
+    <p data-lang="en" data-i18n="footer.legal-en">
+      © 2025 Mubasher One Automotive Maintenance Holding Co.<br>
+      Al-Ahsa, Saudi Arabia | All Rights Reserved
+    </p>
+
+    <!-- AR -->
+    <p data-lang="ar" dir="rtl" class="hidden" data-i18n="footer.legal-ar">
+      © ٢٠٢٥ شركة مباشر وان القابضة لصيانة السيارات<br>
+      السجل التجاري: ٢٢٥٢١٠٧٢٢٩ | الرقم الضريبي: ٣١١٥٦٧١٠٤٥٠٠٠٠٣ | شهادة ساسو ٤ نجوم رقم: ١١٥٤<br>
+      الأحساء، المملكة العربية السعودية | جميع الحقوق محفوظة
+    </p>
+  </div>
+</footer>
+
+
+<!-- FLOATING ACTIONS (vertical stack) -->
+<div class="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+  <!-- WhatsApp -->
+  <a
+    href="https://wa.me/966536600791?text=Hi%20Mubasher%20One%2C%20I%27d%20like%20to%20book%20a%20service."
+    class="flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-green-600 text-white shadow-lg hover:shadow-xl transition pulse"
+    aria-label="WhatsApp Chat"
+  >
+    <img src="./assets/icons/whatsapp.svg" alt="WhatsApp" class="h-5 w-5">
+    <span>WhatsApp</span>
+  </a>
+
+  <!-- Book Now -->
+  <a
+    href="#book"
+    class="flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-neutral-900 text-white shadow-lg hover:shadow-xl transition pulse"
+    aria-label="Book Now"
+  >
+    <img src="./assets/icons/calendar.svg" alt="Book Now" class="h-5 w-5">
+    <span>Book Now</span>
+  </a>
+
+  <!-- Take Me There -->
+  <a
+    href="https://maps.app.goo.gl/11GzxMCKBD8raQtj7"
+    target="_blank"
+    class="flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-blue-600 text-white shadow-lg hover:shadow-xl transition pulse"
+    aria-label="Get Directions"
+  >
+    <img src="./assets/icons/map.svg" alt="Map" class="h-5 w-5">
+    <span>Take Me There</span>
+  </a>
+</div>
+
+
 
   <!-- SCRIPTS -->
   <script>
@@ -576,94 +504,64 @@ document.addEventListener('DOMContentLoaded', heroTextReveal);
     els.forEach(el=>io.observe(el));
   })();
 
- <script>
-/* ===== Reliable EN ↔ AR toggle (covers HERO too) ===== */
+  // ===== Language (embedded Arabic with English fallback) =====
+  const AR = {
+    "nav.services":"الخدمات","nav.capabilities":"القدرات","nav.quality":"الجودة","nav.values":"القيم","nav.clients":"العملاء","nav.reviews":"التقييمات","nav.location":"الموقع","nav.book":"احجز",
+    "saso.badge":"ساسو ٤ نجوم • رقم الشهادة 1154",
+    "hero.title":"نخدم جميع الماركات والموديلات — ملتزمون بالجودة",
+    "hero.desc":"مركز خدمة معتمد بتصنيف 4 نجوم من ساسو في الأحساء، متخصص في صيانة سيارات الديزل والبنزين مع أنظمة مؤسسية ودعم ميداني.",
+    "hero.book":"احجز الآن","hero.explore":"استعرض الخدمات",
+    "stats.facility":"مساحة المنشأة","stats.team":"فريق معتمد","stats.quality":"جودة معتمدة",
+    "cap.title":"لماذا مباشر وان","cap.blurb":"نمزج بين أنظمة الجودة المعتمدة والتشخيصات الحديثة والخدمات الميدانية السريعة.",
+    "cap.saso":"ساسو 4 نجوم","cap.saso_desc":"جودة وسلامة في جميع العمليات.",
+    "cap.erp":"تكامل ERP","cap.erp_desc":"متابعة فورية للقطع وأوامر العمل والمخزون.",
+    "cap.mobile":"وحدات متنقلة","cap.mobile_desc":"إصلاحات طارئة ودعم أساطيل في الموقع.",
+    "services.title":"الخدمات الرئيسية","services.blurb":"برامج صيانة شاملة مخصصة للأساطيل والمركبات الخاصة.",
+    "services.diesel":"خبرة الديزل",
+    "services.d1":"تشخيص وإصلاح نظام الكومون ريل","services.d2":"تنظيف EGR بالموجات فوق الصوتية","services.d3":"تشخيص أنظمة AdBlue / SCR","services.d4":"صيانة مضخات الوقود والهيدروليك","services.d5":"تجميع وعمرة المحركات","services.d6":"خدمات الفرامل","services.d7":"ترصيص وضبط زوايا وتعليق",
+    "services.petrol":"البنزين والهايبرد",
+    "services.p1":"تنظيف مجرى السحب لمحركات الحقن المباشر","services.p2":"إزالة الكربون بقشر الجوز","services.p3":"صيانة دورية وتحسين الأداء","services.p4":"أجهزة تشخيص متقدمة","services.p5":"فحص ومعايرة أنظمة الهايبرد",
+    "services.equip":"معدات متخصصة",
+    "services.e1":"غرف دهان وتجهيز لإنهاء متميز وتجفيف سريع","services.e2":"رافعات هيدروليكية 10 طن للـ SUV والشاحنات الخفيفة","services.e3":"مخارط أقراص وفرامل","services.e4":"أجهزة فحص متعددة الماركات","services.e5":"إصلاح الصدمات بدون دهان","services.e6":"نفخ رملي وتأهيل الهياكل",
+    "services.upholstery":"تنجيد وترميم داخلي",
+    "services.u1":"تنجيد المقاعد وألواح الأبواب","services.u2":"تبديل سقف القماش والموكيت","services.u3":"خياطة مخصصة وترقيات جلد","services.u4":"تفصيل داخلي وترميم الطبلون",
+    "gallery.hint":"اسحب على الجوال • اضغط للتكبير",
+    "reviews.title":"ماذا يقول عملاؤنا","reviews.link":"عرض الكل على خرائط جوجل",
+    "clients.title":"عملاؤنا","clients.blurb":"موثوق بنا من قبل شركات رائدة ومصانع وموردين في السعودية.",
+    "qa.title":"ضمان الجودة","qa.saso":"ساسو 4 نجوم — رقم الشهادة 1154","qa.labor":"ضمان على أعمال الصيانة","qa.oem":"ضمان حسب معايير المصنع","qa.4cs":"تكامل جودة 4Cs","qa.view":"عرض شهادة ساسو (PDF)",
+    "values.title":"القيم الأساسية","values.blurb":"قيم راسخة تقود كل عملياتنا لضمان الشفافية والاحتراف والثقة.",
+    "values.quality":"الجودة","values.quality_desc":"جميع العمليات مطابقة لمعايير ساسو والمصنع بدقة عالية.",
+    "values.integrity":"النزاهة","values.integrity_desc":"تواصل شفاف وممارسات أخلاقية مع جميع العملاء.",
+    "values.expertise":"الخبرة","values.expertise_desc":"فنيون مهرة بتدريب مستمر وأحدث أنظمة التشخيص.",
+    "values.reliability":"الاعتمادية","values.reliability_desc":"الالتزام بالمواعيد والأداء الثابت ونتائج مضمونة.",
+    "values.sustainability":"الاستدامة","values.sustainability_desc":"عمليات مسؤولة بيئياً وإدارة نفايات آمنة.",
+    "values.innovation":"الابتكار","values.innovation_desc":"اعتماد أحدث تقنيات السيارات لرفع الكفاءة والسلامة.",
+    "book.title":"جاهزون لخدمة مركبتك أو أسطولك؟","book.desc":"احجز موعداً أو اطلب دعماً ميدانياً. سنؤكد عبر الهاتف أو الواتساب.","book.li1":"تغطية الأحساء • استقبال 24/7","book.li2":"عروض شفافة مع ضمان قطع وأجور","book.li3":"تتبع فوري عبر نظام ERP","book.name":"الاسم","book.phone":"الهاتف / الواتساب","book.issue":"نوع المركبة / المشكلة","book.submit":"طلب الحجز عبر الواتساب","book.note":"سيتم فتح واتساب مع تفاصيلك تلقائياً",
+    "map.title":"موقعنا","map.blurb":"اضغط أدناه للحصول على الاتجاهات. مواقف متوفرة في الموقع.","map.cta":"احصل على الاتجاهات",
+    "footer.contact":"تواصل","footer.website":"الموقع: ","footer.phone":"الهاتف: ","footer.map":"افتح على خرائط جوجل","footer.location":"الموقع","footer.addr":"الأحساء، المنطقة الشرقية، المملكة العربية السعودية","footer.copy":"© 2025 شركة مباشر وان لصيانة السيارات. جميع الحقوق محفوظة."
+  };
 
-/* 1) Arabic dictionary (keep yours; I copied from your file) */
-const AR = {
-  "nav.services":"الخدمات","nav.capabilities":"القدرات","nav.quality":"الجودة","nav.values":"القيم","nav.clients":"العملاء","nav.reviews":"التقييمات","nav.location":"الموقع","nav.book":"احجز",
-  "saso.badge":"ساسو ٤ نجوم • رقم الشهادة 1154",
-  "hero.title":"نخدم جميع الماركات والموديلات — ملتزمون بالجودة",
-  "hero.desc":"مركز خدمة معتمد بتصنيف 4 نجوم من ساسو في الأحساء، متخصص في صيانة سيارات الديزل والبنزين مع أنظمة مؤسسية ودعم ميداني.",
-  "hero.book":"احجز الآن","hero.explore":"استعرض الخدمات",
-  "stats.facility":"مساحة المنشأة","stats.team":"فريق معتمد","stats.quality":"جودة معتمدة",
-  "cap.title":"لماذا مباشر وان","cap.blurb":"نمزج بين أنظمة الجودة المعتمدة والتشخيصات الحديثة والخدمات الميدانية السريعة.",
-  "cap.saso":"ساسو 4 نجوم","cap.saso_desc":"جودة وسلامة في جميع العمليات.",
-  "cap.erp":"تكامل ERP","cap.erp_desc":"متابعة فورية للقطع وأوامر العمل والمخزون.",
-  "cap.mobile":"وحدات متنقلة","cap.mobile_desc":"إصلاحات طارئة ودعم أساطيل في الموقع.",
-  "services.title":"الخدمات الرئيسية","services.blurb":"برامج صيانة شاملة مخصصة للأساطيل والمركبات الخاصة.",
-  "services.diesel":"خبرة الديزل",
-  "services.d1":"تشخيص وإصلاح نظام الكومون ريل","services.d2":"تنظيف EGR بالموجات فوق الصوتية","services.d3":"تشخيص أنظمة AdBlue / SCR","services.d4":"صيانة مضخات الوقود والهيدروليك","services.d5":"تجميع وعمرة المحركات","services.d6":"خدمات الفرامل","services.d7":"ترصيص وضبط زوايا وتعليق",
-  "services.petrol":"البنزين والهايبرد",
-  "services.p1":"تنظيف مجرى السحب لمحركات الحقن المباشر","services.p2":"إزالة الكربون بقشر الجوز","services.p3":"صيانة دورية وتحسين الأداء","services.p4":"أجهزة تشخيص متقدمة","services.p5":"فحص ومعايرة أنظمة الهايبرد",
-  "services.equip":"معدات متخصصة",
-  "services.e1":"غرف دهان وتجهيز لإنهاء متميز وتجفيف سريع","services.e2":"رافعات هيدروليكية 10 طن للـ SUV والشاحنات الخفيفة","services.e3":"مخارط أقراص وفرامل","services.e4":"أجهزة فحص متعددة الماركات","services.e5":"إصلاح الصدمات بدون دهان","services.e6":"نفخ رملي وتأهيل الهياكل",
-  "services.upholstery":"تنجيد وترميم داخلي",
-  "services.u1":"تنجيد المقاعد وألواح الأبواب","services.u2":"تبديل سقف القماش والموكيت","services.u3":"خياطة مخصصة وترقيات جلد","services.u4":"تفصيل داخلي وترميم الطبلون",
-  "gallery.hint":"اسحب على الجوال • اضغط للتكبير",
-  "reviews.title":"ماذا يقول عملاؤنا","reviews.link":"عرض الكل على خرائط جوجل",
-  "clients.title":"عملاؤنا","clients.blurb":"موثوق بنا من قبل شركات رائدة ومصانع وموردين في السعودية.",
-  "qa.title":"ضمان الجودة","qa.saso":"ساسو 4 نجوم — رقم الشهادة 1154","qa.labor":"ضمان على أعمال الصيانة","qa.oem":"ضمان حسب معايير المصنع","qa.4cs":"تكامل جودة 4Cs","qa.view":"عرض شهادة ساسو (PDF)",
-  "values.title":"القيم الأساسية","values.blurb":"قيم راسخة تقود كل عملياتنا لضمان الشفافية والاحتراف والثقة.",
-  "values.quality":"الجودة","values.quality_desc":"جميع العمليات مطابقة لمعايير ساسو والمصنع بدقة عالية.",
-  "values.integrity":"النزاهة","values.integrity_desc":"تواصل شفاف وممارسات أخلاقية مع جميع العملاء.",
-  "values.expertise":"الخبرة","values.expertise_desc":"فنيون مهرة بتدريب مستمر وأحدث أنظمة التشخيص.",
-  "values.reliability":"الاعتمادية","values.reliability_desc":"الالتزام بالمواعيد والأداء الثابت ونتائج مضمونة.",
-  "values.sustainability":"الاستدامة","values.sustainability_desc":"عمليات مسؤولة بيئياً وإدارة نفايات آمنة.",
-  "values.innovation":"الابتكار","values.innovation_desc":"اعتماد أحدث تقنيات السيارات لرفع الكفاءة والسلامة.",
-  "book.title":"جاهزون لخدمة مركبتك أو أسطولك؟","book.desc":"احجز موعداً أو اطلب دعماً ميدانياً. سنؤكد عبر الهاتف أو الواتساب.","book.li1":"تغطية الأحساء • استقبال 24/7","book.li2":"عروض شفافة مع ضمان قطع وأجور","book.li3":"تتبع فوري عبر نظام ERP","book.name":"الاسم","book.phone":"الهاتف / الواتساب","book.issue":"نوع المركبة / المشكلة","book.submit":"طلب الحجز عبر الواتساب","book.note":"سيتم فتح واتساب مع تفاصيلك تلقائياً",
-  "map.title":"موقعنا","map.blurb":"اضغط أدناه للحصول على الاتجاهات. مواقف متوفرة في الموقع.","map.cta":"احصل على الاتجاهات",
-  "footer.contact":"تواصل","footer.website":"الموقع: ","footer.phone":"الهاتف: ","footer.map":"افتح على خرائط جوجل","footer.location":"الموقع","footer.addr":"الأحساء، المنطقة الشرقية، المملكة العربية السعودية","footer.copy":"© 2025 شركة مباشر وان لصيانة السيارات. جميع الحقوق محفوظة."
-};
+  const langBtn = document.getElementById('langToggle');
+  let isAr = false;
 
-/* 2) Cache EN texts from DOM once */
-(function cacheEN() {
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    if (!el.dataset.en) el.dataset.en = el.textContent.trim();
-  });
-})();
+  function applyTranslations(dict){
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const k = el.getAttribute('data-i18n');
+      if (dict[k]) el.textContent = dict[k];
+    });
+  }
 
-/* 3) Apply a language */
-function setLang(lang) {
-  const isAr = (lang === 'ar');
-  document.documentElement.lang = isAr ? 'ar' : 'en';
-  document.documentElement.dir  = isAr ? 'rtl' : 'ltr';
-
-  // Update all i18n nodes
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (isAr) {
-      // Arabic text if available, else keep EN
-      el.textContent = (AR[key] !== undefined) ? AR[key] : (el.dataset.en || el.textContent);
+  langBtn.addEventListener('click', ()=>{
+    isAr = !isAr;
+    if (isAr){
+      applyTranslations(AR);
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      langBtn.textContent = 'English';
     } else {
-      // Restore original English
-      el.textContent = el.dataset.en || el.textContent;
+      location.reload();
     }
   });
-
-  // Make sure gallery/reviews/clients reset after dir change
-  requestAnimationFrame(() => {
-    if (window.resetGallery)  window.resetGallery();
-    if (window.resetReviews)  window.resetReviews();
-    if (window.resetClients)  window.resetClients();
-  });
-
-  // Button label
-  const toggle = document.getElementById('langToggle');
-  if (toggle) toggle.textContent = isAr ? 'English' : 'عربي';
-}
-
-/* 4) Hook the toggle */
-(function initLangToggle(){
-  const btn = document.getElementById('langToggle');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    const toAr = document.documentElement.dir !== 'rtl';
-    setLang(toAr ? 'ar' : 'en');
-  }, { passive: true });
-})();
-</script>
-
 
   // ===== Gallery (slider + lightbox) =====
   (function setupGallery(){
@@ -853,146 +751,137 @@ function setLang(lang) {
     });
   })();
   </script>
-
-  <script>
-  /* ===== Reset sliders after language toggle ===== */
-  window.resetReviews = function(){
-    const track = document.getElementById('review-track');
-    if (!track) return;
-    track.style.direction = 'ltr';
-    track.style.transform = 'translateX(0%)';
-  };
-  window.resetClients = function(){
-    const marquee = document.getElementById('client-marquee');
-    if (!marquee) return;
-    marquee.style.direction = 'ltr';
-    marquee.style.animation = 'none'; marquee.offsetHeight; marquee.style.animation = '';
-  };
-
-  /* After switch to Arabic */
-  document.getElementById('langToggle')?.addEventListener('click', ()=>{
-    requestAnimationFrame(()=>{
-      if (window.resetGallery)  window.resetGallery();
-      if (window.resetReviews)  window.resetReviews();
-      if (window.resetClients)  window.resetClients();
-      // heroTextReveal is re-run in the other listener after translations
-    });
-  });
-  </script>
-<!-- Force Arabic/English sync for HERO text -->
 <script>
-// --- Force-refresh hero texts on language switch ---
-function refreshHero(lang){
-  const h  = document.querySelector('[data-i18n="hero.title"]');
-  const d  = document.querySelector('[data-i18n="hero.desc"]');
-  const b1 = document.querySelector('[data-i18n="hero.book"]');
-  const b2 = document.querySelector('[data-i18n="hero.explore"]');
-  if(!h || !d || !b1 || !b2) return;
 
-  if (lang === 'ar') {
-    h.textContent  = (window.AR && AR['hero.title'])   || h.textContent;
-    d.textContent  = (window.AR && AR['hero.desc'])    || d.textContent;
-    b1.textContent = (window.AR && AR['hero.book'])    || b1.textContent;
-    b2.textContent = (window.AR && AR['hero.explore']) || b2.textContent;
-  } else {
-    h.textContent  = h.dataset.default  || 'Servicing All Brands & Models — Driven by Quality';
-    d.textContent  = d.dataset.default  || 'SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.';
-    b1.textContent = b1.dataset.default || 'Book Now';
-    b2.textContent = b2.dataset.default || 'Explore Services';
-  }
-}
+/* ===== Reset sliders after language toggle (you already added resetGallery) ===== */
+window.resetReviews = function(){
+  const track = document.getElementById('review-track');
+  if (!track) return;
+  track.style.direction = 'ltr';
+  track.style.transform = 'translateX(0%)';
+};
+window.resetClients = function(){
+  const marquee = document.getElementById('client-marquee');
+  if (!marquee) return;
+  marquee.style.direction = 'ltr';
+  marquee.style.animation = 'none'; marquee.offsetHeight; marquee.style.animation = '';
+};
 
-(function hookLangToggle(){
-  const btn = document.getElementById('langToggle');
-  if(!btn) return;
-  window.__isAr = window.__isAr || false;
-  btn.addEventListener('click', ()=>{
-    window.__isAr = document.documentElement.dir === 'rtl';
-    refreshHero(window.__isAr ? 'ar' : 'en');
-  }, { passive:true });
-})();
+/* Call these after you switch to Arabic */
+document.getElementById('langToggle')?.addEventListener('click', ()=>{
+  // when switching to Arabic, after your existing translations:
+  requestAnimationFrame(()=>{
+    if (window.resetGallery)  window.resetGallery();
+    if (window.resetReviews)  window.resetReviews();
+    if (window.resetClients)  window.resetClients();
+  });
+});
 </script>
-  <script>
-  (async function loadHours(){
-    // ✅ Your key & place id
-    const API_KEY  = "AIzaSyBfCTfoHR1NRoDivnukJRPCZw68h5Wj9hk";
-    const PLACE_ID = "ChIJY_nBNRqjNz4RwBgsAxw27ck";
+<script>
+(async function loadHours(){
+  // ✅ Put your same key and place id here
+  const API_KEY  = "AIzaSyBfCTfoHR1NRoDivnukJRPCZw68h5Wj9hk";
+  const PLACE_ID = "ChIJY_nBNRqjNz4RwBgsAxw27ck";
 
-    const badge = document.getElementById("openNow");
-    const list  = document.getElementById("hoursList");
-    const hint  = document.getElementById("hoursHint");
-    if (!badge || !list) return;
+  const badge = document.getElementById("openNow");
+  const list  = document.getElementById("hoursList");
+  const hint  = document.getElementById("hoursHint");
+  if (!badge || !list) return;
 
-    function setFallback(){
+  function setFallback(){
+    badge.textContent = "Hours";
+    list.innerHTML = `<li>Sat–Thu: 8:00–18:00</li><li>Fri: Closed</li>`;
+  }
+
+  // Render helper
+  function renderHours(data){
+    const oh   = data.currentOpeningHours || data.opening_hours || {};
+    const days = oh.weekdayDescriptions || oh.weekday_text || [];
+    const open = (oh.openNow !== undefined) ? oh.openNow : oh.open_now;
+
+    if (open === true) {
+      badge.textContent = "Open now";
+      badge.className = "text-xs rounded px-2 py-1 bg-green-100 text-green-800";
+    } else if (open === false) {
+      badge.textContent = "Closed now";
+      badge.className = "text-xs rounded px-2 py-1 bg-red-100 text-red-800";
+    } else {
       badge.textContent = "Hours";
-      list.innerHTML = `<li>Sat–Thu: 8:00–18:00</li><li>Fri: Closed</li>`;
     }
 
-    function renderHours(data){
-      const oh   = data.currentOpeningHours || data.opening_hours || {};
-      const days = oh.weekdayDescriptions || oh.weekday_text || [];
-      const open = (oh.openNow !== undefined) ? oh.openNow : oh.open_now;
+    list.innerHTML = days.length
+      ? days.map(line => `<li>${line}</li>`).join("")
+      : `<li>Hours not published on Google</li>`;
 
-      if (open === true) {
-        badge.textContent = "Open now";
-        badge.className = "text-xs rounded px-2 py-1 bg-green-100 text-green-800";
-      } else if (open === false) {
-        badge.textContent = "Closed now";
-        badge.className = "text-xs rounded px-2 py-1 bg-red-100 text-red-800";
-      } else {
-        badge.textContent = "Hours";
-      }
+    if (hint) hint.style.display = "none";
+  }
 
-      list.innerHTML = days.length
-        ? days.map(line => `<li>${line}</li>`).join("")
-        : `<li>Hours not published on Google</li>`;
+  try {
+    // ---- Try Places API v1 (official, with headers + field mask) ----
+    const resV1 = await fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}`, {
+      headers: {
+        "X-Goog-Api-Key": API_KEY,
+        // Ask exactly for what we need (camelCase in v1):
+        "X-Goog-FieldMask": "currentOpeningHours.weekdayDescriptions,currentOpeningHours.openNow"
+      },
+      mode: "cors"
+    });
 
-      if (hint) hint.style.display = "none";
-    }
-
-    try {
-      // v1
-      const resV1 = await fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}`, {
-        headers: {
-          "X-Goog-Api-Key": API_KEY,
-          "X-Goog-FieldMask": "currentOpeningHours.weekdayDescriptions,currentOpeningHours.openNow"
-        },
-        mode: "cors"
-      });
-
-      if (resV1.ok) {
-        const json = await resV1.json();
-        if (json && json.currentOpeningHours) {
-          renderHours(json);
-          return;
-        }
-      }
-
-      // legacy fallback
-      const fieldStr = "opening_hours/weekday_text,opening_hours/open_now";
-      const urlLegacy = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(PLACE_ID)}&fields=${encodeURIComponent(fieldStr)}&key=${API_KEY}`;
-      const resLegacy = await fetch(urlLegacy, { mode: "cors" });
-
-      if (!resLegacy.ok) throw new Error(`Legacy HTTP ${resLegacy.status}`);
-      const j2 = await resLegacy.json();
-
-      if (j2.status === "OK" && j2.result && j2.result.opening_hours) {
-        renderHours({ opening_hours: j2.result.opening_hours });
+    if (resV1.ok) {
+      const json = await resV1.json();
+      if (json && json.currentOpeningHours) {
+        renderHours(json);
         return;
       }
-
-      badge.textContent = "Hours unavailable";
-      list.innerHTML = `<li>Google returned: ${j2.status || "No data"}</li><li>Check API restrictions for Places API.</li>`;
-    } catch (err) {
-      console.error("Hours fetch failed:", err);
-      badge.textContent = "Hours unavailable";
-      list.innerHTML = `<li>Couldn’t load from Google.</li><li>Check API & referrer restrictions.</li>`;
+      // If no currentOpeningHours returned, we’ll try legacy
+    } else {
+      // If v1 rejected (403/400), fall through to legacy
+      // console.warn("v1 error:", await resV1.text());
     }
-  })();
-  </script>
+
+    // ---- Fallback: legacy Place Details (opening_hours) ----
+    const fieldStr = "opening_hours/weekday_text,opening_hours/open_now";
+    const urlLegacy = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(PLACE_ID)}&fields=${encodeURIComponent(fieldStr)}&key=${API_KEY}`;
+    const resLegacy = await fetch(urlLegacy, { mode: "cors" });
+
+    if (!resLegacy.ok) throw new Error(`Legacy HTTP ${resLegacy.status}`);
+    const j2 = await resLegacy.json();
+
+    if (j2.status === "OK" && j2.result && j2.result.opening_hours) {
+      renderHours({ opening_hours: j2.result.opening_hours });
+      return;
+    }
+
+    // If still nothing, show a clear hint on page
+    badge.textContent = "Hours unavailable";
+    list.innerHTML = `<li>Google returned: ${j2.status || "No data"}</li><li>Check API restrictions for Places API.</li>`;
+  } catch (err) {
+    console.error("Hours fetch failed:", err);
+    badge.textContent = "Hours unavailable";
+    list.innerHTML = `<li>Couldn’t load from Google.</li><li>Check API & referrer restrictions.</li>`;
+  }
+})();
+</script>
+
+
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
