@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="256" height="256">
+  <title>Mubasher One - AM Emblem (Fixed Colors)</title>
+  <defs>
+    <style>
+      .red { fill: none; stroke: #e31e24; stroke-width: 4.5; stroke-linecap: round; }
+      .blue { fill: none; stroke: #1677c6; stroke-width: 4.5; stroke-linecap: round; }
+      .diag { fill: none; stroke-width: 4.5; stroke-linecap: round; }
+      .txtA { fill: #e31e24; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 18px; }
+      .txtM { fill: #1677c6; font-family: Arial, Helvetica, sans-serif; font-weight: 700; font-size: 18px; }
+    </style>
+    <!-- Clip to circle for clean edges -->
+    <clipPath id="clip">
+      <circle cx="32" cy="32" r="26"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background transparent -->
+
+  <!-- Circle halves -->
+  <g clip-path="url(#clip)">
+    <!-- Full circle in light gray for alignment (invisible) -->
+    <circle cx="32" cy="32" r="26" fill="none"/>
+    <!-- Red half (left) -->
+    <path class="red" d="M55 32a23 23 0 0 0-46 0" />
+    <!-- Blue half (right) -->
+    <path class="blue" d="M9 32a23 23 0 0 0 46 0" />
+  </g>
+
+  <!-- Diagonal split -->
+  <path class="diag" d="M24 8 L40 56" stroke="#e31e24"/>
+  <path class="diag" d="M24 8 L40 56" stroke="#1677c6" stroke-dasharray="60 60" stroke-dashoffset="30"/>
+
+  <!-- Letters -->
+  <text class="txtA" x="20.5" y="39">A</text>
+  <text class="txtM" x="36" y="39">M</text>
+</svg>
