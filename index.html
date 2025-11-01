@@ -882,7 +882,39 @@ document.addEventListener('DOMContentLoaded', heroTextReveal);
     });
   });
   </script>
+<!-- Force Arabic/English sync for HERO text -->
+<script>
+// --- Force-refresh hero texts on language switch ---
+function refreshHero(lang){
+  const h  = document.querySelector('[data-i18n="hero.title"]');
+  const d  = document.querySelector('[data-i18n="hero.desc"]');
+  const b1 = document.querySelector('[data-i18n="hero.book"]');
+  const b2 = document.querySelector('[data-i18n="hero.explore"]');
+  if(!h || !d || !b1 || !b2) return;
 
+  if (lang === 'ar') {
+    h.textContent  = (window.AR && AR['hero.title'])   || h.textContent;
+    d.textContent  = (window.AR && AR['hero.desc'])    || d.textContent;
+    b1.textContent = (window.AR && AR['hero.book'])    || b1.textContent;
+    b2.textContent = (window.AR && AR['hero.explore']) || b2.textContent;
+  } else {
+    h.textContent  = h.dataset.default  || 'Servicing All Brands & Models — Driven by Quality';
+    d.textContent  = d.dataset.default  || 'SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.';
+    b1.textContent = b1.dataset.default || 'Book Now';
+    b2.textContent = b2.dataset.default || 'Explore Services';
+  }
+}
+
+(function hookLangToggle(){
+  const btn = document.getElementById('langToggle');
+  if(!btn) return;
+  window.__isAr = window.__isAr || false;
+  btn.addEventListener('click', ()=>{
+    window.__isAr = document.documentElement.dir === 'rtl';
+    refreshHero(window.__isAr ? 'ar' : 'en');
+  }, { passive:true });
+})();
+</script>
   <script>
   (async function loadHours(){
     // ✅ Your key & place id
@@ -964,4 +996,5 @@ document.addEventListener('DOMContentLoaded', heroTextReveal);
 
 </body>
 </html>
+
 
