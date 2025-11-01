@@ -391,31 +391,63 @@
 </section>
 
 
-  <!-- FOOTER -->
-  <footer id="contact" class="py-12 bg-neutral-900 text-neutral-300">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8">
-      <div class="flex flex-col items-start">
-        <picture>
-          <source srcset="./assets/LOGO-01.svg" type="image/svg+xml">
-          <img src="./assets/LOGO-01.png" alt="Mubasher One Logo" class="h-[48px] w-auto mb-3">
-        </picture>
-      </div>
-      <div>
-        <div class="font-semibold" data-i18n="footer.contact">Contact</div>
-        <ul class="mt-2 text-sm space-y-1">
-          <li data-i18n="footer.email">Email: <a class="underline" href="mailto:service@mone-sa.com">service@mone-sa.com</a></li>
-          <li data-i18n="footer.website">Website: <a class="underline" href="https://www.mone-sa.com" target="_blank" rel="noopener">www.mone-sa.com</a></li>
-          <li data-i18n="footer.phone">Phone: <a class="underline" href="tel:+966536600791">+966 53 660 0791</a></li>
-        </ul>
-        <a class="mt-2 inline-flex items-center gap-2 text-sm underline" target="_blank" rel="noopener" href="https://maps.app.goo.gl/yhdtpxKjngnFus787" data-i18n="footer.map">Open in Google Maps</a>
-      </div>
-      <div>
-        <div class="font-semibold" data-i18n="footer.location">Location</div>
-        <p class="mt-2 text-sm" data-i18n="footer.addr">Al-Ahsa, Eastern Province, Saudi Arabia</p>
-      </div>
+ <!-- FOOTER -->
+<footer id="contact" class="py-12 bg-neutral-900 text-neutral-300">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8">
+    <!-- Logo -->
+    <div class="flex flex-col items-start">
+      <picture>
+        <source srcset="./assets/LOGO-01.svg" type="image/svg+xml">
+        <img src="./assets/LOGO-01.png" alt="Mubasher One Logo" class="h-[48px] w-auto mb-3">
+      </picture>
     </div>
-    <div class="mt-10 text-xs text-neutral-500 text-center" data-i18n="footer.copy">© 2025 Mubasher One Automotive Maintenance Holding Co. All rights reserved.</div>
-  </footer>
+
+    <!-- Contact Info -->
+    <div>
+      <div class="font-semibold" data-i18n="footer.contact">Contact</div>
+      <ul class="mt-2 text-sm space-y-1">
+        <li data-i18n="footer.email">
+          Email: <a class="underline" href="mailto:service@mone-sa.com">service@mone-sa.com</a>
+        </li>
+        <li data-i18n="footer.website">
+          Website: <a class="underline" href="https://www.mone-sa.com" target="_blank" rel="noopener">www.mone-sa.com</a>
+        </li>
+        <li data-i18n="footer.phone">
+          Phone: <a class="underline" href="tel:+966536600791">+966 53 660 0791</a>
+        </li>
+      </ul>
+      <a class="mt-2 inline-flex items-center gap-2 text-sm underline" target="_blank" rel="noopener"
+         href="https://maps.app.goo.gl/yhdtpxKjngnFus787" data-i18n="footer.map">Open in Google Maps</a>
+    </div>
+
+    <!-- Location -->
+    <div>
+      <div class="font-semibold" data-i18n="footer.location">Location</div>
+      <p class="mt-2 text-sm" data-i18n="footer.addr">Al-Ahsa, Eastern Province, Saudi Arabia</p>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="border-t border-neutral-800 mt-10 mb-6 mx-auto w-1/2"></div>
+
+  <!-- Legal Info -->
+  <div class="text-xs text-neutral-400 text-center space-y-1">
+    <!-- EN -->
+    <p data-lang="en" data-i18n="footer.legal-en">
+      © 2025 Mubasher One Automotive Maintenance Holding Co.<br>
+      CR: 2252107229 | VAT: 311567104500003 | SASO 4-Star Certification No. 1154<br>
+      Al-Ahsa, Saudi Arabia | All Rights Reserved
+    </p>
+
+    <!-- AR -->
+    <p data-lang="ar" dir="rtl" class="hidden" data-i18n="footer.legal-ar">
+      © ٢٠٢٥ شركة مباشر وان القابضة لصيانة السيارات<br>
+      السجل التجاري: ٢٢٥٢١٠٧٢٢٩ | الرقم الضريبي: ٣١١٥٦٧١٠٤٥٠٠٠٠٣ | شهادة ساسو ٤ نجوم رقم: ١١٥٤<br>
+      الأحساء، المملكة العربية السعودية | جميع الحقوق محفوظة
+    </p>
+  </div>
+</footer>
+
 
 <!-- FLOATING ACTIONS -->
 <div class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 md:flex-row md:items-center">
@@ -810,6 +842,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
