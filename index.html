@@ -52,6 +52,14 @@
 
 #clients, #clients * { direction: ltr; }
 #clients #client-marquee { direction: ltr; }
+/* Glow effect for floating icons */
+.pulse img {
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.pulse:hover img {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+  transform: scale(1.08);
+}
 
   </style>
 </head>
@@ -859,6 +867,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
