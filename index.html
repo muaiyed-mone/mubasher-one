@@ -244,16 +244,26 @@
     </div>
   </section>
 
-  <!-- REVIEWS -->
-  <section id="reviews" class="py-16 bg-white border-t border-neutral-200">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="reviews.title">What Our Clients Say</h2>
-      <div id="review-slider" class="relative overflow-hidden mt-8 fade-in">
-        <div id="review-track" class="flex transition-transform duration-700 ease-in-out"></div>
-      </div>
-      <a href="https://g.page/r/CcAYLAMcNu3JEAE/review" target="_blank" class="inline-block mt-6 px-5 py-3 rounded-xl bg-neutral-900 text-white hover:bg-neutral-800 fade-in" data-i18n="reviews.link">View All on Google</a>
+<!-- REVIEWS -->
+<section id="reviews" class="py-16 bg-white border-t border-neutral-200">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in">
+      <span data-i18n="reviews.title">What Our Clients Say</span>
+      <span id="gm-rating" class="align-middle ml-2 text-sm inline-flex items-center gap-1 rounded-full px-2 py-1 bg-yellow-100 text-yellow-800 hidden">★ 0.0 (0)</span>
+    </h2>
+
+    <div id="review-slider" class="relative overflow-hidden mt-8 fade-in">
+      <div id="review-track" class="flex transition-transform duration-700 ease-in-out"></div>
     </div>
-  </section>
+
+    <a href="https://g.page/r/CcAYLAMcNu3JEAE/review" target="_blank"
+       class="inline-block mt-6 px-5 py-3 rounded-xl bg-neutral-900 text-white hover:bg-neutral-800 fade-in"
+       data-i18n="reviews.link">
+      View All on Google
+    </a>
+  </div>
+</section>
+
 
   <!-- CLIENTS -->
   <section id="clients" class="py-16 bg-neutral-50">
@@ -668,31 +678,6 @@
     go(0);
   })();
 
-  // ===== Reviews (custom slider, editable list) =====
-  (function setupReviews(){
-    const reviews = [
-      { name:"Ali A.", rating:5, text:"Excellent service and professional staff!", date:"Mar 2025" },
-      { name:"Fahad Motors", rating:5, text:"Best diesel workshop in Al-Ahsa. Honest team.", date:"Feb 2025" },
-      { name:"Mohammed A.", rating:4, text:"Quick and clean body repair.", date:"Jan 2025" }
-    ];
-    const track = document.getElementById('review-track');
-    function card(r){
-      const stars = '★'.repeat(r.rating) + '☆'.repeat(5-r.rating);
-      return `<div class="shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
-        <div class="rounded-2xl border border-neutral-200 p-6 h-full bg-white text-left">
-          <div class="flex justify-between items-center"><span class="font-semibold">${r.name}</span><span class="text-yellow-400">${stars}</span></div>
-          <p class="mt-2 text-neutral-700 text-sm">${r.text}</p>
-          <div class="mt-2 text-xs text-neutral-400">${r.date}</div>
-        </div>
-      </div>`;
-    }
-    track.innerHTML = reviews.map(card).join('');
-    let i = 0;
-    setInterval(()=>{
-      i = (i + 1) % reviews.length;
-      track.style.transform = `translateX(-${i*100}%)`;
-    }, 8000);
-  })();
 
   // ===== Clients marquee =====
   (function setupClients(){
@@ -778,23 +763,27 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 });
 </script>
 <script>
-(async function loadHours(){
-  // ✅ Put your same key and place id here
+(async function loadGooglePlace(){
+  // === CONFIG: reuse the same key & place id ===
   const API_KEY  = "AIzaSyBfCTfoHR1NRoDivnukJRPCZw68h5Wj9hk";
   const PLACE_ID = "ChIJY_nBNRqjNz4RwBgsAxw27ck";
 
+  // === Elements (hours) ===
   const badge = document.getElementById("openNow");
   const list  = document.getElementById("hoursList");
   const hint  = document.getElementById("hoursHint");
-  if (!badge || !list) return;
+  // === Elements (rating + reviews) ===
+  const ratingBadge = document.getElementById("gm-rating");
+  const reviewTrack = document.getElementById("review-track");
 
-  function setFallback(){
+  function setFallbackHours(){
+    if (!badge || !list) return;
     badge.textContent = "Hours";
     list.innerHTML = `<li>Sat–Thu: 8:00–18:00</li><li>Fri: Closed</li>`;
   }
 
-  // Render helper
   function renderHours(data){
+    if (!badge || !list) return;
     const oh   = data.currentOpeningHours || data.opening_hours || {};
     const days = oh.weekdayDescriptions || oh.weekday_text || [];
     const open = (oh.openNow !== undefined) ? oh.openNow : oh.open_now;
@@ -807,6 +796,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
       badge.className = "text-xs rounded px-2 py-1 bg-red-100 text-red-800";
     } else {
       badge.textContent = "Hours";
+      badge.className = "text-xs rounded px-2 py-1 bg-neutral-100";
     }
 
     list.innerHTML = days.length
@@ -816,57 +806,150 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
     if (hint) hint.style.display = "none";
   }
 
-  try {
-    // ---- Try Places API v1 (official, with headers + field mask) ----
-    const resV1 = await fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}`, {
+  function renderRatingAndReviews(data){
+    if (!ratingBadge || !reviewTrack) return;
+
+    // --- Normalize v1 vs legacy fields ---
+    const rating = data.rating ?? data.result?.rating ?? 0;
+    const total  = data.userRatingCount ?? data.result?.user_ratings_total ?? 0;
+    const reviews = (
+      data.reviews
+      ?? data.result?.reviews
+      ?? []
+    );
+
+    // Show rating badge if we have numbers
+    if (rating && total){
+      ratingBadge.textContent = `★ ${rating.toFixed(1)} (${total})`;
+      ratingBadge.classList.remove('hidden');
+    }
+
+    // Build cards from reviews (prefer newest 6)
+    const normalized = reviews.map(r => {
+      // v1: r.text?.text ; legacy: r.text
+      const text = r.text?.text || r.text || "";
+      const name = r.authorAttribution?.displayName || r.author_name || "Google User";
+      // v1: RFC 3339 in r.publishTime ; legacy: epoch seconds in r.time
+      const dateStr = r.publishTime
+        ? new Date(r.publishTime).toLocaleDateString()
+        : (r.time ? new Date(r.time*1000).toLocaleDateString() : "");
+      const stars = r.rating || 0;
+      return { name, text, date: dateStr, rating: stars };
+    });
+
+    // Sort by date desc if we can parse dates
+    normalized.sort((a,b)=> (new Date(b.date) - new Date(a.date)));
+
+    const take = normalized.slice(0, 6); // show up to 6 cards
+    if (take.length){
+      reviewTrack.innerHTML = take.map(r => {
+        const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+        return `<div class="shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+          <div class="rounded-2xl border border-neutral-200 p-6 h-full bg-white text-left">
+            <div class="flex justify-between items-center">
+              <span class="font-semibold">${r.name}</span>
+              <span class="text-yellow-500" aria-label="${r.rating} out of 5">${stars}</span>
+            </div>
+            <p class="mt-2 text-neutral-700 text-sm">${r.text || ""}</p>
+            <div class="mt-2 text-xs text-neutral-400">${r.date}</div>
+          </div>
+        </div>`;
+      }).join('');
+
+      // simple auto-slide every 8s
+      let i = 0;
+      setInterval(()=>{
+        i = (i + 1) % take.length;
+        reviewTrack.style.transform = `translateX(-${i*100}%)`;
+      }, 8000);
+    }
+  }
+
+  // ---- Caching (speed) ----
+  const CACHE_KEY = "gm_place_cache_v1";
+  const cached = sessionStorage.getItem(CACHE_KEY);
+  if (cached){
+    try{
+      const obj = JSON.parse(cached);
+      if (Date.now() - obj.t < 15*60*1000){ // 15 min cache
+        renderHours(obj.d);
+        renderRatingAndReviews(obj.d);
+        return; // done fast
+      }
+    }catch{}
+  }
+
+  // ---- Fetch (v1) with ONE request for everything ----
+  try{
+    const fieldMask = [
+      "currentOpeningHours.weekdayDescriptions",
+      "currentOpeningHours.openNow",
+      "rating",
+      "userRatingCount",
+      "googleMapsUri",
+      "reviews.rating",
+      "reviews.text",
+      "reviews.publishTime",
+      "reviews.authorAttribution.displayName"
+    ].join(",");
+
+    const res = await fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}?languageCode=en`, {
       headers: {
         "X-Goog-Api-Key": API_KEY,
-        // Ask exactly for what we need (camelCase in v1):
-        "X-Goog-FieldMask": "currentOpeningHours.weekdayDescriptions,currentOpeningHours.openNow"
+        "X-Goog-FieldMask": fieldMask
       },
       mode: "cors"
     });
 
-    if (resV1.ok) {
-      const json = await resV1.json();
-      if (json && json.currentOpeningHours) {
-        renderHours(json);
-        return;
-      }
-      // If no currentOpeningHours returned, we’ll try legacy
-    } else {
-      // If v1 rejected (403/400), fall through to legacy
-      // console.warn("v1 error:", await resV1.text());
-    }
-
-    // ---- Fallback: legacy Place Details (opening_hours) ----
-    const fieldStr = "opening_hours/weekday_text,opening_hours/open_now";
-    const urlLegacy = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(PLACE_ID)}&fields=${encodeURIComponent(fieldStr)}&key=${API_KEY}`;
-    const resLegacy = await fetch(urlLegacy, { mode: "cors" });
-
-    if (!resLegacy.ok) throw new Error(`Legacy HTTP ${resLegacy.status}`);
-    const j2 = await resLegacy.json();
-
-    if (j2.status === "OK" && j2.result && j2.result.opening_hours) {
-      renderHours({ opening_hours: j2.result.opening_hours });
+    if (res.ok){
+      const json = await res.json();
+      renderHours(json);
+      renderRatingAndReviews(json);
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: json }));
       return;
     }
-
-    // If still nothing, show a clear hint on page
-    badge.textContent = "Hours unavailable";
-    list.innerHTML = `<li>Google returned: ${j2.status || "No data"}</li><li>Check API restrictions for Places API.</li>`;
-  } catch (err) {
-    console.error("Hours fetch failed:", err);
-    badge.textContent = "Hours unavailable";
-    list.innerHTML = `<li>Couldn’t load from Google.</li><li>Check API & referrer restrictions.</li>`;
+    // fall through to legacy if not ok
+  } catch(e){
+    // continue to legacy
   }
+
+  // ---- Legacy fallback (Place Details) ----
+  try{
+    const fields = "rating,user_ratings_total,url,reviews(text,author_name,rating,time),opening_hours/weekday_text,opening_hours/open_now";
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(PLACE_ID)}&fields=${encodeURIComponent(fields)}&key=${API_KEY}`;
+    const res = await fetch(url, { mode: "cors" });
+    if (res.ok){
+      const j = await res.json();
+      if (j.status === "OK" && j.result){
+        // Wrap to look like v1 shape where needed
+        const shaped = {
+          opening_hours: j.result.opening_hours,
+          rating: j.result.rating,
+          userRatingCount: j.result.user_ratings_total,
+          reviews: j.result.reviews
+        };
+        renderHours(shaped);
+        renderRatingAndReviews({ result: j.result, ...shaped });
+        sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: shaped }));
+        return;
+      }
+    }
+  }catch(e){
+    // ignore
+  }
+
+  // ---- Final fallback for hours only ----
+  setFallbackHours();
+  // keep your previous static reviews if any (do nothing)
 })();
 </script>
 
 
 
+
 </body>
 </html>
+
 
 
 
