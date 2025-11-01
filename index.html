@@ -449,23 +449,40 @@
 </footer>
 
 
-<!-- FLOATING ACTIONS -->
-<div class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 md:flex-row md:items-center">
+<!-- FLOATING ACTIONS (vertical stack) -->
+<div class="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+  <!-- WhatsApp -->
   <a
     href="https://wa.me/966536600791?text=Hi%20Mubasher%20One%2C%20I%27d%20like%20to%20book%20a%20service."
-    class="rounded-full px-5 py-3 bg-green-600 text-white shadow-lg hover:shadow-xl transition pulse"
+    class="flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-green-600 text-white shadow-lg hover:shadow-xl transition pulse"
     aria-label="WhatsApp Chat"
   >
-    WhatsApp
+    <img src="./assets/icons/whatsapp.svg" alt="WhatsApp" class="h-5 w-5">
+    <span>WhatsApp</span>
   </a>
+
+  <!-- Book Now -->
   <a
     href="#book"
-    class="rounded-full px-5 py-3 bg-neutral-900 text-white shadow-lg hover:shadow-xl transition pulse"
+    class="flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-neutral-900 text-white shadow-lg hover:shadow-xl transition pulse"
     aria-label="Book Now"
   >
-    Book Now
+    <img src="./assets/icons/calendar.svg" alt="Book Now" class="h-5 w-5">
+    <span>Book Now</span>
+  </a>
+
+  <!-- Take Me There -->
+  <a
+    href="https://maps.app.goo.gl/11GzxMCKBD8raQtj7"
+    target="_blank"
+    class="flex items-center justify-center gap-2 rounded-full px-5 py-3 bg-blue-600 text-white shadow-lg hover:shadow-xl transition pulse"
+    aria-label="Get Directions"
+  >
+    <img src="./assets/icons/map.svg" alt="Map" class="h-5 w-5">
+    <span>Take Me There</span>
   </a>
 </div>
+
 
 
   <!-- SCRIPTS -->
@@ -842,6 +859,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
