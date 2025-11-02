@@ -332,23 +332,30 @@
         <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition fade-in">
           <div class="text-3xl mb-3">🌍</div>
        <!-- Sustainability Section -->
-<section id="sustainability" class="py-12 text-center bg-white text-neutral-800">
-  <div class="max-w-6xl mx-auto px-4 group cursor-pointer"
-       onclick="window.open('./assets/certificates/Environmental-Compliance-Certificate.pdf', '_blank')">
+<!-- Sustainability (matches other cards 1:1) -->
+<a href="./assets/certificates/Environmental-Compliance-Certificate.pdf"
+   target="_blank" rel="noopener"
+   class="block group">
+  <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm
+              hover:border-neutral-300 hover:shadow-md transition">
     
+    <!-- single icon (top-left), same size as others -->
     <div class="text-3xl mb-3">🌱</div>
-    <h3 class="font-semibold text-lg mb-2">Sustainability</h3>
-    <p class="text-sm text-neutral-600 mb-1">
+
+    <!-- same heading & paragraph sizes as your other cards -->
+    <h3 class="font-semibold text-lg" data-i18n="values.sustainability">Sustainability</h3>
+    <p class="text-sm text-neutral-600 mt-1" data-i18n="values.sustainability_desc">
       Mubasher One is committed to eco-friendly practices, responsible waste management, and
       full environmental compliance across all operations to minimize our ecological footprint.
     </p>
 
-    <!-- Hover hint -->
-    <span class="text-green-700 text-xs font-medium opacity-0 group-hover:opacity-100 transition duration-300">
+    <!-- subtle hover hint (optional, theme-consistent) -->
+    <span class="text-green-700 text-xs font-medium opacity-0 group-hover:opacity-100
+                 transition mt-3 inline-block" data-i18n="values.see_certificate">
       See Certificate
     </span>
   </div>
-</section>
+</a>
 
 
 
@@ -978,6 +985,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
