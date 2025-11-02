@@ -332,19 +332,53 @@
         <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition fade-in">
           <div class="text-3xl mb-3">🌍</div>
        <!-- Sustainability Section -->
-<section id="sustainability" class="py-12 bg-neutral-50 text-neutral-800 text-center cursor-pointer"
-         onclick="window.open('./assets/certificates/Environmental-Compliance-Certificate.pdf', '_blank')">
-  <div class="max-w-6xl mx-auto px-4 group">
-    <h2 class="text-3xl font-bold mb-4">Sustainability</h2>
-    <p class="text-lg mb-2">
-      Mubasher One is committed to eco-friendly practices, responsible waste management, and
-      full environmental compliance across all operations to minimize our ecological footprint.
-    </p>
-    <span class="text-green-700 text-sm font-medium opacity-0 group-hover:opacity-100 transition duration-300">
-      See Certificate
-    </span>
-  </div>
+<section id="sustainability" class="py-12">
+  <a href="./assets/certificates/Environmental-Compliance-Certificate.pdf"
+     target="_blank" rel="noopener"
+     class="group block">
+    <div class="relative max-w-6xl mx-auto px-4">
+      <div class="rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur-sm shadow-sm
+                  transition duration-300 group-hover:shadow-md group-hover:border-neutral-300">
+        <div class="p-8 text-center text-neutral-800">
+
+          <!-- ⬇️ Keep your exact existing title & paragraph here -->
+          <h2 class="text-3xl font-bold mb-4">Sustainability</h2>
+          <p class="text-lg">
+            Mubasher One is committed to eco-friendly practices, responsible waste management, and
+            full environmental compliance across all operations to minimize our ecological footprint.
+          </p>
+          <!-- ⬆️ Replace with your original text if it’s different -->
+
+        </div>
+
+        <!-- Top-right hover pill (subtle, matches theme) -->
+        <div class="pointer-events-none absolute right-6 top-6
+                    opacity-0 group-hover:opacity-100 transition duration-300">
+          <span class="inline-flex items-center gap-1 rounded-full bg-green-600/90 text-white
+                       text-xs font-semibold px-3 py-1"
+                data-i18n="sustainability.seeCert">
+            See Certificate
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none">
+              <path d="M7 17L17 7M17 7H9M17 7v8" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+
+        <!-- Bottom micro-hint on hover (very subtle) -->
+        <div class="pointer-events-none absolute inset-x-0 bottom-3 text-center
+                    opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0
+                    transition duration-300">
+          <span class="text-green-700 text-sm underline decoration-1 underline-offset-2"
+                data-i18n="sustainability.seeCert">
+            See Certificate
+          </span>
+        </div>
+      </div>
+    </div>
+  </a>
 </section>
+
 
 
         </div>
@@ -971,6 +1005,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
