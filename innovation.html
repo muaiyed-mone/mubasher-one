@@ -1,93 +1,299 @@
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Advanced Tools & Equipment — Mubasher One</title>
 
-  <!-- Diagnostic Scan Tools -->
-  <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-    <img src="./assets/innovation/scan-tools.webp" alt="Diagnostic scan tools" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
-    <figcaption class="p-3 text-sm text-neutral-600">
-      <strong>Diagnostic Scan Tools</strong><br>
-      Multi-brand interfaces (Bosch KTS, Launch X-431, Jaltest HD) for reading and programming ECUs, live-data analysis, and fault-code calibration across commercial and passenger vehicles.
-    </figcaption>
-  </figure>
+  <!-- SEO -->
+  <meta name="description" content="Explore Mubasher One’s state-of-the-art diagnostic systems, precision machines, and service equipment that ensure unmatched quality and efficiency." />
+  <link rel="canonical" href="https://www.mone-sa.com/innovation.html" />
 
-  <!-- Smoke Leak Detection Machine -->
-  <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-    <img src="./assets/innovation/smoke-leak.webp" alt="Smoke leak detection machine" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
-    <figcaption class="p-3 text-sm text-neutral-600">
-      <strong>Smoke Leak Detection Machine</strong><br>
-      Locates intake and vacuum leaks by introducing harmless vapor into the system—critical for diagnosing EVAP, turbo, and EGR circuit leaks quickly.
-    </figcaption>
-  </figure>
+  <!-- Social -->
+  <meta property="og:title" content="Advanced Tools & Equipment — Mubasher One" />
+  <meta property="og:description" content="Discover the modern diagnostic, machining, and service tools behind Mubasher One’s SASO 4-Star quality." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./assets/og-cover.jpg" />
 
-  <!-- Infrared Thermal Camera -->
-  <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-    <img src="./assets/innovation/infrared-camera.webp" alt="Infrared camera" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
-    <figcaption class="p-3 text-sm text-neutral-600">
-      <strong>Infrared Thermal Camera</strong><br>
-      Detects hotspots in brakes, bearings, alternators, wiring harnesses, and HVAC systems—essential for preventive diagnostics and electrical fault isolation.
-    </figcaption>
-  </figure>
+  <!-- Favicons (reuse from main) -->
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg">
+  <link rel="alternate icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png">
+  <link rel="alternate icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png">
+  <link rel="icon" href="./assets/icons/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="./assets/icons/favicon-180.png">
 
-  <!-- Power Probe & Circuit Tracer -->
-  <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-    <img src="./assets/innovation/power-probe.webp" alt="Power probe circuit tester" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
-    <figcaption class="p-3 text-sm text-neutral-600">
-      <strong>Power Probe Circuit Tester & Tracer</strong><br>
-      Allows direct power/ground supply, continuity testing, and signal tracing on live circuits—ideal for diagnosing complex electrical and CAN-bus faults.
-    </figcaption>
-  </figure>
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Borescope Camera -->
-  <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-    <img src="./assets/innovation/borescope.webp" alt="Borescope camera" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
-    <figcaption class="p-3 text-sm text-neutral-600">
-      <strong>Borescope Inspection Camera</strong><br>
-      High-resolution flexible probe for internal inspection of cylinders, valves, injectors, and gearboxes without disassembly—saves time and confirms repair scope.
-    </figcaption>
-  </figure>
+  <style>
+    html { scroll-behavior: smooth; }
+    .fade-in { opacity: 0; transform: translateY(10px); transition: opacity .6s, transform .6s; }
+    .fade-in.reveal { opacity: 1; transform: translateY(0); }
 
-  <!-- Compression Testers -->
-  <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-    <img src="./assets/innovation/compression-tester.webp" alt="Compression tester" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
-    <figcaption class="p-3 text-sm text-neutral-600">
-      <strong>Compression & Leak-Down Testers</strong><br>
-      Measures cylinder pressure and sealing integrity to assess piston, valve, and ring health—vital for pre-rebuild evaluation and post-repair verification.
-    </figcaption>
-  </figure>
+    /* Lightbox */
+    .lb-backdrop { background: rgba(0,0,0,.9); }
+    .lightbox-img { max-height: 90vh; max-width: 90vw; object-fit: contain; }
+  </style>
+</head>
+<body class="bg-neutral-50 text-neutral-900">
 
-  <!-- Brake Fluid Flush Machine -->
-  <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-    <img src="./assets/innovation/brake-flush.webp" alt="Brake fluid flush machine" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
-    <figcaption class="p-3 text-sm text-neutral-600">
-      <strong>Brake Fluid Flush Machine</strong><br>
-      Performs complete hydraulic system bleeding and DOT-fluid replacement under controlled pressure, ensuring consistent pedal feel and safety compliance.
-    </figcaption>
-  </figure>
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-neutral-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+      <a href="./" class="flex items-center" aria-label="Mubasher One home">
+        <picture>
+          <source srcset="./assets/LOGO-01.svg" type="image/svg+xml">
+          <img src="./assets/LOGO-01.png" alt="Mubasher One Logo" class="h-[48px] w-auto">
+        </picture>
+      </a>
 
-  <!-- Coolant Vacuum Filling Machine -->
-  <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-    <img src="./assets/innovation/coolant-vacuum.webp" alt="Coolant vacuum filling machine" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
-    <figcaption class="p-3 text-sm text-neutral-600">
-      <strong>Coolant Vacuum Filling Machine</strong><br>
-      Evacuates air pockets and fills cooling systems using negative pressure, preventing hot-spots and improving thermal efficiency after major repairs.
-    </figcaption>
-  </figure>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="./#services" class="hover:text-neutral-700" data-i18n="nav.services">Services</a>
+        <a href="./#capabilities" class="hover:text-neutral-700" data-i18n="nav.capabilities">Capabilities</a>
+        <a href="./#qa" class="hover:text-neutral-700" data-i18n="nav.quality">Quality</a>
+        <a href="./#values" class="hover:text-neutral-700" data-i18n="nav.values">Values</a>
+        <a href="./#clients" class="hover:text-neutral-700" data-i18n="nav.clients">Clients</a>
+        <a href="./#reviews" class="hover:text-neutral-700" data-i18n="nav.reviews">Reviews</a>
+        <a href="./#map" class="hover:text-neutral-700" data-i18n="nav.location">Location</a>
+        <a href="./#book" class="rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800" data-i18n="nav.book">Book</a>
+      </nav>
 
-  <!-- Injector Removal Tools -->
-  <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-    <img src="./assets/innovation/injector-removal.webp" alt="Injector removal tools" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
-    <figcaption class="p-3 text-sm text-neutral-600">
-      <strong>Injector Removal Tool Sets</strong><br>
-      Hydraulic and slide-hammer pullers for safely extracting seized diesel injectors—avoiding cylinder-head damage and reducing downtime.
-    </figcaption>
-  </figure>
+      <div class="flex items-center gap-3">
+        <a href="./assets/certificates/saso-1154.pdf" target="_blank" class="hidden sm:flex items-center gap-2 text-xs sm:text-sm text-neutral-700 hover:underline">
+          <img src="./assets/trust/saso-4star.png" alt="SASO 4-Star" class="h-6 w-auto">
+          <span data-i18n="saso.badge">SASO 4-Star • Cert. 1154</span>
+        </a>
+        <button id="langToggle" class="rounded-xl px-3 py-1.5 border border-neutral-300 text-sm hover:bg-neutral-100" aria-live="polite">عربي</button>
+      </div>
+    </div>
+  </header>
 
-  <!-- Gearbox & Pilot Bearing Tools -->
-  <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-    <img src="./assets/innovation/pilot-bearing.webp" alt="Gearbox pilot bearing centering tools" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
-    <figcaption class="p-3 text-sm text-neutral-600">
-      <strong>Gearbox & Pilot Bearing Centering Tools</strong><br>
-      Ensures perfect clutch-disc alignment and input-shaft centering during gearbox installation—critical for vibration-free operation and bearing longevity.
-    </figcaption>
-  </figure>
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-neutral-900 text-white">
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <nav class="text-sm text-neutral-300 mb-4">
+        <a href="./" class="hover:underline" data-i18n="crumb.home">Home</a>
+        <span class="mx-2">/</span>
+        <span class="text-white font-medium" data-i18n="crumb.innovation">Advanced Tools & Equipment</span>
+      </nav>
+      <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight fade-in" data-i18n="innov.title">
+        Advanced Tools & Equipment
+      </h1>
+      <p class="mt-4 text-neutral-200 max-w-2xl fade-in" data-i18n="innov.subtitle">
+        Leveraging modern diagnostic tools, digital job tracking, and process engineering to raise precision, safety, and turnaround speed.
+      </p>
+      <div class="mt-6 fade-in">
+        <a href="./#book" class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 shadow-lg hover:shadow-xl hover:bg-neutral-100 transition" data-i18n="innov.cta">
+          Request Booking / Demo
+        </a>
+      </div>
+    </div>
+  </section>
 
-</div>
+  <!-- TOOL GRID -->
+  <section class="py-14 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="innov.gridTitle">Key Equipment on Our Floor</h2>
+      <p class="mt-2 text-neutral-600 fade-in" data-i18n="innov.gridDesc">A selection of specialized tools we use daily to diagnose faster, repair smarter, and document work to OEM standards.</p>
+
+      <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 1. Diagnostic Scan Tools -->
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/scan-tools.webp" alt="Diagnostic scan tools" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.scan.desc">
+            Diagnostic Scan Tools — Multi-brand interfaces (Bosch KTS, Launch X-431, Jaltest HD) for reading/programming ECUs, live-data analysis, and guided calibrations across commercial and passenger vehicles.
+          </figcaption>
+        </figure>
+
+        <!-- 2. Smoke Leak Detection -->
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/smoke-leak.webp" alt="Smoke leak detection machine" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.smoke.desc">
+            Smoke Leak Detection Machine — Introduces harmless vapor to locate intake, EVAP, turbo, and EGR leaks precisely—cutting diagnostic time and preventing repeat faults.
+          </figcaption>
+        </figure>
+
+        <!-- 3. Infrared Thermal Camera -->
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/infrared-camera.webp" alt="Infrared camera" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.thermal.desc">
+            Infrared Thermal Camera — Pinpoints heat signatures in brakes, bearings, alternators, wiring, and HVAC for preventive diagnostics and quick electrical fault isolation.
+          </figcaption>
+        </figure>
+
+        <!-- 4. Power Probe & Circuit Tracer -->
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/power-probe.webp" alt="Power probe circuit tester and tracer" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.probe.desc">
+            Power Probe Circuit Tester & Tracer — Supplies power/ground, checks continuity, and traces signals on live circuits; ideal for CAN-bus and complex electrical diagnosis.
+          </figcaption>
+        </figure>
+
+        <!-- 5. Borescope -->
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/borescope.webp" alt="Borescope inspection camera" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.borescope.desc">
+            Borescope Inspection Camera — High-resolution probe to inspect cylinders, valves, injectors, and gear sets without teardown—confirming scope and saving time.
+          </figcaption>
+        </figure>
+
+        <!-- 6. Compression & Leak-Down Testers -->
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/compression-tester.webp" alt="Compression tester" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.compression.desc">
+            Compression & Leak-Down Testers — Quantifies cylinder sealing to assess piston rings and valves; essential pre-rebuild baseline and post-repair verification.
+          </figcaption>
+        </figure>
+
+        <!-- 7. Brake Fluid Flush Machine -->
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/brake-flush.webp" alt="Brake fluid flush machine" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.brake.desc">
+            Brake Fluid Flush Machine — Controlled hydraulic bleeding and DOT fluid exchange for consistent pedal feel and safety compliance on ABS/ESP systems.
+          </figcaption>
+        </figure>
+
+        <!-- 8. Coolant Vacuum Filling Machine -->
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/coolant-vacuum.webp" alt="Coolant vacuum filling machine" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.coolant.desc">
+            Coolant Vacuum Filling Machine — Evacuates air and fills under vacuum to prevent hot-spots and ensure proper circulation after major cooling-system service.
+          </figcaption>
+        </figure>
+
+        <!-- 9. Injector Removal Tools -->
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/injector-removal.webp" alt="Injector removal tools" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.injector.desc">
+            Injector Removal Tool Sets — Hydraulic and slide-hammer pullers to extract seized diesel injectors safely—avoids head damage and reduces downtime.
+          </figcaption>
+        </figure>
+
+        <!-- 10. Gearbox & Pilot Bearing Tools -->
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/pilot-bearing.webp" alt="Gearbox pilot bearing centering tools" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.pilot.desc">
+            Gearbox & Pilot Bearing Centering Tools — Aligns clutch discs and centers input shafts during installation—prevents vibration and extends bearing life.
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 lb-backdrop hidden z-50 grid place-items-center" aria-modal="true" role="dialog">
+      <button id="lightbox-close" class="absolute top-4 right-4 text-white/80 hover:text-white text-2xl" aria-label="Close">✕</button>
+      <img id="lightbox-img" src="" alt="Photo" class="lightbox-img">
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-14 bg-neutral-900 text-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="innov.cta_title">See it in action</h2>
+        <p class="mt-3 text-neutral-300" data-i18n="innov.cta_desc">Book a quick tour or pilot job—see exactly how our tools and process improve speed and precision.</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="./#book" class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 hover:bg-neutral-100 transition" data-i18n="innov.cta_book">Request Booking</a>
+        <a href="https://wa.me/966536600791?text=I%27d%20like%20to%20see%20an%20equipment%20demo%20at%20Mubasher%20One" target="_blank" class="rounded-xl px-6 py-3 font-semibold bg-green-600 text-white hover:shadow-lg transition" data-i18n="innov.cta_whatsapp">WhatsApp Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (short) -->
+  <footer class="py-8 bg-neutral-900 text-neutral-300">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="./assets/LOGO-01.png" class="h-8 w-auto" alt="Mubasher One">
+        <span class="text-xs text-neutral-400">© 2025 Mubasher One</span>
+      </div>
+      <a href="./#contact" class="text-sm underline" data-i18n="footer.contact">Contact</a>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+  // Reveal on scroll
+  (function(){
+    const els=[...document.querySelectorAll('.fade-in')];
+    const io=new IntersectionObserver((es)=>{
+      es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target);} });
+    },{rootMargin:'-10% 0px'});
+    els.forEach(el=>io.observe(el));
+  })();
+
+  // Arabic translations for this page
+  const AR = {
+    "nav.services":"الخدمات","nav.capabilities":"القدرات","nav.quality":"الجودة","nav.values":"القيم","nav.clients":"العملاء","nav.reviews":"التقييمات","nav.location":"الموقع","nav.book":"احجز",
+    "saso.badge":"ساسو ٤ نجوم • رقم الشهادة 1154",
+    "crumb.home":"الرئيسية","crumb.innovation":"الأدوات والمعدات المتقدمة",
+    "innov.title":"الأدوات والمعدات المتقدمة",
+    "innov.subtitle":"نستخدم أدوات تشخيص حديثة، وتتبعاً رقمياً لأوامر العمل، وهندسة عمليات لرفع الدقة والسلامة وتسريع الإنجاز.",
+    "innov.cta":"طلب حجز / عرض",
+    "innov.gridTitle":"معدات رئيسية داخل الورشة",
+    "innov.gridDesc":"باقة من الأدوات المتخصصة المستخدمة يومياً لتشخيص أسرع وإصلاح أدق وتوثيق مطابق لمعايير المصنع.",
+    "tool.scan.desc":"أجهزة فحص متعددة العلامات (Bosch KTS، Launch X-431، Jaltest HD) لقراءة/برمجة وحدات التحكم، وعرض البيانات الحية، ومعايرات موجهة لسيارات الركاب والمركبات التجارية.",
+    "tool.smoke.desc":"جهاز كشف التسرب بالدخان — يضخ بخاراً آمناً لتحديد تسربات السحب وEVAP والتيربو وEGR بدقة، ما يقلل وقت التشخيص ويمنع تكرار الأعطال.",
+    "tool.thermal.desc":"كاميرا حرارية — تحدد البؤر الساخنة في الفرامل والمحامل والمولدات والضفائر ودوائر المكيف للتشخيص الوقائي وعزل الأعطال الكهربائية بسرعة.",
+    "tool.probe.desc":"جهاز Power Probe ومتعقب الدوائر — يزوّد الدوائر بالطاقة/الأرضي، ويفحص الاستمرارية، ويتتبع الإشارات على الدوائر الحية؛ مثالي لأنظمة CAN والأعطال المعقدة.",
+    "tool.borescope.desc":"منظار داخلي — مسبار عالي الدقة لفحص الأسطوانات والصمامات والحاقنات ومجموعات التروس دون تفكيك، لتأكيد نطاق الإصلاح وتوفير الوقت.",
+    "tool.compression.desc":"عدادات ضغط/Leak-Down — تقيس إحكام الأسطوانة لتقييم حلقات المكبس والصمامات؛ أساسي قبل إعادة البناء وبعد الإصلاح للتوثيق.",
+    "tool.brake.desc":"آلة تبديل زيت الفرامل — نزف هيدروليكي متحكم به واستبدال سائل DOT لضمان ثبات دواسة الفرامل والامتثال لأنظمة ABS/ESP.",
+    "tool.coolant.desc":"آلة تعبئة سائل التبريد بالفراغ — تُزيل الهواء وتملأ تحت تفريغ لمنع النقاط الساخنة وضمان دوران سليم بعد صيانة منظومة التبريد.",
+    "tool.injector.desc":"عدة سحب الحاقنات — سحّابات هيدروليكية وسلايد هامر لاستخراج حاقنات الديزل العالقة بأمان، دون إتلاف رأس المحرك وتقليل التوقف.",
+    "tool.pilot.desc":"عدة محاذاة القابض وتمركز رمان الطيار — لضبط قرص القابض وتمركز عمود الإدخال أثناء التركيب، ما يمنع الاهتزاز ويطيل عمر الرولمان.",
+    "innov.cta_title":"شاهدها عملياً",
+    "innov.cta_desc":"احجز جولة سريعة أو تجربة عمل — اطّلع كيف ترفع أدواتنا ومنهجيتنا السرعة والدقة.",
+    "innov.cta_book":"طلب حجز",
+    "innov.cta_whatsapp":"تواصل واتساب",
+    "footer.contact":"تواصل"
+  };
+
+  const langBtn = document.getElementById('langToggle');
+  let isAr = false;
+  function applyTranslations(dict){
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const k = el.getAttribute('data-i18n');
+      if (dict[k]) el.textContent = dict[k];
+    });
+  }
+  langBtn?.addEventListener('click', ()=>{
+    isAr = !isAr;
+    if (isAr){
+      applyTranslations(AR);
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      langBtn.textContent = 'English';
+    } else {
+      location.reload();
+    }
+  });
+
+  // Simple lightbox (grid-centered + scroll lock)
+  (function(){
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbClose = document.getElementById('lightbox-close');
+
+    document.querySelectorAll('[data-lb]').forEach(img=>{
+      img.addEventListener('click', e=>{
+        lbImg.src = e.target.currentSrc || e.target.src;
+        lb.classList.remove('hidden');
+        document.documentElement.classList.add('overflow-hidden');
+      });
+    });
+
+    function closeLB(){
+      lb.classList.add('hidden');
+      document.documentElement.classList.remove('overflow-hidden');
+    }
+    lbClose.addEventListener('click', closeLB);
+    lb.addEventListener('click', e=>{ if (e.target===lb) closeLB(); });
+    document.addEventListener('keydown', e=>{
+      if (lb.classList.contains('hidden')) return;
+      if (e.key==='Escape') closeLB();
+    });
+  })();
+  </script>
+</body>
+</html>
