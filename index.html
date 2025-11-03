@@ -805,6 +805,7 @@
     "innov.cta_desc":"احجز جولة سريعة أو تجربة عمل — اطّلع كيف ترفع أدواتنا ومنهجيتنا السرعة والدقة.",
     "innov.cta_book":"طلب حجز",
     "innov.cta_whatsapp":"تواصل واتساب"
+    "footer.email":"البريد الإلكتروني: ",
   };
 
 
@@ -812,12 +813,21 @@
   const langBtn = document.getElementById('langToggle');
   let isAr = false;
 
-  function applyTranslations(dict){
-    document.querySelectorAll('[data-i18n]').forEach(el=>{
-      const k = el.getAttribute('data-i18n');
-      if (dict[k]) el.textContent = dict[k];
-    });
-  }
+ function applyTranslations(dict){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.getAttribute('data-i18n');
+    const v = dict[k];
+    if (!v) return;
+
+    // only replace the text before child tags, not the links
+    const firstText = Array.from(el.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
+    if (firstText){
+      firstText.nodeValue = v;
+    } else {
+      el.textContent = v;
+    }
+  });
+}
 
 langBtn.addEventListener('click', ()=>{
   isAr = !isAr;
@@ -1327,6 +1337,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
