@@ -1020,6 +1020,12 @@ function syncHoursLanguage(){
     if (st === 'hours')  badgeEl.textContent = usingAr ? 'الساعات'     : 'Hours';
   }
 }
+  
+function splitDayLine(line){
+  const i = line.indexOf(':');            // split only at the FIRST colon
+  if (i === -1) return [line, ''];
+  return [line.slice(0, i), line.slice(i + 1)];
+}
 
 function setFallbackHours(){
   if (!badgeEl || !listEl) return;
@@ -1039,7 +1045,7 @@ function setFallbackHours(){
   ];
   const dayMap = {Monday:'الاثنين',Tuesday:'الثلاثاء',Wednesday:'الأربعاء',Thursday:'الخميس',Friday:'الجمعة',Saturday:'السبت',Sunday:'الأحد'};
   const ar = en.map(line=>{
-    const [d, restRaw=''] = line.split(':');
+    const [d, restRaw] = splitDayLine(line);
     const rest = restRaw.trim().replace(/AM/g,'ص').replace(/PM/g,'م').replace(/, /g,'، ');
     return `${dayMap[d]||d}: ${rest}`;
   });
@@ -1074,7 +1080,7 @@ function renderHours(data){
   const en = days.slice();
   const dayMap = {Monday:'الاثنين',Tuesday:'الثلاثاء',Wednesday:'الأربعاء',Thursday:'الخميس',Friday:'الجمعة',Saturday:'السبت',Sunday:'الأحد'};
   const ar = en.map(line=>{
-    const [d, restRaw=''] = line.split(':');
+    const [d, restRaw] = splitDayLine(line);
     const rest = (restRaw||'').trim().replace(/AM/g,'ص').replace(/PM/g,'م').replace(/, /g,'، ');
     return `${dayMap[d]||d}: ${rest}`;
   });
@@ -1237,6 +1243,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
