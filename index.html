@@ -241,7 +241,7 @@
     </div>
 
     <!-- Lightbox Modal -->
-    <div id="lightbox" class="fixed inset-0 lb-backdrop hidden items-center justify-center z-50" aria-modal="true" role="dialog">
+<div id="lightbox" class="fixed inset-0 lb-backdrop hidden z-50 grid place-items-center" aria-modal="true" role="dialog">
       <button id="lightbox-close" class="absolute top-4 right-4 text-white/80 hover:text-white text-2xl" aria-label="Close">✕</button>
       <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-3xl" aria-label="Prev">‹</button>
       <img id="lightbox-img" src="" alt="Photo" class="max-h-[90vh] max-w-[90vw] object-contain">
@@ -710,27 +710,34 @@
     // Lightbox
     slides.forEach((s, i) => {
       const img = s.querySelector('img');
-      img.addEventListener('click', e => {
-        lbImg.src = e.target.currentSrc || e.target.src;
-        lb.classList.remove('hidden');
-        idx = i;
-      });
+img.addEventListener('click', e => {
+  lbImg.src = e.target.currentSrc || e.target.src;
+  lb.classList.remove('hidden');
+  document.documentElement.classList.add('overflow-hidden'); // lock background scroll
+  idx = i;
+});
+
     });
     function lbGo(d){
       idx = (idx + d + slides.length) % slides.length;
       const img = slides[idx].querySelector('img');
       lbImg.src = img.currentSrc || img.src;
     }
-    lbPrev.addEventListener('click', () => lbGo(-1));
-    lbNext.addEventListener('click', () => lbGo(1));
-    lbClose.addEventListener('click', () => lb.classList.add('hidden'));
-    lb.addEventListener('click', e => { if (e.target === lb) lb.classList.add('hidden'); });
-    document.addEventListener('keydown', e => {
-      if (lb.classList.contains('hidden')) return;
-      if (e.key === 'Escape') lb.classList.add('hidden');
-      if (e.key === 'ArrowRight') lbGo(1);
-      if (e.key === 'ArrowLeft') lbGo(-1);
-    });
+    function closeLB(){
+  lb.classList.add('hidden');
+  document.documentElement.classList.remove('overflow-hidden'); // unlock background scroll
+}
+
+ lbPrev.addEventListener('click', () => lbGo(-1));
+lbNext.addEventListener('click', () => lbGo(1));
+lbClose.addEventListener('click', closeLB);
+lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+document.addEventListener('keydown', e => {
+  if (lb.classList.contains('hidden')) return;
+  if (e.key === 'Escape') closeLB();
+  if (e.key === 'ArrowRight') lbGo(1);
+  if (e.key === 'ArrowLeft') lbGo(-1);
+});
 
     go(0);
   })();
@@ -1006,6 +1013,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
