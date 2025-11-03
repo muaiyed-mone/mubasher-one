@@ -444,22 +444,61 @@
           <li data-i18n="book.li3">Real-time job tracking via ERP</li>
         </ul>
       </div>
-      <form id="booking-form" class="rounded-2xl bg-white text-neutral-900 p-6 space-y-4 fade-in" novalidate>
-        <div>
-          <label class="text-sm" for="bf_name" data-i18n="book.name">Name</label>
-          <input id="bf_name" name="name" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="Your full name" autocomplete="name" />
-        </div>
-        <div>
-          <label class="text-sm" for="bf_phone" data-i18n="book.phone">Phone / WhatsApp</label>
-          <input id="bf_phone" name="phone" required pattern="\+?\d[\d\s-]{7,}" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="+966…" inputmode="tel" autocomplete="tel" />
-        </div>
-        <div>
-          <label class="text-sm" for="bf_issue" data-i18n="book.issue">Vehicle / Issue</label>
-          <textarea id="bf_issue" name="issue" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" rows="3" placeholder="e.g., 2018 Actros • brake service"></textarea>
-        </div>
-        <button type="submit" class="w-full rounded-xl px-4 py-3 bg-neutral-900 text-white font-semibold hover:bg-neutral-800" data-i18n="book.submit">Request Booking via WhatsApp</button>
-        <p class="text-xs text-neutral-500" data-i18n="book.note">Submitting opens WhatsApp with your details prefilled.</p>
-      </form>
+    <form id="booking-form" class="rounded-2xl bg-white text-neutral-900 p-6 space-y-4 fade-in" novalidate>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Name -->
+    <div>
+      <label class="text-sm" for="bf_name" data-i18n="book.name">Name</label>
+      <input id="bf_name" name="name" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="Your full name" autocomplete="name" />
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <label class="text-sm" for="bf_phone" data-i18n="book.phone">Phone / WhatsApp</label>
+      <input id="bf_phone" name="phone" required pattern="\+?\d[\d\s-]{7,}" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="+966…" inputmode="tel" autocomplete="tel" />
+    </div>
+
+    <!-- Vehicle MMY -->
+    <div class="md:col-span-2">
+      <label class="text-sm" for="bf_mmy" data-i18n="book.mmy">Vehicle Make / Model / Year</label>
+      <input id="bf_mmy" name="mmy" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="e.g., Toyota Land Cruiser 2019" />
+    </div>
+
+    <!-- Plate -->
+    <div>
+      <label class="text-sm" for="bf_plate" data-i18n="book.plate">Plate No.</label>
+      <input id="bf_plate" name="plate" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="ABC-1234 | س ع د-١٢٣٤" />
+    </div>
+
+    <!-- Company -->
+    <div>
+      <label class="text-sm" for="bf_company" data-i18n="book.company">Fleet / Company Name</label>
+      <input id="bf_company" name="company" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="(optional)" />
+    </div>
+
+    <!-- Preferred Date -->
+    <div>
+      <label class="text-sm" for="bf_date" data-i18n="book.date">Preferred Date</label>
+      <input id="bf_date" name="date" type="date" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" />
+    </div>
+
+    <!-- Preferred Time -->
+    <div>
+      <label class="text-sm" for="bf_time" data-i18n="book.time">Preferred Time</label>
+      <input id="bf_time" name="time" type="time" step="900" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" />
+    </div>
+
+    <!-- Notes / Service -->
+    <div class="md:col-span-2">
+      <label class="text-sm" for="bf_issue" data-i18n="book.issue">Service Needed / Notes</label>
+      <textarea id="bf_issue" name="issue" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" rows="3" placeholder="Diagnostics, oil change 15W-40, brake inspection…"></textarea>
+    </div>
+  </div>
+
+  <button type="submit" class="w-full rounded-xl px-4 py-3 bg-neutral-900 text-white font-semibold hover:bg-neutral-800" data-i18n="book.submit">Request Booking via WhatsApp</button>
+  <p class="text-xs text-neutral-500" data-i18n="book.note">Submitting opens WhatsApp with your details prefilled.</p>
+</form>
+
     </div>
   </section>
 
@@ -721,6 +760,11 @@
     "book.issue":"نوع المركبة / المشكلة",
     "book.submit":"طلب الحجز عبر الواتساب",
     "book.note":"سيتم فتح واتساب مع تفاصيلك تلقائياً",
+    "book.mmy":"المركبة (الماركة/الموديل/السنة)",
+    "book.plate":"رقم اللوحة",
+    "book.company":"اسم الشركة / الأسطول",
+    "book.date":"التاريخ المفضل",
+    "book.time":"الوقت المفضل",
 
     /* ===== MAP / FOOTER ===== */
     "map.title":"موقعنا",
@@ -948,27 +992,67 @@ document.addEventListener('keydown', e => {
 
   // ===== Booking -> WhatsApp =====
   (function setupBooking(){
-    const form = document.getElementById("booking-form");
-    const nameEl  = document.getElementById("bf_name");
-    const phoneEl = document.getElementById("bf_phone");
-    const issueEl = document.getElementById("bf_issue");
+    const form     = document.getElementById("booking-form");
+    const nameEl   = document.getElementById("bf_name");
+    const phoneEl  = document.getElementById("bf_phone");
+    const mmyEl    = document.getElementById("bf_mmy");
+    const plateEl  = document.getElementById("bf_plate");
+    const compEl   = document.getElementById("bf_company");
+    const dateEl   = document.getElementById("bf_date");
+    const timeEl   = document.getElementById("bf_time");
+    const issueEl  = document.getElementById("bf_issue");
+
+    // min date = today (Asia/Riyadh local)
+    try {
+      const tzNow = new Date();
+      const yyyy = tzNow.getFullYear();
+      const mm   = String(tzNow.getMonth()+1).padStart(2,'0');
+      const dd   = String(tzNow.getDate()).padStart(2,'0');
+      const today = `${yyyy}-${mm}-${dd}`;
+      if (dateEl) dateEl.min = today;
+    } catch(_) {}
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+
       const name  = (nameEl?.value || "").trim();
       const phone = (phoneEl?.value || "").trim();
       const issue = (issueEl?.value || "").trim();
-      if (!name || !phone || !issue) { alert("Please fill your Name, Phone/WhatsApp, and Vehicle/Issue."); return; }
-      const message = [
-        "Booking request:",
-        `Name: ${name}`,
-        `Phone: ${phone}`,
-        `Vehicle/Issue: ${issue}`,
-        "From: www.mone-sa.com"
-      ].join("\n");
-      const url = `https://wa.me/966536600791?text=${encodeURIComponent(message)}`;
+
+      if (!name || !phone || !issue) {
+        alert("Please fill your Name, Phone/WhatsApp, and Service Needed / Notes.");
+        return;
+      }
+
+      const mmy    = (mmyEl?.value || "").trim();
+      const plate  = (plateEl?.value || "").trim();
+      const comp   = (compEl?.value || "").trim();
+      const date   = (dateEl?.value || "").trim();
+      const time   = (timeEl?.value || "").trim();
+
+      // Neat, readable WhatsApp message
+      const lines = [
+        "📝 *New Booking Request*",
+        `• Name: ${name}`,
+        `• Phone: ${phone}`,
+        mmy   ? `• Vehicle: ${mmy}` : null,
+        plate ? `• Plate No.: ${plate}` : null,
+        comp  ? `• Fleet/Company: ${comp}` : null,
+        (date || time) ? `• Preferred: ${date || "—"}${time ? ` at ${time}` : ""}` : null,
+        issue ? `• Notes: ${issue}` : null,
+        "",
+        "Source: www.mone-sa.com"
+      ].filter(Boolean);
+
+      const message = encodeURIComponent(lines.join("\n"));
+
+      // Your business WhatsApp number (keep as-is)
+      const waNumber = "966536600791";
+      const url = `https://wa.me/${waNumber}?text=${message}`;
       window.open(url, "_blank", "noopener,noreferrer");
     });
   })();
+
   </script>
 <script>
 
@@ -1243,6 +1327,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
