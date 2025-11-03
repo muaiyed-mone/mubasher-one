@@ -997,7 +997,15 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 });
 </script>
 <script>
-  function syncHoursLanguage(){
+/* ===== Hours/Reviews helpers (globals) ===== */
+const langBtnEl = document.getElementById('langToggle');
+const badgeEl   = document.getElementById('openNow');
+const listEl    = document.getElementById('hoursList');
+const hintEl    = document.getElementById('hoursHint');
+const ratingEl  = document.getElementById('gm-rating');
+const reviewEl  = document.getElementById('review-track');
+
+function syncHoursLanguage(){
   const usingAr = document.documentElement.dir === 'rtl';
   const en = document.querySelector('#hoursList [data-lang="en"]');
   const ar = document.querySelector('#hoursList [data-lang="ar"]');
@@ -1005,24 +1013,21 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
     en.classList.toggle('hidden', usingAr);
     ar.classList.toggle('hidden', !usingAr);
   }
-  const badge = document.getElementById('openNow');
-  if (badge){
-    const st = badge.dataset.state; // 'open' | 'closed' | 'hours'
-    if (st === 'open')   badge.textContent = usingAr ? 'مفتوح الآن' : 'Open now';
-    if (st === 'closed') badge.textContent = usingAr ? 'مغلق الآن'  : 'Closed now';
-    if (st === 'hours')  badge.textContent = usingAr ? 'الساعات'     : 'Hours';
+  if (badgeEl){
+    const st = badgeEl.dataset.state; // 'open' | 'closed' | 'hours'
+    if (st === 'open')   badgeEl.textContent = usingAr ? 'مفتوح الآن' : 'Open now';
+    if (st === 'closed') badgeEl.textContent = usingAr ? 'مغلق الآن'  : 'Closed now';
+    if (st === 'hours')  badgeEl.textContent = usingAr ? 'الساعات'     : 'Hours';
   }
 }
 
 function setFallbackHours(){
-  if (!badge || !list) return;
+  if (!badgeEl || !listEl) return;
 
-  // Badge -> neutral
-  badge.dataset.state = 'hours';
-  badge.textContent   = 'Hours';
-  badge.className     = 'text-xs rounded px-2 py-1 bg-neutral-100';
+  badgeEl.dataset.state = 'hours';
+  badgeEl.textContent   = 'Hours';
+  badgeEl.className     = 'text-xs rounded px-2 py-1 bg-neutral-100';
 
-  // Official EN schedule
   const en = [
     'Monday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM',
     'Tuesday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM',
@@ -1032,171 +1037,149 @@ function setFallbackHours(){
     'Saturday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM',
     'Sunday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM'
   ];
-
-  // AR mapping
   const dayMap = {Monday:'الاثنين',Tuesday:'الثلاثاء',Wednesday:'الأربعاء',Thursday:'الخميس',Friday:'الجمعة',Saturday:'السبت',Sunday:'الأحد'};
   const ar = en.map(line=>{
     const [d, restRaw=''] = line.split(':');
-    const rest = restRaw.trim()
-      .replace(/AM/g,'ص').replace(/PM/g,'م')
-      .replace(/, /g,'، ');
+    const rest = restRaw.trim().replace(/AM/g,'ص').replace(/PM/g,'م').replace(/, /g,'، ');
     return `${dayMap[d]||d}: ${rest}`;
   });
 
-  list.innerHTML = `
+  listEl.innerHTML = `
     <div data-lang="en">${en.map(l=>`<li>${l}</li>`).join('')}</div>
     <div data-lang="ar" class="hidden" dir="rtl">${ar.map(l=>`<li>${l}</li>`).join('')}</div>
   `;
 
-  // Show the fallback hint since Google failed
-  if (hint) hint.style.display = '';
-
-  // Match current language
+  if (hintEl) hintEl.style.display = ''; // show fallback note
   syncHoursLanguage();
 }
 
 function renderHours(data){
-  if (!badge || !list) return;
+  if (!badgeEl || !listEl) return;
 
   const oh   = data.currentOpeningHours || data.opening_hours || {};
   const days = oh.weekdayDescriptions || oh.weekday_text || [];
   const open = (oh.openNow !== undefined) ? oh.openNow : oh.open_now;
 
   if (open === true){
-    badge.dataset.state = 'open';
-    badge.className = 'text-xs rounded px-2 py-1 bg-green-100 text-green-800';
+    badgeEl.dataset.state = 'open';
+    badgeEl.className = 'text-xs rounded px-2 py-1 bg-green-100 text-green-800';
   } else if (open === false){
-    badge.dataset.state = 'closed';
-    badge.className = 'text-xs rounded px-2 py-1 bg-red-100 text-red-800';
+    badgeEl.dataset.state = 'closed';
+    badgeEl.className = 'text-xs rounded px-2 py-1 bg-red-100 text-red-800';
   } else {
-    badge.dataset.state = 'hours';
-    badge.className = 'text-xs rounded px-2 py-1 bg-neutral-100';
+    badgeEl.dataset.state = 'hours';
+    badgeEl.className = 'text-xs rounded px-2 py-1 bg-neutral-100';
   }
 
-  // EN from Google
   const en = days.slice();
-
-  // AR from EN
   const dayMap = {Monday:'الاثنين',Tuesday:'الثلاثاء',Wednesday:'الأربعاء',Thursday:'الخميس',Friday:'الجمعة',Saturday:'السبت',Sunday:'الأحد'};
   const ar = en.map(line=>{
     const [d, restRaw=''] = line.split(':');
-    const rest = (restRaw || '').trim()
-      .replace(/AM/g,'ص').replace(/PM/g,'م')
-      .replace(/, /g,'، ');
+    const rest = (restRaw||'').trim().replace(/AM/g,'ص').replace(/PM/g,'م').replace(/, /g,'، ');
     return `${dayMap[d]||d}: ${rest}`;
   });
 
-  // Inject both; toggle with syncHoursLanguage
-  list.innerHTML = `
+  listEl.innerHTML = `
     <div data-lang="en">${en.map(l=>`<li>${l}</li>`).join('')}</div>
     <div data-lang="ar" class="hidden" dir="rtl">${ar.map(l=>`<li>${l}</li>`).join('')}</div>
   `;
-
-  // Hide the fallback hint because Google succeeded
-  if (hint) hint.style.display = 'none';
-
-  // Set badge text in current language
+  if (hintEl) hintEl.style.display = 'none';
   syncHoursLanguage();
 }
 
+function renderRatingAndReviews(data){
+  if (!ratingEl || !reviewEl) return;
+
+  const rating = data.rating ?? data.result?.rating ?? 0;
+  const total  = data.userRatingCount ?? data.result?.user_ratings_total ?? 0;
+  const reviews = data.reviews ?? data.result?.reviews ?? [];
+
+  if (rating && total){
+    ratingEl.textContent = `★ ${rating.toFixed(1)} (${total})`;
+    ratingEl.classList.remove('hidden');
+  }
+
+  const normalized = reviews.map(r=>{
+    const text = r.text?.text || r.text || "";
+    const name = r.authorAttribution?.displayName || r.author_name || "Google User";
+    const dateStr = r.publishTime
+      ? new Date(r.publishTime).toLocaleDateString()
+      : (r.time ? new Date(r.time*1000).toLocaleDateString() : "");
+    const stars = r.rating || 0;
+    return { name, text, date: dateStr, rating: stars };
+  });
+  normalized.sort((a,b)=> (new Date(b.date) - new Date(a.date)));
+
+  const take = normalized.slice(0,6);
+  if (!take.length) return;
+
+  reviewEl.innerHTML = take.map(r=>{
+    const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+    return `<div class="shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
+      <div class="rounded-2xl border border-neutral-200 p-6 h-full bg-white text-left">
+        <div class="flex justify-between items-center">
+          <span class="font-semibold">${r.name}</span>
+          <span class="text-yellow-500" aria-label="${r.rating} out of 5">${stars}</span>
+        </div>
+        <p class="mt-2 text-neutral-700 text-sm">${r.text || ""}</p>
+        <div class="mt-2 text-xs text-neutral-400">${r.date}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  let i = 0;
+  setInterval(()=>{
+    i = (i + 1) % take.length;
+    reviewEl.style.transform = `translateX(-${i*100}%)`;
+  }, 8000);
+}
+
+/* ===== Reset sliders after language toggle (unchanged) ===== */
+window.resetReviews = function(){
+  const track = document.getElementById('review-track');
+  if (!track) return;
+  track.style.direction = 'ltr';
+  track.style.transform = 'translateX(0%)';
+};
+window.resetClients = function(){
+  const marquee = document.getElementById('client-marquee');
+  if (!marquee) return;
+  marquee.style.direction = 'ltr';
+  marquee.style.animation = 'none'; marquee.offsetHeight; marquee.style.animation = '';
+};
+document.getElementById('langToggle')?.addEventListener('click', ()=>{
+  requestAnimationFrame(()=>{
+    if (window.resetGallery)  window.resetGallery();
+    if (window.resetReviews)  window.resetReviews();
+    if (window.resetClients)  window.resetClients();
+    syncHoursLanguage();
+  });
+});
+
+/* ===== Fetch from Google Places v1 (single request) ===== */
 (async function loadGooglePlace(){
-  // === CONFIG: reuse the same key & place id ===
   const API_KEY  = "AIzaSyBfCTfoHR1NRoDivnukJRPCZw68h5Wj9hk";
   const PLACE_ID = "ChIJY_nBNRqjNz4RwBgsAxw27ck";
 
-  // === Elements (hours) ===
-  const badge = document.getElementById("openNow");
-  const list  = document.getElementById("hoursList");
-  const hint  = document.getElementById("hoursHint");
-  // === Elements (rating + reviews) ===
-  const ratingBadge = document.getElementById("gm-rating");
-  const reviewTrack = document.getElementById("review-track");
-
-  
-  }
-
-
-  function renderRatingAndReviews(data){
-    if (!ratingBadge || !reviewTrack) return;
-
-    // --- Normalize v1 vs legacy fields ---
-    const rating = data.rating ?? data.result?.rating ?? 0;
-    const total  = data.userRatingCount ?? data.result?.user_ratings_total ?? 0;
-    const reviews = (
-      data.reviews
-      ?? data.result?.reviews
-      ?? []
-    );
-
-    // Show rating badge if we have numbers
-    if (rating && total){
-      ratingBadge.textContent = `★ ${rating.toFixed(1)} (${total})`;
-      ratingBadge.classList.remove('hidden');
-    }
-
-    // Build cards from reviews (prefer newest 6)
-    const normalized = reviews.map(r => {
-      // v1: r.text?.text ; legacy: r.text
-      const text = r.text?.text || r.text || "";
-      const name = r.authorAttribution?.displayName || r.author_name || "Google User";
-      // v1: RFC 3339 in r.publishTime ; legacy: epoch seconds in r.time
-      const dateStr = r.publishTime
-        ? new Date(r.publishTime).toLocaleDateString()
-        : (r.time ? new Date(r.time*1000).toLocaleDateString() : "");
-      const stars = r.rating || 0;
-      return { name, text, date: dateStr, rating: stars };
-    });
-
-    // Sort by date desc if we can parse dates
-    normalized.sort((a,b)=> (new Date(b.date) - new Date(a.date)));
-
-    const take = normalized.slice(0, 6); // show up to 6 cards
-    if (take.length){
-      reviewTrack.innerHTML = take.map(r => {
-        const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
-        return `<div class="shrink-0 w-full md:w-1/2 lg:w-1/3 px-4">
-          <div class="rounded-2xl border border-neutral-200 p-6 h-full bg-white text-left">
-            <div class="flex justify-between items-center">
-              <span class="font-semibold">${r.name}</span>
-              <span class="text-yellow-500" aria-label="${r.rating} out of 5">${stars}</span>
-            </div>
-            <p class="mt-2 text-neutral-700 text-sm">${r.text || ""}</p>
-            <div class="mt-2 text-xs text-neutral-400">${r.date}</div>
-          </div>
-        </div>`;
-      }).join('');
-
-      // simple auto-slide every 8s
-      let i = 0;
-      setInterval(()=>{
-        i = (i + 1) % take.length;
-        reviewTrack.style.transform = `translateX(-${i*100}%)`;
-      }, 8000);
-    }
-  }
-
-  // ---- Caching (speed) ----
   const CACHE_KEY = "gm_place_cache_v1";
-  const cached = sessionStorage.getItem(CACHE_KEY);
-  if (cached){
-    try{
+  try{
+    const cached = sessionStorage.getItem(CACHE_KEY);
+    if (cached){
       const obj = JSON.parse(cached);
-      if (Date.now() - obj.t < 15*60*1000){ // 15 min cache
+      if (Date.now() - obj.t < 15*60*1000){
         renderHours(obj.d);
         renderRatingAndReviews(obj.d);
-        return; // done fast
+        return;
       }
-    }catch{}
-  }
+    }
+  }catch{}
 
-  // ---- Fetch (v1) with ONE request for everything ----
   try{
     const fieldMask = [
       "currentOpeningHours.weekdayDescriptions",
       "currentOpeningHours.openNow",
       "rating",
       "userRatingCount",
-      "googleMapsUri",
       "reviews.rating",
       "reviews.text",
       "reviews.publishTime",
@@ -1207,31 +1190,28 @@ function renderHours(data){
       headers: {
         "X-Goog-Api-Key": API_KEY,
         "X-Goog-FieldMask": fieldMask
-      },
-      mode: "cors"
+      }
     });
 
     if (res.ok){
       const json = await res.json();
       renderHours(json);
       renderRatingAndReviews(json);
-      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: json }));
+      try{ sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: json })); }catch{}
       return;
     }
-    // fall through to legacy if not ok
   } catch(e){
-    // continue to legacy
+    // continue to fallback
   }
 
-  // ---- Legacy fallback (Place Details) ----
+  // Legacy fallback (may be blocked by CORS in browsers; safe to try)
   try{
-    const fields = "rating,user_ratings_total,url,reviews(text,author_name,rating,time),opening_hours/weekday_text,opening_hours/open_now";
+    const fields = "rating,user_ratings_total,reviews(text,author_name,rating,time),opening_hours/weekday_text,opening_hours/open_now";
     const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${encodeURIComponent(PLACE_ID)}&fields=${encodeURIComponent(fields)}&key=${API_KEY}`;
-    const res = await fetch(url, { mode: "cors" });
+    const res = await fetch(url);
     if (res.ok){
       const j = await res.json();
       if (j.status === "OK" && j.result){
-        // Wrap to look like v1 shape where needed
         const shaped = {
           opening_hours: j.result.opening_hours,
           rating: j.result.rating,
@@ -1240,25 +1220,24 @@ function renderHours(data){
         };
         renderHours(shaped);
         renderRatingAndReviews({ result: j.result, ...shaped });
-        sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: shaped }));
+        try{ sessionStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), d: shaped })); }catch{}
         return;
       }
     }
-  }catch(e){
-    // ignore
-  }
+  }catch(_){}
 
-  // ---- Final fallback for hours only ----
+  // Final fallback (static hours only)
   setFallbackHours();
-  // keep your previous static reviews if any (do nothing)
 })();
 </script>
 
 
 
 
+
 </body>
 </html>
+
 
 
 
