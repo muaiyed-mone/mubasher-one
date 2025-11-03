@@ -489,33 +489,17 @@
       <div class="rounded-2xl border border-neutral-200 bg-white p-5" id="hours" dir="ltr">
         <div class="flex items-center justify-between">
           <h3 class="font-semibold" data-i18n="map.hours">Working Hours</h3>
-          <span id="openNow" class="text-xs rounded px-2 py-1 bg-neutral-100">Loading…</span>
+          <span id="openNow" class="text-xs rounded px-2 py-1 bg-neutral-100" data-i18n="map.loading">Loading…</span>
         </div>
 
-        <!-- Live hours injected here by JS -->
+        <!-- We will inject EN + AR lists into this UL -->
         <ul id="hoursList" class="mt-3 text-sm text-neutral-700 space-y-1"></ul>
 
-        <!-- Static fallback (hidden when API succeeds). Keep both EN & AR; JS will hide this on success. -->
-        <div id="hoursHint" class="mt-3 text-xs text-neutral-500 space-y-1">
-          <div data-lang="en">
-            Monday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM<br>
-            Tuesday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM<br>
-            Wednesday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM<br>
-            Thursday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM<br>
-            Friday: Closed<br>
-            Saturday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM<br>
-            Sunday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM
-          </div>
-          <div data-lang="ar" dir="rtl" class="hidden">
-            الاثنين: ٧:٣٠ ص – ١٢:٠٠ م، ١:٣٠ – ٦:٠٠ م<br>
-            الثلاثاء: ٧:٣٠ ص – ١٢:٠٠ م، ١:٣٠ – ٦:٠٠ م<br>
-            الأربعاء: ٧:٣٠ ص – ١٢:٠٠ م، ١:٣٠ – ٦:٠٠ م<br>
-            الخميس: ٧:٣٠ ص – ١٢:٠٠ م، ١:٣٠ – ٦:٠٠ م<br>
-            الجمعة: مغلق<br>
-            السبت: ٧:٣٠ ص – ١٢:٠٠ م، ١:٣٠ – ٦:٠٠ م<br>
-            الأحد: ٧:٣٠ ص – ١٢:٠٠ م، ١:٣٠ – ٦:٠٠ م
-          </div>
-        </div>
+        <!-- Fallback notice (shown only when Google fails) -->
+        <p id="hoursHint" class="mt-3 text-xs text-neutral-500">
+          <span data-lang="en">Showing our published schedule because Google data is unavailable.</span>
+          <span data-lang="ar" class="hidden" dir="rtl">نعرض جدولنا المنشور لأن بيانات جوجل غير متاحة.</span>
+        </p>
       </div>
     </div>
   </div>
@@ -750,6 +734,8 @@
     "footer.addr":"الأحساء، المنطقة الشرقية، المملكة العربية السعودية",
     "footer.copy":"© 2025 شركة مباشر وان لصيانة السيارات. جميع الحقوق محفوظة.",
     "map.title": "موقعنا",
+    "map.hours":"ساعات العمل",
+    "map.loading":"جارٍ التحميل…",
 
 
 
@@ -796,6 +782,7 @@ langBtn.addEventListener('click', ()=>{
     document.documentElement.lang = 'ar';
     document.documentElement.dir = 'rtl';
     langBtn.textContent = 'English';
+    requestAnimationFrame(syncHoursLanguage);
   } else {
     location.reload();
   }
@@ -1010,6 +997,108 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 });
 </script>
 <script>
+  function syncHoursLanguage(){
+  const usingAr = document.documentElement.dir === 'rtl';
+  const en = document.querySelector('#hoursList [data-lang="en"]');
+  const ar = document.querySelector('#hoursList [data-lang="ar"]');
+  if (en && ar){
+    en.classList.toggle('hidden', usingAr);
+    ar.classList.toggle('hidden', !usingAr);
+  }
+  const badge = document.getElementById('openNow');
+  if (badge){
+    const st = badge.dataset.state; // 'open' | 'closed' | 'hours'
+    if (st === 'open')   badge.textContent = usingAr ? 'مفتوح الآن' : 'Open now';
+    if (st === 'closed') badge.textContent = usingAr ? 'مغلق الآن'  : 'Closed now';
+    if (st === 'hours')  badge.textContent = usingAr ? 'الساعات'     : 'Hours';
+  }
+}
+
+function setFallbackHours(){
+  if (!badge || !list) return;
+
+  // Badge -> neutral
+  badge.dataset.state = 'hours';
+  badge.textContent   = 'Hours';
+  badge.className     = 'text-xs rounded px-2 py-1 bg-neutral-100';
+
+  // Official EN schedule
+  const en = [
+    'Monday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM',
+    'Tuesday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM',
+    'Wednesday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM',
+    'Thursday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM',
+    'Friday: Closed',
+    'Saturday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM',
+    'Sunday: 7:30 AM – 12:00 PM, 1:30 – 6:00 PM'
+  ];
+
+  // AR mapping
+  const dayMap = {Monday:'الاثنين',Tuesday:'الثلاثاء',Wednesday:'الأربعاء',Thursday:'الخميس',Friday:'الجمعة',Saturday:'السبت',Sunday:'الأحد'};
+  const ar = en.map(line=>{
+    const [d, restRaw=''] = line.split(':');
+    const rest = restRaw.trim()
+      .replace(/AM/g,'ص').replace(/PM/g,'م')
+      .replace(/, /g,'، ');
+    return `${dayMap[d]||d}: ${rest}`;
+  });
+
+  list.innerHTML = `
+    <div data-lang="en">${en.map(l=>`<li>${l}</li>`).join('')}</div>
+    <div data-lang="ar" class="hidden" dir="rtl">${ar.map(l=>`<li>${l}</li>`).join('')}</div>
+  `;
+
+  // Show the fallback hint since Google failed
+  if (hint) hint.style.display = '';
+
+  // Match current language
+  syncHoursLanguage();
+}
+
+function renderHours(data){
+  if (!badge || !list) return;
+
+  const oh   = data.currentOpeningHours || data.opening_hours || {};
+  const days = oh.weekdayDescriptions || oh.weekday_text || [];
+  const open = (oh.openNow !== undefined) ? oh.openNow : oh.open_now;
+
+  if (open === true){
+    badge.dataset.state = 'open';
+    badge.className = 'text-xs rounded px-2 py-1 bg-green-100 text-green-800';
+  } else if (open === false){
+    badge.dataset.state = 'closed';
+    badge.className = 'text-xs rounded px-2 py-1 bg-red-100 text-red-800';
+  } else {
+    badge.dataset.state = 'hours';
+    badge.className = 'text-xs rounded px-2 py-1 bg-neutral-100';
+  }
+
+  // EN from Google
+  const en = days.slice();
+
+  // AR from EN
+  const dayMap = {Monday:'الاثنين',Tuesday:'الثلاثاء',Wednesday:'الأربعاء',Thursday:'الخميس',Friday:'الجمعة',Saturday:'السبت',Sunday:'الأحد'};
+  const ar = en.map(line=>{
+    const [d, restRaw=''] = line.split(':');
+    const rest = (restRaw || '').trim()
+      .replace(/AM/g,'ص').replace(/PM/g,'م')
+      .replace(/, /g,'، ');
+    return `${dayMap[d]||d}: ${rest}`;
+  });
+
+  // Inject both; toggle with syncHoursLanguage
+  list.innerHTML = `
+    <div data-lang="en">${en.map(l=>`<li>${l}</li>`).join('')}</div>
+    <div data-lang="ar" class="hidden" dir="rtl">${ar.map(l=>`<li>${l}</li>`).join('')}</div>
+  `;
+
+  // Hide the fallback hint because Google succeeded
+  if (hint) hint.style.display = 'none';
+
+  // Set badge text in current language
+  syncHoursLanguage();
+}
+
 (async function loadGooglePlace(){
   // === CONFIG: reuse the same key & place id ===
   const API_KEY  = "AIzaSyBfCTfoHR1NRoDivnukJRPCZw68h5Wj9hk";
@@ -1023,35 +1112,9 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
   const ratingBadge = document.getElementById("gm-rating");
   const reviewTrack = document.getElementById("review-track");
 
-  function setFallbackHours(){
-    if (!badge || !list) return;
-    badge.textContent = "Hours";
-    list.innerHTML = `<li>Sat–Thu: 8:00–18:00</li><li>Fri: Closed</li>`;
+  
   }
 
-  function renderHours(data){
-    if (!badge || !list) return;
-    const oh   = data.currentOpeningHours || data.opening_hours || {};
-    const days = oh.weekdayDescriptions || oh.weekday_text || [];
-    const open = (oh.openNow !== undefined) ? oh.openNow : oh.open_now;
-
-    if (open === true) {
-      badge.textContent = "Open now";
-      badge.className = "text-xs rounded px-2 py-1 bg-green-100 text-green-800";
-    } else if (open === false) {
-      badge.textContent = "Closed now";
-      badge.className = "text-xs rounded px-2 py-1 bg-red-100 text-red-800";
-    } else {
-      badge.textContent = "Hours";
-      badge.className = "text-xs rounded px-2 py-1 bg-neutral-100";
-    }
-
-    list.innerHTML = days.length
-      ? days.map(line => `<li>${line}</li>`).join("")
-      : `<li>Hours not published on Google</li>`;
-
-    if (hint) hint.style.display = "none";
-  }
 
   function renderRatingAndReviews(data){
     if (!ratingBadge || !reviewTrack) return;
@@ -1196,6 +1259,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
