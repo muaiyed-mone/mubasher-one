@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Innovation — Mubasher One</title>
+
+  <!-- SEO -->
+  <meta name="description" content="How Mubasher One applies innovation: modern diagnostics, ERP, eco-friendly paint, process engineering, and mobile fleet tech." />
+  <link rel="canonical" href="https://www.mone-sa.com/innovation.html" />
+
+  <!-- Social -->
+  <meta property="og:title" content="Innovation at Mubasher One" />
+  <meta property="og:description" content="Diagnostics, ERP, eco-practices, and process engineering that raise quality and speed." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./assets/og-cover.jpg" />
+
+  <!-- Favicons (reuse from main) -->
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg">
+  <link rel="alternate icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png">
+  <link rel="alternate icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png">
+  <link rel="icon" href="./assets/icons/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="./assets/icons/favicon-180.png">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    .fade-in { opacity: 0; transform: translateY(10px); transition: opacity .6s, transform .6s; }
+    .fade-in.reveal { opacity: 1; transform: translateY(0); }
+
+    /* Lightbox */
+    .lb-backdrop { background: rgba(0,0,0,.9); }
+    .lightbox-img { max-height: 90vh; max-width: 90vw; object-fit: contain; }
+  </style>
+</head>
+<body class="bg-neutral-50 text-neutral-900">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-neutral-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+      <a href="./" class="flex items-center" aria-label="Mubasher One home">
+        <picture>
+          <source srcset="./assets/LOGO-01.svg" type="image/svg+xml">
+          <img src="./assets/LOGO-01.png" alt="Mubasher One Logo" class="h-[48px] w-auto">
+        </picture>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="./#services" class="hover:text-neutral-700" data-i18n="nav.services">Services</a>
+        <a href="./#capabilities" class="hover:text-neutral-700" data-i18n="nav.capabilities">Capabilities</a>
+        <a href="./#qa" class="hover:text-neutral-700" data-i18n="nav.quality">Quality</a>
+        <a href="./#values" class="hover:text-neutral-700" data-i18n="nav.values">Values</a>
+        <a href="./#clients" class="hover:text-neutral-700" data-i18n="nav.clients">Clients</a>
+        <a href="./#reviews" class="hover:text-neutral-700" data-i18n="nav.reviews">Reviews</a>
+        <a href="./#map" class="hover:text-neutral-700" data-i18n="nav.location">Location</a>
+        <a href="./#book" class="rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800" data-i18n="nav.book">Book</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="./assets/certificates/saso-1154.pdf" target="_blank" class="hidden sm:flex items-center gap-2 text-xs sm:text-sm text-neutral-700 hover:underline">
+          <img src="./assets/trust/saso-4star.png" alt="SASO 4-Star" class="h-6 w-auto">
+          <span data-i18n="saso.badge">SASO 4-Star • Cert. 1154</span>
+        </a>
+        <button id="langToggle" class="rounded-xl px-3 py-1.5 border border-neutral-300 text-sm hover:bg-neutral-100" aria-live="polite">عربي</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-neutral-900 text-white">
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <nav class="text-sm text-neutral-300 mb-4">
+        <a href="./" class="hover:underline" data-i18n="crumb.home">Home</a>
+        <span class="mx-2">/</span>
+        <span class="text-white font-medium" data-i18n="crumb.innovation">Innovation</span>
+      </nav>
+      <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight fade-in" data-i18n="innov.title">
+        Innovation at Mubasher One
+      </h1>
+      <p class="mt-4 text-neutral-200 max-w-2xl fade-in" data-i18n="innov.subtitle">
+        Practical technology that improves accuracy, speed, quality, and sustainability—deployed on the floor and in the field.
+      </p>
+      <div class="mt-6 fade-in">
+        <a href="./#book" class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 shadow-lg hover:shadow-xl hover:bg-neutral-100 transition" data-i18n="innov.cta">
+          Book a Visit / Demo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="py-14 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="innov.pillars">Our Innovation Pillars</h2>
+      <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition fade-in">
+          <h3 class="font-semibold text-lg">Modern Diagnostics</h3>
+          <p class="text-sm text-neutral-600 mt-2" data-i18n="pill.diagnostics">
+            Multi-brand scan tools, oscilloscope testing, injector coding, and guided fault trees for faster first-time fixes.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition fade-in">
+          <h3 class="font-semibold text-lg">ERP & Workflow</h3>
+          <p class="text-sm text-neutral-600 mt-2" data-i18n="pill.erp">
+            Real-time parts, RO status, technician timekeeping, and customer updates integrated end-to-end.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition fade-in">
+          <h3 class="font-semibold text-lg">Eco-Processes</h3>
+          <p class="text-sm text-neutral-600 mt-2" data-i18n="pill.eco">
+            Waterborne paints, controlled curing, and compliant waste handling to reduce footprint and improve finish quality.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition fade-in">
+          <h3 class="font-semibold text-lg">Process Engineering</h3>
+          <p class="text-sm text-neutral-600 mt-2" data-i18n="pill.process">
+            Jigs, fixtures, SOPs, and QA checkpoints that shorten cycle time without compromising standards.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition fade-in">
+          <h3 class="font-semibold text-lg">Mobile Fleet Tech</h3>
+          <p class="text-sm text-neutral-600 mt-2" data-i18n="pill.mobile">
+            Equipped units for on-site diagnostics, service history lookup, and instant quotations.
+          </p>
+        </div>
+        <div class="rounded-2xl border border-neutral-200 p-6 hover:shadow-md transition fade-in">
+          <h3 class="font-semibold text-lg">Training & SOPS</h3>
+          <p class="text-sm text-neutral-600 mt-2" data-i18n="pill.training">
+            Continuous technician upskilling and codified best practices aligned with OEM/SASO guidance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES / GALLERY -->
+  <section class="py-14 bg-neutral-50" id="innov-gallery">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="innov.cases">Selected Implementations</h2>
+        <span class="text-sm text-neutral-500 fade-in" data-i18n="innov.hint">Click a photo to enlarge</span>
+      </div>
+
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Replace image files as needed (put them in /assets/innovation/) -->
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/diagnostics.webp" alt="Oscilloscope & injector coding" class="w-full h-56 object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600">Oscilloscope & injector coding for CRD systems</figcaption>
+        </figure>
+
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/erp.webp" alt="ERP job tracking" class="w-full h-56 object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600">ERP live RO tracking + parts availability</figcaption>
+        </figure>
+
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/paint.webp" alt="Waterborne paint & controlled curing" class="w-full h-56 object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600">Waterborne paint with controlled curing cycles</figcaption>
+        </figure>
+
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/jigs.webp" alt="Fabricated jigs and fixtures" class="w-full h-56 object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600">Fabricated jigs/fixtures to speed repeat jobs</figcaption>
+        </figure>
+
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/mobile.webp" alt="Mobile service unit tech" class="w-full h-56 object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600">Mobile unit with diagnostics & quoting on site</figcaption>
+        </figure>
+
+        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+          <img src="./assets/innovation/training.webp" alt="Technician training & SOPs" class="w-full h-56 object-cover cursor-zoom-in" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600">Technician training & standardized SOPs</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 lb-backdrop hidden z-50 grid place-items-center" aria-modal="true" role="dialog">
+      <button id="lightbox-close" class="absolute top-4 right-4 text-white/80 hover:text-white text-2xl" aria-label="Close">✕</button>
+      <img id="lightbox-img" src="" alt="Photo" class="lightbox-img">
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="py-14 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="innov.roadmap">What’s Next</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-6">
+        <div class="rounded-2xl border border-neutral-200 p-6 fade-in">
+          <h3 class="font-semibold">Near Term</h3>
+          <ul class="mt-3 text-sm text-neutral-700 space-y-2">
+            <li>Advanced borescope reporting with photo logs</li>
+            <li>More rapid-cure paint workflows</li>
+            <li>Predictive parts stocking based on failure data</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-neutral-200 p-6 fade-in">
+          <h3 class="font-semibold">Mid Term</h3>
+          <ul class="mt-3 text-sm text-neutral-700 space-y-2">
+            <li>On-vehicle programming for newer ECUs</li>
+            <li>Deeper ERP dashboards for fleets</li>
+            <li>Expanded mobile coverage windows</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-14 bg-neutral-900 text-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="innov.cta_title">See it in action</h2>
+        <p class="mt-3 text-neutral-300" data-i18n="innov.cta_desc">Schedule a quick tour or book a pilot job. We’ll share the exact workflow we’ll use on your vehicles.</p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="./#book" class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 hover:bg-neutral-100 transition" data-i18n="innov.cta_book">Request Booking</a>
+        <a href="https://wa.me/966536600791?text=I%27d%20like%20to%20see%20an%20innovation%20demo%20at%20Mubasher%20One" target="_blank" class="rounded-xl px-6 py-3 font-semibold bg-green-600 text-white hover:shadow-lg transition" data-i18n="innov.cta_whatsapp">WhatsApp Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (short) -->
+  <footer class="py-8 bg-neutral-900 text-neutral-300">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="./assets/LOGO-01.png" class="h-8 w-auto" alt="Mubasher One">
+        <span class="text-xs text-neutral-400">© 2025 Mubasher One</span>
+      </div>
+      <a href="./#contact" class="text-sm underline" data-i18n="footer.contact">Contact</a>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+  // Reveal on scroll
+  (function(){
+    const els=[...document.querySelectorAll('.fade-in')];
+    const io=new IntersectionObserver((es)=>{
+      es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target);} });
+    },{rootMargin:'-10% 0px'});
+    els.forEach(el=>io.observe(el));
+  })();
+
+  // Language (Arabic translations only for this page)
+  const AR = {
+    "nav.services":"الخدمات","nav.capabilities":"القدرات","nav.quality":"الجودة","nav.values":"القيم","nav.clients":"العملاء","nav.reviews":"التقييمات","nav.location":"الموقع","nav.book":"احجز",
+    "saso.badge":"ساسو ٤ نجوم • رقم الشهادة 1154",
+    "crumb.home":"الرئيسية","crumb.innovation":"الابتكار",
+    "innov.title":"الابتكار في مباشر وان",
+    "innov.subtitle":"تقنيات عملية ترفع الدقة والسرعة والجودة والاستدامة — مطبّقة في الورشة والميدان.",
+    "innov.cta":"احجز زيارة / عرض",
+    "innov.pillars":"مرتكزات الابتكار لدينا",
+    "pill.diagnostics":"أدوات فحص متعددة العلامات، أوسيلوسكوب، ترميز حاقنات، ومسارات أعطال إرشادية لإصلاحات أسرع من المرة الأولى.",
+    "pill.erp":"متابعة فورية لقطع الغيار وحالة أوامر العمل وتسجيل وقت الفني وتحديثات العميل ضمن نظام موحد.",
+    "pill.eco":"دهانات مائية، تجفيف مُتحكم به، وإدارة نفايات متوافقة لتقليل الأثر وتحسين جودة الطلاء.",
+    "pill.process":"جِكّات وتجهيزات وإجراءات تشغيل قياسية ونقاط فحص جودة تقلل الوقت دون المساس بالمعايير.",
+    "pill.mobile":"وحدات متنقلة مزودة بالفحص وإظهار تاريخ الصيانة وتسعير فوري في موقع العميل.",
+    "pill.training":"تأهيل مستمر للفنيين وإجراءات قياسية متوافقة مع المصنع وساسو.",
+    "innov.cases":"تطبيقات مختارة",
+    "innov.hint":"انقر على الصورة للتكبير",
+    "innov.roadmap":"الخطوات القادمة",
+    "innov.cta_title":"شاهدها عملياً",
+    "innov.cta_desc":"احجز جولة سريعة أو تجربة عمل. سنعرض سير العمل الفعلي لمركباتك.",
+    "innov.cta_book":"طلب حجز",
+    "innov.cta_whatsapp":"تواصل واتساب",
+    "footer.contact":"تواصل"
+  };
+
+  const langBtn = document.getElementById('langToggle');
+  let isAr = false;
+  function applyTranslations(dict){
+    document.querySelectorAll('[data-i18n]').forEach(el=>{
+      const k = el.getAttribute('data-i18n');
+      if (dict[k]) el.textContent = dict[k];
+    });
+  }
+  langBtn?.addEventListener('click', ()=>{
+    isAr = !isAr;
+    if (isAr){
+      applyTranslations(AR);
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir = 'rtl';
+      langBtn.textContent = 'English';
+    } else {
+      location.reload();
+    }
+  });
+
+  // Simple lightbox for this page
+  (function(){
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbClose = document.getElementById('lightbox-close');
+    document.querySelectorAll('[data-lb]').forEach(img=>{
+      img.addEventListener('click', e=>{
+        lbImg.src = e.target.currentSrc || e.target.src;
+        lb.classList.remove('hidden');
+        document.documentElement.classList.add('overflow-hidden');
+      });
+    });
+    function closeLB(){
+      lb.classList.add('hidden');
+      document.documentElement.classList.remove('overflow-hidden');
+    }
+    lbClose.addEventListener('click', closeLB);
+    lb.addEventListener('click', e=>{ if (e.target===lb) closeLB(); });
+    document.addEventListener('keydown', e=>{
+      if (lb.classList.contains('hidden')) return;
+      if (e.key==='Escape') closeLB();
+    });
+  })();
+  </script>
+</body>
+</html>
