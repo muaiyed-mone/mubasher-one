@@ -56,7 +56,7 @@
     #hero picture { display:block; height:100%; width:100%; }
     #hero picture > img { height:100%; width:100%; object-fit:cover; object-position:center; }
 
-    /* HERO glass card */
+    /* HERO glass for badges (kept subtle) */
     #hero .glass {
       backdrop-filter: blur(6px);
       background: rgba(255,255,255,0.08);
@@ -67,11 +67,11 @@
     /* Swap hero columns automatically in Arabic */
     [dir="rtl"] #hero .wrap { flex-direction: row-reverse; }
 
-    /* ===== Hero "wheel-barrel" logo carousel ===== */
+    /* ===== Hero "wheel-barrel" logo carousel (no boxes) ===== */
     .wheel-wrap {
       position: relative;
       width: 100%;
-      height: 260px;              /* wheel height */
+      height: 260px;
       overflow: hidden;
       mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
       -webkit-mask-image: radial-gradient(ellipse at center, black 70%, transparent 100%);
@@ -91,22 +91,23 @@
       transform: translate(-50%,-50%);
       will-change: transform, filter, opacity;
       transition: transform .15s linear;
-      border-radius: 12px;
-      padding: .6rem .8rem;
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 2px 8px rgba(0,0,0,.12);
+      /* removed background, borders, shadow, padding for clean look */
+      border-radius: 0;
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
     }
     #logoWheel img {
       display:block;
-      height: 44px; width: 140px; object-fit: contain;
+      height: 44px; width: auto; object-fit: contain;
+      filter: drop-shadow(0 1px 1px rgba(0,0,0,.15)); /* tiny depth, not a “box” */
     }
     @media (min-width:1024px){
-      #logoWheel img { height: 52px; width: 160px; }
+      #logoWheel img { height: 52px; }
     }
 
     /* Buttons look */
     .btn { border-radius: .75rem; padding: .75rem 1.25rem; font-weight: 700; }
-
   </style>
 </head>
 <body class="bg-neutral-50 text-neutral-900">
@@ -146,25 +147,25 @@
 
   <!-- HERO -->
   <section id="hero" class="relative isolate overflow-hidden">
-    <!-- Background image (team photo) -->
+    <!-- Background image (put your hero files in assets/hero/) -->
     <picture class="absolute inset-0 -z-10">
       <!-- WebP -->
       <source
         srcset="
-          ./assets/gallery/team_mubasher_one-1280.webp 1280w,
-          ./assets/gallery/team_mubasher_one-1920.webp 1920w,
-          ./assets/gallery/team_mubasher_one-2560.webp 2560w
+          ./assets/hero/hero-1280.webp 1280w,
+          ./assets/hero/hero-1920.webp 1920w,
+          ./assets/hero/hero-2560.webp 2560w
         "
         type="image/webp">
       <!-- JPEG fallback -->
       <img
-        src="./assets/gallery/team_mubasher_one-1280.jpeg"
+        src="./assets/hero/hero-1280.jpeg"
         srcset="
-          ./assets/gallery/team_mubasher_one-1280.jpeg 1280w,
-          ./assets/gallery/team_mubasher_one-1920.jpeg 1920w,
-          ./assets/gallery/team_mubasher_one-2560.jpeg 2560w
+          ./assets/hero/hero-1280.jpeg 1280w,
+          ./assets/hero/hero-1920.jpeg 1920w,
+          ./assets/hero/hero-2560.jpeg 2560w
         "
-        alt="Team Mubasher One — technicians at work inside the Al-Ahsa facility">
+        alt="Mubasher One — technicians at work inside the Al-Ahsa facility">
     </picture>
 
     <!-- Dark gradient for legibility -->
@@ -196,37 +197,33 @@
           </div>
         </div>
 
-        <!-- Right: "wheel-barrel" rotating client logos -->
+        <!-- Right: rotating client logos (no card/box) -->
         <aside class="col-right basis-[42%] min-w-0">
-          <div class="glass rounded-2xl p-5 sm:p-6 lg:p-7">
-            <div class="text-sm font-semibold tracking-wide text-white/90 mb-4">
-              <span data-i18n="clients.title">Our Clients</span>
-            </div>
-
-            <div class="wheel-wrap group" aria-label="Rotating client logos">
-              <ul id="logoWheel">
-                <!-- Use your prepared 500x500 pngs (centered logos work best in this frame) -->
-                <li><img src="./assets/clients/Autorent_500x500.png" alt="AUTORENT" /></li>
-                <li><img src="./assets/clients/Alfanar_500x500.png" alt="alfanar" /></li>
-                <li><img src="./assets/clients/SRACO_500x500.png" alt="SRACO" /></li>
-                <li><img src="./assets/clients/Kaefer_500x500.png" alt="KAEFER" /></li>
-                <li><img src="./assets/clients/Eiffel_500x500.png" alt="EIFFEL General Contracting" /></li>
-                <li><img src="./assets/clients/MIA_Arabia_500x500.png" alt="MIA Arabia Company" /></li>
-                <!-- add more <li> as you like -->
-              </ul>
-            </div>
-
-            <p class="mt-4 text-xs text-white/80">
-              <span data-i18n="clients.blurb">Trusted by leading fleets, manufacturers, and suppliers in Saudi Arabia.</span>
-            </p>
+          <!-- removed glass card; pure clean space -->
+          <div class="text-sm font-semibold tracking-wide text-white/90 mb-3">
+            <span data-i18n="clients.title">Our Clients</span>
           </div>
+
+          <div class="wheel-wrap group" aria-label="Rotating client logos">
+            <ul id="logoWheel">
+              <!-- Use your centered 500x500 PNGs/WebPs -->
+              <li><img src="./assets/clients/Autorent_500x500.png" alt="AUTORENT" /></li>
+              <li><img src="./assets/clients/Alfanar_500x500.png" alt="alfanar" /></li>
+              <li><img src="./assets/clients/SRACO_500x500.png" alt="SRACO" /></li>
+              <li><img src="./assets/clients/Kaefer_500x500.png" alt="KAEFER" /></li>
+              <li><img src="./assets/clients/Eiffel_500x500.png" alt="EIFFEL General Contracting" /></li>
+              <li><img src="./assets/clients/MIA_Arabia_500x500.png" alt="MIA Arabia Company" /></li>
+              <!-- add more <li> as needed -->
+            </ul>
+          </div>
+
+          <p class="mt-4 text-xs text-white/80">
+            <span data-i18n="clients.blurb">Trusted by leading fleets, manufacturers, and suppliers in Saudi Arabia.</span>
+          </p>
         </aside>
       </div>
     </div>
   </section>
-
-  <!-- (… keep the rest of your sections exactly as before …)
-       For brevity below, I’m including Services + Book + Map + Footer unchanged except where noted. -->
 
   <!-- STATS -->
   <section class="py-10 bg-neutral-900 text-white">
@@ -237,7 +234,7 @@
     </div>
   </section>
 
-  <!-- CAPABILITIES (unchanged content) -->
+  <!-- CAPABILITIES -->
   <section id="capabilities" class="py-16 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="cap.title">Why Mubasher One</h2>
@@ -246,17 +243,17 @@
         <div class="rounded-2xl border border-neutral-200 p-6 bg-white fade-in text-center hover:-translate-y-1 hover:shadow-lg hover:border-neutral-300 transition">
           <div class="text-3xl mb-3">⭐</div>
           <div class="font-semibold" data-i18n="cap.saso">SASO 4-Star</div>
-          <p class="text-sm text-neutral-600 mt-1" data-i18n="cap.saso_desc">Certified under the SASO 4-Star national quality program…</p>
+          <p class="text-sm text-neutral-600 mt-1" data-i18n="cap.saso_desc">Certified under the SASO 4-Star national quality program, ensuring compliance with operational, safety, and environmental standards across all workshop activities — audited and verified by authorized inspectors.</p>
         </div>
         <div class="rounded-2xl border border-neutral-200 p-6 bg-white fade-in text-center hover:-translate-y-1 hover:shadow-lg hover:border-neutral-300 transition">
           <div class="text-3xl mb-3">💻</div>
           <div class="font-semibold" data-i18n="cap.erp">ERP Integration</div>
-          <p class="text-sm text-neutral-600 mt-1" data-i18n="cap.erp_desc">aiming for enterprise resource planning system…</p>
+          <p class="text-sm text-neutral-600 mt-1" data-i18n="cap.erp_desc">aiming for  enterprise resource planning system to digitally link reception, parts inventory, and service bays — providing live job tracking, cost control, and instant reporting for transparent operations and faster turnaround.</p>
         </div>
         <div class="rounded-2xl border border-neutral-200 p-6 bg-white fade-in text-center hover:-translate-y-1 hover:shadow-lg hover:border-neutral-300 transition">
           <div class="text-3xl mb-3">🚐</div>
           <div class="font-semibold" data-i18n="cap.mobile">Mobile Units</div>
-          <p class="text-sm text-neutral-600 mt-1" data-i18n="cap.mobile_desc">Fully equipped mobile service vans…</p>
+          <p class="text-sm text-neutral-600 mt-1" data-i18n="cap.mobile_desc">Fully equipped mobile service vans with diagnostic tools and air compressors deliver emergency repairs, preventive maintenance, and fleet support directly at client sites across Al-Ahsa and nearby regions.</p>
         </div>
         <div class="rounded-2xl border border-neutral-200 p-6 bg-white fade-in text-center">
           <div class="text-3xl mb-3">🏗️</div>
@@ -271,18 +268,18 @@
         <div class="rounded-2xl border border-neutral-200 p-6 bg-white fade-in text-center">
           <div class="text-3xl mb-3">🧰</div>
           <div class="font-semibold" data-i18n="cap.parts">In-House Parts Store</div>
-          <p class="text-sm text-neutral-600 mt-1" data-i18n="cap.parts_desc">Fast-moving and critical spare parts…</p>
+          <p class="text-sm text-neutral-600 mt-1" data-i18n="cap.parts_desc">Fast-moving and critical spare parts — both new and used — are stocked in our in-house warehouse to reduce downtime and ensure rapid repairs.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES (kept) -->
+  <!-- SERVICES -->
   <section id="services" class="py-16 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="services.title">Core Services</h2>
       <p class="mt-3 text-neutral-600 max-w-2xl fade-in" data-i18n="services.blurb">Comprehensive maintenance programs tailored for fleets and private vehicles.</p>
-      <!-- … keep your service cards here exactly as before … -->
+      <!-- keep your service cards as before -->
     </div>
   </section>
 
@@ -299,9 +296,42 @@
         </ul>
       </div>
 
-      <!-- Booking form (unchanged) -->
+      <!-- Booking form -->
       <form id="booking-form" class="rounded-2xl bg-white text-neutral-900 p-6 space-y-4 fade-in" novalidate>
-        <!-- … your inputs exactly as before … -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm" for="bf_name" data-i18n="book.name">Name</label>
+            <input id="bf_name" name="name" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="Your full name" autocomplete="name" />
+          </div>
+          <div>
+            <label class="text-sm" for="bf_phone" data-i18n="book.phone">Phone / WhatsApp</label>
+            <input id="bf_phone" name="phone" required pattern="\+?\d[\d\s-]{7,}" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="+966…" inputmode="tel" autocomplete="tel" />
+          </div>
+          <div class="md:col-span-2">
+            <label class="text-sm" for="bf_mmy" data-i18n="book.mmy">Vehicle Make / Model / Year</label>
+            <input id="bf_mmy" name="mmy" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="e.g., Toyota Land Cruiser 2019" />
+          </div>
+          <div>
+            <label class="text-sm" for="bf_plate" data-i18n="book.plate">Plate No.</label>
+            <input id="bf_plate" name="plate" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="ABC-1234 | س ع د-١٢٣٤" />
+          </div>
+          <div>
+            <label class="text-sm" for="bf_company" data-i18n="book.company">Fleet / Company Name</label>
+            <input id="bf_company" name="company" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="(optional)" />
+          </div>
+          <div>
+            <label class="text-sm" for="bf_date" data-i18n="book.date">Preferred Date</label>
+            <input id="bf_date" name="date" type="date" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" />
+          </div>
+          <div>
+            <label class="text-sm" for="bf_time" data-i18n="book.time">Preferred Time</label>
+            <input id="bf_time" name="time" type="time" step="900" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" />
+          </div>
+          <div class="md:col-span-2">
+            <label class="text-sm" for="bf_issue" data-i18n="book.issue">Service Needed / Notes</label>
+            <textarea id="bf_issue" name="issue" required class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" rows="3" placeholder="Diagnostics, oil change 15W-40, brake inspection…"></textarea>
+          </div>
+        </div>
         <button type="submit" class="w-full rounded-xl px-4 py-3 bg-neutral-900 text-white font-semibold hover:bg-neutral-800" data-i18n="book.submit">Request Booking via WhatsApp</button>
         <p class="text-xs text-neutral-500" data-i18n="book.note">Submitting opens WhatsApp with your details prefilled.</p>
       </form>
@@ -326,7 +356,7 @@
              data-i18n="map.cta">Open in Google Maps</a>
         </div>
 
-        <!-- Working hours (unchanged structure) -->
+        <!-- Working hours -->
         <div class="rounded-2xl border border-neutral-200 bg-white p-5" id="hours" dir="ltr">
           <div class="flex items-center justify-between">
             <h3 class="font-semibold" data-i18n="map.hours">Working Hours</h3>
@@ -342,7 +372,7 @@
     </div>
   </section>
 
-  <!-- FOOTER (unchanged content) -->
+  <!-- FOOTER -->
   <footer id="contact" class="py-6 bg-neutral-900 text-neutral-300">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8">
       <div class="flex flex-col items-start text-sm text-neutral-400">
@@ -414,7 +444,7 @@
     })();
   </script>
 
-  <!-- Language object (AR) + toggle (keep your previous block if you want full-page translations) -->
+  <!-- Language object (AR) + toggle -->
   <script>
     const AR = {
       "nav.services":"الخدمات","nav.capabilities":"القدرات","nav.quality":"الجودة","nav.values":"القيم","nav.clients":"العملاء","nav.reviews":"التقييمات","nav.location":"الموقع","nav.book":"احجز",
@@ -423,7 +453,7 @@
       "hero.desc":"مركز خدمة معتمد بتصنيف 4 نجوم من ساسو في الأحساء، متخصص في صيانة سيارات الديزل والبنزين مع أنظمة مؤسسية ودعم ميداني.",
       "hero.book":"احجز الآن","hero.explore":"استعرض الخدمات",
       "clients.title":"عملاؤنا",
-      "clients.blurb":"موثوق بنا من قبل شركات رائدة ومصانع وموردين في السعودية.",
+      "clients.blurb":"موثوق بنا من قبل شركات رائدة وموردين في السعودية.",
       "map.title":"موقعنا","map.blurb":"اضغط أدناه للحصول على الاتجاهات. مواقف متوفرة في الموقع.","map.cta":"احصل على الاتجاهات","map.hours":"ساعات العمل","map.loading":"جارٍ التحميل…",
       "footer.contact":"تواصل","footer.website":"الموقع: ","footer.phone":"الهاتف: ","footer.map":"افتح على خرائط جوجل","footer.location":"الموقع",
       "footer.legal-en":"© 2025 Mubasher One Automotive Maintenance Holding Co.\nAl-Ahsa, Saudi Arabia | All Rights Reserved",
@@ -455,7 +485,7 @@
     });
   </script>
 
-  <!-- Hero Wheel-Barrel Logos (smooth orbit) -->
+  <!-- Hero Wheel-Barrel Logos (smooth orbit, no boxes) -->
   <script>
   (function wheelBarrel(){
     const wrap  = document.querySelector('.wheel-wrap');
@@ -490,7 +520,7 @@
     const N = items.length;
     const baseAngles = items.map((_,i)=> i * (Math.PI*2/N));
     const baseScaleA = 0.84, baseScaleB = 1.10;  // back .. front
-    const speed = 0.00055;                       // radians per ms (global)
+    const speed = 0.00055;                       // radians per ms
     let angle0 = 0;
 
     // Initial styles
@@ -511,20 +541,20 @@
         const x = cx + Math.cos(a)*rx;
         const y = cy + Math.sin(a)*ry;
 
-        // Depth factor (0 back, 1 front) from sine on vertical
+        // Depth factor (0 back, 1 front)
         const z = (Math.sin(a) + 1) * 0.5;
 
-        // Scale, opacity, subtle blur/glow based on depth
+        // Scale/opacity/glow
         const s = baseScaleA + z*(baseScaleB - baseScaleA);
         const opacity = 0.55 + z*0.45;
-        const blur = (1 - z) * 1.2; // blur more when "back"
-        const glow = z * 6;
+        const blur = (1 - z) * 1.0; // slight blur when back
+        const glow = z * 5;
 
         const li = items[i];
         li.style.zIndex = String(100 + Math.round(z*100));
-        li.style.transform = `translate(${(x-0).toFixed(1)}px, ${(y-0).toFixed(1)}px) translate(-50%,-50%) scale(${s.toFixed(3)})`;
+        li.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translate(-50%,-50%) scale(${s.toFixed(3)})`;
         li.style.opacity   = opacity.toFixed(2);
-        li.style.filter    = `blur(${blur.toFixed(2)}px) drop-shadow(0 0 ${glow.toFixed(1)}px rgba(255,255,255,${(0.25+z*0.35).toFixed(2)}))`;
+        li.style.filter    = `blur(${blur.toFixed(2)}px) drop-shadow(0 0 ${glow.toFixed(1)}px rgba(255,255,255,${(0.22+z*0.34).toFixed(2)}))`;
       }
       requestAnimationFrame(tick);
     }
@@ -532,9 +562,8 @@
   })();
   </script>
 
-  <!-- (Keep your gallery/reviews/Google Places/booking JS below as-is if you use them) -->
+  <!-- Booking -> WhatsApp -->
   <script>
-    // Booking -> WhatsApp (kept minimal here; your previous full version also works)
     (function setupBooking(){
       const form = document.getElementById("booking-form");
       if (!form) return;
