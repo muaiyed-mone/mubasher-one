@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Advanced Tools & Equipment — Mubasher One</title>
+  <title>Facility Capacity — Mubasher One</title>
 
   <!-- SEO -->
-  <meta name="description" content="Explore Mubasher One’s state-of-the-art diagnostic systems, precision machines, and service equipment that ensure unmatched quality and efficiency." />
+  <meta name="description" content="Facility capacity at Mubasher One: 14 heavy bays, 25 light bays, 5 hydraulic lifts, and 3 full-length service pits — built for fast, high-quality throughput." />
   <link rel="canonical" href="https://www.mone-sa.com/innovation.html" />
 
   <!-- Social -->
-  <meta property="og:title" content="Advanced Tools & Equipment — Mubasher One" />
-  <meta property="og:description" content="Discover the modern diagnostic, machining, and service tools behind Mubasher One’s SASO 4-Star quality." />
+  <meta property="og:title" content="Facility Capacity — Mubasher One" />
+  <meta property="og:description" content="Explore our bays, lifts, and pits — plus the key equipment that powers SASO 4-Star quality." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="./assets/og-cover.jpg" />
 
@@ -29,10 +29,13 @@
     html { scroll-behavior: smooth; }
     .fade-in { opacity: 0; transform: translateY(10px); transition: opacity .6s, transform .6s; }
     .fade-in.reveal { opacity: 1; transform: translateY(0); }
-
-    /* Lightbox */
     .lb-backdrop { background: rgba(0,0,0,.9); }
     .lightbox-img { max-height: 90vh; max-width: 90vw; object-fit: contain; }
+    .stat { @apply rounded-2xl bg-white border border-neutral-200 p-6 text-center shadow-sm; }
+    .stat .num { @apply text-3xl font-extrabold; }
+    .stat .lbl { @apply text-sm text-neutral-600; }
+    .cap-card { @apply rounded-2xl overflow-hidden border border-neutral-200 bg-white; }
+    .cap-img { @apply h-56 w-full object-cover cursor-zoom-in; }
   </style>
 </head>
 <body class="bg-neutral-50 text-neutral-900">
@@ -74,102 +77,160 @@
       <nav class="text-sm text-neutral-300 mb-4">
         <a href="./" class="hover:underline" data-i18n="crumb.home">Home</a>
         <span class="mx-2">/</span>
-        <span class="text-white font-medium" data-i18n="crumb.innovation">Advanced Tools & Equipment</span>
+        <span class="text-white font-medium" data-i18n="crumb.capacity">Facility Capacity</span>
       </nav>
-      <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight fade-in" data-i18n="innov.title">
-        Advanced Tools & Equipment
+      <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight fade-in" data-i18n="cap.title">
+        Facility Capacity
       </h1>
-      <p class="mt-4 text-neutral-200 max-w-2xl fade-in" data-i18n="innov.subtitle">
-        Leveraging modern diagnostic tools, digital job tracking, and process engineering to raise precision, safety, and turnaround speed.
+      <p class="mt-4 text-neutral-200 max-w-2xl fade-in" data-i18n="cap.subtitle">
+        Built for throughput and quality: 14 heavy-vehicle bays, 25 light-vehicle bays, 5 hydraulic lifts, and 3 full-length service pits — optimized for fleets and private vehicles.
       </p>
       <div class="mt-6 fade-in">
-        <a href="./#book" class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 shadow-lg hover:shadow-xl hover:bg-neutral-100 transition" data-i18n="innov.cta">
-          Request Booking / Demo
+        <a href="./#book" class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 shadow-lg hover:shadow-xl hover:bg-neutral-100 transition" data-i18n="cap.cta">
+          Request Booking / Site Visit
         </a>
       </div>
     </div>
   </section>
 
-  <!-- TOOL GRID -->
+  <!-- CAPACITY STATS -->
   <section class="py-14 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="innov.gridTitle">Key Equipment on Our Floor</h2>
-      <p class="mt-2 text-neutral-600 fade-in" data-i18n="innov.gridDesc">A selection of specialized tools we use daily to diagnose faster, repair smarter, and document work to OEM standards.</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="stat fade-in"><div class="num">14</div><div class="lbl" data-i18n="cap.s1">Heavy-Equipment & Large-Vehicle Bays</div></div>
+        <div class="stat fade-in"><div class="num">25</div><div class="lbl" data-i18n="cap.s2">Light-Vehicle Bays</div></div>
+        <div class="stat fade-in"><div class="num">5</div><div class="lbl" data-i18n="cap.s3">Hydraulic Lifts</div></div>
+        <div class="stat fade-in"><div class="num">3</div><div class="lbl" data-i18n="cap.s4">Full-Length Service Pits</div></div>
+      </div>
+
+      <div class="mt-8 grid lg:grid-cols-2 gap-6">
+        <div class="rounded-2xl border border-neutral-200 bg-white p-6 fade-in">
+          <h3 class="font-semibold text-lg" data-i18n="cap.flow.title">Optimized Flow</h3>
+          <ul class="mt-3 text-sm text-neutral-700 list-disc list-inside space-y-1">
+            <li data-i18n="cap.flow.li1">Dedicated diesel lanes for buses and heavy trucks</li>
+            <li data-i18n="cap.flow.li2">Parallel light-vehicle bays for routine maintenance</li>
+            <li data-i18n="cap.flow.li3">Direct parts-store access to reduce wait time</li>
+            <li data-i18n="cap.flow.li4">ERP job-tracking and QA checkpoints</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-neutral-200 bg-white p-6 fade-in">
+          <h3 class="font-semibold text-lg" data-i18n="cap.safety.title">Safety & QA</h3>
+          <ul class="mt-3 text-sm text-neutral-700 list-disc list-inside space-y-1">
+            <li data-i18n="cap.safety.li1">SASO 4-Star accredited processes</li>
+            <li data-i18n="cap.safety.li2">OEM-standard torque specs & documentation</li>
+            <li data-i18n="cap.safety.li3">Clean zones for painting & curing</li>
+            <li data-i18n="cap.safety.li4">Pits with ventilation and guarding</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACILITY PHOTOS (new slots) -->
+  <section class="py-8 bg-neutral-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="cap.gallery">Facility Photos</h2>
+      <p class="mt-2 text-neutral-600 fade-in" data-i18n="cap.galleryHint">Click any image to enlarge.</p>
 
       <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- 1. Diagnostic Scan Tools -->
+        <!-- Keep/add as you upload: put files in ./assets/innovation/ -->
+        <figure class="cap-card fade-in">
+          <img src="./assets/innovation/facility-bays-overview.webp" alt="Bays overview" class="cap-img" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="cap.img1">Bays Overview</figcaption>
+        </figure>
+        <figure class="cap-card fade-in">
+          <img src="./assets/innovation/facility-light-bays.webp" alt="Light-vehicle bays" class="cap-img" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="cap.img2">Light-Vehicle Bays</figcaption>
+        </figure>
+        <figure class="cap-card fade-in">
+          <img src="./assets/innovation/facility-service-pits.webp" alt="Service pits" class="cap-img" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="cap.img3">Full-Length Service Pits</figcaption>
+        </figure>
+        <figure class="cap-card fade-in">
+          <img src="./assets/innovation/facility-lifts.webp" alt="Hydraulic lifts" class="cap-img" data-lb>
+          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="cap.img4">Hydraulic Lifts</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 lb-backdrop hidden z-50 grid place-items-center" aria-modal="true" role="dialog">
+      <button id="lightbox-close" class="absolute top-4 right-4 text-white/80 hover:text-white text-2xl" aria-label="Close">✕</button>
+      <img id="lightbox-img" src="" alt="Photo" class="lightbox-img">
+    </div>
+  </section>
+
+  <!-- EQUIPMENT HIGHLIGHTS (kept from your current page) -->
+  <section class="py-14 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="equip.title">Equipment Highlights</h2>
+      <p class="mt-2 text-neutral-600 fade-in" data-i18n="equip.desc">The same advanced tools from the previous page are retained here.</p>
+
+      <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 1 -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
           <img src="./assets/innovation/scan-tools.webp" alt="Diagnostic scan tools" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.scan.desc">
             Diagnostic Scan Tools — Multi-brand interfaces (Bosch KTS, Launch X-431, Jaltest HD) for reading/programming ECUs, live-data analysis, and guided calibrations across commercial and passenger vehicles.
           </figcaption>
         </figure>
-
-        <!-- 2. Smoke Leak Detection -->
+        <!-- 2 -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
           <img src="./assets/innovation/smoke-leak.webp" alt="Smoke leak detection machine" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.smoke.desc">
             Smoke Leak Detection Machine — Introduces harmless vapor to locate intake, EVAP, turbo, and EGR leaks precisely—cutting diagnostic time and preventing repeat faults.
           </figcaption>
         </figure>
-
-        <!-- 3. Infrared Thermal Camera -->
+        <!-- 3 -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
           <img src="./assets/innovation/infrared-camera.webp" alt="Infrared camera" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.thermal.desc">
             Infrared Thermal Camera — Pinpoints heat signatures in brakes, bearings, alternators, wiring, and HVAC for preventive diagnostics and quick electrical fault isolation.
           </figcaption>
         </figure>
-
-        <!-- 4. Power Probe & Circuit Tracer -->
+        <!-- 4 -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
           <img src="./assets/innovation/power-probe.webp" alt="Power probe circuit tester and tracer" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.probe.desc">
             Power Probe Circuit Tester & Tracer — Supplies power/ground, checks continuity, and traces signals on live circuits; ideal for CAN-bus and complex electrical diagnosis.
           </figcaption>
         </figure>
-
-        <!-- 5. Borescope -->
+        <!-- 5 -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
           <img src="./assets/innovation/borescope.webp" alt="Borescope inspection camera" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.borescope.desc">
             Borescope Inspection Camera — High-resolution probe to inspect cylinders, valves, injectors, and gear sets without teardown—confirming scope and saving time.
           </figcaption>
         </figure>
-
-        <!-- 6. Compression & Leak-Down Testers -->
+        <!-- 6 -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
           <img src="./assets/innovation/compression-tester.webp" alt="Compression tester" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.compression.desc">
             Compression & Leak-Down Testers — Quantifies cylinder sealing to assess piston rings and valves; essential pre-rebuild baseline and post-repair verification.
           </figcaption>
         </figure>
-
-        <!-- 7. Brake Fluid Flush Machine -->
+        <!-- 7 -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
           <img src="./assets/innovation/brake-flush.webp" alt="Brake fluid flush machine" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.brake.desc">
             Brake Fluid Flush Machine — Controlled hydraulic bleeding and DOT fluid exchange for consistent pedal feel and safety compliance on ABS/ESP systems.
           </figcaption>
         </figure>
-
-        <!-- 8. Coolant Vacuum Filling Machine -->
+        <!-- 8 -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
           <img src="./assets/innovation/coolant-vacuum.webp" alt="Coolant vacuum filling machine" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.coolant.desc">
             Coolant Vacuum Filling Machine — Evacuates air and fills under vacuum to prevent hot-spots and ensure proper circulation after major cooling-system service.
           </figcaption>
         </figure>
-
-        <!-- 9. Injector Removal Tools -->
+        <!-- 9 -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
           <img src="./assets/innovation/injector-removal.webp" alt="Injector removal tools" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.injector.desc">
             Injector Removal Tool Sets — Hydraulic and slide-hammer pullers to extract seized diesel injectors safely—avoids head damage and reduces downtime.
           </figcaption>
         </figure>
-
-        <!-- 10. Gearbox & Pilot Bearing Tools -->
+        <!-- 10 -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
           <img src="./assets/innovation/pilot-bearing.webp" alt="Gearbox pilot bearing centering tools" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.pilot.desc">
@@ -178,24 +239,18 @@
         </figure>
       </div>
     </div>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="fixed inset-0 lb-backdrop hidden z-50 grid place-items-center" aria-modal="true" role="dialog">
-      <button id="lightbox-close" class="absolute top-4 right-4 text-white/80 hover:text-white text-2xl" aria-label="Close">✕</button>
-      <img id="lightbox-img" src="" alt="Photo" class="lightbox-img">
-    </div>
   </section>
 
   <!-- CTA -->
   <section class="py-14 bg-neutral-900 text-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-8 items-center">
       <div>
-        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="innov.cta_title">See it in action</h2>
-        <p class="mt-3 text-neutral-300" data-i18n="innov.cta_desc">Book a quick tour or pilot job—see exactly how our tools and process improve speed and precision.</p>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight" data-i18n="cap.cta_title">See it in action</h2>
+        <p class="mt-3 text-neutral-300" data-i18n="cap.cta_desc">Book a quick tour or pilot job—see exactly how our capacity and tools improve speed and precision.</p>
       </div>
       <div class="flex flex-wrap gap-3">
-        <a href="./#book" class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 hover:bg-neutral-100 transition" data-i18n="innov.cta_book">Request Booking</a>
-        <a href="https://wa.me/966536600791?text=I%27d%20like%20to%20see%20an%20equipment%20demo%20at%20Mubasher%20One" target="_blank" class="rounded-xl px-6 py-3 font-semibold bg-green-600 text-white hover:shadow-lg transition" data-i18n="innov.cta_whatsapp">WhatsApp Us</a>
+        <a href="./#book" class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 hover:bg-neutral-100 transition" data-i18n="cap.cta_book">Request Booking</a>
+        <a href="https://wa.me/966536600791?text=I%27d%20like%20to%20visit%20the%20facility%20and%20see%20capacity%20in%20action" target="_blank" class="rounded-xl px-6 py-3 font-semibold bg-green-600 text-white hover:shadow-lg transition" data-i18n="cap.cta_whatsapp">WhatsApp Us</a>
       </div>
     </div>
   </section>
@@ -224,76 +279,65 @@
 
   // Arabic translations for this page
   const AR = {
+    /* NAV */
     "nav.services":"الخدمات","nav.capabilities":"القدرات","nav.quality":"الجودة","nav.values":"القيم","nav.clients":"العملاء","nav.reviews":"التقييمات","nav.location":"الموقع","nav.book":"احجز",
     "saso.badge":"ساسو ٤ نجوم • رقم الشهادة 1154",
-    "crumb.home":"الرئيسية","crumb.innovation":"الأدوات والمعدات المتقدمة",
-    "innov.title":"الأدوات والمعدات المتقدمة",
-    "innov.subtitle":"نستخدم أدوات تشخيص حديثة، وتتبعاً رقمياً لأوامر العمل، وهندسة عمليات لرفع الدقة والسلامة وتسريع الإنجاز.",
-    "innov.cta":"طلب حجز / عرض",
-    "innov.gridTitle":"معدات رئيسية داخل الورشة",
-    "innov.gridDesc":"باقة من الأدوات المتخصصة المستخدمة يومياً لتشخيص أسرع وإصلاح أدق وتوثيق مطابق لمعايير المصنع.",
-    "tool.scan.desc":"أجهزة فحص متعددة العلامات (Bosch KTS، Launch X-431، Jaltest HD) لقراءة/برمجة وحدات التحكم، وعرض البيانات الحية، ومعايرات موجهة لسيارات الركاب والمركبات التجارية.",
-    "tool.smoke.desc":"جهاز كشف التسرب بالدخان — يضخ بخاراً آمناً لتحديد تسربات السحب وEVAP والتيربو وEGR بدقة، ما يقلل وقت التشخيص ويمنع تكرار الأعطال.",
-    "tool.thermal.desc":"كاميرا حرارية — تحدد البؤر الساخنة في الفرامل والمحامل والمولدات والضفائر ودوائر المكيف للتشخيص الوقائي وعزل الأعطال الكهربائية بسرعة.",
-    "tool.probe.desc":"جهاز Power Probe ومتعقب الدوائر — يزوّد الدوائر بالطاقة/الأرضي، ويفحص الاستمرارية، ويتتبع الإشارات على الدوائر الحية؛ مثالي لأنظمة CAN والأعطال المعقدة.",
-    "tool.borescope.desc":"منظار داخلي — مسبار عالي الدقة لفحص الأسطوانات والصمامات والحاقنات ومجموعات التروس دون تفكيك، لتأكيد نطاق الإصلاح وتوفير الوقت.",
-    "tool.compression.desc":"عدادات ضغط/Leak-Down — تقيس إحكام الأسطوانة لتقييم حلقات المكبس والصمامات؛ أساسي قبل إعادة البناء وبعد الإصلاح للتوثيق.",
-    "tool.brake.desc":"آلة تبديل زيت الفرامل — نزف هيدروليكي متحكم به واستبدال سائل DOT لضمان ثبات دواسة الفرامل والامتثال لأنظمة ABS/ESP.",
-    "tool.coolant.desc":"آلة تعبئة سائل التبريد بالفراغ — تُزيل الهواء وتملأ تحت تفريغ لمنع النقاط الساخنة وضمان دوران سليم بعد صيانة منظومة التبريد.",
-    "tool.injector.desc":"عدة سحب الحاقنات — سحّابات هيدروليكية وسلايد هامر لاستخراج حاقنات الديزل العالقة بأمان، دون إتلاف رأس المحرك وتقليل التوقف.",
-    "tool.pilot.desc":"عدة محاذاة القابض وتمركز رمان الطيار — لضبط قرص القابض وتمركز عمود الإدخال أثناء التركيب، ما يمنع الاهتزاز ويطيل عمر الرولمان.",
-    "innov.cta_title":"شاهدها عملياً",
-    "innov.cta_desc":"احجز جولة سريعة أو تجربة عمل — اطّلع كيف ترفع أدواتنا ومنهجيتنا السرعة والدقة.",
-    "innov.cta_book":"طلب حجز",
-    "innov.cta_whatsapp":"تواصل واتساب",
+
+    /* BREADCRUMB + TITLES */
+    "crumb.home":"الرئيسية",
+    "crumb.capacity":"الطاقة الاستيعابية للمنشأة",
+    "cap.title":"الطاقة الاستيعابية للمنشأة",
+    "cap.subtitle":"منشأة مُهيأة للإنتاجية والجودة: 14 حارة للمركبات الثقيلة، 25 حارة لسيارات الركاب، 5 روافع هيدروليكية، و3 حفر خدمة بطول كامل — مُحسّنة للأساطيل والمركبات الخاصة.",
+    "cap.cta":"طلب حجز / زيارة",
+
+    /* STATS */
+    "cap.s1":"حارات للمعدات الثقيلة والمركبات الكبيرة",
+    "cap.s2":"حارات لمركبات الركاب",
+    "cap.s3":"روافع هيدروليكية",
+    "cap.s4":"حفر خدمة بطول كامل",
+
+    /* CARDS */
+    "cap.flow.title":"تدفق عمل محسن",
+    "cap.flow.li1":"مسارات ديزل مخصصة للحافلات والشاحنات الثقيلة",
+    "cap.flow.li2":"حارات متوازية للخدمة الدورية للمركبات الخفيفة",
+    "cap.flow.li3":"وصول مباشر لمستودع القطع لتقليل زمن الانتظار",
+    "cap.flow.li4":"تتبع أوامر العمل و نقاط فحص الجودة عبر ERP",
+
+    "cap.safety.title":"السلامة وضمان الجودة",
+    "cap.safety.li1":"عمليات معتمدة بتصنيف ساسو ٤ نجوم",
+    "cap.safety.li2":"توثيق بمعايير المصنع وعزومات شد معتمدة",
+    "cap.safety.li3":"مناطق نظيفة للدهان والتجفيف",
+    "cap.safety.li4":"حفر خدمة بتهوية وحواجز أمان",
+
+    /* GALLERY */
+    "cap.gallery":"صور المنشأة",
+    "cap.galleryHint":"اضغط على أي صورة للتكبير.",
+    "cap.img1":"نظرة عامة على الحارات",
+    "cap.img2":"حارات سيارات الركاب",
+    "cap.img3":"حفر الخدمة بطول كامل",
+    "cap.img4":"الروافع الهيدروليكية",
+
+    /* EQUIPMENT (kept) */
+    "equip.title":"أبرز المعدات",
+    "equip.desc":"نُبقي على نفس الصور والمعدات المتقدمة المذكورة سابقاً هنا.",
+
+    /* CTA */
+    "cap.cta_title":"شاهدها عملياً",
+    "cap.cta_desc":"احجز جولة سريعة أو تجربة عمل — سترى كيف ترفع الطاقة والمعدات من السرعة والدقة.",
+    "cap.cta_book":"طلب حجز",
+    "cap.cta_whatsapp":"تواصل واتساب",
+
+    /* Footer */
     "footer.contact":"تواصل"
-    /* ===== CAPABILITIES ===== */
-"cap.saso":"ساسو 4 نجوم",
-"cap.saso_desc":"جودة وسلامة في جميع العمليات.",
-"cap.erp":"تكامل نظام ERP",
-"cap.erp_desc":"متابعة فورية لأوامر العمل، القطع، والمخزون.",
-"cap.mobile":"الوحدات المتنقلة",
-"cap.mobile_desc":"إصلاحات طارئة ودعم أساطيل في موقع العميل.",
-"cap.capacity":"الطاقة الاستيعابية للمنشأة",
-"cap.cap1":"14 حارة للمعدات الثقيلة والمركبات الكبيرة",
-"cap.cap2":"25 حارة لمركبات الركاب",
-"cap.cap3":"5 روافع هيدروليكية",
-"cap.cap4":"3 حفر خدمة بطول كامل",
-"cap.parts":"مستودع قطع الغيار الداخلي",
-"cap.parts_desc":"يتوفر لدينا مخزون من قطع الغيار السريعة الدوران والهامة — جديدة ومستعملة — في مستودعنا الداخلي لضمان سرعة الإصلاح وتقليل التوقف.",
-
-/* ===== INNOVATION PAGE ===== */
-"crumb.home":"الرئيسية",
-"crumb.innovation":"الأدوات والمعدات المتقدمة",
-"innov.title":"الأدوات والمعدات المتقدمة",
-"innov.subtitle":"نستخدم أدوات تشخيص حديثة، وتتبعاً رقمياً لأوامر العمل، وهندسة عمليات لرفع الدقة والسلامة وتسريع الإنجاز.",
-"innov.cta":"طلب حجز / عرض",
-"innov.gridTitle":"معدات رئيسية داخل الورشة",
-"innov.gridDesc":"مجموعة من الأدوات المتخصصة المستخدمة يومياً لتشخيص أسرع وإصلاح أدق وتوثيق مطابق لمعايير المصنع.",
-"tool.scan.desc":"أجهزة فحص متعددة العلامات (Bosch KTS، Launch X-431، Jaltest HD) لقراءة/برمجة وحدات التحكم، وعرض البيانات الحية، ومعايرات موجهة لسيارات الركاب والمركبات التجارية.",
-"tool.smoke.desc":"جهاز كشف التسرب بالدخان — يضخ بخاراً آمناً لتحديد تسربات السحب وEVAP والتيربو وEGR بدقة، مما يقلل وقت التشخيص ويمنع تكرار الأعطال.",
-"tool.thermal.desc":"كاميرا حرارية — تحدد البؤر الساخنة في الفرامل والمحامل والمولدات والضفائر ودوائر المكيف للتشخيص الوقائي وعزل الأعطال الكهربائية بسرعة.",
-"tool.probe.desc":"جهاز Power Probe ومتعقب الدوائر — يزوّد الدوائر بالطاقة/الأرضي، ويفحص الاستمرارية، ويتتبع الإشارات على الدوائر الحية؛ مثالي لأنظمة CAN والأعطال المعقدة.",
-"tool.borescope.desc":"منظار داخلي — مسبار عالي الدقة لفحص الأسطوانات والصمامات والحاقنات ومجموعات التروس دون تفكيك، لتأكيد نطاق الإصلاح وتوفير الوقت.",
-"tool.compression.desc":"عدادات ضغط/Leak-Down — تقيس إحكام الأسطوانة لتقييم حلقات المكبس والصمامات؛ أساسي قبل إعادة البناء وبعد الإصلاح للتوثيق.",
-"tool.brake.desc":"آلة تبديل زيت الفرامل — نزف هيدروليكي متحكم به واستبدال سائل DOT لضمان ثبات دواسة الفرامل والامتثال لأنظمة ABS/ESP.",
-"tool.coolant.desc":"آلة تعبئة سائل التبريد بالفراغ — تُزيل الهواء وتملأ تحت تفريغ لمنع النقاط الساخنة وضمان دوران سليم بعد صيانة منظومة التبريد.",
-"tool.injector.desc":"عدة سحب الحاقنات — سحّابات هيدروليكية وسلايد هامر لاستخراج حاقنات الديزل العالقة بأمان، دون إتلاف رأس المحرك وتقليل التوقف.",
-"tool.pilot.desc":"عدة محاذاة القابض وتمركز رمان الطيار — لضبط قرص القابض وتمركز عمود الإدخال أثناء التركيب، ما يمنع الاهتزاز ويطيل عمر الرولمان.",
-"innov.cta_title":"شاهدها عملياً",
-"innov.cta_desc":"احجز جولة سريعة أو تجربة عمل — اطّلع كيف ترفع أدواتنا ومنهجيتنا السرعة والدقة.",
-"innov.cta_book":"طلب حجز",
-"innov.cta_whatsapp":"تواصل واتساب",
-"footer.contact":"تواصل"
-
   };
 
   const langBtn = document.getElementById('langToggle');
   let isAr = false;
   function applyTranslations(dict){
     document.querySelectorAll('[data-i18n]').forEach(el=>{
-      const k = el.getAttribute('data-i18n');
-      if (dict[k]) el.textContent = dict[k];
+      const k = el.getAttribute('data-i18n'); const v = dict[k]; if(!v) return;
+      const firstText = Array.from(el.childNodes).find(n=>n.nodeType===Node.TEXT_NODE);
+      if (firstText){ firstText.nodeValue = v; } else { el.textContent = v; }
     });
   }
   langBtn?.addEventListener('click', ()=>{
@@ -308,7 +352,7 @@
     }
   });
 
-  // Simple lightbox (grid-centered + scroll lock)
+  // Simple lightbox
   (function(){
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightbox-img');
@@ -325,6 +369,7 @@
     function closeLB(){
       lb.classList.add('hidden');
       document.documentElement.classList.remove('overflow-hidden');
+      lbImg.removeAttribute('src');
     }
     lbClose.addEventListener('click', closeLB);
     lb.addEventListener('click', e=>{ if (e.target===lb) closeLB(); });
