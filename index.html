@@ -45,40 +45,64 @@
     /* Footer quick hover */
     .pulse:hover { transform: translateY(-2px); }
 
-    /* === HERO WHEEL (right side) === */
-    /* Clean container, no box */
-    #hero-wheel { perspective: 900px; }
-    #hero-wheel-track {
-      position: relative;
-      height: 280px;              /* visible wheel height */
-      width: 100%;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-    .wheel-item {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      display: grid;
-      place-items: center;
-      height: 56px;               /* fixed item height (no overlap) */
-      width: 160px;               /* enough for wide logos */
-      pointer-events: none;       /* purely decorative */
-    }
-    .wheel-item img {
-      max-height: 44px;
-      max-width: 140px;
-      object-fit: contain;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,.25));
-      transition: filter .3s ease;
-    }
-    /* Subtle highlight on hover of the whole wheel */
-    #hero-wheel:hover img { filter: drop-shadow(0 4px 10px rgba(255,255,255,.35)); }
+  /* === HERO Logos Wheel (centered title + diameter var + selective fade) === */
+#hero-wheel-wrap { display:grid; gap:12px; justify-items:center; }
+#hero-wheel-title { font-weight:600; text-transform:none; letter-spacing:.2px; }
 
-    /* Clients marquee (kept for later section; unchanged visuals) */
-    @keyframes marquee { 0%{ transform: translateX(0) } 100%{ transform: translateX(-50%) } }
-    .marquee { display:flex; gap:3rem; width:max-content; animation: marquee 75s linear infinite; }
-    .marquee:hover { animation-play-state: paused; }
+:root{
+  --wheel-diameter: 480px;      /* desktop base (this is the DIAMETER) */
+  --wheel-speed: 40s;           /* slower = smoother */
+  --wheel-logo: 74px;           /* logo box size */
+}
+@media (min-width:1024px){
+  :root{ --wheel-diameter: 520px; --wheel-logo: 82px; }
+}
+@media (max-width:1024px){
+  :root{ --wheel-diameter: 420px; --wheel-logo: 68px; }
+}
+@media (max-width:640px){
+  :root{ --wheel-diameter: 360px; --wheel-logo: 64px; }
+}
+
+.wheel {
+  position: relative;
+  width: var(--wheel-diameter);
+  height: var(--wheel-diameter);
+  border-radius: 9999px;
+  /* clean look: no border/background */
+  animation: spin var(--wheel-speed) linear infinite;
+  will-change: transform;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.wheel-item {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: var(--wheel-logo); height: var(--wheel-logo);
+  margin: calc(var(--wheel-logo)/-2) 0 0 calc(var(--wheel-logo)/-2);
+  display:grid; place-items:center;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,.18));
+  transform-origin: center;
+  animation: pop 3.2s ease-in-out infinite;
+  transition: opacity .35s ease, filter .35s ease, transform .35s ease;
+}
+.wheel-item img{
+  max-width: 88%; max-height: 88%;
+  object-fit: contain;
+}
+/* gentle breathing */
+@keyframes pop { 0%,100% { transform: scale(1.0); opacity:.92; } 50% { transform: scale(1.07); opacity:1; } }
+
+/* Counter-rotate logos so they stay upright */
+.wheel-item > img { animation: upright var(--wheel-speed) linear infinite; }
+@keyframes upright { to { transform: rotate(-360deg); } }
+
+/* Only 3 items get this at a time (JS toggles it) */
+.wheel-item.faded {
+  opacity: .28;
+  filter: grayscale(35%) drop-shadow(0 2px 4px rgba(0,0,0,.12));
+}
+
   </style>
 </head>
 <body class="bg-neutral-50 text-neutral-900">
@@ -591,90 +615,104 @@
   });
   </script>
 
-  <script>
-  /* ===== HERO WHEEL: rotating vertical logos (no overlap, all available) ===== */
-  (function heroWheel(){
-    const TRACK = document.getElementById('hero-wheel-track');
+ <script>
+/* === HERO rotating wheel (diameter var + "fade 3 not in center") === */
+(function setupHeroWheel(){
+  const wheel = document.getElementById('hero-wheel');
+  if (!wheel) return;
 
-    const CLIENTS = [
-      ["Abrak_500x500.png","ABRAK"],
-      ["Al_Ameer_Bakery_500x500.png","Al Ameer Bakery & Sweets"],
-      ["Al_Najah_Bakeries_500x500.png","Al Najah Bakeries"],
-      ["Al_Rabie_500x500.png","Al Rabie"],
-      ["Al_Rai_500x500.png","Al Rai"],
-      ["Alfanar_500x500.png","alfanar"],
-      ["Arabian_Castles_500x500.png","Arabian Castles"],
-      ["Autorent_500x500.png","AUTORENT"],
-      ["Blue_Flame_Energy_500x500.png","Blue Flame Energy"],
-      ["Eiffel_500x500.png","EIFFEL General Contracting"],
-      ["Kaefer_500x500.png","KAEFER"],
-      ["Kentz_500x500.png","KENTZ"],
-      ["MIA_Arabia_500x500.png","MIA Arabia Company"],
-      ["Sanabel_500x500.png","Sanabel United Trading Co."],
-      ["SRACO_500x500.png","SRACO"],
-      ["Table_Four_500x500.png","Table Four"]
-    ];
+  const clientItems = [
+    ["Abrak_500x500.png","ABRAK"],
+    ["Al_Ameer_Bakery_500x500.png","Al Ameer Bakery & Sweets"],
+    ["Al_Najah_Bakeries_500x500.png","Al Najah Bakeries"],
+    ["Al_Rabie_500x500.png","Al Rabie"],
+    ["Al_Rai_500x500.png","Al Rai"],
+    ["Alfanar_500x500.png","alfanar"],
+    ["Arabian_Castles_500x500.png","Arabian Castles"],
+    ["Autorent_500x500.png","AUTORENT"],
+    ["Blue_Flame_Energy_500x500.png","Blue Flame Energy"],
+    ["Eiffel_500x500.png","EIFFEL General Contracting"],
+    ["Kaefer_500x500.png","KAEFER"],
+    ["Kentz_500x500.png","KENTZ"],
+    ["MIA_Arabia_500x500.png","MIA Arabia Company"],
+    ["Sanabel_500x500.png","Sanabel United Trading Co."],
+    ["SRACO_500x500.png","SRACO"],
+    ["Table_Four_500x500.png","Table Four"]
+  ];
 
-    // Load only existing images to guarantee "all logos available" (no 404 stalls)
-    function preload([file,label]){
-      return new Promise(res=>{
-        const img = new Image();
-        img.onload  = ()=> res([file,label,true]);
-        img.onerror = ()=> res([file,label,false]);
-        img.src = `./assets/clients/${file}`;
-      });
-    }
+  const N = clientItems.length;
 
-    (async function init(){
-      const checks = await Promise.all(CLIENTS.map(preload));
-      const logos  = checks.filter(([, , ok])=> ok).map(([file,label])=>({ src:`./assets/clients/${file}`, alt:label }));
+  // Read CSS variables for geometry
+  const cs = getComputedStyle(document.documentElement);
+  const diameter   = parseFloat(cs.getPropertyValue('--wheel-diameter')); // pixels
+  const logoSize   = parseFloat(cs.getPropertyValue('--wheel-logo'));     // pixels
+  const speedStr   = cs.getPropertyValue('--wheel-speed').trim();         // e.g., "40s"
+  const speedSec   = (/\d+(\.\d+)?/.exec(speedStr)?.[0] || 40) * 1;       // seconds
 
-      // Build wheel items
-      TRACK.innerHTML = '';
-      const visibleSlots = Math.min(8, Math.max(6, Math.floor(TRACK.clientHeight / 56))); // prevent overlap
-      const totalItems   = Math.max(visibleSlots * 2, logos.length); // ensure enough to look continuous
+  // Position items on the circle
+  const radius = (diameter / 2) - (logoSize * 0.7); // bit of padding to keep inside the circle
+  const nodes = [];
 
-      // Repeat logos to fill if needed
-      const seq = Array.from({length: totalItems}, (_, i)=> logos[i % logos.length]);
+  clientItems.forEach(([file, name], i)=>{
+    const baseAngle = (i / N) * Math.PI * 2; // fixed
+    const x = Math.cos(baseAngle) * radius;
+    const y = Math.sin(baseAngle) * radius;
 
-      // Create elements
-      const items = seq.map((logo, i)=>{
-        const li = document.createElement('div');
-        li.className = 'wheel-item';
-        li.innerHTML = `<img src="${logo.src}" alt="${logo.alt}" loading="lazy" decoding="async">`;
-        TRACK.appendChild(li);
-        return li;
-      });
+    const el = document.createElement('div');
+    el.className = 'wheel-item';
+    el.style.left = '50%';
+    el.style.top  = '50%';
+    el.style.transform = `translate(${x}px, ${y}px)`;
+    el.style.animationDelay = `${(i / N) * 2}s`;
 
-      // Smooth wheel animation with depth/opacity mapping
-      let t = 0;                        // time accumulator
-      const speed = 0.00035;            // rotation speed
-      const radius = 95;                // vertical radius (px)
-      const centerY = TRACK.clientHeight / 2;
-      const centerZ = -60;              // move back a bit for realism
+    const img = document.createElement('img');
+    img.src = `./assets/clients/${file}`;
+    img.alt = name;
 
-      function render(){
-        t += speed * 16;                // ~60fps assumption
-        const N = items.length;
-        for (let i=0;i<N;i++){
-          const a = ((i / N) * Math.PI * 2) + t;        // angle around wheel
-          const y = centerY + Math.sin(a) * radius;
-          const z = centerZ + Math.cos(a) * 80;         // depth
-          // Scale & opacity by depth (front brighter/larger)
-          const depthNorm = (Math.cos(a)+1)/2;          // 0..1
-          const scale = 0.85 + depthNorm * 0.35;        // 0.85..1.2
-          const opacity = 0.35 + depthNorm * 0.65;      // 0.35..1.0
+    el.appendChild(img);
+    wheel.appendChild(el);
 
-          items[i].style.transform = `translateX(-50%) translateY(${y - 28}px) translateZ(${z}px) scale(${scale})`;
-          items[i].style.opacity = opacity.toFixed(3);
-          items[i].style.zIndex = String(100 + Math.round(depthNorm * 100));
-        }
-        requestAnimationFrame(render);
-      }
-      render();
-    })();
-  })();
-  </script>
+    nodes.push({ el, baseAngle });
+  });
+
+  // Select exactly 3 "least centered" items to fade as the wheel rotates.
+  // "Center window" = angle ~ 0 rad (pointing right). We mirror CSS rotation
+  // so we know which angles are near/far from that window.
+  const t0 = performance.now();
+  function wrapPI(a){ a = (a + Math.PI) % (2*Math.PI); if (a < 0) a += 2*Math.PI; return a - Math.PI; }
+
+  function tick(now){
+    const rot = ((now - t0) / 1000) / speedSec * 2*Math.PI; // radians
+    const center = 0; // rightmost point is our "center view"
+
+    // Score each logo by its angular distance from the center
+    const scored = nodes.map((n, idx)=>{
+      const theta = n.baseAngle + rot;
+      const dist = Math.abs(wrapPI(theta - center)); // 0 = most centered, pi = farthest
+      return { idx, dist };
+    });
+
+    // Sort by "least centered" (largest distance) and fade top 3
+    scored.sort((a,b)=> b.dist - a.dist);
+    const fadeSet = new Set(scored.slice(0,3).map(s=>s.idx));
+
+    nodes.forEach((n, i)=>{
+      n.el.classList.toggle('faded', fadeSet.has(i));
+    });
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // Keep the title centered regardless of dir/language toggle
+  const title = document.getElementById('hero-wheel-title');
+  if (title){
+    const observer = new MutationObserver(()=>{ title.classList.add('text-center'); });
+    observer.observe(document.documentElement, { attributes:true, attributeFilter:['dir','lang'] });
+  }
+})();
+</script>
+
 
   <script>
   /* ===== Gallery (slider + lightbox) ===== */
@@ -1106,3 +1144,4 @@
 
 </body>
 </html>
+
