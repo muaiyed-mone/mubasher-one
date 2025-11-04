@@ -65,6 +65,23 @@
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
   transform: scale(1.08);
 }
+/* ===== HERO helpers ===== */
+#hero .glass {
+  backdrop-filter: blur(6px);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25) inset, 0 10px 24px rgba(0,0,0,.25);
+  border: 1px solid rgba(255,255,255,.22);
+}
+@keyframes floatY { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-8px) } }
+#hero .logo-float > li { animation: floatY 6s ease-in-out infinite; }
+#hero .logo-float > li:nth-child(2){ animation-duration: 6.8s; animation-delay: .4s }
+#hero .logo-float > li:nth-child(3){ animation-duration: 7.4s; animation-delay: .8s }
+#hero .logo-float > li:nth-child(4){ animation-duration: 6.6s; animation-delay: .2s }
+#hero .logo-float > li:nth-child(5){ animation-duration: 7.2s; animation-delay: .6s }
+#hero .logo-float > li:nth-child(6){ animation-duration: 6.4s; animation-delay: 1s }
+
+/* Swap hero columns automatically in Arabic */
+[dir="rtl"] #hero .wrap { flex-direction: row-reverse; }
 
   </style>
 </head>
@@ -103,39 +120,116 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700"></div>
-    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-white">
-      <div class="max-w-3xl fade-in">
-        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight" data-i18n="hero.title">
+<!-- HERO (Team background + floating client logos) -->
+<section id="hero" class="relative isolate overflow-hidden">
+  <!-- Background image -->
+  <picture class="absolute inset-0 -z-10">
+    <!-- WebP (preferred) -->
+    <source
+      srcset="
+        ./assets/gallery/team_mubasher_one-1280.webp 1280w,
+        ./assets/gallery/team_mubasher_one-1920.webp 1920w,
+        ./assets/gallery/team_mubasher_one-2560.webp 2560w
+      "
+      type="image/webp">
+    <!-- JPEG fallback -->
+    <img
+      src="./assets/gallery/team_mubasher_one-1280.jpeg"
+      srcset="
+        ./assets/gallery/team_mubasher_one-1280.jpeg 1280w,
+        ./assets/gallery/team_mubasher_one-1920.jpeg 1920w,
+        ./assets/gallery/team_mubasher_one-2560.jpeg 2560w
+      "
+      alt="Team Mubasher One — technicians at work inside the Al-Ahsa facility"
+      class="h-full w-full object-cover object-center" loading="eager" decoding="async">
+  </picture>
+
+  <!-- Dark gradient for legibility -->
+  <div class="absolute inset-0 -z-10 bg-gradient-to-br from-black/70 via-black/55 to-neutral-900/55"></div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-white">
+    <div class="wrap flex items-center gap-8 lg:gap-12">
+      <!-- Left: copy + CTAs -->
+      <div class="col-left basis-[58%] min-w-0">
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight fade-in" data-i18n="hero.title">
           Servicing All Brands &amp; Models — Driven by Quality
         </h1>
-        <p class="mt-5 text-neutral-200 max-w-2xl" data-i18n="hero.desc">
+        <p class="mt-5 text-neutral-200 max-w-2xl fade-in" data-i18n="hero.desc">
           SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.
         </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-  <!-- Primary CTA -->
-  <a
-    href="#book"
-    class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 shadow-lg hover:shadow-xl hover:bg-neutral-100 transition"
-    data-i18n="hero.book"
-  >
-    Book Now
-  </a>
 
-  <!-- Secondary CTA (glass / outline) -->
-  <a
-    href="#services"
-    class="rounded-xl px-6 py-3 font-semibold bg-white/10 backdrop-blur ring-1 ring-white/30 hover:bg-white/15 hover:ring-white/40 transition"
-    data-i18n="hero.explore"
-  >
-    Explore Services
-  </a>
-</div>
+        <div class="mt-8 flex flex-wrap gap-3 fade-in">
+          <!-- Primary CTA -->
+          <a
+            href="#book"
+            class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 shadow-lg hover:shadow-xl hover:bg-neutral-100 transition"
+            data-i18n="hero.book">
+            Book Now
+          </a>
+          <!-- Secondary CTA -->
+          <a
+            href="#services"
+            class="rounded-xl px-6 py-3 font-semibold bg-white/10 glass hover:bg-white/15 transition"
+            data-i18n="hero.explore">
+            Explore Services
+          </a>
+        </div>
+
+        <!-- Trust badges (optional mini) -->
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-xs text-white/80 fade-in">
+          <span class="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-white/10 glass">
+            <img src="./assets/trust/saso-4star.png" class="h-4 w-auto" alt="SASO 4-Star">
+            SASO 4-Star • Cert. 1154
+          </span>
+          <span class="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-white/10 glass">
+            30+ Technicians
+          </span>
+          <span class="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-white/10 glass">
+            3,000 m² Facility
+          </span>
+        </div>
       </div>
+
+      <!-- Right: floating client logos -->
+      <aside class="col-right basis-[42%] min-w-0">
+        <div class="glass rounded-2xl p-5 sm:p-6 lg:p-7">
+          <div class="text-sm font-semibold tracking-wide text-white/90 mb-4">
+            <span data-i18n="clients.title">Our Clients</span>
+          </div>
+
+          <!-- Grid for desktop, horizontal scroll on mobile -->
+          <ul class="logo-float grid grid-cols-3 sm:grid-cols-3 gap-4 sm:gap-5">
+            <!-- Use your actual prepared 500x500 client images -->
+            <li class="rounded-xl bg-white/90 p-3 shadow-sm">
+              <img src="./assets/clients/Autorent_500x500.png" alt="AUTORENT" class="h-12 w-full object-contain" />
+            </li>
+            <li class="rounded-xl bg-white/90 p-3 shadow-sm">
+              <img src="./assets/clients/Alfanar_500x500.png" alt="alfanar" class="h-12 w-full object-contain" />
+            </li>
+            <li class="rounded-xl bg-white/90 p-3 shadow-sm">
+              <img src="./assets/clients/SRACO_500x500.png" alt="SRACO" class="h-12 w-full object-contain" />
+            </li>
+            <li class="rounded-xl bg-white/90 p-3 shadow-sm">
+              <img src="./assets/clients/Kaefer_500x500.png" alt="KAEFER" class="h-12 w-full object-contain" />
+            </li>
+            <li class="rounded-xl bg-white/90 p-3 shadow-sm">
+              <img src="./assets/clients/Eiffel_500x500.png" alt="EIFFEL General Contracting" class="h-12 w-full object-contain" />
+            </li>
+            <li class="rounded-xl bg-white/90 p-3 shadow-sm">
+              <img src="./assets/clients/MIA_Arabia_500x500.png" alt="MIA Arabia Company" class="h-12 w-full object-contain" />
+            </li>
+          </ul>
+
+          <!-- Optional caption -->
+          <p class="mt-4 text-xs text-white/80">
+            <span data-i18n="clients.blurb">Trusted by leading fleets, manufacturers, and suppliers in Saudi Arabia.</span>
+          </p>
+        </div>
+      </aside>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- STATS -->
   <section class="py-10 bg-neutral-900 text-white">
@@ -1337,6 +1431,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
