@@ -11,7 +11,7 @@
 
   <!-- Social -->
   <meta property="og:title" content="Facility Capacity — Mubasher One" />
-  <meta property="og:description" content="Explore our bays, lifts, and pits — plus the key equipment that powers SASO 4-Star quality." />
+  <meta property="og:description" content="Explore our bays, lifts, pits, and equipment — powering SASO 4-Star quality for fleets and private vehicles." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="./assets/og-cover.jpg" />
 
@@ -29,13 +29,19 @@
     html { scroll-behavior: smooth; }
     .fade-in { opacity: 0; transform: translateY(10px); transition: opacity .6s, transform .6s; }
     .fade-in.reveal { opacity: 1; transform: translateY(0); }
+
     .lb-backdrop { background: rgba(0,0,0,.9); }
     .lightbox-img { max-height: 90vh; max-width: 90vw; object-fit: contain; }
+
     .stat { @apply rounded-2xl bg-white border border-neutral-200 p-6 text-center shadow-sm; }
     .stat .num { @apply text-3xl font-extrabold; }
     .stat .lbl { @apply text-sm text-neutral-600; }
+
     .cap-card { @apply rounded-2xl overflow-hidden border border-neutral-200 bg-white; }
     .cap-img { @apply h-56 w-full object-cover cursor-zoom-in; }
+
+    /* Make gallery sections look consistent with homepage */
+    picture img { image-rendering: auto; }
   </style>
 </head>
 <body class="bg-neutral-50 text-neutral-900">
@@ -103,6 +109,26 @@
         <div class="stat fade-in"><div class="num">3</div><div class="lbl" data-i18n="cap.s4">Full-Length Service Pits</div></div>
       </div>
 
+      <!-- KPIs -->
+      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="stat fade-in">
+          <div class="num" data-i18n="kpi.jobs.num">40–60</div>
+          <div class="lbl" data-i18n="kpi.jobs.lbl">Jobs per Day (capacity range)</div>
+        </div>
+        <div class="stat fade-in">
+          <div class="num" data-i18n="kpi.tat.num">0.5–2d</div>
+          <div class="lbl" data-i18n="kpi.tat.lbl">Avg Turnaround (minor→major)</div>
+        </div>
+        <div class="stat fade-in">
+          <div class="num" data-i18n="kpi.ftf.num">93–97%</div>
+          <div class="lbl" data-i18n="kpi.ftf.lbl">First-Time Fix Rate (target)</div>
+        </div>
+        <div class="stat fade-in">
+          <div class="num" data-i18n="kpi.otd.num">95%+</div>
+          <div class="lbl" data-i18n="kpi.otd.lbl">On-Time Delivery</div>
+        </div>
+      </div>
+
       <div class="mt-8 grid lg:grid-cols-2 gap-6">
         <div class="rounded-2xl border border-neutral-200 bg-white p-6 fade-in">
           <h3 class="font-semibold text-lg" data-i18n="cap.flow.title">Optimized Flow</h3>
@@ -126,30 +152,86 @@
     </div>
   </section>
 
-  <!-- FACILITY PHOTOS (new slots) -->
+  <!-- FACILITY PHOTOS -->
   <section class="py-8 bg-neutral-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="cap.gallery">Facility Photos</h2>
       <p class="mt-2 text-neutral-600 fade-in" data-i18n="cap.galleryHint">Click any image to enlarge.</p>
 
       <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Keep/add as you upload: put files in ./assets/innovation/ -->
+
+        <!-- Bays Overview -->
         <figure class="cap-card fade-in">
-          <img src="./assets/innovation/facility-bays-overview.webp" alt="Bays overview" class="cap-img" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/facility-bays-overview-640.webp 640w,
+                            ./assets/innovation/facility-bays-overview-960.webp 960w,
+                            ./assets/innovation/facility-bays-overview-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="cap-img"
+                 src="./assets/innovation/facility-bays-overview-960.jpeg"
+                 srcset="./assets/innovation/facility-bays-overview-640.jpeg 640w,
+                         ./assets/innovation/facility-bays-overview-960.jpeg 960w,
+                         ./assets/innovation/facility-bays-overview-1280.jpeg 1280w"
+                 alt="Bays overview" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="cap.img1">Bays Overview</figcaption>
         </figure>
+
+        <!-- Light-Vehicle Bays -->
         <figure class="cap-card fade-in">
-          <img src="./assets/innovation/facility-light-bays.webp" alt="Light-vehicle bays" class="cap-img" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/facility-light-bays-640.webp 640w,
+                            ./assets/innovation/facility-light-bays-960.webp 960w,
+                            ./assets/innovation/facility-light-bays-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="cap-img"
+                 src="./assets/innovation/facility-light-bays-960.jpeg"
+                 srcset="./assets/innovation/facility-light-bays-640.jpeg 640w,
+                         ./assets/innovation/facility-light-bays-960.jpeg 960w,
+                         ./assets/innovation/facility-light-bays-1280.jpeg 1280w"
+                 alt="Light-vehicle bays" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="cap.img2">Light-Vehicle Bays</figcaption>
         </figure>
+
+        <!-- Service Pits -->
         <figure class="cap-card fade-in">
-          <img src="./assets/innovation/facility-service-pits.webp" alt="Service pits" class="cap-img" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/facility-service-pits-640.webp 640w,
+                            ./assets/innovation/facility-service-pits-960.webp 960w,
+                            ./assets/innovation/facility-service-pits-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="cap-img"
+                 src="./assets/innovation/facility-service-pits-960.jpeg"
+                 srcset="./assets/innovation/facility-service-pits-640.jpeg 640w,
+                         ./assets/innovation/facility-service-pits-960.jpeg 960w,
+                         ./assets/innovation/facility-service-pits-1280.jpeg 1280w"
+                 alt="Service pits" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="cap.img3">Full-Length Service Pits</figcaption>
         </figure>
+
+        <!-- Hydraulic Lifts -->
         <figure class="cap-card fade-in">
-          <img src="./assets/innovation/facility-lifts.webp" alt="Hydraulic lifts" class="cap-img" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/facility-lifts-640.webp 640w,
+                            ./assets/innovation/facility-lifts-960.webp 960w,
+                            ./assets/innovation/facility-lifts-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="cap-img"
+                 src="./assets/innovation/facility-lifts-960.jpeg"
+                 srcset="./assets/innovation/facility-lifts-640.jpeg 640w,
+                         ./assets/innovation/facility-lifts-960.jpeg 960w,
+                         ./assets/innovation/facility-lifts-1280.jpeg 1280w"
+                 alt="Hydraulic lifts" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="cap.img4">Hydraulic Lifts</figcaption>
         </figure>
+
       </div>
     </div>
 
@@ -160,83 +242,214 @@
     </div>
   </section>
 
-  <!-- EQUIPMENT HIGHLIGHTS (kept from your current page) -->
+  <!-- EQUIPMENT HIGHLIGHTS (responsive sources added) -->
   <section class="py-14 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="equip.title">Equipment Highlights</h2>
-      <p class="mt-2 text-neutral-600 fade-in" data-i18n="equip.desc">The same advanced tools from the previous page are retained here.</p>
+      <p class="mt-2 text-neutral-600 fade-in" data-i18n="equip.desc">The same advanced tools are retained here, now with responsive images.</p>
 
       <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- 1 -->
+
+        <!-- Scan Tools -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-          <img src="./assets/innovation/scan-tools.webp" alt="Diagnostic scan tools" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/scan-tools-640.webp 640w,
+                            ./assets/innovation/scan-tools-960.webp 960w,
+                            ./assets/innovation/scan-tools-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="h-56 w-full object-cover cursor-zoom-in"
+                 src="./assets/innovation/scan-tools-960.jpeg"
+                 srcset="./assets/innovation/scan-tools-640.jpeg 640w,
+                         ./assets/innovation/scan-tools-960.jpeg 960w,
+                         ./assets/innovation/scan-tools-1280.jpeg 1280w"
+                 alt="Diagnostic scan tools" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.scan.desc">
             Diagnostic Scan Tools — Multi-brand interfaces (Bosch KTS, Launch X-431, Jaltest HD) for reading/programming ECUs, live-data analysis, and guided calibrations across commercial and passenger vehicles.
           </figcaption>
         </figure>
-        <!-- 2 -->
+
+        <!-- Smoke Leak -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-          <img src="./assets/innovation/smoke-leak.webp" alt="Smoke leak detection machine" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/smoke-leak-640.webp 640w,
+                            ./assets/innovation/smoke-leak-960.webp 960w,
+                            ./assets/innovation/smoke-leak-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="h-56 w-full object-cover cursor-zoom-in"
+                 src="./assets/innovation/smoke-leak-960.jpeg"
+                 srcset="./assets/innovation/smoke-leak-640.jpeg 640w,
+                         ./assets/innovation/smoke-leak-960.jpeg 960w,
+                         ./assets/innovation/smoke-leak-1280.jpeg 1280w"
+                 alt="Smoke leak detection machine" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.smoke.desc">
             Smoke Leak Detection Machine — Introduces harmless vapor to locate intake, EVAP, turbo, and EGR leaks precisely—cutting diagnostic time and preventing repeat faults.
           </figcaption>
         </figure>
-        <!-- 3 -->
+
+        <!-- Infrared Camera -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-          <img src="./assets/innovation/infrared-camera.webp" alt="Infrared camera" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/infrared-camera-640.webp 640w,
+                            ./assets/innovation/infrared-camera-960.webp 960w,
+                            ./assets/innovation/infrared-camera-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="h-56 w-full object-cover cursor-zoom-in"
+                 src="./assets/innovation/infrared-camera-960.jpeg"
+                 srcset="./assets/innovation/infrared-camera-640.jpeg 640w,
+                         ./assets/innovation/infrared-camera-960.jpeg 960w,
+                         ./assets/innovation/infrared-camera-1280.jpeg 1280w"
+                 alt="Infrared camera" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.thermal.desc">
             Infrared Thermal Camera — Pinpoints heat signatures in brakes, bearings, alternators, wiring, and HVAC for preventive diagnostics and quick electrical fault isolation.
           </figcaption>
         </figure>
-        <!-- 4 -->
+
+        <!-- Power Probe -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-          <img src="./assets/innovation/power-probe.webp" alt="Power probe circuit tester and tracer" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/power-probe-640.webp 640w,
+                            ./assets/innovation/power-probe-960.webp 960w,
+                            ./assets/innovation/power-probe-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="h-56 w-full object-cover cursor-zoom-in"
+                 src="./assets/innovation/power-probe-960.jpeg"
+                 srcset="./assets/innovation/power-probe-640.jpeg 640w,
+                         ./assets/innovation/power-probe-960.jpeg 960w,
+                         ./assets/innovation/power-probe-1280.jpeg 1280w"
+                 alt="Power probe circuit tester and tracer" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.probe.desc">
             Power Probe Circuit Tester & Tracer — Supplies power/ground, checks continuity, and traces signals on live circuits; ideal for CAN-bus and complex electrical diagnosis.
           </figcaption>
         </figure>
-        <!-- 5 -->
+
+        <!-- Borescope -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-          <img src="./assets/innovation/borescope.webp" alt="Borescope inspection camera" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/borescope-640.webp 640w,
+                            ./assets/innovation/borescope-960.webp 960w,
+                            ./assets/innovation/borescope-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="h-56 w-full object-cover cursor-zoom-in"
+                 src="./assets/innovation/borescope-960.jpeg"
+                 srcset="./assets/innovation/borescope-640.jpeg 640w,
+                         ./assets/innovation/borescope-960.jpeg 960w,
+                         ./assets/innovation/borescope-1280.jpeg 1280w"
+                 alt="Borescope inspection camera" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.borescope.desc">
             Borescope Inspection Camera — High-resolution probe to inspect cylinders, valves, injectors, and gear sets without teardown—confirming scope and saving time.
           </figcaption>
         </figure>
-        <!-- 6 -->
+
+        <!-- Compression Tester -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-          <img src="./assets/innovation/compression-tester.webp" alt="Compression tester" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/compression-tester-640.webp 640w,
+                            ./assets/innovation/compression-tester-960.webp 960w,
+                            ./assets/innovation/compression-tester-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="h-56 w-full object-cover cursor-zoom-in"
+                 src="./assets/innovation/compression-tester-960.jpeg"
+                 srcset="./assets/innovation/compression-tester-640.jpeg 640w,
+                         ./assets/innovation/compression-tester-960.jpeg 960w,
+                         ./assets/innovation/compression-tester-1280.jpeg 1280w"
+                 alt="Compression tester" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.compression.desc">
             Compression & Leak-Down Testers — Quantifies cylinder sealing to assess piston rings and valves; essential pre-rebuild baseline and post-repair verification.
           </figcaption>
         </figure>
-        <!-- 7 -->
+
+        <!-- Brake Flush -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-          <img src="./assets/innovation/brake-flush.webp" alt="Brake fluid flush machine" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/brake-flush-640.webp 640w,
+                            ./assets/innovation/brake-flush-960.webp 960w,
+                            ./assets/innovation/brake-flush-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="h-56 w-full object-cover cursor-zoom-in"
+                 src="./assets/innovation/brake-flush-960.jpeg"
+                 srcset="./assets/innovation/brake-flush-640.jpeg 640w,
+                         ./assets/innovation/brake-flush-960.jpeg 960w,
+                         ./assets/innovation/brake-flush-1280.jpeg 1280w"
+                 alt="Brake fluid flush machine" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.brake.desc">
             Brake Fluid Flush Machine — Controlled hydraulic bleeding and DOT fluid exchange for consistent pedal feel and safety compliance on ABS/ESP systems.
           </figcaption>
         </figure>
-        <!-- 8 -->
+
+        <!-- Coolant Vacuum -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-          <img src="./assets/innovation/coolant-vacuum.webp" alt="Coolant vacuum filling machine" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/coolant-vacuum-640.webp 640w,
+                            ./assets/innovation/coolant-vacuum-960.webp 960w,
+                            ./assets/innovation/coolant-vacuum-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="h-56 w-full object-cover cursor-zoom-in"
+                 src="./assets/innovation/coolant-vacuum-960.jpeg"
+                 srcset="./assets/innovation/coolant-vacuum-640.jpeg 640w,
+                         ./assets/innovation/coolant-vacuum-960.jpeg 960w,
+                         ./assets/innovation/coolant-vacuum-1280.jpeg 1280w"
+                 alt="Coolant vacuum filling machine" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.coolant.desc">
             Coolant Vacuum Filling Machine — Evacuates air and fills under vacuum to prevent hot-spots and ensure proper circulation after major cooling-system service.
           </figcaption>
         </figure>
-        <!-- 9 -->
+
+        <!-- Injector Removal -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-          <img src="./assets/innovation/injector-removal.webp" alt="Injector removal tools" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/injector-removal-640.webp 640w,
+                            ./assets/innovation/injector-removal-960.webp 960w,
+                            ./assets/innovation/injector-removal-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="h-56 w-full object-cover cursor-zoom-in"
+                 src="./assets/innovation/injector-removal-960.jpeg"
+                 srcset="./assets/innovation/injector-removal-640.jpeg 640w,
+                         ./assets/innovation/injector-removal-960.jpeg 960w,
+                         ./assets/innovation/injector-removal-1280.jpeg 1280w"
+                 alt="Injector removal tools" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.injector.desc">
             Injector Removal Tool Sets — Hydraulic and slide-hammer pullers to extract seized diesel injectors safely—avoids head damage and reduces downtime.
           </figcaption>
         </figure>
-        <!-- 10 -->
+
+        <!-- Pilot Bearing -->
         <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
-          <img src="./assets/innovation/pilot-bearing.webp" alt="Gearbox pilot bearing centering tools" class="h-56 w-full object-cover cursor-zoom-in" data-lb>
+          <picture>
+            <source type="image/webp"
+                    srcset="./assets/innovation/pilot-bearing-640.webp 640w,
+                            ./assets/innovation/pilot-bearing-960.webp 960w,
+                            ./assets/innovation/pilot-bearing-1280.webp 1280w"
+                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
+            <img class="h-56 w-full object-cover cursor-zoom-in"
+                 src="./assets/innovation/pilot-bearing-960.jpeg"
+                 srcset="./assets/innovation/pilot-bearing-640.jpeg 640w,
+                         ./assets/innovation/pilot-bearing-960.jpeg 960w,
+                         ./assets/innovation/pilot-bearing-1280.jpeg 1280w"
+                 alt="Gearbox pilot bearing centering tools" data-lb loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
           <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.pilot.desc">
             Gearbox & Pilot Bearing Centering Tools — Aligns clutch discs and centers input shafts during installation—prevents vibration and extends bearing life.
           </figcaption>
         </figure>
+
       </div>
     </div>
   </section>
@@ -277,31 +490,36 @@
     els.forEach(el=>io.observe(el));
   })();
 
-  // Arabic translations for this page
+  // Arabic translations (adds KPIs)
   const AR = {
-    /* NAV */
     "nav.services":"الخدمات","nav.capabilities":"القدرات","nav.quality":"الجودة","nav.values":"القيم","nav.clients":"العملاء","nav.reviews":"التقييمات","nav.location":"الموقع","nav.book":"احجز",
     "saso.badge":"ساسو ٤ نجوم • رقم الشهادة 1154",
 
-    /* BREADCRUMB + TITLES */
     "crumb.home":"الرئيسية",
     "crumb.capacity":"الطاقة الاستيعابية للمنشأة",
     "cap.title":"الطاقة الاستيعابية للمنشأة",
     "cap.subtitle":"منشأة مُهيأة للإنتاجية والجودة: 14 حارة للمركبات الثقيلة، 25 حارة لسيارات الركاب، 5 روافع هيدروليكية، و3 حفر خدمة بطول كامل — مُحسّنة للأساطيل والمركبات الخاصة.",
     "cap.cta":"طلب حجز / زيارة",
 
-    /* STATS */
     "cap.s1":"حارات للمعدات الثقيلة والمركبات الكبيرة",
     "cap.s2":"حارات لمركبات الركاب",
     "cap.s3":"روافع هيدروليكية",
     "cap.s4":"حفر خدمة بطول كامل",
 
-    /* CARDS */
+    "kpi.jobs.num":"40–60",
+    "kpi.jobs.lbl":"طلبات يومية (سعة تقريبية)",
+    "kpi.tat.num":"0.5–2 يوم",
+    "kpi.tat.lbl":"متوسط مدة الإنجاز (صغير→كبير)",
+    "kpi.ftf.num":"%93–%97",
+    "kpi.ftf.lbl":"الإصلاح من المرة الأولى (مستهدف)",
+    "kpi.otd.num":"%95+",
+    "kpi.otd.lbl":"الالتزام بالمواعيد",
+
     "cap.flow.title":"تدفق عمل محسن",
     "cap.flow.li1":"مسارات ديزل مخصصة للحافلات والشاحنات الثقيلة",
-    "cap.flow.li2":"حارات متوازية للخدمة الدورية للمركبات الخفيفة",
+    "cap.flow.li2":"حارات متوازية للصيانة الدورية للمركبات الخفيفة",
     "cap.flow.li3":"وصول مباشر لمستودع القطع لتقليل زمن الانتظار",
-    "cap.flow.li4":"تتبع أوامر العمل و نقاط فحص الجودة عبر ERP",
+    "cap.flow.li4":"تتبع أوامر العمل ونقاط فحص الجودة عبر ERP",
 
     "cap.safety.title":"السلامة وضمان الجودة",
     "cap.safety.li1":"عمليات معتمدة بتصنيف ساسو ٤ نجوم",
@@ -309,7 +527,6 @@
     "cap.safety.li3":"مناطق نظيفة للدهان والتجفيف",
     "cap.safety.li4":"حفر خدمة بتهوية وحواجز أمان",
 
-    /* GALLERY */
     "cap.gallery":"صور المنشأة",
     "cap.galleryHint":"اضغط على أي صورة للتكبير.",
     "cap.img1":"نظرة عامة على الحارات",
@@ -317,17 +534,14 @@
     "cap.img3":"حفر الخدمة بطول كامل",
     "cap.img4":"الروافع الهيدروليكية",
 
-    /* EQUIPMENT (kept) */
     "equip.title":"أبرز المعدات",
-    "equip.desc":"نُبقي على نفس الصور والمعدات المتقدمة المذكورة سابقاً هنا.",
+    "equip.desc":"نُبقي على نفس المعدات مع صور متجاوبة.",
 
-    /* CTA */
     "cap.cta_title":"شاهدها عملياً",
     "cap.cta_desc":"احجز جولة سريعة أو تجربة عمل — سترى كيف ترفع الطاقة والمعدات من السرعة والدقة.",
     "cap.cta_book":"طلب حجز",
     "cap.cta_whatsapp":"تواصل واتساب",
 
-    /* Footer */
     "footer.contact":"تواصل"
   };
 
