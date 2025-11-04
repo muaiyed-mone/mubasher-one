@@ -3,7 +3,7 @@ name: Deploy static site to Pages
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch: {}   # enables the “Run workflow” button
+  workflow_dispatch: {}   # enables “Run workflow” button
 
 permissions:
   contents: read
@@ -21,13 +21,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: "."   # <-- change to "./docs" if your index.html is inside /docs
+          path: "."   # your index.html is in repo root
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     environment:
-      name: github-pages
+      name: github-pages   # will be auto-created (you deleted it earlier)
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
