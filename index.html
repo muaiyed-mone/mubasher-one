@@ -112,11 +112,11 @@
 }
 
 /* base animation (duration set via JS for smooth speed) */
+/* the JS will set --vw to the viewport width in px */
 @keyframes heroMarquee {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); } /* because we’ll duplicate content */
+  to   { transform: translateX(calc(-50% - var(--vw, 0px))); }
 }
-
 
 
   </style>
@@ -1403,7 +1403,6 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 </script>
 <script>
 (function setupHeroClientsMarquee(){
-  // Your full client list (same as before)
   const LIST = [
     ["Abrak_500x500.png","ABRAK"],
     ["Al_Ameer_Bakery_500x500.png","Al Ameer Bakery & Sweets"],
@@ -1427,51 +1426,47 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
   if (!track) return;
 
   const floatClasses = ["float-slow","float-slower","float-slowest"];
+  const one = LIST.map(([img, name], i)=>`
+    <div class="hero-logo ${floatClasses[i % floatClasses.length]} logo-swap">
+      <img src="./assets/clients/${img}" alt="${name}" loading="lazy" decoding="async" />
+    </div>
+  `).join('');
 
-  function cell([img, name], i){
-    return `
-      <div class="hero-logo ${floatClasses[i % floatClasses.length]} logo-swap">
-        <img src="./assets/clients/${img}" alt="${name}" loading="lazy" decoding="async" />
-      </div>`;
-  }
-
-  // Build one sequence
-  const one = LIST.map(cell).join('');
-  // Duplicate for seamless loop (we slide -50%)
+  // duplicate content for seamless scroll
   track.innerHTML = one + one;
-
-  // Ensure LTR motion even on RTL page
   track.style.direction = 'ltr';
 
-  // Set animation duration based on content width → constant speed
-  function setSpeed(){
-    // pixels per second (tweak to taste)
-    const PX_PER_SEC = 160; // slower = smaller; faster = larger
-    // width of the first half (one list)
-    const firstHalfWidth = track.scrollWidth / 2;
-    const duration = firstHalfWidth / PX_PER_SEC; // seconds
+  function setSpeedAndViewport(){
+    // measure viewport (the visible window that shows ~3 logos)
+    const viewport = track.parentElement?.clientWidth || 0;
+    track.style.setProperty('--vw', viewport + 'px');  // used in keyframes
+
+    // constant pixels-per-second speed
+    const PX_PER_SEC = 120; // tweak to taste (80 slower, 160 faster)
+    const half = track.scrollWidth / 2;               // width of one sequence
+    const distance = half + viewport;                 // match keyframes: -50% - vw
+    const duration = distance / PX_PER_SEC;           // seconds
+
     track.style.animation = `heroMarquee ${duration}s linear infinite`;
   }
 
-  // After images decode (important for accurate width), then set speed
+  // Wait for images to size accurately, then set speed
   const imgs = track.querySelectorAll('img');
   let pending = imgs.length;
-  if (pending === 0) setSpeed();
+  if (!pending) setSpeedAndViewport();
   imgs.forEach(img=>{
-    if (img.complete) {
-      if (--pending === 0) setSpeed();
-    } else {
-      img.addEventListener('load', ()=>{ if (--pending === 0) setSpeed(); }, {once:true});
-      img.addEventListener('error',()=>{ if (--pending === 0) setSpeed(); }, {once:true});
+    if (img.complete) { if (--pending === 0) setSpeedAndViewport(); }
+    else {
+      img.addEventListener('load',  ()=>{ if (--pending === 0) setSpeedAndViewport(); }, {once:true});
+      img.addEventListener('error', ()=>{ if (--pending === 0) setSpeedAndViewport(); }, {once:true});
     }
   });
 
-  // Recompute on resize so speed stays constant
-  let resizeTimer;
-  window.addEventListener('resize', ()=>{
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(setSpeed, 200);
-  });
+  // Recompute on resize & orientation changes
+  let t;
+  const onResize = ()=>{ clearTimeout(t); t = setTimeout(setSpeedAndViewport, 150); };
+  window.addEventListener('resize', onResize);
+  window.addEventListener('orientationchange', onResize);
 })();
 </script>
 
@@ -1482,6 +1477,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
