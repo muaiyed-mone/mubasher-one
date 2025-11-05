@@ -86,7 +86,15 @@
 .float-slowest{ animation: floatY 16s ease-in-out infinite; }
 
 
-.hero-logos-fade { transition: opacity .5s ease; }
+    /* --- Hero logo fade cross-dissolve --- */
+.hero-logos-fade {
+  position: relative;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.hero-logos-fade.fade-out { opacity: 0; }
+.hero-logos-fade.fade-in  { opacity: 1; }
+
 
   </style>
 </head>
@@ -1369,7 +1377,6 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 </script>
 <script>
 (function setupHeroClients(){
-  // Reuse the same list you already use in #clients (order shuffled for variety if you want)
   const HERO_CLIENTS = [
     ["Abrak_500x500.png","ABRAK"],
     ["Al_Ameer_Bakery_500x500.png","Al Ameer Bakery & Sweets"],
@@ -1392,7 +1399,6 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
   const wrap = document.getElementById('hero-logos');
   if (!wrap) return;
 
-  // helper to render a single logo cell with subtle floating motion
   const clsByIndex = ["float-slow","float-slower","float-slowest"];
   function cell([img, name], i){
     const floatClass = clsByIndex[i % clsByIndex.length];
@@ -1402,27 +1408,33 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
       </div>`;
   }
 
-  // cycle 3-at-a-time
   let start = 0;
+  let fading = false;
+
   function render(){
-    // fade out
-    wrap.style.opacity = '0';
-    // after fade, swap content, then fade in
+    if (fading) return;
+    fading = true;
+    wrap.classList.remove('fade-in');
+    wrap.classList.add('fade-out');
+
+    // After fade-out, swap content
     setTimeout(()=>{
-      const slice = [0,1,2].map((off)=> HERO_CLIENTS[(start + off) % HERO_CLIENTS.length]);
+      const slice = [0,1,2].map(off => HERO_CLIENTS[(start + off) % HERO_CLIENTS.length]);
       wrap.innerHTML = slice.map(cell).join('');
-      wrap.style.opacity = '1';
       start = (start + 3) % HERO_CLIENTS.length;
-    }, 220); // short fade gap
+      wrap.classList.remove('fade-out');
+      wrap.classList.add('fade-in');
+      fading = false;
+    }, 700); // match CSS fade time
   }
 
-  // initial paint
+  // Initial paint
+  wrap.classList.add('fade-in');
   render();
 
-  // rotate every few seconds
+  // Change set every 8 seconds
   setInterval(render, 8000);
 
-  // keep readable in RTL too (no layout flip here)
   wrap.style.direction = 'ltr';
 })();
 </script>
@@ -1433,6 +1445,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
