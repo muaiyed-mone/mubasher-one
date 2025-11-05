@@ -23,7 +23,6 @@
   <link rel="apple-touch-icon" href="./assets/icons/favicon-180.png">
 
   <!-- Tailwind -->
-  
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
@@ -31,17 +30,13 @@
     .fade-in { opacity: 0; transform: translateY(10px); transition: opacity .6s, transform .6s; }
     .fade-in.reveal { opacity: 1; transform: translateY(0); }
 
+    /* Lightbox */
     .lb-backdrop { background: rgba(0,0,0,.9); }
     .lightbox-img { max-height: 90vh; max-width: 90vw; object-fit: contain; }
 
-    .stat { @apply rounded-2xl bg-white border border-neutral-200 p-6 text-center shadow-sm; }
-    .stat .num { @apply text-3xl font-extrabold; }
-    .stat .lbl { @apply text-sm text-neutral-600; }
-
-    .cap-card { @apply rounded-2xl overflow-hidden border border-neutral-200 bg-white; }
-    .cap-img { @apply h-56 w-full object-cover cursor-zoom-in; }
-
-    /* Make gallery sections look consistent with homepage */
+    /* Match Parts Store gallery look */
+    .gallery-frame { aspect-ratio:16/9; position:relative; background:#f3f4f6; }
+    .caption { position:absolute; left:0; right:0; bottom:0; background:rgba(0,0,0,.55); color:#fff; font-size:12px; line-height:1.25; padding:6px 10px; backdrop-filter: blur(3px); }
     picture img { image-rendering: auto; }
   </style>
 </head>
@@ -100,106 +95,104 @@
     </div>
   </section>
 
- <!-- CAPACITY STATS -->
-<section class="py-14 bg-white">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+  <!-- CAPACITY STATS -->
+  <section class="py-14 bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="cap.title">
-      Facility Capacity
-    </h2>
-    <p class="mt-2 text-neutral-600 fade-in" data-i18n="cap.subtitle">
-      Built for throughput and quality: 14 heavy-vehicle bays, 25 light-vehicle bays, 5 hydraulic lifts, and 3 full-length service pits — optimized for fleets and private vehicles.
-    </p>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="cap.title">
+        Facility Capacity
+      </h2>
+      <p class="mt-2 text-neutral-600 fade-in" data-i18n="cap.subtitle">
+        Built for throughput and quality: 14 heavy-vehicle bays, 25 light-vehicle bays, 5 hydraulic lifts, and 3 full-length service pits — optimized for fleets and private vehicles.
+      </p>
 
-    <!-- ✨ Refined stat boxes -->
-    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- ✨ Refined stat boxes -->
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
 
-      <!-- Heavy Bays -->
-      <div class="fade-in rounded-2xl bg-white border border-neutral-200 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
-        <div class="text-5xl mb-2">🚛</div>
-        <div class="text-4xl font-extrabold tracking-tight text-neutral-900">14</div>
-        <div class="mt-1 text-sm text-neutral-600" data-i18n="cap.s1">Heavy-Equipment & Large-Vehicle Bays</div>
+        <!-- Heavy Bays -->
+        <div class="fade-in rounded-2xl bg-white border border-neutral-200 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
+          <div class="text-5xl mb-2">🚛</div>
+          <div class="text-4xl font-extrabold tracking-tight text-neutral-900">14</div>
+          <div class="mt-1 text-sm text-neutral-600" data-i18n="cap.s1">Heavy-Equipment & Large-Vehicle Bays</div>
+        </div>
+
+        <!-- Light Bays -->
+        <div class="fade-in rounded-2xl bg-white border border-neutral-200 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
+          <div class="text-5xl mb-2">🚗</div>
+          <div class="text-4xl font-extrabold tracking-tight text-neutral-900">25</div>
+          <div class="mt-1 text-sm text-neutral-600" data-i18n="cap.s2">Light-Vehicle Bays</div>
+        </div>
+
+        <!-- Hydraulic Lifts -->
+        <div class="fade-in rounded-2xl bg-white border border-neutral-200 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
+          <div class="text-5xl mb-2">🔧</div>
+          <div class="text-4xl font-extrabold tracking-tight text-neutral-900">5</div>
+          <div class="mt-1 text-sm text-neutral-600" data-i18n="cap.s3">Hydraulic Lifts</div>
+        </div>
+
+        <!-- Service Pits -->
+        <div class="fade-in rounded-2xl bg-white border border-neutral-200 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
+          <div class="text-5xl mb-2">🕳️</div>
+          <div class="text-4xl font-extrabold tracking-tight text-neutral-900">3</div>
+          <div class="mt-1 text-sm text-neutral-600" data-i18n="cap.s4">Full-Length Service Pits</div>
+        </div>
+
+        <!-- Jobs per Day -->
+        <div class="fade-in rounded-2xl bg-white border border-green-100 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
+          <div class="text-5xl mb-2 text-green-600">📈</div>
+          <div class="text-4xl font-extrabold tracking-tight text-neutral-900" data-i18n="kpi.jobs.num">40–60</div>
+          <div class="mt-1 text-sm text-neutral-600" data-i18n="kpi.jobs.lbl">Jobs per Day (capacity range)</div>
+        </div>
+
+        <!-- Turnaround -->
+        <div class="fade-in rounded-2xl bg-white border border-blue-100 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
+          <div class="text-5xl mb-2 text-blue-600">⏱️</div>
+          <div class="text-4xl font-extrabold tracking-tight text-neutral-900" data-i18n="kpi.tat.num">0.5–2d</div>
+          <div class="mt-1 text-sm text-neutral-600" data-i18n="kpi.tat.lbl">Avg Turnaround (minor→major)</div>
+        </div>
+
+        <!-- FTF -->
+        <div class="fade-in rounded-2xl bg-white border border-yellow-100 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
+          <div class="text-5xl mb-2 text-yellow-600">✅</div>
+          <div class="text-4xl font-extrabold tracking-tight text-neutral-900" data-i18n="kpi.ftf.num">93–97%</div>
+          <div class="mt-1 text-sm text-neutral-600" data-i18n="kpi.ftf.lbl">First-Time Fix Rate (target)</div>
+        </div>
+
+        <!-- On-Time Delivery -->
+        <div class="fade-in rounded-2xl bg-white border border-purple-100 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
+          <div class="text-5xl mb-2 text-purple-600">🕒</div>
+          <div class="text-4xl font-extrabold tracking-tight text-neutral-900" data-i18n="kpi.otd.num">95%+</div>
+          <div class="mt-1 text-sm text-neutral-600" data-i18n="kpi.otd.lbl">On-Time Delivery</div>
+        </div>
+
       </div>
 
-      <!-- Light Bays -->
-      <div class="fade-in rounded-2xl bg-white border border-neutral-200 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
-        <div class="text-5xl mb-2">🚗</div>
-        <div class="text-4xl font-extrabold tracking-tight text-neutral-900">25</div>
-        <div class="mt-1 text-sm text-neutral-600" data-i18n="cap.s2">Light-Vehicle Bays</div>
-      </div>
-
-      <!-- Hydraulic Lifts -->
-      <div class="fade-in rounded-2xl bg-white border border-neutral-200 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
-        <div class="text-5xl mb-2">🔧</div>
-        <div class="text-4xl font-extrabold tracking-tight text-neutral-900">5</div>
-        <div class="mt-1 text-sm text-neutral-600" data-i18n="cap.s3">Hydraulic Lifts</div>
-      </div>
-
-      <!-- Service Pits -->
-      <div class="fade-in rounded-2xl bg-white border border-neutral-200 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
-        <div class="text-5xl mb-2">🕳️</div>
-        <div class="text-4xl font-extrabold tracking-tight text-neutral-900">3</div>
-        <div class="mt-1 text-sm text-neutral-600" data-i18n="cap.s4">Full-Length Service Pits</div>
-      </div>
-
-      <!-- Jobs per Day -->
-      <div class="fade-in rounded-2xl bg-white border border-green-100 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
-        <div class="text-5xl mb-2 text-green-600">📈</div>
-        <div class="text-4xl font-extrabold tracking-tight text-neutral-900" data-i18n="kpi.jobs.num">40–60</div>
-        <div class="mt-1 text-sm text-neutral-600" data-i18n="kpi.jobs.lbl">Jobs per Day (capacity range)</div>
-      </div>
-
-      <!-- Turnaround -->
-      <div class="fade-in rounded-2xl bg-white border border-blue-100 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
-        <div class="text-5xl mb-2 text-blue-600">⏱️</div>
-        <div class="text-4xl font-extrabold tracking-tight text-neutral-900" data-i18n="kpi.tat.num">0.5–2d</div>
-        <div class="mt-1 text-sm text-neutral-600" data-i18n="kpi.tat.lbl">Avg Turnaround (minor→major)</div>
-      </div>
-
-      <!-- FTF -->
-      <div class="fade-in rounded-2xl bg-white border border-yellow-100 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
-        <div class="text-5xl mb-2 text-yellow-600">✅</div>
-        <div class="text-4xl font-extrabold tracking-tight text-neutral-900" data-i18n="kpi.ftf.num">93–97%</div>
-        <div class="mt-1 text-sm text-neutral-600" data-i18n="kpi.ftf.lbl">First-Time Fix Rate (target)</div>
-      </div>
-
-      <!-- On-Time Delivery -->
-      <div class="fade-in rounded-2xl bg-white border border-purple-100 p-6 text-center shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition">
-        <div class="text-5xl mb-2 text-purple-600">🕒</div>
-        <div class="text-4xl font-extrabold tracking-tight text-neutral-900" data-i18n="kpi.otd.num">95%+</div>
-        <div class="mt-1 text-sm text-neutral-600" data-i18n="kpi.otd.lbl">On-Time Delivery</div>
+      <!-- NEXT CONTENT (keep existing) -->
+      <div class="mt-12 grid lg:grid-cols-2 gap-6">
+        <div class="rounded-2xl border border-neutral-200 bg-white p-6 fade-in">
+          <h3 class="font-semibold text-lg" data-i18n="cap.flow.title">Optimized Flow</h3>
+          <ul class="mt-3 text-sm text-neutral-700 list-disc list-inside space-y-1">
+            <li data-i18n="cap.flow.li1">Dedicated diesel lanes for buses and heavy trucks</li>
+            <li data-i18n="cap.flow.li2">Parallel light-vehicle bays for routine maintenance</li>
+            <li data-i18n="cap.flow.li3">Direct parts-store access to reduce wait time</li>
+            <li data-i18n="cap.flow.li4">ERP job-tracking and QA checkpoints</li>
+          </ul>
+        </div>
+        <div class="rounded-2xl border border-neutral-200 bg-white p-6 fade-in">
+          <h3 class="font-semibold text-lg" data-i18n="cap.safety.title">Safety & QA</h3>
+          <ul class="mt-3 text-sm text-neutral-700 list-disc list-inside space-y-1">
+            <li data-i18n="cap.safety.li1">SASO 4-Star accredited processes</li>
+            <li data-i18n="cap.safety.li2">OEM-standard torque specs & documentation</li>
+            <li data-i18n="cap.safety.li3">Clean zones for painting & curing</li>
+            <li data-i18n="cap.safety.li4">Pits with ventilation and guarding</li>
+          </ul>
+        </div>
       </div>
 
     </div>
-    <!-- ✨ Refined stat boxes end -->
+  </section>
 
-    <!-- NEXT CONTENT (keep existing) -->
-    <div class="mt-12 grid lg:grid-cols-2 gap-6">
-      <div class="rounded-2xl border border-neutral-200 bg-white p-6 fade-in">
-        <h3 class="font-semibold text-lg" data-i18n="cap.flow.title">Optimized Flow</h3>
-        <ul class="mt-3 text-sm text-neutral-700 list-disc list-inside space-y-1">
-          <li data-i18n="cap.flow.li1">Dedicated diesel lanes for buses and heavy trucks</li>
-          <li data-i18n="cap.flow.li2">Parallel light-vehicle bays for routine maintenance</li>
-          <li data-i18n="cap.flow.li3">Direct parts-store access to reduce wait time</li>
-          <li data-i18n="cap.flow.li4">ERP job-tracking and QA checkpoints</li>
-        </ul>
-      </div>
-      <div class="rounded-2xl border border-neutral-200 bg-white p-6 fade-in">
-        <h3 class="font-semibold text-lg" data-i18n="cap.safety.title">Safety & QA</h3>
-        <ul class="mt-3 text-sm text-neutral-700 list-disc list-inside space-y-1">
-          <li data-i18n="cap.safety.li1">SASO 4-Star accredited processes</li>
-          <li data-i18n="cap.safety.li2">OEM-standard torque specs & documentation</li>
-          <li data-i18n="cap.safety.li3">Clean zones for painting & curing</li>
-          <li data-i18n="cap.safety.li4">Pits with ventilation and guarding</li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-  <!-- FACILITY PHOTOS -->
+  <!-- FACILITY PHOTOS (now matching Parts Store style) -->
   <section class="py-8 bg-neutral-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="cap.gallery">Facility Photos</h2>
@@ -208,75 +201,71 @@
       <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <!-- Bays Overview -->
-        <figure class="cap-card fade-in">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/facility-bays-overview-640.webp 640w,
                             ./assets/facility/facility-bays-overview-960.webp 960w,
-                            ./assets/facility/facility-bays-overview-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="cap-img"
+                            ./assets/facility/facility-bays-overview-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/facility-bays-overview-960.jpeg"
                  srcset="./assets/facility/facility-bays-overview-640.jpeg 640w,
                          ./assets/facility/facility-bays-overview-960.jpeg 960w,
                          ./assets/facility/facility-bays-overview-1280.jpeg 1280w"
-                 alt="Bays overview" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Bays overview" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="cap.img1">Bays Overview</figcaption>
+          <figcaption class="caption" data-i18n="cap.img1">Bays Overview</figcaption>
         </figure>
 
         <!-- Light-Vehicle Bays -->
-        <figure class="cap-card fade-in">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/facility-light-bays-640.webp 640w,
                             ./assets/facility/facility-light-bays-960.webp 960w,
-                            ./assets/facility/facility-light-bays-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="cap-img"
+                            ./assets/facility/facility-light-bays-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/facility-light-bays-960.jpeg"
                  srcset="./assets/facility/facility-light-bays-640.jpeg 640w,
                          ./assets/facility/facility-light-bays-960.jpeg 960w,
                          ./assets/facility/facility-light-bays-1280.jpeg 1280w"
-                 alt="Light-vehicle bays" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Light-vehicle bays" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="cap.img2">Light-Vehicle Bays</figcaption>
+          <figcaption class="caption" data-i18n="cap.img2">Light-Vehicle Bays</figcaption>
         </figure>
 
         <!-- Service Pits -->
-        <figure class="cap-card fade-in">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/facility-service-pits-640.webp 640w,
                             ./assets/facility/facility-service-pits-960.webp 960w,
-                            ./assets/facility/facility-service-pits-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="cap-img"
+                            ./assets/facility/facility-service-pits-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/facility-service-pits-960.jpeg"
                  srcset="./assets/facility/facility-service-pits-640.jpeg 640w,
                          ./assets/facility/facility-service-pits-960.jpeg 960w,
                          ./assets/facility/facility-service-pits-1280.jpeg 1280w"
-                 alt="Service pits" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Service pits" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="cap.img3">Full-Length Service Pits</figcaption>
+          <figcaption class="caption" data-i18n="cap.img3">Full-Length Service Pits</figcaption>
         </figure>
 
         <!-- Hydraulic Lifts -->
-        <figure class="cap-card fade-in">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/facility-lifts-640.webp 640w,
                             ./assets/facility/facility-lifts-960.webp 960w,
-                            ./assets/facility/facility-lifts-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="cap-img"
+                            ./assets/facility/facility-lifts-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/facility-lifts-960.jpeg"
                  srcset="./assets/facility/facility-lifts-640.jpeg 640w,
                          ./assets/facility/facility-lifts-960.jpeg 960w,
                          ./assets/facility/facility-lifts-1280.jpeg 1280w"
-                 alt="Hydraulic lifts" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Hydraulic lifts" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="cap.img4">Hydraulic Lifts</figcaption>
+          <figcaption class="caption" data-i18n="cap.img4">Hydraulic Lifts</figcaption>
         </figure>
 
       </div>
@@ -289,7 +278,7 @@
     </div>
   </section>
 
-  <!-- EQUIPMENT HIGHLIGHTS (responsive sources added) -->
+  <!-- EQUIPMENT HIGHLIGHTS (also matching Parts Store style) -->
   <section class="py-14 bg-white">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl sm:text-3xl font-bold tracking-tight fade-in" data-i18n="equip.title">Equipment Highlights</h2>
@@ -298,201 +287,191 @@
       <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <!-- Scan Tools -->
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/scan-tools-640.webp 640w,
                             ./assets/facility/scan-tools-960.webp 960w,
-                            ./assets/facility/scan-tools-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="h-56 w-full object-cover cursor-zoom-in"
+                            ./assets/facility/scan-tools-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/scan-tools-960.jpeg"
                  srcset="./assets/facility/scan-tools-640.jpeg 640w,
                          ./assets/facility/scan-tools-960.jpeg 960w,
                          ./assets/facility/scan-tools-1280.jpeg 1280w"
-                 alt="Diagnostic scan tools" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Diagnostic scan tools" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.scan.desc">
+          <figcaption class="caption" data-i18n="tool.scan.desc">
             Diagnostic Scan Tools — Multi-brand interfaces (Bosch KTS, Launch X-431, Jaltest HD) for reading/programming ECUs, live-data analysis, and guided calibrations across commercial and passenger vehicles.
           </figcaption>
         </figure>
 
         <!-- Smoke Leak -->
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/smoke-leak-640.webp 640w,
                             ./assets/facility/smoke-leak-960.webp 960w,
-                            ./assets/facility/smoke-leak-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="h-56 w-full object-cover cursor-zoom-in"
+                            ./assets/facility/smoke-leak-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/smoke-leak-960.jpeg"
                  srcset="./assets/facility/smoke-leak-640.jpeg 640w,
                          ./assets/facility/smoke-leak-960.jpeg 960w,
                          ./assets/facility/smoke-leak-1280.jpeg 1280w"
-                 alt="Smoke leak detection machine" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Smoke leak detection machine" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.smoke.desc">
+          <figcaption class="caption" data-i18n="tool.smoke.desc">
             Smoke Leak Detection Machine — Introduces harmless vapor to locate intake, EVAP, turbo, and EGR leaks precisely—cutting diagnostic time and preventing repeat faults.
           </figcaption>
         </figure>
 
         <!-- Infrared Camera -->
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/infrared-camera-640.webp 640w,
                             ./assets/facility/infrared-camera-960.webp 960w,
-                            ./assets/facility/infrared-camera-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="h-56 w-full object-cover cursor-zoom-in"
+                            ./assets/facility/infrared-camera-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/infrared-camera-960.jpeg"
                  srcset="./assets/facility/infrared-camera-640.jpeg 640w,
                          ./assets/facility/infrared-camera-960.jpeg 960w,
                          ./assets/facility/infrared-camera-1280.jpeg 1280w"
-                 alt="Infrared camera" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Infrared camera" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.thermal.desc">
+          <figcaption class="caption" data-i18n="tool.thermal.desc">
             Infrared Thermal Camera — Pinpoints heat signatures in brakes, bearings, alternators, wiring, and HVAC for preventive diagnostics and quick electrical fault isolation.
           </figcaption>
         </figure>
 
         <!-- Power Probe -->
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/power-probe-640.webp 640w,
                             ./assets/facility/power-probe-960.webp 960w,
-                            ./assets/facility/power-probe-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="h-56 w-full object-cover cursor-zoom-in"
+                            ./assets/facility/power-probe-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/power-probe-960.jpeg"
                  srcset="./assets/facility/power-probe-640.jpeg 640w,
                          ./assets/facility/power-probe-960.jpeg 960w,
                          ./assets/facility/power-probe-1280.jpeg 1280w"
-                 alt="Power probe circuit tester and tracer" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Power probe circuit tester and tracer" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.probe.desc">
+          <figcaption class="caption" data-i18n="tool.probe.desc">
             Power Probe Circuit Tester & Tracer — Supplies power/ground, checks continuity, and traces signals on live circuits; ideal for CAN-bus and complex electrical diagnosis.
           </figcaption>
         </figure>
 
         <!-- Borescope -->
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/borescope-640.webp 640w,
                             ./assets/facility/borescope-960.webp 960w,
-                            ./assets/facility/borescope-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="h-56 w-full object-cover cursor-zoom-in"
+                            ./assets/facility/borescope-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/borescope-960.jpeg"
                  srcset="./assets/facility/borescope-640.jpeg 640w,
                          ./assets/facility/borescope-960.jpeg 960w,
                          ./assets/facility/borescope-1280.jpeg 1280w"
-                 alt="Borescope inspection camera" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Borescope inspection camera" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.borescope.desc">
+          <figcaption class="caption" data-i18n="tool.borescope.desc">
             Borescope Inspection Camera — High-resolution probe to inspect cylinders, valves, injectors, and gear sets without teardown—confirming scope and saving time.
           </figcaption>
         </figure>
 
         <!-- Compression Tester -->
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/compression-tester-640.webp 640w,
                             ./assets/facility/compression-tester-960.webp 960w,
-                            ./assets/facility/compression-tester-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="h-56 w-full object-cover cursor-zoom-in"
+                            ./assets/facility/compression-tester-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/compression-tester-960.jpeg"
                  srcset="./assets/facility/compression-tester-640.jpeg 640w,
                          ./assets/facility/compression-tester-960.jpeg 960w,
                          ./assets/facility/compression-tester-1280.jpeg 1280w"
-                 alt="Compression tester" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Compression tester" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.compression.desc">
+          <figcaption class="caption" data-i18n="tool.compression.desc">
             Compression & Leak-Down Testers — Quantifies cylinder sealing to assess piston rings and valves; essential pre-rebuild baseline and post-repair verification.
           </figcaption>
         </figure>
 
         <!-- Brake Flush -->
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/brake-flush-640.webp 640w,
                             ./assets/facility/brake-flush-960.webp 960w,
-                            ./assets/facility/brake-flush-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="h-56 w-full object-cover cursor-zoom-in"
+                            ./assets/facility/brake-flush-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/brake-flush-960.jpeg"
                  srcset="./assets/facility/brake-flush-640.jpeg 640w,
                          ./assets/facility/brake-flush-960.jpeg 960w,
                          ./assets/facility/brake-flush-1280.jpeg 1280w"
-                 alt="Brake fluid flush machine" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Brake fluid flush machine" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.brake.desc">
+          <figcaption class="caption" data-i18n="tool.brake.desc">
             Brake Fluid Flush Machine — Controlled hydraulic bleeding and DOT fluid exchange for consistent pedal feel and safety compliance on ABS/ESP systems.
           </figcaption>
         </figure>
 
         <!-- Coolant Vacuum -->
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/coolant-vacuum-640.webp 640w,
                             ./assets/facility/coolant-vacuum-960.webp 960w,
-                            ./assets/facility/coolant-vacuum-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="h-56 w-full object-cover cursor-zoom-in"
+                            ./assets/facility/coolant-vacuum-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/coolant-vacuum-960.jpeg"
                  srcset="./assets/facility/coolant-vacuum-640.jpeg 640w,
                          ./assets/facility/coolant-vacuum-960.jpeg 960w,
                          ./assets/facility/coolant-vacuum-1280.jpeg 1280w"
-                 alt="Coolant vacuum filling machine" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Coolant vacuum filling machine" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.coolant.desc">
+          <figcaption class="caption" data-i18n="tool.coolant.desc">
             Coolant Vacuum Filling Machine — Evacuates air and fills under vacuum to prevent hot-spots and ensure proper circulation after major cooling-system service.
           </figcaption>
         </figure>
 
         <!-- Injector Removal -->
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/injector-removal-640.webp 640w,
                             ./assets/facility/injector-removal-960.webp 960w,
-                            ./assets/facility/injector-removal-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="h-56 w-full object-cover cursor-zoom-in"
+                            ./assets/facility/injector-removal-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/injector-removal-960.jpeg"
                  srcset="./assets/facility/injector-removal-640.jpeg 640w,
                          ./assets/facility/injector-removal-960.jpeg 960w,
                          ./assets/facility/injector-removal-1280.jpeg 1280w"
-                 alt="Injector removal tools" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Injector removal tools" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.injector.desc">
+          <figcaption class="caption" data-i18n="tool.injector.desc">
             Injector Removal Tool Sets — Hydraulic and slide-hammer pullers to extract seized diesel injectors safely—avoids head damage and reduces downtime.
           </figcaption>
         </figure>
 
         <!-- Pilot Bearing -->
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-white">
+        <figure class="gallery-frame rounded-2xl overflow-hidden border border-neutral-200 cursor-zoom-in fade-in">
           <picture>
             <source type="image/webp"
                     srcset="./assets/facility/pilot-bearing-640.webp 640w,
                             ./assets/facility/pilot-bearing-960.webp 960w,
-                            ./assets/facility/pilot-bearing-1280.webp 1280w"
-                    sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw">
-            <img class="h-56 w-full object-cover cursor-zoom-in"
+                            ./assets/facility/pilot-bearing-1280.webp 1280w">
+            <img class="h-full w-full object-cover" data-lb
                  src="./assets/facility/pilot-bearing-960.jpeg"
                  srcset="./assets/facility/pilot-bearing-640.jpeg 640w,
                          ./assets/facility/pilot-bearing-960.jpeg 960w,
                          ./assets/facility/pilot-bearing-1280.jpeg 1280w"
-                 alt="Gearbox pilot bearing centering tools" data-lb loading="lazy" decoding="async" width="1280" height="720">
+                 alt="Gearbox pilot bearing centering tools" loading="lazy" decoding="async" width="1280" height="720">
           </picture>
-          <figcaption class="p-3 text-sm text-neutral-600" data-i18n="tool.pilot.desc">
+          <figcaption class="caption" data-i18n="tool.pilot.desc">
             Gearbox & Pilot Bearing Centering Tools — Aligns clutch discs and centers input shafts during installation—prevents vibration and extends bearing life.
           </figcaption>
         </figure>
@@ -537,7 +516,7 @@
     els.forEach(el=>io.observe(el));
   })();
 
-  // Arabic translations (adds KPIs)
+  // Arabic translations (same as before)
   const AR = {
     "nav.services":"الخدمات","nav.capabilities":"القدرات","nav.quality":"الجودة","nav.values":"القيم","nav.clients":"العملاء","nav.reviews":"التقييمات","nav.location":"الموقع","nav.book":"احجز",
     "saso.badge":"ساسو ٤ نجوم • رقم الشهادة 1154",
