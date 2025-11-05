@@ -65,6 +65,23 @@
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
   transform: scale(1.08);
 }
+/* --- HERO clients (right side) --- */
+.hero-clients h3 { font-weight: 600; letter-spacing: .02em; }
+.hero-logo {
+  height: 56px; width: 112px;
+  display: grid; place-items: center;
+  filter: grayscale(1) brightness(1.15) opacity(.92);
+  transition: transform .35s ease, filter .35s ease;
+}
+.hero-logo img { max-height: 44px; max-width: 100%; object-fit: contain; }
+.hero-logo:hover { transform: translateY(-2px); filter: grayscale(.2) brightness(1) opacity(1); }
+
+@keyframes floatY { 0%{transform: translateY(0)} 50%{transform: translateY(-4px)} 100%{transform: translateY(0)} }
+.float-slow   { animation: floatY 6s ease-in-out infinite; }
+.float-slower { animation: floatY 7.5s ease-in-out infinite; }
+.float-slowest{ animation: floatY 9s ease-in-out infinite; }
+
+.hero-logos-fade { transition: opacity .5s ease; }
 
   </style>
 </head>
@@ -103,39 +120,39 @@
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700"></div>
-    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-white">
-      <div class="max-w-3xl fade-in">
-        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight" data-i18n="hero.title">
-          Servicing All Brands &amp; Models — Driven by Quality
-        </h1>
-        <p class="mt-5 text-neutral-200 max-w-2xl" data-i18n="hero.desc">
-          SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-  <!-- Primary CTA -->
-  <a
-    href="#book"
-    class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 shadow-lg hover:shadow-xl hover:bg-neutral-100 transition"
-    data-i18n="hero.book"
-  >
-    Book Now
-  </a>
+ <!-- HERO -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700"></div>
 
-  <!-- Secondary CTA (glass / outline) -->
-  <a
-    href="#services"
-    class="rounded-xl px-6 py-3 font-semibold bg-white/10 backdrop-blur ring-1 ring-white/30 hover:bg-white/15 hover:ring-white/40 transition"
-    data-i18n="hero.explore"
-  >
-    Explore Services
-  </a>
-</div>
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-white grid lg:grid-cols-2 gap-10 items-start">
+    <!-- LEFT: Title + CTAs (unchanged) -->
+    <div class="max-w-3xl fade-in">
+      <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight" data-i18n="hero.title">
+        Servicing All Brands &amp; Models — Driven by Quality
+      </h1>
+      <p class="mt-5 text-neutral-200 max-w-2xl" data-i18n="hero.desc">
+        SASO 4-Star certified service center in Al-Ahsa, delivering precision maintenance for diesel and petrol vehicles with enterprise-grade systems and on-site mobile support.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#book" class="rounded-xl px-6 py-3 font-semibold bg-white text-neutral-900 shadow-lg hover:shadow-xl hover:bg-neutral-100 transition" data-i18n="hero.book">Book Now</a>
+        <a href="#services" class="rounded-xl px-6 py-3 font-semibold bg-white/10 backdrop-blur ring-1 ring-white/30 hover:bg-white/15 hover:ring-white/40 transition" data-i18n="hero.explore">Explore Services</a>
       </div>
     </div>
-  </section>
+
+    <!-- RIGHT: Trusted By (no box, blends into hero) -->
+    <aside class="hero-clients fade-in lg:justify-self-end">
+      <h3 class="text-sm uppercase tracking-wider text-white/70 select-none">Trusted By</h3>
+
+      <!-- 3-at-a-time slots -->
+      <div id="hero-logos" class="mt-4 flex gap-6 hero-logos-fade">
+        <!-- JS fills 3 items here -->
+      </div>
+
+      <!-- small helper text (optional) -->
+      <div class="mt-2 text-xs text-white/40">Leading fleets & manufacturers in KSA</div>
+    </aside>
+  </div>
+</section>
 
   <!-- STATS -->
   <section class="py-10 bg-neutral-900 text-white">
@@ -1347,6 +1364,65 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
   setFallbackHours();
 })();
 </script>
+<script>
+(function setupHeroClients(){
+  // Reuse the same list you already use in #clients (order shuffled for variety if you want)
+  const HERO_CLIENTS = [
+    ["Abrak_500x500.png","ABRAK"],
+    ["Al_Ameer_Bakery_500x500.png","Al Ameer Bakery & Sweets"],
+    ["Al_Najah_Bakeries_500x500.png","Al Najah Bakeries"],
+    ["Al_Rabie_500x500.png","Al Rabie"],
+    ["Al_Rai_500x500.png","Al Rai"],
+    ["Alfanar_500x500.png","alfanar"],
+    ["Arabian_Castles_500x500.png","Arabian Castles"],
+    ["Autorent_500x500.png","AUTORENT"],
+    ["Blue_Flame_Energy_500x500.png","Blue Flame Energy"],
+    ["Eiffel_500x500.png","EIFFEL General Contracting"],
+    ["Kaefer_500x500.png","KAEFER"],
+    ["Kentz_500x500.png","KENTZ"],
+    ["MIA_Arabia_500x500.png","MIA Arabia Company"],
+    ["Sanabel_500x500.png","Sanabel United Trading Co."],
+    ["SRACO_500x500.png","SRACO"],
+    ["Table_Four_500x500.png","Table Four"]
+  ];
+
+  const wrap = document.getElementById('hero-logos');
+  if (!wrap) return;
+
+  // helper to render a single logo cell with subtle floating motion
+  const clsByIndex = ["float-slow","float-slower","float-slowest"];
+  function cell([img, name], i){
+    const floatClass = clsByIndex[i % clsByIndex.length];
+    return `
+      <div class="hero-logo ${floatClass}">
+        <img src="./assets/clients/${img}" alt="${name}" loading="lazy" decoding="async">
+      </div>`;
+  }
+
+  // cycle 3-at-a-time
+  let start = 0;
+  function render(){
+    // fade out
+    wrap.style.opacity = '0';
+    // after fade, swap content, then fade in
+    setTimeout(()=>{
+      const slice = [0,1,2].map((off)=> HERO_CLIENTS[(start + off) % HERO_CLIENTS.length]);
+      wrap.innerHTML = slice.map(cell).join('');
+      wrap.style.opacity = '1';
+      start = (start + 3) % HERO_CLIENTS.length;
+    }, 220); // short fade gap
+  }
+
+  // initial paint
+  render();
+
+  // rotate every few seconds
+  setInterval(render, 4000);
+
+  // keep readable in RTL too (no layout flip here)
+  wrap.style.direction = 'ltr';
+})();
+</script>
 
 
 
@@ -1354,6 +1430,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
