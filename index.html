@@ -1403,6 +1403,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 </script>
 <script>
 (function setupHeroClientsMarquee(){
+  // ——— 1) Data ———
   const LIST = [
     ["Abrak_500x500.png","ABRAK"],
     ["Al_Ameer_Bakery_500x500.png","Al Ameer Bakery & Sweets"],
@@ -1417,7 +1418,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
     ["Kaefer_500x500.png","KAEFER"],
     ["Kentz_500x500.png","KENTZ"],
     ["MIA_Arabia_500x500.png","MIA Arabia Company"],
-    ["Sanabel_500x500.png","Sanabel United Trading Co."],
+    ["Sanabel_United_Trading_500x500.png","Sanabel United Trading Co."], // keep your actual filename
     ["SRACO_500x500.png","SRACO"],
     ["Table_Four_500x500.png","Table Four"]
   ];
@@ -1425,48 +1426,116 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
   const track = document.getElementById('hero-strip-track');
   if (!track) return;
 
-  const floatClasses = ["float-slow","float-slower","float-slowest"];
-  const one = LIST.map(([img, name], i)=>`
-    <div class="hero-logo ${floatClasses[i % floatClasses.length]} logo-swap">
-      <img src="./assets/clients/${img}" alt="${name}" loading="lazy" decoding="async" />
-    </div>
-  `).join('');
-
-  // duplicate content for seamless scroll
-  track.innerHTML = one + one;
+  // Make sure LTR motion even on RTL pages
   track.style.direction = 'ltr';
+  // Kill any CSS animation that might conflict
+  track.style.animation = 'none';
 
-  function setSpeedAndViewport(){
-    // measure viewport (the visible window that shows ~3 logos)
-    const viewport = track.parentElement?.clientWidth || 0;
-    track.style.setProperty('--vw', viewport + 'px');  // used in keyframes
+  // ——— 2) Helpers ———
+  const floatClasses = ["float-slow","float-slower","float-slowest"];
+  const cell = ([img, name], i) => `
+    <div class="hero-logo ${floatClasses[i % floatClasses.length]}">
+      <img src="./assets/clients/${img}" alt="${name}" loading="eager" decoding="async">
+    </div>
+  `;
 
-    // constant pixels-per-second speed
-    const PX_PER_SEC = 120; // tweak to taste (80 slower, 160 faster)
-    const half = track.scrollWidth / 2;               // width of one sequence
-    const distance = half + viewport;                 // match keyframes: -50% - vw
-    const duration = distance / PX_PER_SEC;           // seconds
-
-    track.style.animation = `heroMarquee ${duration}s linear infinite`;
+  function buildOnce(){
+    return LIST.map((it,i)=>cell(it,i)).join('');
   }
 
-  // Wait for images to size accurately, then set speed
-  const imgs = track.querySelectorAll('img');
-  let pending = imgs.length;
-  if (!pending) setSpeedAndViewport();
-  imgs.forEach(img=>{
-    if (img.complete) { if (--pending === 0) setSpeedAndViewport(); }
-    else {
-      img.addEventListener('load',  ()=>{ if (--pending === 0) setSpeedAndViewport(); }, {once:true});
-      img.addEventListener('error', ()=>{ if (--pending === 0) setSpeedAndViewport(); }, {once:true});
-    }
-  });
+  // Wait until all current images in the track have sizes
+  function waitImages(el){
+    const imgs = Array.from(el.querySelectorAll('img'));
+    if (!imgs.length) return Promise.resolve();
+    return new Promise(res=>{
+      let pending = imgs.length;
+      const done = ()=>{ if (--pending <= 0) res(); };
+      imgs.forEach(img=>{
+        if (img.complete && img.naturalWidth) done();
+        else {
+          img.addEventListener('load', done, {once:true});
+          img.addEventListener('error', done, {once:true});
+        }
+      });
+    });
+  }
 
-  // Recompute on resize & orientation changes
-  let t;
-  const onResize = ()=>{ clearTimeout(t); t = setTimeout(setSpeedAndViewport, 150); };
+  let rafId = 0;
+  let last = 0;
+  let x = 0;                 // current translateX
+  let seqWidth = 0;          // width of one full sequence
+  let viewport = 0;
+  let PX_PER_SEC = 120;      // adjust speed here
+
+  async function layout(){
+    cancelAnimationFrame(rafId);
+    track.style.transform = 'translateX(0px)';
+    x = 0;
+
+    // Build the **base** sequence just once
+    track.innerHTML = buildOnce();
+
+    // Ensure we can measure widths
+    await waitImages(track);
+
+    // Measure the width of ONE sequence
+    seqWidth = Array.from(track.children)
+      .reduce((w, el)=> w + el.getBoundingClientRect().width, 0);
+
+    viewport = track.parentElement?.clientWidth || 0;
+
+    // Now clone enough items so that total width >= seqWidth + viewport
+    // (we need at least one extra full sequence + viewport to wrap seamlessly)
+    let total = seqWidth;
+    const baseHTML = track.innerHTML;
+    while (total < seqWidth + viewport + 1) { // +1 avoids off-by-1 px on some zoom levels
+      track.insertAdjacentHTML('beforeend', baseHTML);
+      total += seqWidth;
+    }
+
+    // Start the loop
+    last = performance.now();
+    loop(last);
+  }
+
+  function loop(t){
+    const dt = (t - last) / 1000; // seconds
+    last = t;
+
+    // Move left by speed
+    x -= PX_PER_SEC * dt;
+
+    // Wraparound: when we've shifted past ONE sequence, jump forward by EXACTLY one sequence
+    if (-x >= seqWidth) {
+      x += seqWidth;
+    }
+
+    track.style.transform = `translateX(${x}px)`;
+    rafId = requestAnimationFrame(loop);
+  }
+
+  // Initial layout
+  layout();
+
+  // Recompute on resize / orientation change
+  let rto;
+  const onResize = ()=>{
+    clearTimeout(rto);
+    rto = setTimeout(layout, 150);
+  };
   window.addEventListener('resize', onResize);
   window.addEventListener('orientationchange', onResize);
+
+  // If you toggle Arabic, we also relayout (you already have a lang toggle)
+  document.getElementById('langToggle')?.addEventListener('click', ()=>{
+    setTimeout(layout, 50);
+  });
+
+  // Optional: pause on hover
+  track.addEventListener('mouseenter', ()=>{ cancelAnimationFrame(rafId); rafId = 0; });
+  track.addEventListener('mouseleave', ()=>{
+    if (!rafId){ last = performance.now(); rafId = requestAnimationFrame(loop); }
+  });
 })();
 </script>
 
@@ -1475,8 +1544,10 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 
 
+
 </body>
 </html>
+
 
 
 
