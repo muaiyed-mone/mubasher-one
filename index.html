@@ -94,6 +94,29 @@
 
 .hero-logos-fade.fade-out { opacity: 0; }
 .hero-logos-fade.fade-in  { opacity: 1; }
+    /* === HERO marquee (3-at-a-time continuous) === */
+.hero-strip{
+  /* width tuned to show ≈ 3 logos incl. gaps; tweak if you change logo size/gap */
+  width: calc((112px * 3) + (2rem * 2)); /* 3 cells + two gaps (gap-8 = 2rem) */
+  margin-inline: auto;                    /* center horizontally */
+}
+
+.hero-strip-track .hero-logo { /* reuse your hero-logo styles */
+  flex: 0 0 112px;              /* each logo cell width */
+}
+
+/* soften edges so it blends in hero */
+.hero-strip{
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+/* base animation (duration set via JS for smooth speed) */
+@keyframes heroMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* because we’ll duplicate content */
+}
+
 
 
   </style>
@@ -157,7 +180,10 @@
       <h3 class="text-sm uppercase tracking-wider text-white/70 select-none mb-4">Trusted By</h3>
 
       <!-- 3-at-a-time slots -->
-      <div id="hero-logos" class="flex gap-8 hero-logos-fade justify-center items-center"></div>
+<!-- viewport shows exactly ~3 logos -->
+<div class="mt-2 hero-strip overflow-hidden">
+  <div id="hero-strip-track" class="hero-strip-track flex gap-8 will-change-transform"></div>
+</div>
 
       <div class="mt-3 text-xs text-white/40">Leading fleets & manufacturers in KSA</div>
     </aside>
@@ -1376,8 +1402,9 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 })();
 </script>
 <script>
-(function setupHeroClients(){
-  const HERO_CLIENTS = [
+(function setupHeroClientsMarquee(){
+  // Your full client list (same as before)
+  const LIST = [
     ["Abrak_500x500.png","ABRAK"],
     ["Al_Ameer_Bakery_500x500.png","Al Ameer Bakery & Sweets"],
     ["Al_Najah_Bakeries_500x500.png","Al Najah Bakeries"],
@@ -1396,46 +1423,55 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
     ["Table_Four_500x500.png","Table Four"]
   ];
 
-  const wrap = document.getElementById('hero-logos');
-  if (!wrap) return;
+  const track = document.getElementById('hero-strip-track');
+  if (!track) return;
 
-  const clsByIndex = ["float-slow","float-slower","float-slowest"];
+  const floatClasses = ["float-slow","float-slower","float-slowest"];
+
   function cell([img, name], i){
-    const floatClass = clsByIndex[i % clsByIndex.length];
     return `
-      <div class="hero-logo ${floatClass}">
-        <img src="./assets/clients/${img}" alt="${name}" loading="lazy" decoding="async">
+      <div class="hero-logo ${floatClasses[i % floatClasses.length]} logo-swap">
+        <img src="./assets/clients/${img}" alt="${name}" loading="lazy" decoding="async" />
       </div>`;
   }
 
-  let start = 0;
-  let fading = false;
+  // Build one sequence
+  const one = LIST.map(cell).join('');
+  // Duplicate for seamless loop (we slide -50%)
+  track.innerHTML = one + one;
 
-  function render(){
-    if (fading) return;
-    fading = true;
-    wrap.classList.remove('fade-in');
-    wrap.classList.add('fade-out');
+  // Ensure LTR motion even on RTL page
+  track.style.direction = 'ltr';
 
-    // After fade-out, swap content
-    setTimeout(()=>{
-      const slice = [0,1,2].map(off => HERO_CLIENTS[(start + off) % HERO_CLIENTS.length]);
-      wrap.innerHTML = slice.map(cell).join('');
-      start = (start + 3) % HERO_CLIENTS.length;
-      wrap.classList.remove('fade-out');
-      wrap.classList.add('fade-in');
-      fading = false;
-    }, 700); // match CSS fade time
+  // Set animation duration based on content width → constant speed
+  function setSpeed(){
+    // pixels per second (tweak to taste)
+    const PX_PER_SEC = 60; // slower = smaller; faster = larger
+    // width of the first half (one list)
+    const firstHalfWidth = track.scrollWidth / 2;
+    const duration = firstHalfWidth / PX_PER_SEC; // seconds
+    track.style.animation = `heroMarquee ${duration}s linear infinite`;
   }
 
-  // Initial paint
-  wrap.classList.add('fade-in');
-  render();
+  // After images decode (important for accurate width), then set speed
+  const imgs = track.querySelectorAll('img');
+  let pending = imgs.length;
+  if (pending === 0) setSpeed();
+  imgs.forEach(img=>{
+    if (img.complete) {
+      if (--pending === 0) setSpeed();
+    } else {
+      img.addEventListener('load', ()=>{ if (--pending === 0) setSpeed(); }, {once:true});
+      img.addEventListener('error',()=>{ if (--pending === 0) setSpeed(); }, {once:true});
+    }
+  });
 
-  // Change set every 8 seconds
-  setInterval(render, 8000);
-
-  wrap.style.direction = 'ltr';
+  // Recompute on resize so speed stays constant
+  let resizeTimer;
+  window.addEventListener('resize', ()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(setSpeed, 200);
+  });
 })();
 </script>
 
@@ -1443,8 +1479,10 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 
 
+
 </body>
 </html>
+
 
 
 
