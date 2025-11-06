@@ -28,36 +28,92 @@
 </head>
 <body class="bg-neutral-50 text-neutral-900">
 
-  <!-- HEADER -->
-  <header class="sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-neutral-200">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
-      <a href="./index.html" class="flex items-center" aria-label="Mubasher One home">
-        <picture>
-          <source srcset="./assets/LOGO-01.svg" type="image/svg+xml">
-          <img src="./assets/LOGO-01.png" alt="Mubasher One Logo" class="h-[64px] w-auto">
-        </picture>
-      </a>
+ <!-- HEADER (matches homepage) -->
+<header class="sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-neutral-200">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+    <!-- Logo -->
+    <a href="./" class="flex items-center" aria-label="Mubasher One home">
+      <picture>
+        <source srcset="./assets/LOGO-01.svg" type="image/svg+xml">
+        <img src="./assets/LOGO-01.png" alt="Mubasher One Logo" class="h-[64px] w-auto">
+      </picture>
+    </a>
 
-      <nav class="hidden md:flex items-center gap-6 text-sm">
-        <a href="./index.html#services" class="hover:text-neutral-700" data-i18n="nav.services">Services</a>
-        <a href="./index.html#capabilities" class="hover:text-neutral-700" data-i18n="nav.capabilities">Capabilities</a>
-        <a href="./index.html#qa" class="hover:text-neutral-700" data-i18n="nav.quality">Quality</a>
-        <a href="./index.html#values" class="hover:text-neutral-700" data-i18n="nav.values">Values</a>
-        <a href="./index.html#clients" class="hover:text-neutral-700" data-i18n="nav.clients">Clients</a>
-        <a href="./index.html#reviews" class="hover:text-neutral-700" data-i18n="nav.reviews">Reviews</a>
-        <a href="./index.html#map" class="hover:text-neutral-700" data-i18n="nav.location">Location</a>
-        <a href="./index.html#book" class="rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800" data-i18n="nav.book">Book</a>
-      </nav>
-
-      <div class="flex items-center gap-3">
-        <a href="./assets/certificates/saso-1154.pdf" target="_blank" class="flex items-center gap-2 text-xs sm:text-sm text-neutral-700 hover:underline" aria-label="SASO Certificate 1154">
-          <img src="./assets/trust/saso-4star.png" alt="SASO 4-Star" class="h-6 w-auto hidden sm:block">
-          <span data-i18n="saso.badge">SASO 4-Star • Cert. 1154</span>
+    <!-- Nav -->
+    <nav class="hidden md:flex items-center gap-6 text-sm">
+      <!-- Capabilities (hover/focus dropdown + clickable link) -->
+      <div class="relative group">
+        <a href="./#capabilities"
+           class="inline-flex items-center gap-1 hover:text-neutral-700 focus:outline-none"
+           data-i18n="nav.capabilities">
+          Capabilities
+          <svg aria-hidden="true" viewBox="0 0 20 20" class="h-4 w-4">
+            <path d="M5.5 7.5 10 12l4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
         </a>
-        <button id="langToggle" class="rounded-xl px-3 py-1.5 border border-neutral-300 text-sm hover:bg-neutral-100" aria-live="polite">عربي</button>
+
+        <!-- Hover menu -->
+        <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 z-50">
+          <div
+            class="w-72 rounded-xl border border-neutral-200 bg-white shadow-lg overflow-hidden
+                   opacity-0 invisible pointer-events-none transition duration-150
+                   group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto
+                   focus-within:opacity-100 focus-within:visible focus-within:pointer-events-auto">
+
+            <!-- SASO (PDF direct) -->
+            <a href="./assets/certificates/saso-1154.pdf" target="_blank" rel="noopener"
+               class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
+              <span class="font-medium" data-i18n="cap.saso">SASO 4-Star Certificate</span>
+              <div class="text-xs text-neutral-500">View official SASO accreditation PDF</div>
+            </a>
+
+            <!-- Mobile Units -->
+            <a href="./mobile-units.html" class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
+              <span class="font-medium" data-i18n="cap.mobile">Mobile Units</span>
+              <div class="text-xs text-neutral-500" data-i18n="cap.mobile_desc">On-site service vans and emergency support.</div>
+            </a>
+
+            <!-- Facility Capacity -->
+            <a href="./facility-capacity.html" class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
+              <span class="font-medium" data-i18n="cap.capacity">Facility Capacity</span>
+              <div class="text-xs text-neutral-500">Bays, lifts, and service pits overview.</div>
+            </a>
+
+            <!-- In-House Parts Store (current page) -->
+            <a href="./parts-store.html" aria-current="page"
+               class="block px-4 py-2.5 text-sm bg-neutral-50">
+              <span class="font-medium" data-i18n="cap.parts">In-House Parts Store</span>
+              <div class="text-xs text-neutral-500" data-i18n="cap.parts_desc">Fast-moving and critical parts in stock.</div>
+            </a>
+          </div>
+        </div>
       </div>
+
+      <!-- Same order as homepage; target HOME sections -->
+      <a href="./#services" class="hover:text-neutral-700" data-i18n="nav.services">Services</a>
+      <a href="./#gallery" class="hover:text-neutral-700">Gallery</a>
+      <a href="./#reviews" class="hover:text-neutral-700" data-i18n="nav.reviews">Reviews</a>
+      <a href="./#clients" class="hover:text-neutral-700" data-i18n="nav.clients">Clients</a>
+      <a href="./#qa" class="hover:text-neutral-700" data-i18n="nav.quality">Quality</a>
+      <a href="./#values" class="hover:text-neutral-700" data-i18n="nav.values">Values</a>
+      <a href="./#about" class="hover:text-neutral-700" data-i18n="nav.about">About&nbsp;Us</a>
+      <a href="./#book" class="rounded-xl px-4 py-2 bg-neutral-900 text-white hover:bg-neutral-800" data-i18n="nav.book">Book</a>
+      <a href="./#map" class="hover:text-neutral-700" data-i18n="nav.location">Location</a>
+    </nav>
+
+    <!-- Right side: SASO badge + Lang toggle -->
+    <div class="flex items-center gap-3">
+      <a href="./assets/certificates/saso-1154.pdf" target="_blank"
+         class="flex items-center gap-2 text-xs sm:text-sm text-neutral-700 hover:underline"
+         aria-label="SASO Certificate 1154">
+        <img src="./assets/trust/saso-4star.png" alt="SASO 4-Star" class="h-6 w-auto hidden sm:block">
+        <span data-i18n="saso.badge">SASO 4-Star • Cert. 1154</span>
+      </a>
+      <button id="langToggle" class="rounded-xl px-3 py-1.5 border border-neutral-300 text-sm hover:bg-neutral-100" aria-live="polite">عربي</button>
     </div>
-  </header>
+  </div>
+</header>
+
 
   <!-- HERO -->
   <section class="relative overflow-hidden">
