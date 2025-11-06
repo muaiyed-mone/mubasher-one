@@ -85,6 +85,52 @@
 .float-slower { animation: floatY 14s ease-in-out infinite; }
 .float-slowest{ animation: floatY 16s ease-in-out infinite; }
 
+/* === HERO vertical wheel (right side) === */
+/* 1.5× size of your old 112×56 cells → 168×84 */
+:root{
+  --hero-cell-w: 168px;
+  --hero-cell-h: 84px;
+  --hero-gap:  1rem;             /* gap-4 */
+  --hero-speed-pps: 30;          /* same px/sec as before */
+}
+
+/* Title style already present */
+.hero-clients h3 { font-weight:600; letter-spacing:.02em; }
+
+/* Each logo cell */
+.hero-wheel-logo{
+  width: var(--hero-cell-w);
+  height: var(--hero-cell-h);
+  display: grid;
+  place-items: center;
+  filter: grayscale(1) brightness(1.15) opacity(.92);
+  transition: transform .35s ease, filter .35s ease;
+}
+.hero-wheel-logo:hover{ transform: translateY(-2px); filter: grayscale(.2) brightness(1) opacity(1); }
+
+.hero-wheel-logo img{
+  max-height: calc(var(--hero-cell-h) * 0.78); /* ≈66px */
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Viewport shows exactly 3 cells (2 gaps between them) */
+#hero-wheel-viewport{
+  width:  var(--hero-cell-w);
+  height: calc(var(--hero-cell-h) * 3 + var(--hero-gap) * 2);
+  /* soften top/bottom edges for a windowed effect */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+/* vertical stack + spacing */
+#hero-wheel-track{ gap: var(--hero-gap); }
+
+/* gentle float options (reused) */
+@keyframes floatY { 0%{transform:translateY(0)} 50%{transform:translateY(-4px)} 100%{transform:translateY(0)} }
+.float-slow   { animation: floatY 12s ease-in-out infinite; }
+.float-slower { animation: floatY 14s ease-in-out infinite; }
+.float-slowest{ animation: floatY 16s ease-in-out infinite; }
 
     /* --- Hero logo fade cross-dissolve --- */
 .hero-logos-fade {
@@ -272,10 +318,13 @@ a:not(.btn):focus-visible{
       <h3 class="text-sm uppercase tracking-wider text-white/70 select-none mb-4">Trusted By</h3>
 
       <!-- 3-at-a-time slots -->
-<!-- viewport shows exactly ~3 logos -->
-<div class="mt-2 hero-strip overflow-hidden">
-  <div id="hero-strip-track" class="hero-strip-track flex gap-8 will-change-transform"></div>
+<!-- Vertical rotating wheel (3 logos visible) -->
+<div id="hero-wheel" class="mt-2">
+  <div id="hero-wheel-viewport" class="overflow-hidden mx-auto">
+    <div id="hero-wheel-track" class="flex flex-col will-change-transform"></div>
+  </div>
 </div>
+
 
       <div class="mt-3 text-xs text-white/40">Leading fleets & manufacturers in KSA</div>
     </aside>
@@ -1547,7 +1596,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 })();
 </script>
 <script>
-(function setupHeroClientsMarquee(){
+(function setupHeroClientsWheel(){
   // ——— 1) Data ———
   const LIST = [
     ["Abrak_500x500.png","ABRAK"],
@@ -1563,32 +1612,28 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
     ["Kaefer_500x500.png","KAEFER"],
     ["Kentz_500x500.png","KENTZ"],
     ["MIA_Arabia_500x500.png","MIA Arabia Company"],
-    ["Sanabel_United_Trading_500x500.png","Sanabel United Trading Co."], // keep your actual filename
+    ["Sanabel_United_Trading_500x500.png","Sanabel United Trading Co."],
     ["SRACO_500x500.png","SRACO"],
     ["Table_Four_500x500.png","Table Four"]
   ];
 
-  const track = document.getElementById('hero-strip-track');
-  if (!track) return;
+  const track    = document.getElementById('hero-wheel-track');
+  const viewport = document.getElementById('hero-wheel-viewport');
+  if (!track || !viewport) return;
 
-  // Make sure LTR motion even on RTL pages
+  // Ensure LTR layout regardless of page dir (we move via translateY)
   track.style.direction = 'ltr';
-  // Kill any CSS animation that might conflict
-  track.style.animation = 'none';
 
   // ——— 2) Helpers ———
   const floatClasses = ["float-slow","float-slower","float-slowest"];
   const cell = ([img, name], i) => `
-    <div class="hero-logo ${floatClasses[i % floatClasses.length]}">
+    <div class="hero-wheel-logo ${floatClasses[i % floatClasses.length]}">
       <img src="./assets/clients/${img}" alt="${name}" loading="eager" decoding="async">
     </div>
   `;
 
-  function buildOnce(){
-    return LIST.map((it,i)=>cell(it,i)).join('');
-  }
+  function buildSequence(){ return LIST.map((it,i)=>cell(it,i)).join(''); }
 
-  // Wait until all current images in the track have sizes
   function waitImages(el){
     const imgs = Array.from(el.querySelectorAll('img'));
     if (!imgs.length) return Promise.resolve();
@@ -1605,40 +1650,40 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
     });
   }
 
+  // ——— 3) Layout + Animation ———
   let rafId = 0;
-  let last = 0;
-  let x = 0;                 // current translateX
-  let seqWidth = 0;          // width of one full sequence
-  let viewport = 0;
-  let PX_PER_SEC = 30;      // adjust speed here
+  let last  = 0;
+  let y     = 0;                 // current translateY
+  let seqH  = 0;                 // height of one full sequence
+  let viewH = 0;
+  const PX_PER_SEC = parseFloat(getComputedStyle(document.documentElement)
+                    .getPropertyValue('--hero-speed-pps')) || 30; // same speed
 
   async function layout(){
     cancelAnimationFrame(rafId);
-    track.style.transform = 'translateX(0px)';
-    x = 0;
+    track.style.transform = 'translateY(0px)';
+    track.innerHTML = buildSequence();
+    y = 0;
 
-    // Build the **base** sequence just once
-    track.innerHTML = buildOnce();
-
-    // Ensure we can measure widths
+    // Ensure we can measure heights
     await waitImages(track);
 
-    // Measure the width of ONE sequence
-    seqWidth = Array.from(track.children)
-      .reduce((w, el)=> w + el.getBoundingClientRect().width, 0);
+    // one sequence height = sum of item heights + gaps
+    const children = Array.from(track.children);
+    seqH = children.reduce((h, el)=> h + el.getBoundingClientRect().height, 0)
+        + (children.length - 1) * parseFloat(getComputedStyle(track).gap || 0);
 
-    viewport = track.parentElement?.clientWidth || 0;
+    viewH = viewport.clientHeight || 0;
 
-    // Now clone enough items so that total width >= seqWidth + viewport
-    // (we need at least one extra full sequence + viewport to wrap seamlessly)
-    let total = seqWidth;
+    // Clone enough sequences to cover at least one extra sequence + viewport for seamless wrap
     const baseHTML = track.innerHTML;
-    while (total < seqWidth + viewport + 1) { // +1 avoids off-by-1 px on some zoom levels
+    let total = seqH;
+    while (total < seqH + viewH + 1){
       track.insertAdjacentHTML('beforeend', baseHTML);
-      total += seqWidth;
+      total += seqH;
     }
 
-    // Start the loop
+    // Kick off animation
     last = performance.now();
     loop(last);
   }
@@ -1647,40 +1692,39 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
     const dt = (t - last) / 1000; // seconds
     last = t;
 
-    // Move left by speed
-    x -= PX_PER_SEC * dt;
+    // Move UP by speed
+    y -= PX_PER_SEC * dt;
 
-    // Wraparound: when we've shifted past ONE sequence, jump forward by EXACTLY one sequence
-    if (-x >= seqWidth) {
-      x += seqWidth;
+    // Wrap by exactly one sequence height for a perfect loop
+    if (-y >= seqH) {
+      y += seqH;
     }
 
-    track.style.transform = `translateX(${x}px)`;
+    track.style.transform = `translateY(${y}px)`;
     rafId = requestAnimationFrame(loop);
   }
 
   // Initial layout
   layout();
 
-  // Recompute on resize / orientation change
+  // Re-layout on resize and dir/lang toggle
   let rto;
-  const onResize = ()=>{
-    clearTimeout(rto);
-    rto = setTimeout(layout, 150);
-  };
+  const onResize = ()=>{ clearTimeout(rto); rto = setTimeout(layout, 150); };
   window.addEventListener('resize', onResize);
   window.addEventListener('orientationchange', onResize);
 
-  // If you toggle Arabic, we also relayout (you already have a lang toggle)
   document.getElementById('langToggle')?.addEventListener('click', ()=>{
     setTimeout(layout, 50);
   });
 
-  // Optional: pause on hover
-  track.addEventListener('mouseenter', ()=>{ cancelAnimationFrame(rafId); rafId = 0; });
-  track.addEventListener('mouseleave', ()=>{
+  // Pause on hover (optional)
+  viewport.addEventListener('mouseenter', ()=>{ cancelAnimationFrame(rafId); rafId = 0; });
+  viewport.addEventListener('mouseleave', ()=>{
     if (!rafId){ last = performance.now(); rafId = requestAnimationFrame(loop); }
   });
+
+  // Expose a reset hook like your other sliders
+  window.resetHeroWheel = layout;
 })();
 </script>
 
@@ -1690,8 +1734,10 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 
 
+
 </body>
 </html>
+
 
 
 
