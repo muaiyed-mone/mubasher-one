@@ -677,5 +677,83 @@
     });
   })();
   </script>
+
+  <script>
+/* ===== Persistent language across pages ===== */
+(function persistentLang(){
+  const STORAGE_KEY = 'mone_lang';   // 'en' | 'ar'
+  const btn = document.getElementById('langToggle');
+
+  // Helper: activate a language
+  function setLang(lang){
+    // Update <html> attributes
+    if (lang === 'ar'){
+      document.documentElement.lang = 'ar';
+      document.documentElement.dir  = 'rtl';
+      // Run translations if AR + applyTranslations exist on this page
+      try {
+        if (window.AR && typeof window.applyTranslations === 'function') {
+          window.applyTranslations(window.AR);
+        }
+      } catch(_) {}
+      // Toggle button text
+      if (btn) btn.textContent = 'English';
+    } else {
+      document.documentElement.lang = 'en';
+      document.documentElement.dir  = 'ltr';
+      if (btn) btn.textContent = 'عربي';
+    }
+
+    // Call any page-specific fixups if they exist
+    try { if (typeof window.resetGallery        === 'function') window.resetGallery(); } catch(_){}
+    try { if (typeof window.resetReviews        === 'function') window.resetReviews(); } catch(_){}
+    try { if (typeof window.resetClients        === 'function') window.resetClients(); } catch(_){}
+    try { if (typeof window.syncHoursLanguage   === 'function') window.syncHoursLanguage(); } catch(_){}
+  }
+
+  // 1) On load: read saved choice and apply
+  const saved = localStorage.getItem(STORAGE_KEY) || 'en';
+  setLang(saved);
+
+  // 2) Toggle: save choice and apply immediately
+  if (btn){
+    btn.addEventListener('click', ()=>{
+      const current = localStorage.getItem(STORAGE_KEY) || 'en';
+      const next = current === 'ar' ? 'en' : 'ar';
+      localStorage.setItem(STORAGE_KEY, next);
+      setLang(next);
+      // If you prefer to reload for a full reset, uncomment:
+      // location.reload();
+    });
+  }
+
+  // 3) (Optional) Ensure internal links keep state even if another script resets things.
+  //    Because we use localStorage, we DON'T need to modify URLs.
+  //    But if you load some pages without this script, you can append ?lang=ar:
+  /*
+  if (saved === 'ar'){
+    document.querySelectorAll('a[href^="./"], a[href^="#"], a[href^="/"]').forEach(a=>{
+      const href = a.getAttribute('href');
+      if (!href) return;
+      if (href.startsWith('#')) return; // same-page anchors okay
+      if (href.includes('lang=')) return;
+      const url = new URL(href, location.origin);
+      url.searchParams.set('lang','ar');
+      a.setAttribute('href', url.pathname + url.search + url.hash);
+    });
+  }
+  */
+
+  // 4) (Optional) If you DO decide to use the ?lang=ar fallback, read it and store:
+  const paramsLang = new URLSearchParams(location.search).get('lang');
+  if (paramsLang === 'ar' || paramsLang === 'en'){
+    if (paramsLang !== saved){
+      localStorage.setItem(STORAGE_KEY, paramsLang);
+      setLang(paramsLang);
+    }
+  }
+})();
+</script>
+
 </body>
 </html>
