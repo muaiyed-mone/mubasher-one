@@ -118,6 +118,16 @@
   to   { transform: translateX(calc(-50% - var(--vw, 0px))); }
 }
 
+    /* Make links readable by default, and show a tidy underline on hover/focus */
+a:not(.btn){
+  text-decoration: none;
+}
+a:not(.btn):hover,
+a:not(.btn):focus-visible{
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 
   </style>
 </head>
@@ -216,9 +226,10 @@
     Certified under the SASO 4-Star national quality program, ensuring compliance with operational,
     safety, and environmental standards across all workshop activities — audited and verified by authorized inspectors.
   </p>
-  <span class="text-green-700 text-xs font-medium opacity-0 group-hover:opacity-100 transition mt-3 inline-block">
-    See Certificate (PDF)
-  </span>
+ <span class="text-green-700 text-xs font-medium transition mt-3 inline-flex items-center gap-1">
+  See Certificate (PDF) <span aria-hidden="true">→</span>
+</span>
+
 </a>
 
 <!-- ERP -->
@@ -241,9 +252,10 @@
     Fully equipped mobile service vans with diagnostic tools and air compressors deliver emergency repairs,
     preventive maintenance, and fleet support directly at client sites across Al-Ahsa and nearby regions.
   </p>
-  <span class="text-green-700 text-xs font-medium opacity-0 group-hover:opacity-100 transition mt-3 inline-block">
-    View Photos &amp; Videos
-  </span>
+ <span class="text-green-700 text-xs font-medium transition mt-3 inline-flex items-center gap-1">
+  View Photos &amp; Videos <span aria-hidden="true">→</span>
+</span>
+
 </a>
 
 <!-- Facility Capacity -->
@@ -257,9 +269,10 @@
     <li data-i18n="cap.cap3">5 hydraulic lifts</li>
     <li data-i18n="cap.cap4">3 full-length service pits</li>
   </ul>
-  <span class="text-green-700 text-xs font-medium opacity-0 group-hover:opacity-100 transition mt-3 inline-block">
-    Explore More
-  </span>
+ <span class="text-green-700 text-xs font-medium transition mt-3 inline-flex items-center gap-1">
+  Explore More <span aria-hidden="true">→</span>
+</span>
+
 </a>
 
 <!-- In-House Parts Store -->
@@ -271,9 +284,10 @@
     Fast-moving and critical spare parts — both new and used — are stocked in our in-house warehouse
     to reduce downtime and ensure rapid repairs.
   </p>
-  <span class="text-green-700 text-xs font-medium opacity-0 group-hover:opacity-100 transition mt-3 inline-block">
-    View Photos
-  </span>
+ <span class="text-green-700 text-xs font-medium transition mt-3 inline-flex items-center gap-1">
+ View Photos <span aria-hidden="true">→</span>
+</span>
+
 </a>
 
   </div>
@@ -1547,6 +1561,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
