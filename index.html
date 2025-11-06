@@ -175,21 +175,20 @@ a:not(.btn):focus-visible{
       </a>
 
       <nav class="hidden md:flex items-center gap-6 text-sm">
-<!-- Capabilities (hover/focus dropdown with hover-bridge) -->
+<!-- Capabilities (hover/focus dropdown + clickable link) -->
 <div class="relative group">
-  <!-- Trigger -->
-  <button
-    class="inline-flex items-center gap-1 hover:text-neutral-700 focus:outline-none"
-    aria-haspopup="true" aria-expanded="false" data-i18n="nav.capabilities">
+  <!-- Trigger is an <a> so click navigates to the section -->
+  <a href="#capabilities"
+     class="inline-flex items-center gap-1 hover:text-neutral-700 focus:outline-none"
+     data-i18n="nav.capabilities">
     Capabilities
     <svg aria-hidden="true" viewBox="0 0 20 20" class="h-4 w-4">
       <path d="M5.5 7.5 10 12l4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
-  </button>
+  </a>
 
-  <!-- Wrapper creates a hover-bridge using padding (no gap between button and menu) -->
+  <!-- Hover-bridge wrapper so the menu doesn't disappear -->
   <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 z-50">
-    <!-- Panel -->
     <div
       class="w-72 rounded-xl border border-neutral-200 bg-white shadow-lg overflow-hidden
              opacity-0 invisible pointer-events-none
@@ -197,7 +196,7 @@ a:not(.btn):focus-visible{
              group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto
              focus-within:opacity-100 focus-within:visible focus-within:pointer-events-auto">
 
-      <!-- SASO (opens PDF directly) -->
+      <!-- SASO (PDF direct) -->
       <a href="./assets/certificates/saso-1154.pdf" target="_blank" rel="noopener"
          class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
         <span class="font-medium" data-i18n="cap.saso">SASO 4-Star Certificate</span>
@@ -205,22 +204,19 @@ a:not(.btn):focus-visible{
       </a>
 
       <!-- Mobile Units -->
-      <a href="./mobile-units.html"
-         class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
+      <a href="./mobile-units.html" class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
         <span class="font-medium" data-i18n="cap.mobile">Mobile Units</span>
         <div class="text-xs text-neutral-500" data-i18n="cap.mobile_desc">On-site service vans and emergency support.</div>
       </a>
 
       <!-- Facility Capacity -->
-      <a href="./facility-capacity.html"
-         class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
+      <a href="./facility-capacity.html" class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
         <span class="font-medium" data-i18n="cap.capacity">Facility Capacity</span>
         <div class="text-xs text-neutral-500">Bays, lifts, and service pits overview.</div>
       </a>
 
       <!-- In-House Parts Store -->
-      <a href="./parts-store.html"
-         class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
+      <a href="./parts-store.html" class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
         <span class="font-medium" data-i18n="cap.parts">In-House Parts Store</span>
         <div class="text-xs text-neutral-500" data-i18n="cap.parts_desc">Fast-moving and critical parts in stock.</div>
       </a>
@@ -1696,6 +1692,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
