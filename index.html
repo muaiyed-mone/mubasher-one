@@ -179,6 +179,7 @@ a:not(.btn):focus-visible{
         <a href="#capabilities" class="hover:text-neutral-700" data-i18n="nav.capabilities">Capabilities</a>
         <a href="#qa" class="hover:text-neutral-700" data-i18n="nav.quality">Quality</a>
         <a href="#values" class="hover:text-neutral-700" data-i18n="nav.values">Values</a>
+        <a href="#mission" class="hover:text-neutral-700" data-i18n="nav.mission">Mission & Vision</a>
         <a href="#clients" class="hover:text-neutral-700" data-i18n="nav.clients">Clients</a>
         <a href="#reviews" class="hover:text-neutral-700" data-i18n="nav.reviews">Reviews</a>
         <a href="#map" class="hover:text-neutral-700" data-i18n="nav.location">Location</a>
@@ -548,12 +549,24 @@ a:not(.btn):focus-visible{
 </section>
 
   
-<!-- MISSION & VISION -->
+<!-- OVERVIEW + MISSION & VISION -->
 <section id="mission" class="py-16 bg-neutral-50 text-neutral-800">
   <div class="max-w-5xl mx-auto px-4 text-center fade-in">
-    <h2 class="text-3xl font-bold mb-8" data-i18n="mission.title">Mission & Vision</h2>
+    <h2 class="text-3xl font-bold mb-8" data-i18n="mission.title">Overview • Mission & Vision</h2>
+
+    <!-- Overview -->
+    <p class="text-neutral-700 text-sm sm:text-base leading-relaxed mb-10" data-i18n="mission.overview">
+      Mubasher One Automotive Maintenance Co. is a SASO 4-Star certified service center,
+      recognized as a leader in automotive maintenance and refurbishment across the Al-Ahsa region.
+      With a 3,000 m² facility and a skilled workforce of over 30 certified professionals, we combine
+      cutting-edge technology, technical expertise, and a customer-first approach to deliver exceptional
+      results for both diesel and petrol vehicles. Our operation is built on efficiency, transparency, and
+      innovation, offering comprehensive maintenance solutions that serve individuals, corporate fleets,
+      and government clients with equal precision and reliability.
+    </p>
+
+    <!-- Mission & Vision -->
     <div class="grid md:grid-cols-2 gap-8 text-left">
-      <!-- Mission -->
       <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition duration-300">
         <h3 class="font-semibold text-lg mb-2" data-i18n="mission.mission_title">Our Mission</h3>
         <p class="text-sm text-neutral-600" data-i18n="mission.mission_desc">
@@ -564,7 +577,6 @@ a:not(.btn):focus-visible{
         </p>
       </div>
 
-      <!-- Vision -->
       <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition duration-300">
         <h3 class="font-semibold text-lg mb-2" data-i18n="mission.vision_title">Our Vision</h3>
         <p class="text-sm text-neutral-600" data-i18n="mission.vision_desc">
@@ -576,6 +588,7 @@ a:not(.btn):focus-visible{
     </div>
   </div>
 </section>
+
 
 
   <!-- BOOK / REQUEST SERVICE -->
@@ -953,11 +966,14 @@ a:not(.btn):focus-visible{
     "innov.cta_whatsapp":"تواصل واتساب",
    "footer.email":"البريد الإلكتروني: ",
 
-    "mission.title":"الرسالة والرؤية",
+  "mission.title":"نظرة عامة • الرسالة والرؤية",
+"mission.overview":"شركة مباشر وان لصيانة السيارات هي مركز خدمة معتمد بتصنيف ٤ نجوم من ساسو، معترف بها كإحدى الشركات الرائدة في صيانة وإعادة تأهيل السيارات في منطقة الأحساء. تمتد منشأتنا على مساحة ٣٠٠٠ م² ويعمل بها أكثر من ٣٠ فنيًا معتمدًا يجمعون بين التكنولوجيا الحديثة والخبرة الفنية ونهج يضع العميل أولًا لتقديم نتائج استثنائية لمركبات الديزل والبنزين على حد سواء. تعتمد عملياتنا على الكفاءة والشفافية والابتكار لتقديم حلول صيانة شاملة للأفراد والشركات والجهات الحكومية بنفس الدقة والموثوقية.",
 "mission.mission_title":"رسالتنا",
 "mission.mission_desc":"نعمل بتعاون وثيق مع عملائنا لبناء منظومة سيارات أقوى وأكثر ابتكارًا. معًا نتغلب على تحديات اليوم ونستبق فرص الغد، وندفع نحو نمو مستدام، ونرفع معايير الخدمة، ونخلق قيمة طويلة الأمد للأعمال والمجتمع.",
 "mission.vision_title":"رؤيتنا",
 "mission.vision_desc":"أن نكون قوة رائدة في صناعة السيارات — مدفوعة برضا العملاء، وتميّز الموظفين، والابتكار المستمر، والنمو المستدام، والكفاءة التشغيلية.",
+"nav.mission":"الرسالة والرؤية",
+
 
   };
 
@@ -1629,6 +1645,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
