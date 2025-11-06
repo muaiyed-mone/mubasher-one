@@ -175,7 +175,7 @@ a:not(.btn):focus-visible{
       </a>
 
       <nav class="hidden md:flex items-center gap-6 text-sm">
-<!-- Capabilities (hover/focus dropdown) -->
+<!-- Capabilities (hover/focus dropdown with hover-bridge) -->
 <div class="relative group">
   <!-- Trigger -->
   <button
@@ -187,43 +187,47 @@ a:not(.btn):focus-visible{
     </svg>
   </button>
 
-  <!-- Dropdown -->
-  <div
-    class="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100
-           transition duration-150
-           absolute left-1/2 -translate-x-1/2 top-full mt-2
-           w-72 rounded-xl border border-neutral-200 bg-white shadow-lg overflow-hidden z-50">
+  <!-- Wrapper creates a hover-bridge using padding (no gap between button and menu) -->
+  <div class="absolute left-1/2 -translate-x-1/2 top-full pt-2 z-50">
+    <!-- Panel -->
+    <div
+      class="w-72 rounded-xl border border-neutral-200 bg-white shadow-lg overflow-hidden
+             opacity-0 invisible pointer-events-none
+             transition duration-150
+             group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto
+             focus-within:opacity-100 focus-within:visible focus-within:pointer-events-auto">
 
-    <!-- SASO -->
-    <a href="./assets/certificates/saso-1154.pdf" target="_blank" rel="noopener"
-       class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
-       <span class="font-medium" data-i18n="cap.saso">SASO 4-Star Certificate</span>
-       <div class="text-xs text-neutral-500">View official SASO accreditation PDF</div>
-    </a>
+      <!-- SASO (opens PDF directly) -->
+      <a href="./assets/certificates/saso-1154.pdf" target="_blank" rel="noopener"
+         class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
+        <span class="font-medium" data-i18n="cap.saso">SASO 4-Star Certificate</span>
+        <div class="text-xs text-neutral-500">View official SASO accreditation PDF</div>
+      </a>
 
-    <!-- Mobile Units -->
-    <a href="./mobile-units.html"
-       class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
-       <span class="font-medium" data-i18n="cap.mobile">Mobile Units</span>
-       <div class="text-xs text-neutral-500" data-i18n="cap.mobile_desc">On-site service vans and emergency support.</div>
-    </a>
+      <!-- Mobile Units -->
+      <a href="./mobile-units.html"
+         class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
+        <span class="font-medium" data-i18n="cap.mobile">Mobile Units</span>
+        <div class="text-xs text-neutral-500" data-i18n="cap.mobile_desc">On-site service vans and emergency support.</div>
+      </a>
 
-    <!-- Facility Capacity -->
-    <a href="./facility-capacity.html"
-       class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
-       <span class="font-medium" data-i18n="cap.capacity">Facility Capacity</span>
-       <div class="text-xs text-neutral-500">Bays, lifts, and full-length service pits overview.</div>
-    </a>
+      <!-- Facility Capacity -->
+      <a href="./facility-capacity.html"
+         class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
+        <span class="font-medium" data-i18n="cap.capacity">Facility Capacity</span>
+        <div class="text-xs text-neutral-500">Bays, lifts, and service pits overview.</div>
+      </a>
 
-    <!-- In-House Parts Store -->
-    <a href="./parts-store.html"
-       class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
-       <span class="font-medium" data-i18n="cap.parts">In-House Parts Store</span>
-       <div class="text-xs text-neutral-500" data-i18n="cap.parts_desc">Fast-moving and critical parts in stock.</div>
-    </a>
-
+      <!-- In-House Parts Store -->
+      <a href="./parts-store.html"
+         class="block px-4 py-2.5 text-sm hover:bg-neutral-50">
+        <span class="font-medium" data-i18n="cap.parts">In-House Parts Store</span>
+        <div class="text-xs text-neutral-500" data-i18n="cap.parts_desc">Fast-moving and critical parts in stock.</div>
+      </a>
+    </div>
   </div>
 </div>
+
 
          <a href="#services" class="hover:text-neutral-700" data-i18n="nav.services">Services</a>
           <a href="#gallery" class="hover:text-neutral-700">Gallery</a>
@@ -1692,6 +1696,7 @@ document.getElementById('langToggle')?.addEventListener('click', ()=>{
 
 </body>
 </html>
+
 
 
 
