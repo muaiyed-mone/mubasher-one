@@ -49,7 +49,7 @@ async function loadEstimate(){
   const est = j.estimate;
   document.getElementById('est').classList.remove('hidden');
   document.getElementById('cust').textContent = `${est.customer_name} • ${est.vehicle} • Plate ${est.plate} • ${est.amount||''}`;
-  document.getElementById('pdf').src = est.pdf_view_url;
+document.getElementById('pdf').src = `${API}?action=pdf&token=${encodeURIComponent(token)}`;
 }
 loadEstimate();
 
