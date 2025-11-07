@@ -37,8 +37,8 @@
   </div>
 
 <script>
-const API = "YOUR_APPS_SCRIPT_WEBAPP_URL"; // e.g., https://script.google.com/macros/s/xxx/exec
-const token = new URL(location.href).searchParams.get('token');
+const API = "https://script.google.com/macros/s/AKfycbzydcohEYQC2cACcw9t7KTR5n_s9Wf6gwfamlSJH3fObsW_HvSD57n4uBqOg4hSTXQd/exec";
+  const token = new URL(location.href).searchParams.get('token');
 
 async function loadEstimate(){
   const r = await fetch(`${API}?action=get_estimate&token=${encodeURIComponent(token)}`);
