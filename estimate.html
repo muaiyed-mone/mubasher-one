@@ -1,0 +1,83 @@
+<!doctype html><html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estimate Approval — Mubasher One</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3/dist/tailwind.min.css">
+</head>
+<body class="bg-neutral-50">
+  <div class="max-w-md mx-auto p-4">
+    <h1 class="text-xl font-semibold mb-2">Estimate Approval</h1>
+    <p id="status" class="text-sm text-neutral-600 mb-3"></p>
+
+    <div id="est" class="hidden">
+      <div class="text-sm mb-2" id="cust"></div>
+      <div class="rounded-md overflow-hidden border bg-white">
+        <iframe id="pdf" width="100%" height="520" style="border:0;"></iframe>
+      </div>
+
+      <div id="otpBox" class="border rounded-md p-3 bg-white my-3">
+        <label class="block text-sm mb-1">Enter the 6-digit code</label>
+        <input id="otp" class="border w-full p-2 rounded" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
+        <button id="btnOtp" class="mt-2 px-3 py-2 bg-black text-white rounded">Verify</button>
+        <div id="otpMsg" class="text-sm mt-2 text-red-600"></div>
+      </div>
+
+      <div id="actions" class="hidden flex gap-2">
+        <button id="btnApprove" class="px-3 py-2 bg-emerald-600 text-white rounded">Approve</button>
+        <button id="btnChanges" class="px-3 py-2 bg-amber-600 text-white rounded">Request changes</button>
+        <button id="btnDecline" class="px-3 py-2 bg-rose-600 text-white rounded">Decline</button>
+      </div>
+
+      <p class="text-xs text-neutral-500 mt-3">
+        By tapping Approve, I authorize Mubasher One to proceed with the listed works and charges.
+        <a href="/estimate-terms.html" class="underline">Terms</a>
+      </p>
+    </div>
+  </div>
+
+<script>
+const API = "YOUR_APPS_SCRIPT_WEBAPP_URL"; // e.g., https://script.google.com/macros/s/xxx/exec
+const token = new URL(location.href).searchParams.get('token');
+
+async function loadEstimate(){
+  const r = await fetch(`${API}?action=get_estimate&token=${encodeURIComponent(token)}`);
+  const j = await r.json();
+  const st = document.getElementById('status');
+  if(!j.ok){ st.textContent = j.error || 'Error'; return; }
+  st.textContent = 'Verify the code we sent to your WhatsApp to continue.';
+  const est = j.estimate;
+  document.getElementById('est').classList.remove('hidden');
+  document.getElementById('cust').textContent = `${est.customer_name} • ${est.vehicle} • Plate ${est.plate} • ${est.amount||''}`;
+  document.getElementById('pdf').src = est.pdf_view_url;
+}
+loadEstimate();
+
+document.getElementById('btnOtp').onclick = async ()=>{
+  const otp = document.getElementById('otp').value.trim();
+  const r = await fetch(API, { method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ action:'verify_otp', token, otp })});
+  const j = await r.json();
+  const box = document.getElementById('otpMsg');
+  if(!j.ok){ box.textContent = j.error || 'Invalid code'; return; }
+  box.textContent = '';
+  document.getElementById('otpBox').classList.add('hidden');
+  document.getElementById('actions').classList.remove('hidden');
+  window._estId = j.id;
+};
+
+async function finalize(action, note){
+  const r = await fetch(API, { method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ action, id: window._estId, note, ua: navigator.userAgent })});
+  const j = await r.json();
+  if(j.ok){ alert('Saved: ' + j.status); location.replace('/estimate-done.html'); }
+  else alert(j.error || 'Error');
+}
+document.getElementById('btnApprove').onclick = ()=>finalize('approve');
+document.getElementById('btnDecline').onclick = ()=>finalize('decline');
+document.getElementById('btnChanges').onclick = ()=>{
+  const note = prompt('What would you like changed?');
+  finalize('request_changes', note||'');
+};
+</script>
+</body></html>
