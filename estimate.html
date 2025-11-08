@@ -1,83 +1,155 @@
-<!doctype html><html lang="en" dir="ltr">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Estimate Approval — Mubasher One</title>
-  <meta name="robots" content="noindex,nofollow">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3/dist/tailwind.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>html{scroll-behavior:smooth}</style>
 </head>
-<body class="bg-neutral-50">
-  <div class="max-w-md mx-auto p-4">
-    <h1 class="text-xl font-semibold mb-2">Estimate Approval</h1>
-    <p id="status" class="text-sm text-neutral-600 mb-3"></p>
-
-    <div id="est" class="hidden">
-      <div class="text-sm mb-2" id="cust"></div>
-      <div class="rounded-md overflow-hidden border bg-white">
-        <iframe id="pdf" width="100%" height="520" style="border:0;"></iframe>
-      </div>
-
-      <div id="otpBox" class="border rounded-md p-3 bg-white my-3">
-        <label class="block text-sm mb-1">Enter the 6-digit code</label>
-        <input id="otp" class="border w-full p-2 rounded" maxlength="6" inputmode="numeric" autocomplete="one-time-code">
-        <button id="btnOtp" class="mt-2 px-3 py-2 bg-black text-white rounded">Verify</button>
-        <div id="otpMsg" class="text-sm mt-2 text-red-600"></div>
-      </div>
-
-      <div id="actions" class="hidden flex gap-2">
-        <button id="btnApprove" class="px-3 py-2 bg-emerald-600 text-white rounded">Approve</button>
-        <button id="btnChanges" class="px-3 py-2 bg-amber-600 text-white rounded">Request changes</button>
-        <button id="btnDecline" class="px-3 py-2 bg-rose-600 text-white rounded">Decline</button>
-      </div>
-
-      <p class="text-xs text-neutral-500 mt-3">
-        By tapping Approve, I authorize Mubasher One to proceed with the listed works and charges.
-        <a href="/estimate-terms.html" class="underline">Terms</a>
-      </p>
+<body class="bg-neutral-50 text-neutral-900">
+  <main class="max-w-3xl mx-auto p-6">
+    <div class="mb-6">
+      <a href="/" class="text-sm text-neutral-500 hover:underline">&larr; Back to Home</a>
     </div>
-  </div>
+
+    <div id="card" class="rounded-2xl bg-white shadow-sm border border-neutral-200 p-6">
+      <h1 class="text-2xl font-semibold mb-2" id="title">Estimate</h1>
+      <p class="text-sm text-neutral-600 mb-6" id="subtitle">Loading…</p>
+
+      <div id="details" class="grid md:grid-cols-2 gap-4 mb-6 hidden">
+        <div class="rounded-xl border p-4">
+          <div class="text-xs text-neutral-500">Customer</div>
+          <div class="font-medium" id="customer"></div>
+        </div>
+        <div class="rounded-xl border p-4">
+          <div class="text-xs text-neutral-500">Vehicle</div>
+          <div class="font-medium" id="vehicle"></div>
+        </div>
+
+        <!-- Work Description -->
+        <div class="rounded-xl border p-4 md:col-span-2">
+          <div class="text-xs text-neutral-500">Work Description</div>
+          <div class="font-medium whitespace-pre-wrap" id="work_description"></div>
+        </div>
+
+        <div class="rounded-xl border p-4">
+          <div class="text-xs text-neutral-500">Subtotal</div>
+          <div class="font-medium" id="subtotal"></div>
+        </div>
+        <div class="rounded-xl border p-4">
+          <div class="text-xs text-neutral-500">VAT</div>
+          <div class="font-medium" id="vat"></div>
+        </div>
+        <div class="rounded-xl border p-4">
+          <div class="text-xs text-neutral-500">Total</div>
+          <div class="font-semibold text-lg" id="total"></div>
+        </div>
+        <div class="rounded-xl border p-4">
+          <div class="text-xs text-neutral-500">Status</div>
+          <div class="font-medium" id="status"></div>
+        </div>
+      </div>
+
+      <label class="block text-sm text-neutral-600 mb-2">Add a note (optional)</label>
+      <textarea id="note" class="w-full border rounded-xl p-3 mb-4" rows="3" placeholder="Any comments…"></textarea>
+
+      <div class="flex gap-3">
+        <button id="approveBtn" class="px-5 py-3 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700">Approve</button>
+        <button id="rejectBtn" class="px-5 py-3 rounded-xl bg-rose-600 text-white hover:bg-rose-700">Reject</button>
+      </div>
+
+      <div id="msg" class="mt-4 text-sm"></div>
+    </div>
+  </main>
 
 <script>
-const API = "https://script.google.com/macros/u/1/s/AKfycbyhx17QVzLiA9gWWmRd4d3KVPlzQ9PBWpacuWs6bhugoLwuEjgeQ8GASfwI8i89bece/exec";
-  const token = new URL(location.href).searchParams.get('token');
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxoMvrYXR6XnDBe9NHrT6qQY2_sM8V9Kf2dKJ0fhp-8Ohx4rIopBdSdMjZ6sJqTCud4Ow/exec';
+
+function qs(k){ return new URLSearchParams(location.search).get(k); }
+const estimateId = qs('id');
+const token = qs('token');
+
+const els = {
+  title: document.getElementById('title'),
+  subtitle: document.getElementById('subtitle'),
+  details: document.getElementById('details'),
+  customer: document.getElementById('customer'),
+  vehicle: document.getElementById('vehicle'),
+  work_description: document.getElementById('work_description'),
+  subtotal: document.getElementById('subtotal'),
+  vat: document.getElementById('vat'),
+  total: document.getElementById('total'),
+  status: document.getElementById('status'),
+  approve: document.getElementById('approveBtn'),
+  reject: document.getElementById('rejectBtn'),
+  note: document.getElementById('note'),
+  msg: document.getElementById('msg')
+};
 
 async function loadEstimate(){
-  const r = await fetch(`${API}?action=get_estimate&token=${encodeURIComponent(token)}`);
-  const j = await r.json();
-  const st = document.getElementById('status');
-  if(!j.ok){ st.textContent = j.error || 'Error'; return; }
-  st.textContent = 'Verify the code we sent to your WhatsApp to continue.';
-  const est = j.estimate;
-  document.getElementById('est').classList.remove('hidden');
-  document.getElementById('cust').textContent = `${est.customer_name} • ${est.vehicle} • Plate ${est.plate} • ${est.amount||''}`;
-document.getElementById('pdf').src = `${API}?action=pdf&token=${encodeURIComponent(token)}`;
+  if(!estimateId || !token){
+    els.subtitle.textContent = 'Missing estimate link parameters.';
+    return;
+  }
+  try{
+    const url = `${SCRIPT_URL}?action=get&id=${encodeURIComponent(estimateId)}&token=${encodeURIComponent(token)}`;
+    const res = await fetch(url, { headers: { 'Content-Type':'application/json' }});
+    const data = await res.json();
+    if(!data.ok) throw new Error(data.error || 'Failed');
+    const e = data.estimate;
+    els.title.textContent = `Estimate ${e.estimate_id}`;
+    els.subtitle.textContent = 'Please review the details below:';
+    els.customer.textContent = e.customer_name || '';
+    els.vehicle.textContent = e.vehicle || '';
+    els.work_description.textContent = e.work_description || '';
+    els.subtotal.textContent = e.subtotal || '';
+    els.vat.textContent = e.vat || '';
+    els.total.textContent = e.total || '';
+    els.status.textContent = e.status || '';
+    els.details.classList.remove('hidden');
+
+    const final = String(e.status || '').toUpperCase();
+    if (final === 'APPROVED' || final === 'REJECTED'){
+      els.approve.disabled = true;
+      els.reject.disabled = true;
+      els.msg.textContent = `This estimate is already ${final.toLowerCase()}.`;
+    }
+  }catch(err){
+    els.subtitle.textContent = 'Sorry, this estimate could not be loaded.';
+    console.error(err);
+  }
 }
+
+async function decide(decision){
+  els.msg.textContent = 'Submitting…';
+  try{
+    const res = await fetch(SCRIPT_URL, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({
+        action:'decide',
+        id: estimateId,
+        token,
+        decision,
+        note: els.note.value||''
+      })
+    });
+    const data = await res.json();
+    if(!data.ok) throw new Error(data.error || 'Failed');
+    els.msg.textContent = decision === 'APPROVED' ? '✅ Approved. Thank you.' : '❌ Rejected. We’ll review and contact you.';
+    els.approve.disabled = true;
+    els.reject.disabled = true;
+  }catch(err){
+    els.msg.textContent = err.message?.includes('Already') ? err.message : 'There was an issue saving your decision.';
+    console.error(err);
+  }
+}
+
+els.approve.addEventListener('click', ()=>decide('APPROVED'));
+els.reject.addEventListener('click', ()=>decide('REJECTED'));
+
 loadEstimate();
-
-document.getElementById('btnOtp').onclick = async ()=>{
-  const otp = document.getElementById('otp').value.trim();
-  const r = await fetch(API, { method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ action:'verify_otp', token, otp })});
-  const j = await r.json();
-  const box = document.getElementById('otpMsg');
-  if(!j.ok){ box.textContent = j.error || 'Invalid code'; return; }
-  box.textContent = '';
-  document.getElementById('otpBox').classList.add('hidden');
-  document.getElementById('actions').classList.remove('hidden');
-  window._estId = j.id;
-};
-
-async function finalize(action, note){
-  const r = await fetch(API, { method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ action, id: window._estId, note, ua: navigator.userAgent })});
-  const j = await r.json();
-  if(j.ok){ alert('Saved: ' + j.status); location.replace('/estimate-done.html'); }
-  else alert(j.error || 'Error');
-}
-document.getElementById('btnApprove').onclick = ()=>finalize('approve');
-document.getElementById('btnDecline').onclick = ()=>finalize('decline');
-document.getElementById('btnChanges').onclick = ()=>{
-  const note = prompt('What would you like changed?');
-  finalize('request_changes', note||'');
-};
 </script>
-</body></html>
+</body>
+</html>
