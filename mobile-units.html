@@ -278,11 +278,29 @@
         lbImg.src=src; lbImg.classList.remove('hidden');
         lb.classList.remove('hidden'); document.documentElement.classList.add('overflow-hidden');
       }
-      function openVideo(src, poster){
-        lbImg.classList.add('hidden'); lbImg.removeAttribute('src');
-        lbVid.src=src; if(poster) lbVid.setAttribute('poster',poster); lbVid.classList.remove('hidden'); lbVid.currentTime=0; lbVid.play();
-        lb.classList.remove('hidden'); document.documentElement.classList.add('overflow-hidden');
-      }
+     function openVideo(src, poster){
+  lbImg.classList.add('hidden'); 
+  lbImg.removeAttribute('src');
+
+  lbVid.pause();   
+  lbVid.classList.remove('hidden');
+
+  // FIX → load poster before showing the video
+  if (poster) {
+    lbVid.setAttribute('poster', poster);
+  }
+
+  // Assign src after poster so it loads correctly
+  lbVid.src = src;
+
+  lb.classList.remove('hidden'); 
+  document.documentElement.classList.add('overflow-hidden');
+
+  // Start video once visible (optional)
+  lbVid.currentTime = 0;
+  lbVid.play();
+}
+
       function closeLB(){
         lb.classList.add('hidden'); document.documentElement.classList.remove('overflow-hidden');
         lbVid.pause(); lbVid.removeAttribute('src'); lbVid.removeAttribute('poster'); lbVid.load();
